@@ -1,5 +1,7 @@
 {
     "name":"inequality gdp region",
+    "schema_version":1,
+    "author":"Joël Foramitti <demo1@user.com>",
     "libraries":{
         "apexcharts":true,
         "d3js":false
