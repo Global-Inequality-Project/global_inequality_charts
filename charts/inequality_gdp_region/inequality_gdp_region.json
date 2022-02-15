@@ -1,0 +1,7 @@
+{
+    "name":"inequality gdp region",
+    "libraries":{
+        "apexcharts":true,
+        "d3js":false
+    }
+}

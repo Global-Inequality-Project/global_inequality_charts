@@ -1,0 +1,7 @@
+{
+    "name":"Demo 2",
+    "libraries":{
+        "apexcharts":true,
+        "d3js":false
+    }
+}
