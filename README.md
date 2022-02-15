@@ -91,5 +91,15 @@ The renderFunc takes one input canvasID, which defines where the chart should be
 }
 ```
 
+## Building the divi module 
+
+This is not necessary for adding a chart, but it is necessary to update the style and script files.
+
+- install nodejs version 14, version 16 is not supported. We recommend to use nvm for this [https://github.com/elegantthemes/create-divi-extension/issues/541].
+- install yarn with `npm install -g yarn`
+- install the dependencies with `yarn install`
+- build the module with `yarn build`
+
+For development you can use `yarn start`. This will start a local server that serves the files and builds the module after saving a file. 
 
 
