@@ -42,7 +42,7 @@ class GLICH_Charts extends ET_Builder_Module
 	{
 		$ctype = $this->props['charttype'];
 		// load chart js
-		$charttype_js_path = '/gip_chart_interface-main/' . $ctype . '/' . $ctype . '.js';
+		$charttype_js_path = '../../../charts/' . $ctype . '/' . $ctype . '.js';
 		$charttype_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $charttype_js_path));
 		wp_enqueue_script('chartinterface_js_' . $ctype, plugins_url($charttype_js_path, __FILE__), array(), $charttype_js_ver);
 		// render chart
@@ -59,14 +59,15 @@ function load_charts_scripts($hook)
 {
 
 	// create my own version codes
-	$chartinterface_js_path = '/gip_chart_interface-main/chartinterface.js';
+	$chartinterface_js_path = '../../../assets/js/chartinterface.js';
 	$chartinterface_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $chartinterface_js_path));
-	$chartutils_js_path = '/gip_chart_interface-main/chartutils.js';
+	$chartutils_js_path = '../../../assets/js/chartutils.js';
 	$chartutils_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $chartinterface_js_path));
 
 	// enqueue scripts
 	wp_enqueue_script('d3_js', "https://d3js.org/d3.v4.min.js");
-	wp_enqueue_script('apexcharts_js', "https://cdn.jsdelivr.net/npm/apexcharts");
+	$apexcharts_js_path = '../../../node_modules/apexcharts/dist/apexcharts.min.js';
+	wp_enqueue_script('apexcharts_js', plugins_url($apexcharts_js_path, __FILE__));
 	wp_enqueue_script('chartinterface_js', plugins_url($chartinterface_js_path, __FILE__), array(), $chartinterface_js_ver);
 	wp_enqueue_script('chartutils_js', plugins_url($chartutils_js_path, __FILE__), array(), $chartutils_js_ver);
 }

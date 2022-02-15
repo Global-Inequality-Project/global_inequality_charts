@@ -1,3 +1,3 @@
-import HelloWorld from './HelloWorld/HelloWorld';
+import Charts from './Charts/Charts';
 
-export default [HelloWorld];
+export default [Charts];

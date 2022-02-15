@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 
 // Internal Dependencies
-import './style.css';
-import './gip_chart_interface-main/style.css';
+// import '../../../style.css';
+// import './_gip_chart_interface-main/style.css';
 
 
 class Charts extends Component {
