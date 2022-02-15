@@ -2,22 +2,21 @@ name: CI
 on: [push]
 jobs:
   build:
-    name: Test
+    name: Build global ineqaulities charts package
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: borales/actions-yarn@v2.3.0
+      - name: Build
+        uses: actions/checkout@v2
+        with:
+          path: .
+      - uses: actions/setup-node@v2
         with:
           node-version: '14'
-          cmd: install # will run `yarn install` command
-      - uses: borales/actions-yarn@v2.3.0
-        with:
-          node-version: '14'
-          cmd: build # will run `yarn build` command
-      - uses: borales/actions-yarn@v2.3.0
-        with:
-          node-version: '14'
-          cmd: test # will run `yarn test` command
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn test
+      - run: yarn build
+      
       - name: Upload build artifacts
         uses: actions/upload-artifact@v2
         with:
