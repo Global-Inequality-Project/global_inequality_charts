@@ -20,5 +20,15 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: globalineqalities-charts
-          path: ./
           retention-days: 7
+          path: |
+            package.json
+            yarn.lock
+            README.md
+            LICENSE
+            scripts
+            styles
+            charts
+            includes
+            assets
+            node_modules/apexcharts/dist/apexcharts.min.js
