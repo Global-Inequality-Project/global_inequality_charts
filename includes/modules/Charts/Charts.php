@@ -15,6 +15,7 @@ class GLICH_Charts extends ET_Builder_Module
 	// initialise the module 
 	public function init()
 	{
+		$this->set_url();
 		$this->name = esc_html__('Global Inequality Charts', 'glich-globalinequalities-charts');
 	}
 
@@ -27,6 +28,12 @@ class GLICH_Charts extends ET_Builder_Module
 		}
 		echo $js_code;
 	}
+	private function set_url()
+	{
+		$js_code = '<script>window.wp_url="'.get_home_url().'";</script>';
+		echo $js_code;
+	}
+
 
 	// get the fields for the module in the builder
 	public function get_fields()
