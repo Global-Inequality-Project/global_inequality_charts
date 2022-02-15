@@ -4,6 +4,6 @@
     "author":"Joël Foramitti <demo1@user.com>",
     "libraries":{
         "apexcharts":true,
-        "d3js":false
+        "d3js":true
     }
 }
