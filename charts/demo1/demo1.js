@@ -13,22 +13,20 @@ function transposeCSV(csv) {
   return data;
 }
 
-function render_demo2(canvasID) {
+function render_demo1(canvasID) {
 
-  var chartID = "demo2"
-  d3.csv(`${window.path_to_charts}/${chartID}/${chartID}.csv`, (csv) => {
-    var data = transposeCSV(csv)
+  var chartID = "demo1"
+  d3.csv(`${window.charts_path}/${chartID}/${chartID}.csv`, (csv) => {
+    var data = transposeCSV(csv);
 
+    // console.log(data)
     var options = {
       chart: {
-        type: 'bar',
+        type: 'line',
         toolbar: {
           show: false,
         },
       },
-      dataLabels: {
-          enabled: false
-        },
       legend: {
         position: 'top',
         horizontalAlign: 'right',
@@ -50,17 +48,31 @@ function render_demo2(canvasID) {
       }],
       xaxis: {
         categories: data['year']
-      }
+      },
+      grid: {
+          padding: {
+              bottom: 0,
+              left: 10,
+              right: 0,
+              top: 0,
+          }
+      },
     }
 
-    var chart = createApexChart(canvasID, chartID, options);
+    function callback(chart) {
+      chart.hideSeries('var2');
+      chart.hideSeries('var3');
+    }
+
+    var chart = createApexChart(canvasID, chartID, options, callback);
+    
   });
 }
 
 createChartInterface({
-  chartID:'demo2',
-  chartTitle:"Demo2 Chart Title",
-  chartDescription:"Demo2 Chart Description",
-  chartSources:"Demo2 Chart Sources",
-  renderFunc:render_demo2,
+  chartID:'demo1',
+  chartTitle:"Demo1 Chart Title",
+  chartDescription:"Demo1 Chart Description",
+  chartSources:"Demo1 Chart Sources",
+  renderFunc:render_demo1,
 })

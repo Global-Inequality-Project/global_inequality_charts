@@ -1,0 +1,34 @@
+name: CI
+on: [push]
+jobs:
+  build:
+    name: Build global ineqaulities charts package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        uses: actions/checkout@v2
+        with:
+          path: .
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn build
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: globalineqalities-charts
+          retention-days: 7
+          path: |
+            package.json
+            yarn.lock
+            README.md
+            LICENSE
+            scripts
+            styles
+            charts
+            includes
+            assets
+            node_modules/apexcharts/dist/apexcharts.min.js

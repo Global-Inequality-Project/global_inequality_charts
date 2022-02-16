@@ -4,13 +4,13 @@ $(function() {
     window.chart_data["inequality_gdp_chg"] = {
         percentiles: { start: 1, end: 100},
     };
+
     importFilesAndShow_inequality_gdp_chg();
 });
 
 //-------------------------------------- importFilesAndShow
 function importFilesAndShow_inequality_gdp_chg(){
-    // TODO: why do we need window.path_to_charts
-	$.get(`${window.path_to_charts2}/${"inequality_gdp_chg"}/${"inequality_gdp_chg"}.csv`, function(gdp_nrt_sth){
+	$.get(`${window.charts_path}/${"inequality_gdp_chg"}/${"inequality_gdp_chg"}.csv`, function(gdp_nrt_sth){
         window.chart_data["inequality_gdp_chg"].data = fromCSV(gdp_nrt_sth, ['string', 'number', 'number']);
         
 

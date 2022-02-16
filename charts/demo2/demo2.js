@@ -16,7 +16,7 @@ function transposeCSV(csv) {
 function render_demo2(canvasID) {
 
   var chartID = "demo2"
-  d3.csv(`${window.path_to_charts}/${chartID}/${chartID}.csv`, (csv) => {
+  d3.csv(`${window.charts_path}/${chartID}/${chartID}.csv`, (csv) => {
     var data = transposeCSV(csv)
 
     var options = {
