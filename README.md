@@ -22,6 +22,10 @@ The chart files are in the root directory of the plugin at `/wp-content/plugins/
     - scripts -> automatically generated js
     - styles -> automatically generated css
 
+## Licensing
+
+The plugin code is released under the MIT license. Each of the charts and the corresponding datasets can be subject to different authorships and license terms, which are indicated in the respective directory of each chart. 
+
 ## Usage
 
 A chart is integrated into a wordpress page as follows:
