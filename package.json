@@ -1,5 +1,5 @@
 {
-  "name": "globalinequalities-charts",
+  "name": "global_inequalitiy_charts",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -28,7 +28,7 @@
     ]
   },
   "cde": {
-    "gettext": "glich-globalinequalities-charts",
+    "gettext": "glich-global_inequalitiy_charts",
     "prefix": "glich"
   }
 }

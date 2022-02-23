@@ -1,6 +1,6 @@
 <?php
 
-class GLICH_GlobalinequalitiesCharts extends DiviExtension {
+class GLICH_Global_inequality_charts extends DiviExtension {
 
 	/**
 	 * The gettext domain for the extension's translations.
@@ -9,7 +9,7 @@ class GLICH_GlobalinequalitiesCharts extends DiviExtension {
 	 *
 	 * @var string
 	 */
-	public $gettext_domain = 'glich-globalinequalities-charts';
+	public $gettext_domain = 'glich-global_inequalitiy_charts';
 
 	/**
 	 * The extension's WP Plugin name.
@@ -18,7 +18,7 @@ class GLICH_GlobalinequalitiesCharts extends DiviExtension {
 	 *
 	 * @var string
 	 */
-	public $name = 'globalinequalities-charts';
+	public $name = 'global_inequalitiy_charts';
 
 	/**
 	 * The extension's version
@@ -30,12 +30,12 @@ class GLICH_GlobalinequalitiesCharts extends DiviExtension {
 	public $version = '1.0.0';
 
 	/**
-	 * GLICH_GlobalinequalitiesCharts constructor.
+	 * GLICH_Global_inequality_charts constructor.
 	 *
 	 * @param string $name
 	 * @param array  $args
 	 */
-	public function __construct( $name = 'globalinequalities-charts', $args = array() ) {
+	public function __construct( $name = 'global_inequalitiy_charts', $args = array() ) {
 		$this->plugin_dir     = plugin_dir_path( __FILE__ );
 		$this->plugin_dir_url = plugin_dir_url( $this->plugin_dir );
 
@@ -43,4 +43,4 @@ class GLICH_GlobalinequalitiesCharts extends DiviExtension {
 	}
 }
 
-new GLICH_GlobalinequalitiesCharts;
+new GLICH_Global_inequality_charts;

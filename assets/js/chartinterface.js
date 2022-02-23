@@ -1,6 +1,6 @@
 // Global objects
 window.chart_data = {}
-window.charts_path = window.wp_url+"/wp-content/plugins/globalinequalities-charts/charts"
+window.charts_path = window.wp_url+"/wp-content/plugins/global_inequality_charts/charts"
 
 
 // Chart Interface

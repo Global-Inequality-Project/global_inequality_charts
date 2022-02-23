@@ -16,7 +16,7 @@ class GLICH_Charts extends ET_Builder_Module
 	public function init()
 	{
 		$this->set_url();
-		$this->name = esc_html__('Global Inequality Charts', 'glich-globalinequalities-charts');
+		$this->name = esc_html__('Global Inequality Charts', 'glich-global_inequalitiy_charts');
 	}
 
 	private function console_log($output, $with_script_tags = true)
@@ -58,11 +58,11 @@ class GLICH_Charts extends ET_Builder_Module
 
 		return array(
 			'charttype' => array(
-				'label'           => esc_html__('Charttype', 'glich-globalinequalities-charts'),
+				'label'           => esc_html__('Charttype', 'glich-global_inequalitiy_charts'),
 				'type'            => 'select',
 				'option_category' => 'basic_option',
 				'options'         => $options,
-				'description'     => esc_html__('the charttype entered here will appear inside the module.', 'glich-globalinequalities-charts'),
+				'description'     => esc_html__('the charttype entered here will appear inside the module.', 'glich-global_inequalitiy_charts'),
 				'toggle_slug'     => 'main_content',
 			),
 		);
@@ -78,7 +78,7 @@ class GLICH_Charts extends ET_Builder_Module
 
 		wp_enqueue_script('chartinterface_js_' . $ctype, plugins_url($charttype_js_path, __FILE__), array(), $charttype_js_ver);
 		// render chart
-		return sprintf('<h1>%1$s</h1><br/><div id="chart-%1$s"></div>', $ctype, $ctype);
+		return sprintf('<br/><div id="chart-%1$s"></div>', $ctype, $ctype);
 	}
 
 	// load the libraries for the chart depending on the libraries section of the config

@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Globalinequalities Charts
+Plugin Name: Global Inequality Charts
 Plugin URI:  https://globalinequality.org/ 
 Description: A wp plugin to add a divi/gutenberg block for showing global inequality charts
 Version:     1.1.0
@@ -8,7 +8,7 @@ Author:      Aaron Kimmig and Leon Beccard from convive.io
 Author URI:  https://www.convive.io/
 License:     MIT
 License URI: https://opensource.org/licenses/MIT
-Text Domain: glich-globalinequalities-charts
+Text Domain: glich-global_inequality_charts
 Domain Path: /languages
 
 Copyright (c) 2022 Joël Foramitti, Aaron Kimmig, Leon Beccard, Huzaifa Zoomkawala
@@ -33,7 +33,7 @@ if ( ! function_exists( 'glich_initialize_extension' ) ):
  * @since 1.0.0
  */
 function glich_initialize_extension() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/GlobalinequalitiesCharts.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/Global_inequalitiy_charts.php';
 }
 add_action( 'divi_extensions_init', 'glich_initialize_extension' );
 endif;
