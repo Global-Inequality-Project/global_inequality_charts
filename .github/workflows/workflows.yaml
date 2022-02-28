@@ -32,3 +32,4 @@ jobs:
             includes
             assets
             node_modules/apexcharts/dist/apexcharts.min.js
+            global_inequality_charts.php
