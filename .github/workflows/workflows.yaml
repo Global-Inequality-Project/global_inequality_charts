@@ -19,7 +19,7 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: globalineqalities-charts
+          name: global_inequality_charts
           retention-days: 7
           path: |
             package.json
@@ -32,3 +32,4 @@ jobs:
             includes
             assets
             node_modules/apexcharts/dist/apexcharts.min.js
+            global_inequality_charts.php

@@ -6,7 +6,7 @@ Global Inequality Charts is a wordpress divi module and a javascript library to 
 
 Each chart has a unique ID, denoted in this documentation as [chartID]. This ID is used to identify the chart in the javascript library and it has to be unique.
 
-The chart files are in the root directory of the plugin at `/wp-content/plugins/global-inequalities-charts/`:
+The chart files are in the root directory of the plugin at `/wp-content/plugins/global_inequality_charts/`:
 
 - plugin-root
     - charts
@@ -97,7 +97,7 @@ The renderFunc takes one input canvasID, which defines where the chart should be
 
 This is not necessary for adding a chart, but it is necessary to update the style and script files.
 
-- install nodejs version 14, version 16 is not supported. We recommend to use nvm for this [https://github.com/elegantthemes/create-divi-extension/issues/541].
+- install nodejs version 14, version 16 is not supported. We recommend to use nvm for this.  [https://github.com/elegantthemes/create-divi-extension/issues/541].
 - install yarn with `npm install -g yarn`
 - install the dependencies with `yarn install`
 - build the module with `yarn build`
