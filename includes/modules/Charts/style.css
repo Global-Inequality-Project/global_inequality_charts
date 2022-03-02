@@ -129,3 +129,14 @@
 .apexcharts-tooltip {
   line-height: 1em;
 }
+
+.downloadImage {
+  position: fixed;
+  padding: 30;
+  top: -1000;
+}
+.downloadImage .et_pb_menu__logo {
+    overflow: hidden;
+    width: 300;
+}
+
