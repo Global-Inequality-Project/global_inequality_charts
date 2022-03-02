@@ -6231,7 +6231,7 @@
     "which" "~2.0.2"
 
 "grunt-po2mo@elegantthemes/grunt-po2mo#master":
-  "resolved" "git+ssh://git@github.com/elegantthemes/grunt-po2mo.git#26eca7c892db50837b58fdcf3771c5eb331a2ead"
+  "resolved" "https://github.com/elegantthemes/grunt-po2mo.git#26eca7c892db50837b58fdcf3771c5eb331a2ead"
   "version" "0.1.5"
   dependencies:
     "sync-exec" "0.6.2"
