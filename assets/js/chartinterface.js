@@ -1,6 +1,6 @@
 // Global objects
 window.chart_data = {}
-window.charts_path = window.wp_url+"/wp-content/plugins/global_inequality_charts/charts"
+window.charts_path = window.wp_url + "/wp-content/plugins/global_inequality_charts/charts"
 
 
 // Chart Interface
@@ -133,7 +133,9 @@ function shareChartTwitter(chartID) {
 }
 
 function copyChartURL(chartID) {
-    navigator.clipboard.writeText(`${window.location.href}`);
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(`${window.location.href}?chart=${chartID}`);
+    }
 }
 
 

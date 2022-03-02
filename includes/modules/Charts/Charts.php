@@ -1,5 +1,7 @@
 <?php
 
+static $debug = false;
+
 class GLICH_Charts extends ET_Builder_Module
 {
 
@@ -21,16 +23,19 @@ class GLICH_Charts extends ET_Builder_Module
 
 	private function console_log($output, $with_script_tags = true)
 	{
-		$js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) .
-			');';
-		if ($with_script_tags) {
-			$js_code = '<script>' . $js_code . '</script>';
+		global $debug;
+		if ($debug) {
+			$js_code = 'console.log("[global inequality charts]",' . json_encode($output, JSON_HEX_TAG) .
+				');';
+			if ($with_script_tags) {
+				$js_code = '<script>' . $js_code . '</script>';
+			}
+			echo $js_code;
 		}
-		echo $js_code;
 	}
 	private function set_url()
 	{
-		$js_code = '<script>window.wp_url="'.get_home_url().'";</script>';
+		$js_code = '<script>window.wp_url="' . get_home_url() . '";</script>';
 		echo $js_code;
 	}
 
@@ -43,7 +48,7 @@ class GLICH_Charts extends ET_Builder_Module
 		$options = array();
 		foreach ($paths as $path) {
 			$chart_id = basename($path);
-			if(is_file($path . "/" . $chart_id . ".json")){
+			if (is_file($path . "/" . $chart_id . ".json")) {
 				$chart_config_file = file_get_contents($path . "/" . $chart_id . ".json");
 				$chart_json = json_decode($chart_config_file, true);
 				if ($chart_json === null) {
@@ -53,7 +58,6 @@ class GLICH_Charts extends ET_Builder_Module
 					$options[$chart_id] =  esc_html__($chart_json["name"], 'dvmm-divi-mad-menu');
 				}
 			}
-
 		}
 
 		return array(
@@ -77,28 +81,29 @@ class GLICH_Charts extends ET_Builder_Module
 		$charttype_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $charttype_js_path));
 
 		wp_enqueue_script('chartinterface_js_' . $ctype, plugins_url($charttype_js_path, __FILE__), array(), $charttype_js_ver);
+		$this->console_log("render " . $ctype);
+
 		// render chart
 		return sprintf('<br/><div id="chart-%1$s"></div>', $ctype, $ctype);
 	}
 
 	// load the libraries for the chart depending on the libraries section of the config
-	private function load_libraries($id){
-		$path = plugin_dir_path(__FILE__) . "../../../charts/".$id. "/" . $id . ".json";
+	private function load_libraries($id)
+	{
+		$path = plugin_dir_path(__FILE__) . "../../../charts/" . $id . "/" . $id . ".json";
 		$chart_config_file = file_get_contents($path);
 		$chart_json = json_decode($chart_config_file, true);
 		if ($chart_json === null) {
 			// deal with error...
 			$this->console_log("failed to parse json for chart " . $path);
 		} else {
-			if($chart_json["libraries"]["apexcharts"]){
+			if ($chart_json["libraries"]["apexcharts"]) {
 				$this->console_log("loading apexcharts");
 				$apexcharts_js_path = '../../../node_modules/apexcharts/dist/apexcharts.min.js';
 				$apexcharts_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $apexcharts_js_path));
 				wp_enqueue_script('apexcharts_js', plugins_url($apexcharts_js_path, __FILE__), array(), $apexcharts_js_ver);
-				$this->console_log("loading apexcharts2");
-
 			}
-			if($chart_json["libraries"]["d3js"]){
+			if ($chart_json["libraries"]["d3js"]) {
 				wp_enqueue_script('d3_js', "https://d3js.org/d3.v4.min.js");
 			}
 		}
@@ -133,3 +138,50 @@ if (!function_exists('add_chart_modal_wrapper')) {
 	}
 	add_action('wp_footer', 'add_chart_modal_wrapper', 100);
 }
+
+
+/**
+ * Add open graph tags to the header but only once!
+ */
+function add_open_graph_tags($id)
+{
+	global $debug;
+	static $already_run = false;
+	if (!$already_run) {
+
+		// PLACE YOUR CODE BELOW THIS LINE
+
+		if (!is_singular()) //if it is not a post or a page
+			return;
+		$id = $_GET["chart"];
+		$id = htmlspecialchars($id, ENT_QUOTES, 'UTF-8');
+		$id = str_replace("/", "", $id);
+		$id = str_replace(".", "", $id);
+		$id = str_replace("chart-", "", $id);
+		if ($id == "") {
+			if ($debug)	echo '<script>console.log("add open graph for ' . $id . ' not found");</script>';
+
+			return;
+		}
+		if ($debug) echo '<script>console.log("add open graph for ' . $id . '");</script>';
+
+		// load chart config for open graph tags
+		// $charttype_json_path = plugin_dir_path(__FILE__) . '../../../charts/' . $id . '/' . $id . '.json';
+		// if (!file_exists($charttype_json_path)) {
+		// 	echo '<script>console.log("add open graph for ' . $charttype_json_path . ' not found");</script>';
+		// 	return;
+		// }
+		// $chart_json = file_get_contents($charttype_json_path);
+
+		if ($debug) echo '<script>console.log("add open graph ' . $id . '");</script>';
+		echo '<meta property="og:title" content="' . $id . '"/>';
+		echo '<meta property="og:type" content="article" />';
+		$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+		$url = $protocol . $_SERVER['HTTP_HOST'];
+		$image_url = $url . '/wp-content/plugins/global_inequality_charts/charts/' . $id . '/' . $id . '.png';
+		echo '<meta property="og:url" content="' . $url .  $_SERVER['REQUEST_URI'] . '" />';
+		echo '<meta property="og:image" content="' . $image_url . '" />';
+		$already_run = true;
+	}
+}
+add_action('wp_head', 'add_open_graph_tags', 5);
