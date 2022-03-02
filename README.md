@@ -14,6 +14,7 @@ The chart files are in the root directory of the plugin at `/wp-content/plugins/
             - [chartID].json
             - [chartID].js
             - [chartID].csv
+            - [chartID].png -> for open graph data
     - assets
         - js -> here is where the magic happens
     - includes -> the divi module

@@ -166,11 +166,11 @@ function add_open_graph_tags($id)
 		if ($debug) echo '<script>console.log("add open graph for ' . $id . '");</script>';
 
 		// load chart config for open graph tags
-		// $charttype_json_path = plugin_dir_path(__FILE__) . '../../../charts/' . $id . '/' . $id . '.json';
-		// if (!file_exists($charttype_json_path)) {
-		// 	echo '<script>console.log("add open graph for ' . $charttype_json_path . ' not found");</script>';
-		// 	return;
-		// }
+		$charttype_json_path = plugin_dir_path(__FILE__) . '../../../charts/' . $id . '/' . $id . '.json';
+		if (!file_exists($charttype_json_path)) {
+			echo '<script>console.log("add open graph for ' . $charttype_json_path . ' not found");</script>';
+			return;
+		}
 		// $chart_json = file_get_contents($charttype_json_path);
 
 		if ($debug) echo '<script>console.log("add open graph ' . $id . '");</script>';
