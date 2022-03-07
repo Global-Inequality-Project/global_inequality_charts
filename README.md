@@ -1,6 +1,6 @@
 # Global Inequality Charts 
 
-Global Inequality Charts is a wordpress divi module and a javascript library to integrate interactive charts in a wordpress site and provide chart tools.
+A divi module to display interactive charts on a wordpress site and provide tools to share, download data, and more.
 
 ## Overview
 
