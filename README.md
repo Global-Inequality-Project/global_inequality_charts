@@ -75,6 +75,10 @@ The renderFunc takes one input canvasID, which defines where the chart should be
    - `[chartID].json` -> contains the chart settings
    - `[chartID].csv` -> contains the chart data
    - `[chartID].js` -> contains the chart render function
+   - `[chartID].png` -> is the image that is used, when the chart is shared (1200×630 px)
+   - `[chartID].css` -> contains custom css for the graph
+
+
 
 ##  [chartID].json schema v2
 - id: [chartID]
@@ -83,7 +87,8 @@ The renderFunc takes one input canvasID, which defines where the chart should be
 - the author of the chart
 - description: a short description of the chart
 - source: the source of the data
-- libraries: libraries that should be loaded in order to show the graph, currently supports apexcharts, chartutils and d3js. They are optional and can be omitted when not used. 
+- libraries: libraries that should be loaded in order to show the graph, currently supports apexcharts, chartutils and d3js. They are optional and can be omitted when not used.
+
 
 ```
 {
@@ -100,6 +105,10 @@ The renderFunc takes one input canvasID, which defines where the chart should be
     }
 }
 ```
+
+### schema Libraries
+
+If the chart needs libraries, they can be added to the `libraries` object. If the library is not yet available, it can be added to the `assets/js` folder or it has to be added to the `package.json` and added to the `.github/workflows/workflows.yaml`. Adding a library via `package.json` is the prefered way. Please don't add libraries via a CDN, this can't be accepted because of the GDPR. The library should be a javascript file that contains the library. In order to load the library correctly it has to be added to the `includes/modules/Charts/Charts.php -> load_libraries` file . Please contact a developer if you need to add a new library.
 
 ## Building the divi module 
 

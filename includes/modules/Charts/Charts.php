@@ -122,6 +122,12 @@ class GLICH_Charts extends ET_Builder_Module
 				wp_enqueue_script('chartutils_js', plugins_url($chartutils_js_path, __FILE__), array(), $chartutils_js_ver);
 			}
 		}
+		// load the chart styles
+		$chart_css_path = '../../../charts/' . $id . '/' . $id . '.css';
+		if (is_file(plugin_dir_path(__FILE__) . $chart_css_path)) {
+			$chart_css_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $chart_css_path));
+			wp_enqueue_style('chart_css_' . $id, plugins_url($chart_css_path, __FILE__), array(), $chart_css_ver);
+		}
 	}
 }
 
