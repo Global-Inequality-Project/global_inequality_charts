@@ -55,7 +55,12 @@ class GLICH_Charts extends ET_Builder_Module
 					// deal with error...
 					$this->console_log("failed to parse json for chart " . $path . $chart_id . ".json");
 				} else {
-					$options[$chart_id] =  esc_html__($chart_json["name"], 'dvmm-divi-mad-menu');
+					if ($options["schema_version"] >= 2) {
+						$options[$chart_id] =  esc_html__($chart_json["title"], 'dvmm-divi-mad-menu');
+					} else {
+						// pre v2 schema
+						$options[$chart_id] =  esc_html__($chart_json["name"], 'dvmm-divi-mad-menu');
+					}
 				}
 			}
 		}
@@ -97,14 +102,24 @@ class GLICH_Charts extends ET_Builder_Module
 			// deal with error...
 			$this->console_log("failed to parse json for chart " . $path);
 		} else {
-			if ($chart_json["libraries"]["apexcharts"]) {
+			if (isset($chart_json["libraries"]["apexcharts"]) && $chart_json["libraries"]["apexcharts"]) {
 				$this->console_log("loading apexcharts");
 				$apexcharts_js_path = '../../../node_modules/apexcharts/dist/apexcharts.min.js';
 				$apexcharts_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $apexcharts_js_path));
 				wp_enqueue_script('apexcharts_js', plugins_url($apexcharts_js_path, __FILE__), array(), $apexcharts_js_ver);
 			}
-			if ($chart_json["libraries"]["d3js"]) {
+			if (isset($chart_json["libraries"]["d3js"]) && $chart_json["libraries"]["d3js"]) {
 				wp_enqueue_script('d3_js', "https://d3js.org/d3.v4.min.js");
+			}
+			// load the chart utils js, always required for schema version < 2 
+			if (
+				$chart_json["schema_version"] < 2
+				|| isset($chart_json["libraries"]["chartutils"])
+				&& $chart_json["libraries"]["chartutils"]
+			) {
+				$chartutils_js_path = '../../../assets/js/chartutils.js';
+				$chartutils_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $chartutils_js_path));
+				wp_enqueue_script('chartutils_js', plugins_url($chartutils_js_path, __FILE__), array(), $chartutils_js_ver);
 			}
 		}
 	}
@@ -121,12 +136,9 @@ function load_charts_scripts($hook)
 	// create my own version codes
 	$chartinterface_js_path = '../../../assets/js/chartinterface.js';
 	$chartinterface_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $chartinterface_js_path));
-	$chartutils_js_path = '../../../assets/js/chartutils.js';
-	$chartutils_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $chartinterface_js_path));
 
 	// enqueue scripts
 	wp_enqueue_script('chartinterface_js', plugins_url($chartinterface_js_path, __FILE__), array(), $chartinterface_js_ver);
-	wp_enqueue_script('chartutils_js', plugins_url($chartutils_js_path, __FILE__), array(), $chartutils_js_ver);
 }
 add_action('wp_enqueue_scripts', 'load_charts_scripts');
 
@@ -171,16 +183,31 @@ function add_open_graph_tags($id)
 			echo '<script>console.log("add open graph for ' . $charttype_json_path . ' not found");</script>';
 			return;
 		}
-		// $chart_json = file_get_contents($charttype_json_path);
+		$chart_json = file_get_contents($charttype_json_path);
 
+		// parse json
+		$chart_json = json_decode($chart_json, true);
+
+		// add open graph tags
 		if ($debug) echo '<script>console.log("add open graph ' . $id . '");</script>';
-		echo '<meta property="og:title" content="' . $id . '"/>';
+
+		// title was added in schema version 2
+		if ($chart_json['schema_version'] >= 2 && isset($chart_json['title']) && $chart_json['title'] != "") {
+			echo '<meta property="og:title" content="' . $chart_json['title'] . '" />';
+		} else {
+			echo '<meta property="og:title" content="' . $id . '"/>';
+		}
 		echo '<meta property="og:type" content="article" />';
 		$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 		$url = $protocol . $_SERVER['HTTP_HOST'];
 		$image_url = $url . '/wp-content/plugins/global_inequality_charts/charts/' . $id . '/' . $id . '.png';
 		echo '<meta property="og:url" content="' . $url .  $_SERVER['REQUEST_URI'] . '" />';
 		echo '<meta property="og:image" content="' . $image_url . '" />';
+
+		// description was added in schema version 2
+		if ($chart_json['schema_version'] >= 2 && isset($chart_json['description'])  && $chart_json['description'] != "") {
+			echo '<meta property="og:description" content="' . $chart_json['description'] . '" />';
+		}
 		$already_run = true;
 	}
 }

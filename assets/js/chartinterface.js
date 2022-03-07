@@ -86,6 +86,19 @@ function createChartInterface({ chartID, chartTitle, chartDescription, chartSour
     // Render chart in main area
     renderFunc(`#chart-canvas-${chartID}`)
 
+    // If chart is specified in url, scroll to it
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const chart = urlParams.get('chart')
+    
+    if ( chart === chartID) {
+        // Scroll to chart after chart is ready
+        setTimeout(function(){
+            document.getElementById(`chart-${chartID}`).scrollIntoView();
+        }, 600);
+     
+    }
+
     // Expand function
     var expandButton = document.getElementById(`chart-expand-btn-${chartID}`);
     expandButton.onclick = function () {
@@ -133,8 +146,18 @@ function shareChartTwitter(chartID) {
 }
 
 function copyChartURL(chartID) {
+    const url = `${window.location.href}/#chart-${chartID}?chart=${chartID}`
+    console.log(url)
     if (navigator.clipboard) {
-        navigator.clipboard.writeText(`${window.location.href}?chart=${chartID}`);
+        navigator.clipboard.writeText(url);
+    } else {
+        // fallback: manually copy the text for older browsers
+        var dummy = document.createElement("textarea");
+        document.body.appendChild(dummy);
+        dummy.value = url;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
     }
 }
 

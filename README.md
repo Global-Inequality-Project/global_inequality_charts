@@ -76,20 +76,27 @@ The renderFunc takes one input canvasID, which defines where the chart should be
    - `[chartID].csv` -> contains the chart data
    - `[chartID].js` -> contains the chart render function
 
-##  [chartID].json schema v1
-- name: the human readable name that shows in the divi editor
+##  [chartID].json schema v2
+- id: [chartID]
+- title: the human readable name that shows in the divi editor
 - schema_version: the version of the schema, this increases, when new features are added
 - the author of the chart
-- libraries: libraries that should be loaded in order to show the graph, currently supports apexcharts and d3js 
+- description: a short description of the chart
+- source: the source of the data
+- libraries: libraries that should be loaded in order to show the graph, currently supports apexcharts, chartutils and d3js. They are optional and can be omitted when not used. 
 
 ```
 {
-    "name":"Demo 2",
-    "schema_version":1,
-    "author":"Demo user <demo1@user.com>",
-    "libraries":{
-        "apexcharts":true,
-        "d3js":false
+    "id": "demo1",
+    "title": "Demo 1 Chart Title",
+    "schema_version": 2,
+    "author": "Joël Foramitti <demo1@user.com>",
+    "description": "Demo1 Chart Description",
+    "sources": "Demo1 Chart Sources",
+    "libraries": {
+        "apexcharts": true,
+        "d3js": true,
+        "chartutils": true
     }
 }
 ```
