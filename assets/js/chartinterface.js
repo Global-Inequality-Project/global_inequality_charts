@@ -143,7 +143,7 @@ function toggleArea(button, areaID, chartID) {
 
 function shareChartTwitter(chartID) {
     var url = window.location.href.split('?')[0];
-    window.open(`http://twitter.com/share?url=${url}?${chartID}`, "_blank")
+    window.open(`http://twitter.com/share?url=${url}?chart=${chartID}`, "_blank")
 }
 
 function copyChartURL(chartID) {
