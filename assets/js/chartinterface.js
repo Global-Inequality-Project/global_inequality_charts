@@ -90,7 +90,7 @@ function createChartInterface({ chartID, chartTitle, chartDescription, chartSour
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const chart = urlParams.get('chart')
-    
+
     if ( chart === chartID) {
         // Scroll to chart after chart is ready
         setTimeout(function(){
@@ -146,7 +146,7 @@ function shareChartTwitter(chartID) {
 }
 
 function copyChartURL(chartID) {
-    const url = `${window.location.href}/#chart-${chartID}?chart=${chartID}`
+    const url = `${window.location.href}?chart=${chartID}`
     console.log(url)
     if (navigator.clipboard) {
         navigator.clipboard.writeText(url);
