@@ -197,6 +197,8 @@ function add_open_graph_tags($id)
 		// add open graph tags
 		if ($debug) echo '<script>console.log("add open graph ' . $id . '");</script>';
 
+		echo '<meta name="twitter:card" content="summary" />'; // twitter card
+
 		// title was added in schema version 2
 		if ($chart_json['schema_version'] >= 2 && isset($chart_json['title']) && $chart_json['title'] != "") {
 			echo '<meta property="og:title" content="' . $chart_json['title'] . '" />';
@@ -212,12 +214,13 @@ function add_open_graph_tags($id)
 		$image_url = "";
 		// try to find the image in the chart folder
 		if (file_exists($chart_img_path)) {
-			$image_url = plugins_url("", __FILE__). '/charts/' . $id . '/' . $id . '.png';
+			$image_url = plugins_url("", __FILE__). '../../../charts/' . $id . '/' . $id . '.png';
 		} else {
-			$image_url = plugins_url("", __FILE__). '/assets/img/global_inequality_share.png';
+			$image_url = plugins_url("", __FILE__). '../../../assets/img/global_inequality_share.png';
 		}
 		echo '<meta property="og:image" content="' . $image_url . '" />';
-
+		echo '<meta name="twitter:image" content="' . $image_url . '" />';
+		
 		// description was added in schema version 2
 		if ($chart_json['schema_version'] >= 2 && isset($chart_json['description'])  && $chart_json['description'] != "") {
 			echo '<meta property="og:description" content="' . $chart_json['description'] . '" />';
