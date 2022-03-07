@@ -142,11 +142,12 @@ function toggleArea(button, areaID, chartID) {
 
 
 function shareChartTwitter(chartID) {
-    window.open(`http://twitter.com/share?url=${window.location.href}`, "_blank")
+    var url = window.location.href.split('?')[0];
+    window.open(`http://twitter.com/share?url=${url}?${chartID}`, "_blank")
 }
 
 function copyChartURL(chartID) {
-    const url = `${window.location.href}?chart=${chartID}`
+    const url = window.location.href.split('?')[0]+`?chart=${chartID}`;
     console.log(url)
     if (navigator.clipboard) {
         navigator.clipboard.writeText(url);
@@ -161,6 +162,7 @@ function copyChartURL(chartID) {
     }
 }
 
+// todo fb share button + other social media
 
 
 // Modal wrapper
