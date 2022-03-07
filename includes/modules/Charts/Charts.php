@@ -206,8 +206,16 @@ function add_open_graph_tags($id)
 		echo '<meta property="og:type" content="article" />';
 		$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 		$url = $protocol . $_SERVER['HTTP_HOST'];
-		$image_url = $url . '/wp-content/plugins/global_inequality_charts/charts/' . $id . '/' . $id . '.png';
 		echo '<meta property="og:url" content="' . $url .  $_SERVER['REQUEST_URI'] . '" />';
+		$chart_img_path = plugin_dir_path(__FILE__) . '../../../charts/' . $id . '/' . $id . '.png';
+
+		$image_url = "";
+		// try to find the image in the chart folder
+		if (file_exists($chart_img_path)) {
+			$image_url = $url . '/wp-content/plugins/global_inequality_charts/charts/' . $id . '/' . $id . '.png';
+		} else {
+			$image_url = $url . '/wp-content/plugins/global_inequality_charts/assets/img/global_inequality_share.png';
+		}
 		echo '<meta property="og:image" content="' . $image_url . '" />';
 
 		// description was added in schema version 2
