@@ -143,7 +143,9 @@ function toggleArea(button, areaID, chartID) {
 
 function shareChartTwitter(chartID) {
     var url = window.location.href.split('?')[0];
-    window.open(`http://twitter.com/share?url=${url}?chart=${chartID}`, "_blank")
+    var text = `Check out this chart on Global Inequality:`;
+    var hashtags = "globalinequality,inequality,global,globalinequalitycharts";
+    window.open(`https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}&url=${url}?chart=${chartID}`, "_blank");
 }
 
 function copyChartURL(chartID) {
