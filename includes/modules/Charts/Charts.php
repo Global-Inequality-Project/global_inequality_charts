@@ -123,7 +123,8 @@ class GLICH_Charts extends ET_Builder_Module
 			}
 		}
 		// load the chart styles
-		$chart_css_path = '../../../charts/' . $id . '/' . $id . '.css';
+		$chart_css_path = '/../../../charts/' . $id . '/' . $id . '.css';
+		print_r($chart_css_path);
 		if (is_file(plugin_dir_path(__FILE__) . $chart_css_path)) {
 			$chart_css_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $chart_css_path));
 			wp_enqueue_style('chart_css_' . $id, plugins_url($chart_css_path, __FILE__), array(), $chart_css_ver);
