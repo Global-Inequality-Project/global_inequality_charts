@@ -1,6 +1,6 @@
 // Global objects
 window.chart_data = {}
-window.charts_path = window.wp_url+"/wp-content/plugins/global_inequality_charts/charts"
+window.charts_path = window.wp_url + "/wp-content/plugins/global_inequality_charts/charts"
 
 
 // Chart Interface
@@ -86,6 +86,19 @@ function createChartInterface({ chartID, chartTitle, chartDescription, chartSour
     // Render chart in main area
     renderFunc(`#chart-canvas-${chartID}`)
 
+    // If chart is specified in url, scroll to it
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const chart = urlParams.get('chart')
+
+    if ( chart === chartID) {
+        // Scroll to chart after chart is ready
+        setTimeout(function(){
+            document.getElementById(`chart-${chartID}`).scrollIntoView();
+        }, 600);
+     
+    }
+
     // Expand function
     var expandButton = document.getElementById(`chart-expand-btn-${chartID}`);
     expandButton.onclick = function () {
@@ -129,13 +142,29 @@ function toggleArea(button, areaID, chartID) {
 
 
 function shareChartTwitter(chartID) {
-    window.open(`http://twitter.com/share?url=${window.location.href}`, "_blank")
+    var url = window.location.href.split('?')[0];
+    var text = `Check out this chart on Global Inequality:`;
+    var hashtags = "globalinequality,inequality,global,globalinequalitycharts";
+    window.open(`https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}&url=${url}?chart=${chartID}`, "_blank");
 }
 
 function copyChartURL(chartID) {
-    navigator.clipboard.writeText(`${window.location.href}`);
+    const url = window.location.href.split('?')[0]+`?chart=${chartID}`;
+    console.log(url)
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(url);
+    } else {
+        // fallback: manually copy the text for older browsers
+        var dummy = document.createElement("textarea");
+        document.body.appendChild(dummy);
+        dummy.value = url;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+    }
 }
 
+// todo fb share button + other social media
 
 
 // Modal wrapper

@@ -1,0 +1,5 @@
+/* please use always the id as primary selector to not interfer with other parts */
+
+#chart-demo1 h1{
+    color: darkblue;
+}
