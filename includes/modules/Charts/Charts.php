@@ -109,7 +109,9 @@ class GLICH_Charts extends ET_Builder_Module
 				wp_enqueue_script('apexcharts_js', plugins_url($apexcharts_js_path, __FILE__), array(), $apexcharts_js_ver);
 			}
 			if (isset($chart_json["libraries"]["d3js"]) && $chart_json["libraries"]["d3js"]) {
-				wp_enqueue_script('d3_js', "https://d3js.org/d3.v4.min.js");
+				$d3_path = '../../../node_modules/d3/build/d3.min.js';
+
+				wp_enqueue_script('d3_js',  plugins_url($d3_path, __FILE__));
 			}
 			// load the chart utils js, always required for schema version < 2 
 			if (
@@ -214,9 +216,9 @@ function add_open_graph_tags($id)
 		$image_url = "";
 		// try to find the image in the chart folder
 		if (file_exists($chart_img_path)) {
-			$image_url = plugins_url("", __FILE__). '/../../../charts/' . $id . '/' . $id . '.png';
+			$image_url = plugins_url("", __FILE__) . '/../../../charts/' . $id . '/' . $id . '.png';
 		} else {
-			$image_url = plugins_url("", __FILE__). '/../../../assets/img/global_inequality_share.png';
+			$image_url = plugins_url("", __FILE__) . '/../../../assets/img/global_inequality_share.png';
 		}
 		echo '<meta property="og:image" content="' . $image_url . '" />';
 		echo '<meta name="twitter:image" content="' . $image_url . '" />';
