@@ -1,6 +1,6 @@
 # Global Inequality Charts 
 
-Global Inequality Charts is a wordpress divi module and a javascript library to integrate interactive charts in a wordpress site and provide chart tools.
+A divi module to display interactive charts on a wordpress site and provide tools to share, download data, and more.
 
 ## Overview
 
@@ -14,6 +14,7 @@ The chart files are in the root directory of the plugin at `/wp-content/plugins/
             - [chartID].json
             - [chartID].js
             - [chartID].csv
+            - [chartID].png -> for open graph data
     - assets
         - js -> here is where the magic happens
     - includes -> the divi module
@@ -74,24 +75,40 @@ The renderFunc takes one input canvasID, which defines where the chart should be
    - `[chartID].json` -> contains the chart settings
    - `[chartID].csv` -> contains the chart data
    - `[chartID].js` -> contains the chart render function
+   - `[chartID].png` -> is the image that is used, when the chart is shared (1200×630 px)
+   - `[chartID].css` -> contains custom css for the graph
 
-##  [chartID].json schema v1
-- name: the human readable name that shows in the divi editor
+
+
+##  [chartID].json schema v2
+- id: [chartID]
+- title: the human readable name that shows in the divi editor
 - schema_version: the version of the schema, this increases, when new features are added
 - the author of the chart
-- libraries: libraries that should be loaded in order to show the graph, currently supports apexcharts and d3js 
+- description: a short description of the chart
+- source: the source of the data
+- libraries: libraries that should be loaded in order to show the graph, currently supports apexcharts, chartutils and d3js. They are optional and can be omitted when not used.
+
 
 ```
 {
-    "name":"Demo 2",
-    "schema_version":1,
-    "author":"Demo user <demo1@user.com>",
-    "libraries":{
-        "apexcharts":true,
-        "d3js":false
+    "id": "demo1",
+    "title": "Demo 1 Chart Title",
+    "schema_version": 2,
+    "author": "Joël Foramitti <demo1@user.com>",
+    "description": "Demo1 Chart Description",
+    "sources": "Demo1 Chart Sources",
+    "libraries": {
+        "apexcharts": true,
+        "d3js": true,
+        "chartutils": true
     }
 }
 ```
+
+### schema Libraries
+
+If the chart needs libraries, they can be added to the `libraries` object. If the library is not yet available, it can be added to the `assets/js` folder or it has to be added to the `package.json` and added to the `.github/workflows/workflows.yaml`. Adding a library via `package.json` is the prefered way. Please don't add libraries via a CDN, this can't be accepted because of the GDPR. The library should be a javascript file that contains the library. In order to load the library correctly it has to be added to the `includes/modules/Charts/Charts.php -> load_libraries` file . Please contact a developer if you need to add a new library.
 
 ## Building the divi module 
 

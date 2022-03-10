@@ -1,9 +1,13 @@
 {
-    "name":"Demo 1",
-    "schema_version":1,
-    "author":"Joël Foramitti <demo1@user.com>",
-    "libraries":{
-        "apexcharts":true,
-        "d3js":true
+    "id": "demo1",
+    "title": "Demo 1 Chart Title",
+    "schema_version": 2,
+    "author": "Joël Foramitti <demo1@user.com>",
+    "description": "Demo1 Chart Description",
+    "sources": "Demo1 Chart Sources",
+    "libraries": {
+        "apexcharts": true,
+        "d3js": true,
+        "chartutils": true
     }
 }
