@@ -5,7 +5,38 @@ window.charts_path = window.wp_url + "/wp-content/plugins/global_inequality_char
 
 // Chart Interface
 // ---------------
-function createChartInterface({ chartID, chartTitle, chartDescription, chartSources, renderFunc, pathToData, topMargin }) {
+function createChartInterface({ chartID, renderFunc, pathToData, topMargin }) {
+    loadJson(`${window.charts_path}/${chartID}/${chartID}.json`, function (error, data) {
+        if (error === null) {
+            if (data.schema_version >= 2) {
+                createChart({
+                    chartID: chartID,
+                    chartTitle: data.title,
+                    chartDescription: data.description,
+                    chartSources: data.sources,
+                    renderFunc: renderFunc,
+                    pathToData: pathToData,
+                    topMargin: topMargin
+                })
+            } else {
+                createChart({
+                    chartID: chartID,
+                    chartTitle: data.name,
+                    chartDescription: "no description",
+                    chartSources: "no sources",
+                    renderFunc: renderFunc,
+                    pathToData: pathToData,
+                    topMargin: topMargin
+                })
+            }
+        } else {
+            // todo - error handling
+        }
+    });
+
+
+}
+function createChart({ chartID, chartTitle, chartDescription, chartSources, renderFunc, pathToData, topMargin }) {
 
 
     if (pathToData == null) { pathToData = `${window.charts_path}/${chartID}/${chartID}.csv` }
@@ -91,12 +122,12 @@ function createChartInterface({ chartID, chartTitle, chartDescription, chartSour
     const urlParams = new URLSearchParams(queryString);
     const chart = urlParams.get('chart')
 
-    if ( chart === chartID) {
+    if (chart === chartID) {
         // Scroll to chart after chart is ready
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementById(`chart-${chartID}`).scrollIntoView();
         }, 600);
-     
+
     }
 
     // Expand function
@@ -117,11 +148,7 @@ function createChartInterface({ chartID, chartTitle, chartDescription, chartSour
         renderFunc(`#chart-modal-content-${chartID}`)
 
     };
-
-
 }
-
-
 // Button areas
 // ------------
 
@@ -149,7 +176,7 @@ function shareChartTwitter(chartID) {
 }
 
 function copyChartURL(chartID) {
-    const url = window.location.href.split('?')[0]+`?chart=${chartID}`;
+    const url = window.location.href.split('?')[0] + `?chart=${chartID}`;
     console.log(url)
     if (navigator.clipboard) {
         navigator.clipboard.writeText(url);
@@ -165,6 +192,22 @@ function copyChartURL(chartID) {
 }
 
 // todo fb share button + other social media
+
+// load Json data
+function loadJson(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function () {
+        var status = xhr.status;
+        if (status === 200) {
+            callback(null, xhr.response);
+        } else {
+            callback(status, xhr.response);
+        }
+    };
+    xhr.send();
+};
 
 
 // Modal wrapper
