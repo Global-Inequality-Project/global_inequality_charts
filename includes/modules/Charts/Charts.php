@@ -109,7 +109,9 @@ class GLICH_Charts extends ET_Builder_Module
 				wp_enqueue_script('apexcharts_js', plugins_url($apexcharts_js_path, __FILE__), array(), $apexcharts_js_ver);
 			}
 			if (isset($chart_json["libraries"]["d3js"]) && $chart_json["libraries"]["d3js"]) {
-				wp_enqueue_script('d3_js', "https://d3js.org/d3.v4.min.js");
+				$d3_path = '../../../node_modules/d3/build/d3.min.js';
+
+				wp_enqueue_script('d3_js',  plugins_url($d3_path, __FILE__));
 			}
 			// load the chart utils js, always required for schema version < 2 
 			if (
