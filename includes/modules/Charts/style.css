@@ -137,6 +137,6 @@
 }
 .downloadImage .et_pb_menu__logo {
     overflow: hidden;
-    width: 300;
+    width: 150;
+    float: right;
 }
-

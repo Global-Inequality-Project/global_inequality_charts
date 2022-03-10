@@ -1,13 +1,13 @@
 //--------------------------------------- createApexCharts
 function createApexChart(canvasID, chartID, options, callback) {
     options.chart.height = '100%';
-    options.chart.fontFamily = 'Open Sans';
+    options.chart.fontFamily = 'Open Sans, sans-serif';
     var chart = new ApexCharts(document.querySelector(canvasID), options);
     function renderChart() {
         chart.render()
         if (callback !== undefined) {
             callback(chart)
-        }        
+        }
     }
     setTimeout(renderChart, 500);
     return chart
@@ -124,7 +124,7 @@ function basicTooltip(dataPointIndex, w, format, prefix, order, show_name){
         lines+
         '</div>';
 }
-    
+
 //-------------------------------------- pre_populate
 function pre_populate(json, style_file, lang){
     window.global = json;
