@@ -5,83 +5,49 @@ window.charts_path = window.wp_url + "/wp-content/plugins/global_inequality_char
 
 // Chart Interface
 // ---------------
-function createChartInterface({ chartID, chartTitle, chartDescription, chartSources, renderFunc, pathToData, topMargin }) {
+function createChartInterface({ chartID, renderFunc, pathToData, topMargin }) {
+    loadJson(`${window.charts_path}/${chartID}/${chartID}.json`, function (error, data) {
+        if (error === null) {
+            if (data.schema_version >= 2) {
+                createChart({
+                    chartID: chartID,
+                    chartTitle: data.title,
+                    chartDescription: data.description,
+                    chartSources: data.sources,
+                    template: data.template ? data.template : "main",
+                    renderFunc: renderFunc,
+                    pathToData: pathToData,
+                    topMargin: topMargin
+                })
+            } else {
+                createChart({
+                    chartID: chartID,
+                    chartTitle: data.name,
+                    chartDescription: "no description",
+                    chartSources: "no sources",
+                    template: "main",
+                    renderFunc: renderFunc,
+                    pathToData: pathToData,
+                    topMargin: topMargin
+                })
+            }
+        } else {
+            // todo - error handling
+        }
+    });
+
+
+}
+function createChart({ chartID, chartTitle, chartDescription, chartSources, template, renderFunc, pathToData, topMargin }) {
 
 
     if (pathToData == null) { pathToData = `${window.charts_path}/${chartID}/${chartID}.csv` }
     if (topMargin == null) { topMargin = 0 }
-
-    document.getElementById(`chart-${chartID}`).innerHTML += `
-    <div class="chart-interface">
-    <div class="et_pb_row et_pb_row_0 et_pb_row_1-4_3-4">
-
-    <div class="et_pb_column et_pb_column_1_4 et_pb_column_0  et_pb_css_mix_blend_mode_passthrough">
-
-        <div class="chart-title">
-            <h1>${chartTitle}</h1>
-            ${chartDescription}
-        </div>
-
-        <button class="chart-btn chart-expand-btn" id="chart-expand-btn-${chartID}">
-            <i class="fas fa-expand-alt"></i>Expand
-        </button>
-
-
-        <button onclick="toggleArea(this, 'share', '${chartID}')" value="OFF" class="chart-btn">
-        <i class="fas fa-share"></i>Share
-        </button>
-
-        <div class="chart-share-btns" id="chart-${chartID}-share-btns">
-
-            <button class="chart-btn" onclick="shareChartTwitter('${chartID}')">
-                <i class="fa fa-twitter"></i>Twitter
-            </button> 
-
-            <button class="chart-btn"><i class="fas fa-facebook"></i>Facebook</button>
-
-            <button class="chart-btn" onclick="copyChartURL('${chartID}')">
-                <i class="fas fa-link"></i>Copy link
-            </button> 
-
-        </div> 
-
-        <button onclick="toggleArea(this, 'save', '${chartID}')" value="OFF"  class="chart-btn">
-                <i class="fas fa-arrow-alt-circle-down"></i>Download
-        </button>
-
-        <div class="chart-share-btns" id="chart-${chartID}-save-btns">
-
-            <a href="${pathToData}">
-            <button class="chart-btn">
-                <i class="fas fa-arrow-alt-circle-down"></i>Data (csv)
-            </button>
-            </a>
-
-            <button class="chart-btn">
-                <i class="fas fa-arrow-alt-circle-down"></i>Picture (png)
-            </button>
-
-        </div> 
-
-        <button value="OFF"  class="chart-btn">
-                <i class="fas fa-info"></i>Sources
-        </button>
-
-
-
-
-    </div>
-
-    <div class="et_pb_column et_pb_column_3_4 et_pb_column_1  et_pb_css_mix_blend_mode_passthrough et-last-child">
-    <div class="chart-box-outer" style="margin-top: ${topMargin}">
-    <div class="chart-box-inner">
-    <div id="chart-canvas-${chartID}">
-    </div>
-    </div>
-
-    </div>
-    </div>
-    </div>`
+    let createTemplate = window["createTemplate_" + template]({
+        chartID: chartID, chartTitle: chartTitle, chartDescription: chartDescription,
+        chartSources: chartSources, topMargin: topMargin, pathToData: pathToData
+    });
+    document.getElementById(`chart-${chartID}`).innerHTML = createTemplate;
 
     // Render chart in main area
     renderFunc(`#chart-canvas-${chartID}`)
@@ -91,12 +57,12 @@ function createChartInterface({ chartID, chartTitle, chartDescription, chartSour
     const urlParams = new URLSearchParams(queryString);
     const chart = urlParams.get('chart')
 
-    if ( chart === chartID) {
+    if (chart === chartID) {
         // Scroll to chart after chart is ready
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementById(`chart-${chartID}`).scrollIntoView();
         }, 600);
-     
+
     }
 
     // Expand function
@@ -117,11 +83,7 @@ function createChartInterface({ chartID, chartTitle, chartDescription, chartSour
         renderFunc(`#chart-modal-content-${chartID}`)
 
     };
-
-
 }
-
-
 // Button areas
 // ------------
 
@@ -149,7 +111,7 @@ function shareChartTwitter(chartID) {
 }
 
 function copyChartURL(chartID) {
-    const url = window.location.href.split('?')[0]+`?chart=${chartID}`;
+    const url = window.location.href.split('?')[0] + `?chart=${chartID}`;
     console.log(url)
     if (navigator.clipboard) {
         navigator.clipboard.writeText(url);
@@ -165,6 +127,22 @@ function copyChartURL(chartID) {
 }
 
 // todo fb share button + other social media
+
+// load Json data
+function loadJson(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function () {
+        var status = xhr.status;
+        if (status === 200) {
+            callback(null, xhr.response);
+        } else {
+            callback(status, xhr.response);
+        }
+    };
+    xhr.send();
+};
 
 
 // Modal wrapper

@@ -1,10 +1,11 @@
 {
     "id": "demo1",
     "title": "Demo 1 Chart Title",
-    "schema_version": 2,
+    "schema_version": 3,
     "author": "Joël Foramitti <demo1@user.com>",
     "description": "Demo1 Chart Description",
     "sources": "Demo1 Chart Sources",
+    "template":"main",
     "libraries": {
         "apexcharts": true,
         "d3js": true,

@@ -71,8 +71,5 @@ function render_demo1(canvasID) {
 
 createChartInterface({
   chartID:'demo1',
-  chartTitle:"Demo1 Chart Title",
-  chartDescription:"Demo1 Chart Description",
-  chartSources:"Demo1 Chart Sources",
   renderFunc:render_demo1,
 })
