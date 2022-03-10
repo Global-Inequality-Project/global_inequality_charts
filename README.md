@@ -87,7 +87,7 @@ The renderFunc takes one input canvasID, which defines where the chart should be
 - the author of the chart
 - description: a short description of the chart
 - source: the source of the data
-- libraries: libraries that should be loaded in order to show the graph, currently supports apexcharts, chartutils and d3js. They are optional and can be omitted when not used.
+- libraries: libraries that should be loaded in order to show the graph, currently supports apexcharts, chartutils and d3js(v4.13). They are optional and can be omitted when not used.
 
 
 ```
