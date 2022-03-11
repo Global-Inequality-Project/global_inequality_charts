@@ -1,5 +1,5 @@
 //--------------------------------------- window.ready
-$(function() {
+jQuery(function() {
     checkObjectKeysFunc();
     window.chart_data["inequality_gdp_chg"] = {
         percentiles: { start: 1, end: 100},
@@ -10,7 +10,7 @@ $(function() {
 
 //-------------------------------------- importFilesAndShow
 function importFilesAndShow_inequality_gdp_chg(){
-	$.get(`${window.charts_path}/${"inequality_gdp_chg"}/${"inequality_gdp_chg"}.csv`, function(gdp_nrt_sth){
+	jQuery.get(`${window.charts_path}/${"inequality_gdp_chg"}/${"inequality_gdp_chg"}.csv`, function(gdp_nrt_sth){
         window.chart_data["inequality_gdp_chg"].data = fromCSV(gdp_nrt_sth, ['string', 'number', 'number']);
         
 
