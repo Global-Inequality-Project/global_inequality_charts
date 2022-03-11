@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // Internal Dependencies
-// import '../../../style.css';
+import './style.css';
 // import './_gip_chart_interface-main/style.css';
 
 
@@ -14,9 +14,10 @@ class Charts extends Component {
     const Content = this.props.content;
 
     return (
-      <h1>
+      <div className="glich">
+        <h1>Global Inequality chart</h1>
         <Content/>
-      </h1>
+      </div>
     );
   }
 }

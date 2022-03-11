@@ -17,8 +17,8 @@ class GLICH_Charts extends ET_Builder_Module
 	// initialise the module 
 	public function init()
 	{
-		$this->set_url();
 		$this->name = esc_html__('Global Inequality Charts', 'glich-global_inequalitiy_charts');
+
 	}
 
 	private function console_log($output, $with_script_tags = true)
@@ -33,12 +33,6 @@ class GLICH_Charts extends ET_Builder_Module
 			echo $js_code;
 		}
 	}
-	private function set_url()
-	{
-		$js_code = '<script>window.wp_url="' . get_home_url() . '";</script>';
-		echo $js_code;
-	}
-
 
 	// get the fields for the module in the builder
 	public function get_fields()
@@ -79,6 +73,7 @@ class GLICH_Charts extends ET_Builder_Module
 
 	public function render($attrs, $content = null, $render_slug)
 	{
+		$this->set_url();
 		$ctype = $this->props['charttype'];
 		$this->load_libraries($ctype);
 		// load chart js
@@ -89,7 +84,7 @@ class GLICH_Charts extends ET_Builder_Module
 		$this->console_log("render " . $ctype);
 
 		// render chart
-		return sprintf('<br/><div id="chart-%1$s"></div>', $ctype, $ctype);
+		return sprintf('<br/><div id="chart-%1$s"></div>', $ctype);
 	}
 
 	// load the libraries for the chart depending on the libraries section of the config
@@ -147,6 +142,7 @@ new GLICH_Charts;
  */
 function load_charts_scripts($hook)
 {
+	set_url();
 
 	// create my own version codes
 	$chartinterface_js_path = '../../../assets/js/chartinterface.js';
@@ -157,13 +153,20 @@ function load_charts_scripts($hook)
 }
 add_action('wp_enqueue_scripts', 'load_charts_scripts');
 
+// set the url for the charts
+function set_url()
+{
+	$js_code = '<script>window.wp_url="' . get_home_url() . '";</script>';
+	echo $js_code;
+}
 // add chart-modal-wrapper div to footer
 if (!function_exists('add_chart_modal_wrapper')) {
 	function add_chart_modal_wrapper()
 	{
+
 		echo '<div id="chart-modal-wrapper"></div>';
 	}
-	add_action('wp_footer', 'add_chart_modal_wrapper', 100);
+	add_action('wp_footer', 'add_chart_modal_wrapper', 10);
 }
 
 
