@@ -49,7 +49,7 @@ class GLICH_Charts extends ET_Builder_Module
 					// deal with error...
 					$this->console_log("failed to parse json for chart " . $path . $chart_id . ".json");
 				} else {
-					if ($options["schema_version"] >= 2) {
+					if ($chart_json["schema_version"] >= 2) {
 						$options[$chart_id] =  esc_html__($chart_json["title"], 'dvmm-divi-mad-menu');
 					} else {
 						// pre v2 schema
