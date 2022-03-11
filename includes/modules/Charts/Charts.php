@@ -73,7 +73,6 @@ class GLICH_Charts extends ET_Builder_Module
 
 	public function render($attrs, $content = null, $render_slug)
 	{
-		$this->set_url();
 		$ctype = $this->props['charttype'];
 		$this->load_libraries($ctype);
 		// load chart js

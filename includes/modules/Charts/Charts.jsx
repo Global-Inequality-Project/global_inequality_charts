@@ -11,12 +11,14 @@ class Charts extends Component {
   static slug = 'glich_charts';
 
   render() {
-    const Content = this.props.content;
-
+    // currently used for divi editor rendering
+    const chartType = this.props.charttype;
+    console.log(chartType, this.props);
     return (
-      <div className="glich">
+
+      <div className="glich-backend">
         <h1>Global Inequality chart</h1>
-        <Content/>
+        <small className="glich-subtitle"> {chartType} </small>
       </div>
     );
   }
