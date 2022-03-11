@@ -13,7 +13,6 @@ class Charts extends Component {
   render() {
     // currently used for divi editor rendering
     const chartType = this.props.charttype;
-    console.log(chartType, this.props);
     return (
 
       <div className="glich-backend">
