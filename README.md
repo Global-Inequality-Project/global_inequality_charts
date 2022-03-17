@@ -80,24 +80,26 @@ The renderFunc takes one input canvasID, which defines where the chart should be
 
 
 
-##  [chartID].json schema v2
+##  [chartID].json schema v3
 - id: [chartID]
 - title: the human readable name that shows in the divi editor
 - schema_version: the version of the schema, this increases, when new features are added
 - the author of the chart
 - description: a short description of the chart
 - source: the source of the data
-- libraries: libraries that should be loaded in order to show the graph, currently supports apexcharts, chartutils and d3js. They are optional and can be omitted when not used.
+- template: the template of the chart -> `assets/js/templates/[template].js`
+- libraries: libraries that should be loaded in order to show the graph, currently supports apexcharts, chartutils and d3js (v4.13). They are optional and can be omitted when not used.
 
 
 ```
 {
     "id": "demo1",
     "title": "Demo 1 Chart Title",
-    "schema_version": 2,
+    "schema_version": 3,
     "author": "Joël Foramitti <demo1@user.com>",
     "description": "Demo1 Chart Description",
     "sources": "Demo1 Chart Sources",
+    "template": "main",
     "libraries": {
         "apexcharts": true,
         "d3js": true,
@@ -109,6 +111,17 @@ The renderFunc takes one input canvasID, which defines where the chart should be
 ### schema Libraries
 
 If the chart needs libraries, they can be added to the `libraries` object. If the library is not yet available, it can be added to the `assets/js` folder or it has to be added to the `package.json` and added to the `.github/workflows/workflows.yaml`. Adding a library via `package.json` is the prefered way. Please don't add libraries via a CDN, this can't be accepted because of the GDPR. The library should be a javascript file that contains the library. In order to load the library correctly it has to be added to the `includes/modules/Charts/Charts.php -> load_libraries` file . Please contact a developer if you need to add a new library.
+
+### create a new chart template
+
+The name/id of the template has to be the same as the name of the file in `assets/js/templates/[templateID]`. The template has to be a javascript file that contains the template render function. The chart render function has to be called `createTemplate_[templateID]`. 
+
+The template render function has to return a string that contains the html code of the template. The html code is inserted into the divi module. The html code must contain the following element(s):
+
+```
+<div id="chart-canvas-${chartID}"> </div>
+```
+The values of  `chartID`, `chartTitle`, `chartDescription`, `chartSources`, `topMargin` and `pathToData` can be used to build the template.
 
 ## Building the divi module 
 
