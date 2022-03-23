@@ -42,9 +42,8 @@ class GLICH_Global_inequality_charts extends DiviExtension
 		$this->plugin_dir_url = plugin_dir_url($this->plugin_dir);
 
 		parent::__construct($name, $args);
-		// create my own version codes
-		$fontawesome_path = '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
+		$fontawesome_path = '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 		// enqueue scripts
 		wp_enqueue_style('fontawesome', plugins_url($fontawesome_path, __FILE__), array());
 	}

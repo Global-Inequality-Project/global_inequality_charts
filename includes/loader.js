@@ -1,11 +1,10 @@
 // External Dependencies
-import $ from 'jquery';
+import jQuery from 'jquery'
 
 // Internal Dependencies
 import modules from './modules';
-import fields from './fields';
 
-$(window).on('et_builder_api_ready', (event, API) => {
-  API.registerModules(modules);
-  API.registerModalFields(fields);
+jQuery(window).on('et_builder_api_ready', (event, API) => {
+  // alert("124");
+ API.registerModules(modules);
 });

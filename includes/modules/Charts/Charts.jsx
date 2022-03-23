@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // Internal Dependencies
-// import '../../../style.css';
+import './style.css';
 // import './_gip_chart_interface-main/style.css';
 
 
@@ -11,12 +11,14 @@ class Charts extends Component {
   static slug = 'glich_charts';
 
   render() {
-    const Content = this.props.content;
-
+    // currently used for divi editor rendering
+    const chartType = this.props.charttype;
     return (
-      <h1>
-        <Content/>
-      </h1>
+
+      <div className="glich-backend">
+        <h1>Global Inequality chart</h1>
+        <small className="glich-subtitle"> {chartType} </small>
+      </div>
     );
   }
 }
