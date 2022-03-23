@@ -14,13 +14,9 @@ function importFilesAndShow_inequality_gdp_nrt_sth(){
 	jQuery.get(`${window.charts_path}/${"inequality_gdp_nrt_sth"}/${"inequality_gdp_nrt_sth"}.csv`, function(gdp_nrt_sth){
         window.chart_data["inequality_gdp_nrt_sth"].data = fromCSV(gdp_nrt_sth, ['string', 'number', 'number']);
         
-
         // Render Chart Interface
         createChartInterface({
           chartID:'inequality_gdp_nrt_sth',
-          chartTitle:"GDP per capita: Global North vs. Global South",
-          chartDescription:"Constant 2010 USD",
-          chartSources:"Chart Sources",
           renderFunc:render_inequality_gdp_nrt_sth,
           topMargin:"-15px",
         })

@@ -1,3 +1,35 @@
+.chart-template-main {
+  display: flex;
+}
+
+.chart-col-left {
+  width: 22.75%;
+  margin-right: 3%;
+}
+
+.chart-col-right {
+  width: 74.25%;
+}
+
+/* Mobile view */
+
+@media all and (max-width: 767px) {
+  
+  .chart-template-main {
+    display: block;
+  }
+
+  .chart-col-left {
+    width: 100%;
+    margin-right: 0%;
+    margin-bottom: 20px;
+  }
+
+  .chart-col-right {
+    width: 100%;
+  }
+}
+
 /* Charts */
 
 .chart-interface {
@@ -6,11 +38,27 @@
 }
 
 .chart-title {
-  background-color: #f7f7f7;
+  background-color: #f2f2f2;
   color: #646464;
   padding: 12px 17px;
   font-size: 14px;
   margin-bottom: 3px;
+  display: flex;
+}
+
+.chart-title-main {
+  width: 100%;
+}
+
+.chart-title-bars {
+  display: none;
+}
+
+.chart-title-bars i {
+  font-size: 16px;
+  margin-left: 10px;
+  margin-top: 7px;
+  margin-right: 2px;
 }
 
 .chart-title h1 {
@@ -23,8 +71,14 @@
 
 /* Chart Buttons */
 
+.chart-title-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 .chart-btn {
-  background-color: #f7f7f7;
+  background-color: #f2f2f2;
   border: none;
   color: #646464;
   padding: 15px 17px;
@@ -36,27 +90,42 @@
   text-align: left;
 }
 
+.chart-btn:hover {
+  background-color: #e2e2e2;
+}
+
+.chart-btn[value*="ON"] {
+  font-weight: bold;
+  background-color: #e2e2e2;
+  border-bottom: 3px white solid;
+}
+
 .chart-btn i {
   margin-right: 15px;
   width: 15px;
   text-align: center;
 }
 
-@media all and (max-width: 980px) {
+@media all and (max-width: 767px) {
+  
+  .chart-title-bars {
+  display: block;
+  }
+  
+  .chart-all-btns {
+  display: none;
+  }
+  
   .chart-expand-btn {
     display: none;
   }
-}
-
-@media all and (max-width: 767px) {
+  
   .chart-btn {
     padding: 12px 17px;
   }
 }
 
-.chart-btn:hover {
-  background-color: #e2e2e2;
-}
+
 
 /* Chart Sub Buttons */
 
@@ -68,7 +137,7 @@
 
 .chart-share-btns .chart-btn {
   margin-top: -4px;
-  padding: 10px 0px 10px 40px;
+  padding: 10px 0px 10px 17px;
 }
 
 /* Chart Expansion Modal */
@@ -111,7 +180,7 @@
 
 .chart-box-outer {
   width: 100%;
-  padding-top: 400px; /*max(66%, 300px); */
+  padding-top: max(66%, 300px); 
   position: relative;
 }
 

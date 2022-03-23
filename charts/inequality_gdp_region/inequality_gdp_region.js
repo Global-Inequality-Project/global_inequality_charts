@@ -25,9 +25,6 @@ function importFilesAndShow_inequality_gdp_region(){
         // Render Chart Interface
         createChartInterface({
           chartID:'inequality_gdp_region',
-          chartTitle:"GDP per capita: World regions",
-          chartDescription:"Constant 2010 USD",
-          chartSources:"Chart Sources",
           renderFunc:render_inequality_gdp_region,
           topMargin:"-15px",
         })

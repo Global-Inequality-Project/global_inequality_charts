@@ -17,9 +17,6 @@ function importFilesAndShow_inequality_gdp_chg(){
         // Render Chart Interface
         createChartInterface({
           chartID:'inequality_gdp_chg',
-          chartTitle:"Distribution of new income (1980-2016)",
-          chartDescription:"Constant 2018 USD",
-          chartSources:"Chart Sources",
           renderFunc:render_inequality_gdp_chg,
           topMargin:"-15px"
         })

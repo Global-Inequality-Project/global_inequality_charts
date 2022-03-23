@@ -1,9 +1,11 @@
 {
-    "name":"inequality gdp chg",
-    "schema_version":1,
-    "author":"Joël Foramitti <demo1@user.com>",
+    "schema_version":3,
+    "id":"inequality_gdp_chg",
+    "title": "Distribution of new income (1980-2016)",
+    "description": "Constant 2018 USD",
+    "author":"",
     "libraries":{
         "apexcharts":true,
-        "d3js":false
+        "chartutils": true
     }
 }

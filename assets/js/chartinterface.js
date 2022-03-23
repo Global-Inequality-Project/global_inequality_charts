@@ -84,10 +84,11 @@ function createChart({ chartID, chartTitle, chartDescription, chartSources, temp
 
     };
 }
+
 // Button areas
 // ------------
 
-function toggleArea(button, areaID, chartID) {
+function toggleChartArea(button, areaID, chartID) {
     var shareArea = document.getElementById(`chart-${chartID}-${areaID}-btns`)
     if (button.value == "OFF") {
         button.value = "ON";
