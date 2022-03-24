@@ -180,7 +180,7 @@
 
 .chart-box-outer {
   width: 100%;
-  padding-top: max(66%, 300px); 
+  padding-top: calc(max(66%, 300px)); 
   position: relative;
 }
 
