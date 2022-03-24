@@ -1,5 +1,5 @@
 //--------------------------------------- window.ready
-$(function() {
+jQuery(function() {
     checkObjectKeysFunc();
     window.chart_data["inequality_gdp_region"] = {
         regions: [
@@ -19,7 +19,7 @@ $(function() {
 
 //-------------------------------------- importFilesAndShow
 function importFilesAndShow_inequality_gdp_region(){
-	$.get(`${window.charts_path}/${"inequality_gdp_region"}/${"inequality_gdp_region"}.csv`, function(gdp_region){
+	jQuery.get(`${window.charts_path}/${"inequality_gdp_region"}/${"inequality_gdp_region"}.csv`, function(gdp_region){
         window.chart_data["inequality_gdp_region"].data = fromCSV(gdp_region, ['string'].concat(Array(8).fill('number')));
         
         // Render Chart Interface
