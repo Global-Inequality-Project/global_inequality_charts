@@ -1,5 +1,5 @@
 //--------------------------------------- window.ready
-$(function() {
+jQuery(function() {
     checkObjectKeysFunc();
     window.chart_data["inequality_gdp_nrt_sth"] = {
         years: { start: 1960, end: 2018},
@@ -11,7 +11,7 @@ $(function() {
 
 //-------------------------------------- importFilesAndShow
 function importFilesAndShow_inequality_gdp_nrt_sth(){
-	$.get(`${window.charts_path}/${"inequality_gdp_nrt_sth"}/${"inequality_gdp_nrt_sth"}.csv`, function(gdp_nrt_sth){
+	jQuery.get(`${window.charts_path}/${"inequality_gdp_nrt_sth"}/${"inequality_gdp_nrt_sth"}.csv`, function(gdp_nrt_sth){
         window.chart_data["inequality_gdp_nrt_sth"].data = fromCSV(gdp_nrt_sth, ['string', 'number', 'number']);
         
 

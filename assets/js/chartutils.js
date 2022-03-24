@@ -135,7 +135,7 @@ function pre_populate(json, style_file, lang){
             window.global.lang = window.location.search.substr(1); // remove leading '?'
             // Removed comments and added window.global.rtl_switch condition July 14, 2019
             if (window. global.rtl_switch && (window.global.lang == 'ur' || window.global.lang == 'ar'))
-                $('html').attr("dir", "rtl");
+                jQuery('html').attr("dir", "rtl");
         }else
             window.global.lang = 'en';
     }else
@@ -146,9 +146,9 @@ function pre_populate(json, style_file, lang){
         lang_css_file += '_'+window.global.lang;
 
     lang_css_file += '.css';
-    $('head').append('<link rel="stylesheet" href="'+lang_css_file+'" type="text/css" />');
+    jQuery('head').append('<link rel="stylesheet" href="'+lang_css_file+'" type="text/css" />');
 
-    $.holdReady(false);
+    jQuery.holdReady(false);
 }
 
 //-------------------------------------- localizedTitles
@@ -169,22 +169,22 @@ function localizedTitles(lang_id){
             break;
         default: break;
     }
-    $('#'+lang_id).html('<a href="'+window.location.pathname+suffix+'">'+lang+'</a>');
+    jQuery('#'+lang_id).html('<a href="'+window.location.pathname+suffix+'">'+lang+'</a>');
 
     // insert titles based on language
     for (var i=0, len =  window.global.titles.length; i < len; ++i){
         switch (window.global.titles[i].type){
             case 'link':
-                $('#'+window.global.titles[i].key+' a').html(window.global.titles[i][window.global.lang]);
+                jQuery('#'+window.global.titles[i].key+' a').html(window.global.titles[i][window.global.lang]);
                 break;
             case 'class':
-                $('.'+window.global.titles[i].key).html(window.global.titles[i][window.global.lang]);
+                jQuery('.'+window.global.titles[i].key).html(window.global.titles[i][window.global.lang]);
                 break;
             case 'option':
-                $('option[value="'+window.global.titles[i].key+'"]').html(window.global.titles[i][window.global.lang]);
+                jQuery('option[value="'+window.global.titles[i].key+'"]').html(window.global.titles[i][window.global.lang]);
                 break;
             default: // id
-                $('#'+window.global.titles[i].key).html(window.global.titles[i][window.global.lang]);
+                jQuery('#'+window.global.titles[i].key).html(window.global.titles[i][window.global.lang]);
         }
     }
 }
@@ -537,12 +537,12 @@ function checkAndSetBrowserZoom(default_width){
 
     var zoom = window.screen.availWidth/default_width;
     if (Math.abs(1 - zoom) > 0.0001)
-        if ($.browser.mozilla){
-            $('body').css('transform-origin','top left');
-            $('body').css('MozTransform','scale(' + zoom + ')');
+        if (jQuery.browser.mozilla){
+            jQuery('body').css('transform-origin','top left');
+            jQuery('body').css('MozTransform','scale(' + zoom + ')');
         }else{
-            $('body').css('transform-origin','top left');
-            $('body').css('zoom', zoom );
+            jQuery('body').css('transform-origin','top left');
+            jQuery('body').css('zoom', zoom );
         }
 }
 
@@ -586,22 +586,22 @@ function getSnippet(url) {
         request.onload = function() {
             if (request.status === 200) {
                 // If successful, resolve the promise by passing back the request response
-                $("body").css("cursor", "default");
+                jQuery("body").css("cursor", "default");
                 resolve(request.response);
             } else {
                 // If it fails, reject the promise with a error message
-                $("body").css("cursor", "default");
+                jQuery("body").css("cursor", "default");
                 reject(Error('Text file didn\'t load successfully; error code: ' + request.statusText+'. Url: '+url));
             }
         };
         request.onerror = function() {
             // Also deal with the case when the entire request fails to begin with
             // This is probably a network error, so reject the promise with an appropriate message
-            $("body").css("cursor", "default");
+            jQuery("body").css("cursor", "default");
             reject(Error('There was a network error.'+' url: '+url));
         };
         // Send the request
-        $("body").css("cursor", "progress");
+        jQuery("body").css("cursor", "progress");
         request.send();
     });
 }

@@ -130,6 +130,7 @@
   line-height: 1em;
 }
 
+
 .downloadImage {
   position: fixed;
   padding: 30;
@@ -139,4 +140,10 @@
     overflow: hidden;
     width: 150;
     float: right;
+
+.glich-backend{
+  background-color: #f7f7f7;
+  padding: 15px;
+  margin-bottom: 15px;
+
 }
