@@ -13,6 +13,7 @@ jobs:
         with:
           node-version: '14'
           cache: 'yarn'
+      - run: node --version
       - run: yarn install
       - run: yarn build
 
