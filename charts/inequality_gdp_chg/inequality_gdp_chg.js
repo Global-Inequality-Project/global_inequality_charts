@@ -13,14 +13,11 @@ function importFilesAndShow_inequality_gdp_chg(){
 	jQuery.get(`${window.charts_path}/${"inequality_gdp_chg"}/${"inequality_gdp_chg"}.csv`, function(gdp_nrt_sth){
         window.chart_data["inequality_gdp_chg"].data = fromCSV(gdp_nrt_sth, ['string', 'number', 'number']);
         
-
         // Render Chart Interface
         createChartInterface({
           chartID:'inequality_gdp_chg',
           renderFunc:render_inequality_gdp_chg,
-          topMargin:"-15px"
         })
-
 
 	});
 }
@@ -32,6 +29,8 @@ function render_inequality_gdp_chg(canvasID) {
     var options = {
         chart: {
             type: 'bar',
+            height: '100%',
+            fontFamily: 'Open Sans',
             toolbar: {
                 show: false,
                 tools: {zoom: false}
@@ -109,7 +108,7 @@ function render_inequality_gdp_chg(canvasID) {
     options['chart'].id = ('Distribution of New Income 1980to2016').replace(/ /g,"");
 	options.series = series;
 
-    var chart = createApexChart(canvasID, chartID, options);
+    var chart = createApexChart(canvasID, options);
 }
 
 

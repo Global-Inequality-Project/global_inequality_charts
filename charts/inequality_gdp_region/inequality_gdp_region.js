@@ -26,7 +26,6 @@ function importFilesAndShow_inequality_gdp_region(){
         createChartInterface({
           chartID:'inequality_gdp_region',
           renderFunc:render_inequality_gdp_region,
-          topMargin:"-15px",
         })
 
 
@@ -40,6 +39,8 @@ function render_inequality_gdp_region(canvasID){
     var options = {
         chart: {
             type: 'line',
+            height: '100%',
+            fontFamily: 'Open Sans',
             toolbar: {
                 show: false,
                 tools: {zoom: false}
@@ -109,7 +110,7 @@ function render_inequality_gdp_region(canvasID){
 	options['xaxis'] = { categories: years, tickAmount: 30, tooltip: {enabled: false} };
 	options.series = series;
 
-	var chart = createApexChart(canvasID, chartID, options);
+	var chart = createApexChart(canvasID, options);
 
 }
 

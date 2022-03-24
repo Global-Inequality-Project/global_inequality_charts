@@ -1,9 +1,10 @@
 {
-    "schema_version":3,
     "id":"inequality_gdp_nrt_sth",
     "title": "GDP per capita: Global North vs. Global South",
     "description": "Constant 2010 USD",
-    "author":"",
+    "author":"Huzaifa Zoomkawala",
+    "template":"main",
+    "schema_version":4,
     "libraries":{
         "apexcharts":true,
         "chartutils": true

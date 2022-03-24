@@ -1,9 +1,10 @@
 {
-    "schema_version":3,
     "id":"inequality_gdp_chg",
     "title": "Distribution of new income (1980-2016)",
     "description": "Constant 2018 USD",
-    "author":"",
+    "author":"Huzaifa Zoomkawala",
+    "template":"main",
+    "schema_version":4,
     "libraries":{
         "apexcharts":true,
         "chartutils": true
