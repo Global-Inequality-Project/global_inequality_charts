@@ -1,4 +1,4 @@
-function createTemplate_main({ chartID, chartTitle, chartDescription, chartSources, topMargin, pathToData }) {
+function createTemplate_main({ chartID, chartTitle, chartDescription, customTools }) {
 
 var tmpl =`
 <div class="chart-interface chart-template-main">
@@ -18,6 +18,9 @@ var tmpl =`
     </div>
     
     <div class="chart-all-btns" id="chart-${chartID}-all-btns">
+        
+        ${customTools}
+
         <button class="chart-btn chart-expand-btn" id="chart-expand-btn-${chartID}">
           <i class="fas fa-expand-alt"></i>Expand
         </button>
@@ -61,13 +64,13 @@ var tmpl =`
         </div> 
 
         <button value="OFF"  class="chart-btn">
-                <i class="fa-solid fa-book-open"></i>Sources
+                <i class="fa-solid fa-file-lines"></i>Sources
         </button>
     </div>
   </div>
 
   <div class="chart-col-right">
-    <div class="chart-box-outer" style="margin-top: ${topMargin}">
+    <div class="chart-box-outer">
       <div class="chart-box-inner">
         <div id="chart-canvas-${chartID}">
         </div>
