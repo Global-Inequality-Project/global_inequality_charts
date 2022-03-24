@@ -1,7 +1,5 @@
 //--------------------------------------- createApexCharts
-function createApexChart(canvasID, chartID, options, callback) {
-    options.chart.height = '100%';
-    options.chart.fontFamily = 'Open Sans';
+function createApexChart(canvasID, options, callback) {
     var chart = new ApexCharts(document.querySelector(canvasID), options);
     function renderChart() {
         chart.render()
