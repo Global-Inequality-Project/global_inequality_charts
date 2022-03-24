@@ -1,137 +1,164 @@
 # Global Inequality Charts 
 
-A divi module to display interactive charts on a wordpress site and provide tools to share, download data, and more.
+A divi module to display interactive charts on a wordpress site and provide various tools in a sidebar.
 
-## Overview
+## Installation
 
-Each chart has a unique ID, denoted in this documentation as [chartID]. This ID is used to identify the chart in the javascript library and it has to be unique.
+To install the latest version of the plugin:
 
-The chart files are in the root directory of the plugin at `/wp-content/plugins/global_inequality_charts/`:
-
-- plugin-root
-    - charts
-        - [chartID] -> one folder for each chart
-            - [chartID].json
-            - [chartID].js
-            - [chartID].csv
-            - [chartID].png -> for open graph data
-    - assets
-        - js -> here is where the magic happens
-    - includes -> the divi module
-    - languages -> could be used for translations
-    - node_modules -> the dependencies folder
-    - scripts -> automatically generated js
-    - styles -> automatically generated css
-
-## Licensing
-
-The plugin code is released under the MIT license. Each of the charts and the corresponding datasets can be subject to different authorships and license terms, which are indicated in the respective directory of each chart. 
+- Select the latest workflow from [Actions](https://github.com/Global-Inequality-Project/global_inequality_charts/actions) and download the plugin file from `Artifacts`
+- Install the plugin on your wordpress instance
 
 ## Usage
 
 A chart is integrated into a wordpress page as follows:
 
-- open a page or a post with the divi editor
-- add the `global inequalities charts` module to the page
-- in the settings of the module the chart can be selected by the name defined in `[chartID].json`
+- Open a page or a post with the divi editor
+- Add a `global inequalities charts` module to the page
+- Select one of the charts in the module settings
 
-## The chart interface
+## Licensing
 
-The interface is created by calling createChartInterface() 
+The plugin code is released under the MIT license. Each of the charts and the corresponding datasets can be subject to different authorships and license terms, which are indicated in the respective directory of each chart. 
 
-The function createChartInterface() is defined in chartinterface.js.
+## Overview
 
-The function takes the following inputs:
+Each chart has a unique ID, denoted in this documentation as `[chartID]`. 
 
-- chartID (string)
-- chartTitle (string)
-- chartDescription (string)
-- renderFunc: See section 'The chart'
+The chart files can be found in the root directory of the plugin at `/wp-content/plugins/global_inequality_charts/`.
 
-The chart interface consists of the chart itself, as well as the following set of tools:
+The file structure of the plugin is as follows:
 
-- Share 
-    - Twitter
-    - Facebook
-    - Copy link
-- Expand
-- Download
-    - Data (csv)
-    - Picture (png) 
-- Show sources
+- plugin-root
+    - `charts`
+        - `[chartID]` -> one folder for each chart
+    - `assets`
+        - `js` -> here is where the magic happens
+            - `templates` -> contains different layouts for the chart interface
+    - `includes` -> the divi module
+    - `languages` -> could be used for translations
+    - `node_modules` -> external js libraries
+    - `scripts` -> automatically generated js
+    - `styles` -> automatically generated css
 
+## Adding new charts
 
+You can a new chart to the plugin as follows:
 
-## The chart content
-
-The script [chartID].js defines the renderFunc and calls createChartInterface().
-
-The renderFunc takes one input canvasID, which defines where the chart should be rendered.
-
-## How to add a chart
-
-- create a new folder in `charts` with the name of the `[chartID]`
-- in the folder create the 3 files
+- Create a new folder in `charts` with the name of the `[chartID]`
+- In the folder, create the following files:
    - `[chartID].json` -> contains the chart settings
-   - `[chartID].csv` -> contains the chart data
    - `[chartID].js` -> contains the chart render function
-   - `[chartID].png` -> is the image that is used, when the chart is shared (1200×630 px)
-   - `[chartID].css` -> contains custom css for the graph
+   - `[chartID].txt` -> Information on data sources
+   - `[chartID].css` -> optional: contains custom css for the graph
+   - `[chartID].png` -> optional: image that is used when the chart is shared (1200×630 px)
+   - `LICENSE` -> optional: custom license information regarding the chart and used data
 
+An example can be found in `charts/demo_chart/`.
 
+### `[chartID].json` (Version 4)
 
-##  [chartID].json schema v3
+This file contains the following chart settings:
+
 - id: [chartID]
 - title: the human readable name that shows in the divi editor
-- schema_version: the version of the schema, this increases, when new features are added
-- the author of the chart
 - description: a short description of the chart
-- source: the source of the data
+- author: the author(s) of the chart
 - template: the template of the chart -> `assets/js/templates/[template].js`
-- libraries: libraries that should be loaded in order to show the graph, currently supports apexcharts, chartutils and d3js (v4.13). They are optional and can be omitted when not used.
+- schema_version: the version of the schema, this increases, when new features are added.
+- libraries: libraries that should be loaded in order to show the graph
 
+The following entries for libraries are currently supported. They are optional and can be omitted when not used. Entries marked with a * can be adapted in `assets/js/`.
+
+- `apexcharts` (v3.33)
+- `d3js` (v4.13)
+- `chartutils` *
+
+The following templates are currently supported:
+
+- `main` (default)
+
+Here is an example:
 
 ```
 {
-    "id": "demo1",
-    "title": "Demo 1 Chart Title",
-    "schema_version": 3,
-    "author": "Joël Foramitti <demo1@user.com>",
-    "description": "Demo1 Chart Description",
-    "sources": "Demo1 Chart Sources",
-    "template": "main",
+    "id": "demo_chart",
+    "title": "Demo chart",
+    "description": "This is the chart description",
+    "author": "Joël Foramitti",
+    "template":"main",
+    "schema_version": 4,
     "libraries": {
         "apexcharts": true,
-        "d3js": true,
         "chartutils": true
     }
 }
+
 ```
 
-### schema Libraries
+### `[chartID].js`
 
-If the chart needs libraries, they can be added to the `libraries` object. If the library is not yet available, it can be added to the `assets/js` folder or it has to be added to the `package.json` and added to the `.github/workflows/workflows.yaml`. Adding a library via `package.json` is the prefered way. Please don't add libraries via a CDN, this can't be accepted because of the GDPR. The library should be a javascript file that contains the library. In order to load the library correctly it has to be added to the `includes/modules/Charts/Charts.php -> load_libraries` file . Please contact a developer if you need to add a new library.
+The script `[chartID].js` has to call the function `createChartInterface()`, which takes the following inputs:
 
-### create a new chart template
+- `chartID` (string): The unique ID of the chart
+- `renderFunc` (function): Function to render the main chart (see below)
+- `renderFuncModal` (function, optional): Function to render a different chart in expanded mode
+- `chartData` (object, optional): Will be forwarded to `renderFunc` and `renderFuncModal`
+- `customTools` (string, optional): Will be forwarded to the chosen template to display custom tools
 
-The name/id of the template has to be the same as the name of the file in `assets/js/templates/[templateID]`. The template has to be a javascript file that contains the template render function. The chart render function has to be called `createTemplate_[templateID]`. 
+The functions `renderFunc` and `renderFuncModal` take two inputs `canvasID` and `data` and are meant to display the chart on the DOM element with the id `canvasID`.
 
-The template render function has to return a string that contains the html code of the template. The html code is inserted into the divi module. The html code must contain the following element(s):
+### `[chartID].css`
+
+The file `[chartID].css` can be used to modify chart styles. Please use the selectors `#chart-[chartID]` or `chart-modal-content-[chartID]` to affect only chart styles. Here are some examples:
+
+```
+/* Custom graph height */
+
+#chart-[chartID] .chart-box-outer {
+  margin-top: -15px;  
+  padding-top: calc(max(66%, 300px)); 
+}
+
+/* Make modal scrollable */
+
+#chart-modal-content-[chartID] {
+  overflow-y: auto; 
+  overflow-x: hidden;
+  width: 100%;
+  height: auto;
+  padding-right: 20px;
+}
+```
+
+## Additional development
+
+### Building the plugin 
+
+Whenever a new commit is made on this repository, [a GitHub action](https://github.com/Global-Inequality-Project/global_inequality_charts/actions) automatically builds the plugin, which can be found as an artifact of the latest workflow.
+
+To build the plugin manually, take the following steps. This is not needed for adding a chart, but it is necessary to update the style and script files.
+
+- Install nodejs version 14, version 16 is not supported. We recommend to use nvm for this.  [https://github.com/elegantthemes/create-divi-extension/issues/541].
+- Install yarn with `npm install -g yarn`
+- Install the dependencies with `yarn install`
+- Build the module with `yarn build`
+
+For development you can use `yarn start`. This will start a local server that serves the files and builds the module after saving a file. 
+
+### Adding new libraries  
+
+If a chart needs external javascript libraries, they can either be added to `assets/js` or to `package.json` and `.github/workflows/workflows.yaml`. Adding a library via `package.json` is the prefered way. To keep the plugin GDPR compliant, libraries should not be added via a CDN service. In order to load the library correctly it also has to be added to the `includes/modules/Charts/Charts.php -> load_libraries` file. You can also create a GitHub issue to request a new library to be added.
+
+### Adding new templates
+
+Each template has a unique id. The template file must be as follows: `assets/js/templates/[templateID].js`. The template has to be a javascript file that contains the template render function. See `assets/js/templates/main.js` for an example. The chart render function has to be called `createTemplate_[templateID]()`. It has to return a string that contains the html code of the template. The function takes the arguments `chartID, chartTitle, chartDescription, customTools` which can be inserted into the html string. The html code is inserted into the divi module. To display correctly, it must contain the following element which will serve as the canvas for the chart:
 
 ```
 <div id="chart-canvas-${chartID}"> </div>
 ```
-The values of  `chartID`, `chartTitle`, `chartDescription`, `chartSources`, `topMargin` and `pathToData` can be used to build the template.
 
-## Building the divi module 
 
-This is not necessary for adding a chart, but it is necessary to update the style and script files.
 
-- install nodejs version 14, version 16 is not supported. We recommend to use nvm for this.  [https://github.com/elegantthemes/create-divi-extension/issues/541].
-- install yarn with `npm install -g yarn`
-- install the dependencies with `yarn install`
-- build the module with `yarn build`
-
-For development you can use `yarn start`. This will start a local server that serves the files and builds the module after saving a file. 
 
 
