@@ -5,52 +5,46 @@ window.charts_path = window.wp_url + "/wp-content/plugins/global_inequality_char
 
 // Chart Interface
 // ---------------
-function createChartInterface({ chartID, renderFunc, pathToData, topMargin }) {
+function createChartInterface({chartID, renderFunc, renderFuncModal, chartData, customTools}) {
     loadJson(`${window.charts_path}/${chartID}/${chartID}.json`, function (error, data) {
         if (error === null) {
-            if (data.schema_version >= 2) {
+            if (data.schema_version >= 4) {
                 createChart({
                     chartID: chartID,
+                    chartData: chartData,
                     chartTitle: data.title,
                     chartDescription: data.description,
-                    chartSources: data.sources,
-                    template: data.template ? data.template : "main",
                     renderFunc: renderFunc,
-                    pathToData: pathToData,
-                    topMargin: topMargin
+                    renderFuncModal: renderFuncModal ? renderFuncModal : renderFunc,
+                    template: data.template ? data.template : "main",
+                    customTools: customTools ? customTools : "",
                 })
             } else {
-                createChart({
-                    chartID: chartID,
-                    chartTitle: data.name,
-                    chartDescription: "no description",
-                    chartSources: "no sources",
-                    template: "main",
-                    renderFunc: renderFunc,
-                    pathToData: pathToData,
-                    topMargin: topMargin
-                })
+                console.log("Chart settings 'schema_version < 4' is depreciated. Please update schema.")
             }
         } else {
             // todo - error handling
+            console.log(error)
         }
     });
 
-
 }
-function createChart({ chartID, chartTitle, chartDescription, chartSources, template, renderFunc, pathToData, topMargin }) {
 
 
-    if (pathToData == null) { pathToData = `${window.charts_path}/${chartID}/${chartID}.csv` }
-    if (topMargin == null) { topMargin = 0 }
+function createChart({chartID, chartData, chartTitle, chartDescription, renderFunc, renderFuncModal, template, customTools}) {
+
     let createTemplate = window["createTemplate_" + template]({
-        chartID: chartID, chartTitle: chartTitle, chartDescription: chartDescription,
-        chartSources: chartSources, topMargin: topMargin, pathToData: pathToData
+        chartID: chartID, 
+        chartTitle: chartTitle, 
+        chartDescription: chartDescription,
+        customTools: customTools,
     });
     document.getElementById(`chart-${chartID}`).innerHTML = createTemplate;
 
+
+
     // Render chart in main area
-    renderFunc(`#chart-canvas-${chartID}`)
+    renderFunc(`#chart-canvas-${chartID}`, chartData)
 
     // If chart is specified in url, scroll to it
     const queryString = window.location.search;
@@ -62,7 +56,6 @@ function createChart({ chartID, chartTitle, chartDescription, chartSources, temp
         setTimeout(function () {
             document.getElementById(`chart-${chartID}`).scrollIntoView();
         }, 600);
-
     }
 
     // Expand function
@@ -80,7 +73,7 @@ function createChart({ chartID, chartTitle, chartDescription, chartSources, temp
         modal.style.display = "block"
 
         // Render chart in modal content
-        renderFunc(`#chart-modal-content-${chartID}`)
+        renderFuncModal(`#chart-modal-content-${chartID}`, chartData)
 
     };
 }
