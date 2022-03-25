@@ -46,9 +46,11 @@ function createTemplate_main({ chartID, chartTitle, chartDescription, chartSourc
             </button>
             </a>
 
-            <button class="chart-btn">
+            <button onclick="downloadImage('${chartID}', '${chartTitle}', '${chartDescription}', '${chartSources}')" class="chart-btn">
                 <i class="fas fa-arrow-alt-circle-down"></i>Picture (png)
             </button>
+
+            <div class="downloadImage" id="downloadImage-${chartID}"></div>
 
         </div>
 

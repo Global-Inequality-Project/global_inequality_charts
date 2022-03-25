@@ -148,6 +148,55 @@ function copyChartURL(chartID, boolean) {
 
 // todo fb share button + other social media
 
+// Download image functions
+// ---------------
+
+function createImage(chartID, chartTitle, chartDescription, chartSources) {
+
+    var chart = document.getElementById(`chart-canvas-${chartID}`);
+    const chart_clone = chart.cloneNode(true);
+    var logo = document.getElementsByClassName('et_pb_menu__logo');
+    const logo_clone = logo[0].cloneNode(true);
+
+    document.getElementById(`downloadImage-${chartID}`).appendChild(logo_clone);
+
+    document.getElementById(`downloadImage-${chartID}`).innerHTML +=
+              `<h2>${chartTitle}</h2>`;
+
+    document.getElementById(`downloadImage-${chartID}`).innerHTML +=
+              `<h4>${chartDescription}</h4>`;
+
+    document.getElementById(`downloadImage-${chartID}`).appendChild(chart_clone);
+
+    document.getElementById(`downloadImage-${chartID}`).innerHTML +=
+              `Sources: ${chartSources} <br>`;
+
+    document.getElementById(`downloadImage-${chartID}`).innerHTML +=
+              `URL: ${window.location.href}#chart-${chartID}`;
+
+}
+
+function downloadImage(chartID, chartTitle, chartDescription, chartSources) {
+
+    createImage(chartID, chartTitle, chartDescription, chartSources)
+
+    var container = document.getElementById(`downloadImage-${chartID}`);
+
+    html2canvas(container, { allowTaint: true }).then(function (canvas) {
+
+        var link = document.createElement("a");
+        document.body.appendChild(link);
+        link.download = `${chartTitle}.png`;
+        link.href = canvas.toDataURL();
+        link.target = '_blank';
+        link.click();
+        document.body.removeChild(link);
+
+    });
+
+    container.innerHTML = "";
+}
+
 // load Json data
 function loadJson(url, callback) {
     var xhr = new XMLHttpRequest();

@@ -125,6 +125,18 @@
   line-height: 1em;
 }
 
+.downloadImage {
+  position: fixed;
+  padding: 30;
+  top: -1000;
+}
+
+.downloadImage .et_pb_menu__logo {
+    overflow: hidden;
+    width: 150;
+    float: right;
+}
+
 .popover {
   position: relative;
   margin-top: 3px;
@@ -160,3 +172,4 @@
   padding: 15px;
   margin-bottom: 15px;
 }
+
