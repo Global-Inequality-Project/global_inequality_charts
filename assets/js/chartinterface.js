@@ -89,25 +89,18 @@ function toggleChartArea(button, areaID, chartID) {
     if (button.value == "OFF") {
         button.value = "ON";
         shareArea.style.display = "block";
+        shareArea.style.visibility = "visible";
     } else {
         button.value = "OFF";
         shareArea.style.display = "none";
+        shareArea.style.visibility = "hidden";
     }
 }
 
-function togglePopover(chartTitle, chartSources) {
-    popover = document.getElementById(`Popover-${chartTitle}`);
-    if (chartSources != null) {
-        copyChartURL(chartSources, true)
-    }
-    if (popover.style.display == "none" || popover.style.display == "") {
-        popover.style.display = "block";
-        popover.style.visibility = "visible";
-    } else {
-        popover.style.display = "none";
-        popover.style.visibility = "hidden";
-    }
-
+function copySources(chartID, chartSources) {
+    var btn = document.getElementById(`chart-btn-sources-${chartID}`)
+    toggleChartArea(btn, 'sources', chartID)
+    copyToClipboard(chartSources)
 }
 
 
@@ -122,13 +115,13 @@ function shareChartTwitter(chartID) {
     window.open(`https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}&url=${url}?chart=${chartID}`, "_blank");
 }
 
-function copyChartURL(chartID, boolean) {
-    if (boolean == true){
-        var url = chartID
-    } else {
-        var url = window.location.href.split('?')[0] + `?chart=${chartID}`;
-    }
-    console.log(url)
+function copyChartURL(chartID) {
+    var url = window.location.href.split('?')[0] + `?chart=${chartID}`;
+    copyToClipboard(url)
+}
+
+function copyToClipboard(url) {  
+    //console.log(url)
     if (navigator.clipboard) {
         navigator.clipboard.writeText(url);
     } else {
