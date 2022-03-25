@@ -121,6 +121,8 @@
 
   .chart-sources-popover {
     width: auto !important;
+    border: none !important;
+    margin-top: 0px !important;
   }
 
 
