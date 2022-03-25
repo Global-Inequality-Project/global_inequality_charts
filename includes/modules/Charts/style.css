@@ -118,9 +118,13 @@
   .chart-btn {
     padding: 12px 17px;
   }
+
+  .chart-sources-popover {
+    width: auto !important;
+  }
+
+
 }
-
-
 
 /* Chart Sub Buttons */
 
@@ -206,22 +210,25 @@
     float: right;
 }
 
-.popover {
+.chart-sources-popover {
   position: relative;
-  margin-top: 3px;
+  margin-top: -3px;
   display: none;
   visibility: hidden;
-  width: 393px;
-  padding: 5px;
-  background: #f7f7f7;
+  width: 200%;
+  padding: 10px 17px;
+  background: #f2f2f2;
   z-index: 100;
   min-height: 50px;
   overflow: hidden;
+  border-top: white 3px solid;
+  border-right: white 3px solid;
+  border-bottom: white 3px solid;
 }
 
-.popover .chart-btn {
-  margin-top: -4px;
-  padding: 10px 135px 10px 135px;
+.chart-sources-popover .chart-btn {
+  margin-top: 0px;
+  padding: 10px 12px;
 }
 
 /*necessary for popover to be visible above apexcharts*/
@@ -229,7 +236,7 @@
   z-index: 3;
 }
 
-.popover-title{
+.chart-sources-popover-title{
   font-size: 14px;
   font-family: 'Open Sans';
   margin: 3px 0px;
