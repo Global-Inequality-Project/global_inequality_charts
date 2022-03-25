@@ -7,6 +7,7 @@ window.charts_path = window.wp_url + "/wp-content/plugins/global_inequality_char
 // ---------------
 function createChartInterface({chartID, renderFunc, renderFuncModal, chartData, customTools}) {
     loadJson(`${window.charts_path}/${chartID}/${chartID}.json`, function (error, data) {
+    jQuery.get(`${window.charts_path}/${chartID}/${chartID}_sources.txt`, function(chartSources) {    
         if (error === null) {
             if (data.schema_version >= 4) {
                 createChart({
@@ -14,6 +15,7 @@ function createChartInterface({chartID, renderFunc, renderFuncModal, chartData, 
                     chartData: chartData,
                     chartTitle: data.title,
                     chartDescription: data.description,
+                    chartSources: chartSources,
                     renderFunc: renderFunc,
                     renderFuncModal: renderFuncModal ? renderFuncModal : renderFunc,
                     template: data.template ? data.template : "main",
@@ -24,24 +26,25 @@ function createChartInterface({chartID, renderFunc, renderFuncModal, chartData, 
             }
         } else {
             // todo - error handling
+            // todo - also add error handling if import of sources fails
             console.log(error)
         }
+    })
     });
 
 }
 
 
-function createChart({chartID, chartData, chartTitle, chartDescription, renderFunc, renderFuncModal, template, customTools}) {
+function createChart({chartID, chartData, chartTitle, chartDescription, renderFunc, renderFuncModal, template, customTools, chartSources}) {
 
     let createTemplate = window["createTemplate_" + template]({
         chartID: chartID, 
         chartTitle: chartTitle, 
         chartDescription: chartDescription,
         customTools: customTools,
+        chartSources: chartSources
     });
     document.getElementById(`chart-${chartID}`).innerHTML = createTemplate;
-
-
 
     // Render chart in main area
     renderFunc(`#chart-canvas-${chartID}`, chartData)
@@ -92,9 +95,8 @@ function toggleChartArea(button, areaID, chartID) {
     }
 }
 
-function togglePopover(chartTitle,chartSources) {
+function togglePopover(chartTitle, chartSources) {
     popover = document.getElementById(`Popover-${chartTitle}`);
-
     if (chartSources != null) {
         copyChartURL(chartSources, true)
     }
@@ -145,7 +147,7 @@ function copyChartURL(chartID, boolean) {
 // Download image functions
 // ---------------
 
-function createImage(chartID, chartTitle, chartDescription, chartSources) {
+function createImage(chartID, chartTitle, chartDescription) {
 
     var chart = document.getElementById(`chart-canvas-${chartID}`);
     const chart_clone = chart.cloneNode(true);
@@ -162,17 +164,17 @@ function createImage(chartID, chartTitle, chartDescription, chartSources) {
 
     document.getElementById(`downloadImage-${chartID}`).appendChild(chart_clone);
 
-    document.getElementById(`downloadImage-${chartID}`).innerHTML +=
-              `Sources: ${chartSources} <br>`;
+    //document.getElementById(`downloadImage-${chartID}`).innerHTML +=
+    //          `Sources: ${chartSources} <br>`;
 
     document.getElementById(`downloadImage-${chartID}`).innerHTML +=
               `URL: ${window.location.href}#chart-${chartID}`;
 
 }
 
-function downloadImage(chartID, chartTitle, chartDescription, chartSources) {
+function downloadImage(chartID, chartTitle, chartDescription) {
 
-    createImage(chartID, chartTitle, chartDescription, chartSources)
+    createImage(chartID, chartTitle, chartDescription)
 
     var container = document.getElementById(`downloadImage-${chartID}`);
 

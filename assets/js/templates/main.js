@@ -1,4 +1,4 @@
-function createTemplate_main({ chartID, chartTitle, chartDescription, customTools }) {
+function createTemplate_main({ chartID, chartTitle, chartDescription, chartSources, customTools }) {
 
 var tmpl =`
 <div class="chart-interface chart-template-main">

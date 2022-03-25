@@ -152,7 +152,7 @@ If a chart needs external javascript libraries, they can either be added to `ass
 
 ### Adding new templates
 
-Each template has a unique id. The template file must be as follows: `assets/js/templates/[templateID].js`. The template has to be a javascript file that contains the template render function. See `assets/js/templates/main.js` for an example. The chart render function has to be called `createTemplate_[templateID]()`. It has to return a string that contains the html code of the template. The function takes the arguments `chartID, chartTitle, chartDescription, customTools` which can be inserted into the html string. The html code is inserted into the divi module. To display correctly, it must contain the following element which will serve as the canvas for the chart:
+Each template has a unique id. The template file must be as follows: `assets/js/templates/[templateID].js`. The template has to be a javascript file that contains the template render function. See `assets/js/templates/main.js` for an example. The chart render function has to be called `createTemplate_[templateID]()`. It has to return a string that contains the html code of the template. The function takes the arguments `chartID, chartTitle, chartDescription, chartSources, customTools` which can be inserted into the html string. The html code is inserted into the divi module. To display correctly, it must contain the following element which will serve as the canvas for the chart:
 
 ```
 <div id="chart-canvas-${chartID}"> </div>
@@ -160,7 +160,7 @@ Each template has a unique id. The template file must be as follows: `assets/js/
 
 ### Adding custom tools
 
-The feature to add custom tools can add additional tools to the sidebar. For example, the following string could be passed to `customTools` to add an additional button:
+The feature to add custom tools can add additional tools to the template. Each template might have different uses for the input it gets through the argument `customTools`. The main template takes an html string that is added below the chart description. For example, the following string could be passed to `customTools` to add an additional button:
 
 ```
 <button class="chart-btn" onclick="myCustomFunction()">
