@@ -43,13 +43,13 @@ The file structure of the plugin is as follows:
 
 ## Adding new charts
 
-You can a new chart to the plugin as follows:
+You can add a new chart to the plugin as follows:
 
 - Create a new folder in `charts` with the name of the `[chartID]`
 - In the folder, create the following files:
    - `[chartID].json` -> contains the chart settings
    - `[chartID].js` -> contains the chart render function
-   - `[chartID].txt` -> Information on data sources
+   - `[chartID]_sources.txt` -> Information on data sources
    - `[chartID].css` -> optional: contains custom css for the graph
    - `[chartID].png` -> optional: image that is used when the chart is shared (1200×630 px)
    - `LICENSE` -> optional: custom license information regarding the chart and used data
@@ -85,7 +85,7 @@ Here is an example:
     "id": "demo_chart",
     "title": "Demo chart",
     "description": "This is the chart description",
-    "author": "Joël Foramitti",
+    "author": "Name(s) of the author(s) <Email address>",
     "template":"main",
     "schema_version": 4,
     "libraries": {
@@ -158,7 +158,15 @@ Each template has a unique id. The template file must be as follows: `assets/js/
 <div id="chart-canvas-${chartID}"> </div>
 ```
 
+### Adding custom tools
 
+The feature to add custom tools can add additional tools to the sidebar. For example, the following string could be passed to `customTools` to add an additional button:
 
+```
+<button class="chart-btn" onclick="myCustomFunction()">
+  <i class="fa-solid fa-sliders"></i>My custom tools
+</button>
+```
 
+The function `myCustomFunction()` would then have to be defined in `[chartID].js`.
 
