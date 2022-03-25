@@ -92,6 +92,22 @@ function toggleChartArea(button, areaID, chartID) {
     }
 }
 
+function togglePopover(chartTitle,chartSources) {
+    popover = document.getElementById(`Popover-${chartTitle}`);
+
+    if (chartSources != null) {
+        copyChartURL(chartSources, true)
+    }
+    if (popover.style.display == "none" || popover.style.display == "") {
+        popover.style.display = "block";
+        popover.style.visibility = "visible";
+    } else {
+        popover.style.display = "none";
+        popover.style.visibility = "hidden";
+    }
+
+}
+
 
 // Share functions
 // ---------------
@@ -104,8 +120,12 @@ function shareChartTwitter(chartID) {
     window.open(`https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}&url=${url}?chart=${chartID}`, "_blank");
 }
 
-function copyChartURL(chartID) {
-    const url = window.location.href.split('?')[0] + `?chart=${chartID}`;
+function copyChartURL(chartID, boolean) {
+    if (boolean == true){
+        var url = chartID
+    } else {
+        var url = window.location.href.split('?')[0] + `?chart=${chartID}`;
+    }
     console.log(url)
     if (navigator.clipboard) {
         navigator.clipboard.writeText(url);
@@ -121,6 +141,55 @@ function copyChartURL(chartID) {
 }
 
 // todo fb share button + other social media
+
+// Download image functions
+// ---------------
+
+function createImage(chartID, chartTitle, chartDescription, chartSources) {
+
+    var chart = document.getElementById(`chart-canvas-${chartID}`);
+    const chart_clone = chart.cloneNode(true);
+    var logo = document.getElementsByClassName('et_pb_menu__logo');
+    const logo_clone = logo[0].cloneNode(true);
+
+    document.getElementById(`downloadImage-${chartID}`).appendChild(logo_clone);
+
+    document.getElementById(`downloadImage-${chartID}`).innerHTML +=
+              `<h2>${chartTitle}</h2>`;
+
+    document.getElementById(`downloadImage-${chartID}`).innerHTML +=
+              `<h4>${chartDescription}</h4>`;
+
+    document.getElementById(`downloadImage-${chartID}`).appendChild(chart_clone);
+
+    document.getElementById(`downloadImage-${chartID}`).innerHTML +=
+              `Sources: ${chartSources} <br>`;
+
+    document.getElementById(`downloadImage-${chartID}`).innerHTML +=
+              `URL: ${window.location.href}#chart-${chartID}`;
+
+}
+
+function downloadImage(chartID, chartTitle, chartDescription, chartSources) {
+
+    createImage(chartID, chartTitle, chartDescription, chartSources)
+
+    var container = document.getElementById(`downloadImage-${chartID}`);
+
+    html2canvas(container, { allowTaint: true }).then(function (canvas) {
+
+        var link = document.createElement("a");
+        document.body.appendChild(link);
+        link.download = `${chartTitle}.png`;
+        link.href = canvas.toDataURL();
+        link.target = '_blank';
+        link.click();
+        document.body.removeChild(link);
+
+    });
+
+    container.innerHTML = "";
+}
 
 // load Json data
 function loadJson(url, callback) {
@@ -165,4 +234,4 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("chart-modal-box").innerHTML = "";
         }
     };
-}, false);  
+}, false);

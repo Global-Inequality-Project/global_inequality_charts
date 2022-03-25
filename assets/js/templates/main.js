@@ -43,7 +43,7 @@ var tmpl =`
             <i class="fas fa-link"></i>Copy link
           </button> 
 
-        </div> 
+        </div>
 
         <button onclick="toggleChartArea(this, 'save', '${chartID}')" value="OFF"  class="chart-btn">
           <i class="fas fa-arrow-alt-circle-down"></i>Download
@@ -51,7 +51,7 @@ var tmpl =`
 
         <div class="chart-share-btns" id="chart-${chartID}-save-btns">
 
-            <button class="chart-btn">
+            <button onclick="downloadImage('${chartID}', '${chartTitle}', '${chartDescription}')" class="chart-btn">
                 <i class="fas fa-image"></i>Image
             </button>
 
@@ -61,11 +61,23 @@ var tmpl =`
             </button>
             </a>
 
-        </div> 
+            <div class="downloadImage" id="downloadImage-${chartID}"></div>
 
-        <button value="OFF"  class="chart-btn">
+        </div>
+
+        <button class="chart-btn" onclick="togglePopover('${chartTitle}')">
                 <i class="fa-solid fa-file-lines"></i>Sources
         </button>
+
+        <div class="popover" role="tooltip" id="Popover-${chartTitle}">
+            <section class="popover-title">${chartSources}</section>
+            <button class="chart-btn" onclick="togglePopover('${chartTitle}', '${chartSources}')">
+                <i class="fas fa-link"></i>Copy source
+            </button>
+        </div>
+
+
+
     </div>
   </div>
 

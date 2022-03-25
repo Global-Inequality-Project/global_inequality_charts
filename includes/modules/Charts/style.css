@@ -32,11 +32,6 @@
 
 /* Charts */
 
-.chart-interface {
-  /*padding-top: 30px;
-    padding-bottom: 30px;*/
-}
-
 .chart-title {
   background-color: #f2f2f2;
   color: #646464;
@@ -199,8 +194,51 @@
   line-height: 1em;
 }
 
+.downloadImage {
+  position: fixed;
+  padding: 30;
+  top: -1000;
+}
+
+.downloadImage .et_pb_menu__logo {
+    overflow: hidden;
+    width: 150;
+    float: right;
+}
+
+.popover {
+  position: relative;
+  margin-top: 3px;
+  display: none;
+  visibility: hidden;
+  width: 393px;
+  padding: 5px;
+  background: #f7f7f7;
+  z-index: 100;
+  min-height: 50px;
+  overflow: hidden;
+}
+
+.popover .chart-btn {
+  margin-top: -4px;
+  padding: 10px 135px 10px 135px;
+}
+
+/*necessary for popover to be visible above apexcharts*/
+.et_pb_column .et_pb_column_1_4 {
+  z-index: 3;
+}
+
+.popover-title{
+  font-size: 14px;
+  font-family: 'Open Sans';
+  margin: 3px 0px;
+  color: #646464;
+}
+
 .glich-backend{
   background-color: #f7f7f7;
   padding: 15px;
   margin-bottom: 15px;
 }
+

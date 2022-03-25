@@ -5,7 +5,7 @@ function createApexChart(canvasID, options, callback) {
         chart.render()
         if (callback !== undefined) {
             callback(chart)
-        }        
+        }
     }
     setTimeout(renderChart, 500);
     return chart
@@ -122,7 +122,7 @@ function basicTooltip(dataPointIndex, w, format, prefix, order, show_name){
         lines+
         '</div>';
 }
-    
+
 //-------------------------------------- pre_populate
 function pre_populate(json, style_file, lang){
     window.global = json;
