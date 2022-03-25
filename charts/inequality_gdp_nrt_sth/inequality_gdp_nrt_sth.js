@@ -1,3 +1,4 @@
+
 //--------------------------------------- window.ready
 jQuery(function() {
     checkObjectKeysFunc();
@@ -11,18 +12,16 @@ jQuery(function() {
 
 //-------------------------------------- importFilesAndShow
 function importFilesAndShow_inequality_gdp_nrt_sth(){
-	jQuery.get(`${window.charts_path}/${"inequality_gdp_nrt_sth"}/${"inequality_gdp_nrt_sth"}.csv`, function(gdp_nrt_sth){
-        window.chart_data["inequality_gdp_nrt_sth"].data = fromCSV(gdp_nrt_sth, ['string', 'number', 'number']);
-        
+	
+    var chartID = "inequality_gdp_nrt_sth"
 
+    jQuery.get(`${window.charts_path}/${chartID}/${chartID}.csv`, function(gdp_nrt_sth){
+        window.chart_data[chartID].data = fromCSV(gdp_nrt_sth, ['string', 'number', 'number']);
+        
         // Render Chart Interface
         createChartInterface({
           chartID:'inequality_gdp_nrt_sth',
-          chartTitle:"GDP per capita: Global North vs. Global South",
-          chartDescription:"Constant 2010 USD",
-          chartSources:"Chart Sources",
           renderFunc:render_inequality_gdp_nrt_sth,
-          topMargin:"-15px",
         })
 
 	});
@@ -31,10 +30,11 @@ function importFilesAndShow_inequality_gdp_nrt_sth(){
 //--------------------------------------- showChart
 function render_inequality_gdp_nrt_sth(canvasID){
 
-    var chartID = "inequality_gdp_nrt_sth"
     var options = {
         chart: {
             type: 'line',
+            height: '100%',
+            fontFamily: 'Open Sans',
             toolbar: {
                 show: false,
                 tools: {zoom: false}
@@ -106,7 +106,7 @@ function render_inequality_gdp_nrt_sth(canvasID){
     options['chart'].id = ('GDP per capita Global North vs Global South').replace(/ /g,"");
 	options.series = series;
 
-	var chart = createApexChart(canvasID, chartID, options);
+	var chart = createApexChart(canvasID, options);
 }
 
 
