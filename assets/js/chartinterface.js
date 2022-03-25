@@ -98,6 +98,22 @@ function toggleArea(button, areaID, chartID) {
     }
 }
 
+function togglePopover(chartTitle,chartSources) {
+    popover = document.getElementById(`Popover-${chartTitle}`);
+
+    if (chartSources != null) {
+        copyChartURL(chartSources, true)
+    }
+    if (popover.style.display == "none" || popover.style.display == "") {
+        popover.style.display = "block";
+        popover.style.visibility = "visible";
+    } else {
+        popover.style.display = "none";
+        popover.style.visibility = "hidden";
+    }
+
+}
+
 
 // Share functions
 // ---------------
@@ -110,8 +126,12 @@ function shareChartTwitter(chartID) {
     window.open(`https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}&url=${url}?chart=${chartID}`, "_blank");
 }
 
-function copyChartURL(chartID) {
-    const url = window.location.href.split('?')[0] + `?chart=${chartID}`;
+function copyChartURL(chartID, boolean) {
+    if (boolean == true){
+        var url = chartID
+    } else {
+        var url = window.location.href.split('?')[0] + `?chart=${chartID}`;
+    }
     console.log(url)
     if (navigator.clipboard) {
         navigator.clipboard.writeText(url);
@@ -221,5 +241,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 }, false);
-
-
