@@ -1,6 +1,6 @@
 # Global Inequality Charts 
 
-A divi module to display interactive charts on a wordpress site and provide the following tools:
+A divi module to display interactive charts on a wordpress site together with the following tools:
 
 - Expand: Opens a modal to display the chart (or an extended version) full-screen
 - Share: Provides different options to share the chart
