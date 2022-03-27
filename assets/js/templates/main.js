@@ -29,7 +29,7 @@ var tmpl =`
           <i class="fas fa-share"></i>Share
         </button>
 
-        <div class="chart-share-btns" id="chart-${chartID}-share-btns">
+        <div class="chart-btn-area" id="chart-${chartID}-share-btns">
 
           <button class="chart-btn" onclick="shareChartTwitter('${chartID}')">
             <i class="fa-brands fa-twitter"></i>Twitter
@@ -49,7 +49,7 @@ var tmpl =`
           <i class="fas fa-arrow-alt-circle-down"></i>Download
         </button>
 
-        <div class="chart-share-btns" id="chart-${chartID}-save-btns">
+        <div class="chart-btn-area" id="chart-${chartID}-save-btns">
 
             <button onclick="downloadImage('${chartID}', '${chartTitle}', '${chartDescription}')" class="chart-btn">
                 <i class="fas fa-image"></i>Image
