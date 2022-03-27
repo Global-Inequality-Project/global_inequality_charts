@@ -32,11 +32,11 @@ var tmpl =`
         <div class="chart-share-btns" id="chart-${chartID}-share-btns">
 
           <button class="chart-btn" onclick="shareChartTwitter('${chartID}')">
-            <i class="fa fa-twitter"></i>Twitter
+            <i class="fa-brands fa-twitter"></i>Twitter
           </button> 
 
           <button class="chart-btn">
-            <i class="fas fa-facebook"></i>Facebook
+            <i class="fa-brands fa-facebook"></i>Facebook
           </button>
 
           <button class="chart-btn" onclick="copyChartURL('${chartID}')">
@@ -45,7 +45,7 @@ var tmpl =`
 
         </div>
 
-        <button onclick="toggleChartArea(this, 'save', '${chartID}')" value="OFF"  class="chart-btn">
+        <button onclick="toggleChartArea(this, 'save', '${chartID}')" value="OFF" class="chart-btn">
           <i class="fas fa-arrow-alt-circle-down"></i>Download
         </button>
 
@@ -65,14 +65,14 @@ var tmpl =`
 
         </div>
 
-        <button class="chart-btn" onclick="togglePopover('${chartTitle}')">
+        <button class="chart-btn" id="chart-btn-sources-${chartID}" onclick="toggleChartArea(this, 'sources', '${chartID}')" value="OFF">
                 <i class="fa-solid fa-file-lines"></i>Sources
         </button>
 
-        <div class="popover" role="tooltip" id="Popover-${chartTitle}">
-            <section class="popover-title">${chartSources}</section>
-            <button class="chart-btn" onclick="togglePopover('${chartTitle}', '${chartSources}')">
-                <i class="fas fa-link"></i>Copy source
+        <div class="chart-sources-popover" role="tooltip" id="chart-${chartID}-sources-btns">
+            <section class="chart-sources-popover-title">${chartSources}</section>
+            <button class="chart-btn" onclick="copySources('${chartID}', '${chartSources}')">
+                <i class="fas fa-link"></i>Copy sources
             </button>
         </div>
 
