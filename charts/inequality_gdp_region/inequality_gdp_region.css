@@ -1,3 +1,4 @@
 #chart-inequality_gdp_region .chart-box-outer {
   margin-top: -15px;
+  padding-top: calc(max(66%, 400px));  /* Custom graph height */
 }

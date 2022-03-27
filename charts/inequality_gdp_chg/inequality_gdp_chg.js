@@ -83,6 +83,17 @@ function render_inequality_gdp_chg(canvasID) {
                 top: 0,
             }
         },
+        tooltip: {
+            y: { 
+                formatter: (val, index) => '$'+formatTooltipVal(val, index, 0), 
+                title: {
+                    formatter: (seriesName) => '',
+                },
+            },
+            x: {
+                formatter: (val) => 'Percentile: '+val,
+            }
+        },
         legend: {
             show: false
         },
@@ -109,21 +120,4 @@ function render_inequality_gdp_chg(canvasID) {
 	options.series = series;
 
     return createApexChart(canvasID, options);
-}
-
-
-//--------------------------------------- percentileTooltip
-function percentileTooltip(dataPointIndex, w){
-    let config_series = w.config.series;
-
-    let percentile = w.globals.seriesX[0][dataPointIndex];
-    let color = w.config.colors[0];
-    let marker = '<div class="custom-tooltip-marker" style="background-color:'+color+'"></div>';
-    //let val = '$'+formatYAxisLabel(config_series[0].data[dataPointIndex], null, 1, false);
-    let val = '$'+addCommas(config_series[0].data[dataPointIndex]);
-
-    return '<div class="custom-tooltip-box">' +
-        '<div class="custom-tooltip-title">' + percentile + '</div>' +
-        '<div class="custom-tooltip-line">'+ marker + '<div><b>' + val +'</b></div></div>' +
-        '</div>';
 }

@@ -57,14 +57,24 @@ function render_inequality_gdp_region(canvasID){
                 }
             },
             {
-                breakpoint: 401,
+                breakpoint: 601,
                 options: {
                     yaxis: {
                         tickAmount: 5,
                         labels: { formatter: (val, index) => '$'+formatYAxisLabel(val, index, 0, true) }
                     },
+                    tooltip: {
+                        y: { 
+                            title: {
+                                // Names are too long for mobile view
+                                // Alternatively, formatter could change seriesName to abbreviation
+                                formatter: (seriesName) => '',
+                            }
+                        },
+                    }
                 }
-            }
+
+            },
         ],
         stroke: {
             curve: 'straight',
@@ -77,6 +87,13 @@ function render_inequality_gdp_region(canvasID){
             padding: {
                 top: 0,
             }
+        },
+        tooltip: {
+            y: { 
+                formatter: (val, index) => '$'+formatTooltipVal(val, index), 
+            },
+            followCursor: true,
+            shared: false,
         },
 	}
 
