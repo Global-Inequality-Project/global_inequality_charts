@@ -70,7 +70,7 @@ You can add a new chart to the plugin as follows:
 
 An example can be found in `charts/demo_chart/`.
 
-### `[chartID].json` (Version 4)
+### [chartID].json (Version 4)
 
 This file contains the following chart settings:
 
@@ -110,7 +110,7 @@ Here is an example:
 
 ```
 
-### `[chartID].js`
+### [chartID].js
 
 The script `[chartID].js` has to call the function `createChartInterface()`, which takes the following inputs:
 
@@ -126,7 +126,7 @@ The function `renderFunc` takes two inputs:
 The function is meant to render the chart within `canvasID`, using 100% of the the canvas's width and height. The function can return a chart object, which will be stored in `window.charts[chartID]`. If data for the chart should be stored globally, you can use `window.chart_data[chartID]`. When the chart is rendered onto the expansion modal, the object is stored in `window.charts['modal']`. When the modal is closed the chart object's `destroy()` function is called if it exists.
 
 
-### `[chartID].css`
+### [chartID].css
 
 The file `[chartID].css` can be used to modify chart styles. Please use the selectors `#chart-[chartID]` or `chart-modal-content-[chartID]` to affect only chart styles. Here are some examples:
 
