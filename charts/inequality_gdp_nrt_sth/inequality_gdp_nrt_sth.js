@@ -106,7 +106,7 @@ function render_inequality_gdp_nrt_sth(canvasID){
     options['chart'].id = ('GDP per capita Global North vs Global South').replace(/ /g,"");
 	options.series = series;
 
-	var chart = createApexChart(canvasID, options);
+	return createApexChart(canvasID, options);
 }
 
 

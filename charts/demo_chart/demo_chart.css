@@ -17,9 +17,9 @@
 
 #chart-modal-content-demo_chart {
   /* Create scrollable modal */
-  /* overflow-y: auto; 
+  overflow-y: auto; 
   overflow-x: hidden;
   width: 100%;
-  height: auto;
-  padding-right: 20px; */
+  height: 100%;
+  padding-right: 20px; 
 }

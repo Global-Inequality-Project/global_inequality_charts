@@ -1,23 +1,23 @@
 // Global objects
+window.charts = {}
 window.chart_data = {}
 window.charts_path = window.wp_url + "/wp-content/plugins/global_inequality_charts/charts"
 
 
 // Chart Interface
 // ---------------
-function createChartInterface({chartID, renderFunc, renderFuncModal, chartData, customTools}) {
+function createChartInterface({chartID, renderFunc, customTools}) {
+    // TODO - Create Chart Interace if loading of chartSources fails
     loadJson(`${window.charts_path}/${chartID}/${chartID}.json`, function (error, data) {
     jQuery.get(`${window.charts_path}/${chartID}/${chartID}_sources.txt`, function(chartSources) {    
         if (error === null) {
             if (data.schema_version >= 4) {
                 createChart({
                     chartID: chartID,
-                    chartData: chartData,
                     chartTitle: data.title,
                     chartDescription: data.description,
                     chartSources: chartSources,
                     renderFunc: renderFunc,
-                    renderFuncModal: renderFuncModal ? renderFuncModal : renderFunc,
                     template: data.template ? data.template : "main",
                     customTools: customTools ? customTools : "",
                 })
@@ -25,9 +25,7 @@ function createChartInterface({chartID, renderFunc, renderFuncModal, chartData, 
                 console.log("Chart settings 'schema_version < 4' is depreciated. Please update schema.")
             }
         } else {
-            // todo - error handling
-            // todo - also add error handling if import of sources fails
-            console.log(error)
+            console.log("Chart settings ([chartID].json) could not be loaded.")
         }
     })
     });
@@ -35,7 +33,7 @@ function createChartInterface({chartID, renderFunc, renderFuncModal, chartData, 
 }
 
 
-function createChart({chartID, chartData, chartTitle, chartDescription, renderFunc, renderFuncModal, template, customTools, chartSources}) {
+function createChart({chartID, chartTitle, chartDescription, renderFunc, template, customTools, chartSources}) {
 
     let createTemplate = window["createTemplate_" + template]({
         chartID: chartID, 
@@ -47,7 +45,7 @@ function createChart({chartID, chartData, chartTitle, chartDescription, renderFu
     document.getElementById(`chart-${chartID}`).innerHTML = createTemplate;
 
     // Render chart in main area
-    renderFunc(`#chart-canvas-${chartID}`, chartData)
+    window.charts[chartID] = renderFunc(`#chart-canvas-${chartID}`, false)
 
     // If chart is specified in url, scroll to it
     const queryString = window.location.search;
@@ -75,8 +73,11 @@ function createChart({chartID, chartData, chartTitle, chartDescription, renderFu
         var modal = document.getElementById("chart-modal-wrapper")
         modal.style.display = "block"
 
+        // Disable scrolling
+        document.body.style.overflow = "hidden";
+
         // Render chart in modal content
-        renderFuncModal(`#chart-modal-content-${chartID}`, chartData)
+        window.charts["modal"] = renderFunc(`#chart-modal-content-${chartID}`, true)
 
     };
 }
@@ -135,10 +136,10 @@ function copyToClipboard(url) {
     }
 }
 
-// todo fb share button + other social media
+// todo fb share button
 
 // Download image functions
-// ---------------
+// ------------------------
 
 function createImage(chartID, chartTitle, chartDescription) {
 
@@ -220,6 +221,7 @@ document.addEventListener('DOMContentLoaded', function () {
     modalClose.onclick = function () {
         modal.style.display = "none";
         document.getElementById("chart-modal-box").innerHTML = "";
+        document.body.style.overflow = "auto"; // Enable scrolling
     };
 
     // Close modal by clicking on grey area
@@ -227,6 +229,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (event.target == modal) {
             modal.style.display = "none";
             document.getElementById("chart-modal-box").innerHTML = "";
+            document.body.style.overflow = "auto"; // Enable scrolling
+            var chart = window.charts["modal"] 
+            if (typeof chart.destroy == 'function') {
+                chart.destroy();
+            }
+            window.charts["modal"] = null
         }
     };
 }, false);

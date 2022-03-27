@@ -108,7 +108,7 @@ function render_inequality_gdp_chg(canvasID) {
     options['chart'].id = ('Distribution of New Income 1980to2016').replace(/ /g,"");
 	options.series = series;
 
-    var chart = createApexChart(canvasID, options);
+    return createApexChart(canvasID, options);
 }
 
 

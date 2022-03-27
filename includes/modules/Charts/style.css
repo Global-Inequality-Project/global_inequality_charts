@@ -101,7 +101,7 @@
   text-align: center;
 }
 
-@media all and (max-width: 767px) {
+@media all and (max-width: 900px) {
   
   .chart-title-bars {
   display: block;
@@ -125,18 +125,17 @@
     margin-top: 0px !important;
   }
 
-
 }
 
 /* Chart Sub Buttons */
 
-.chart-share-btns {
+.chart-btn-area {
   display: none;
   background-color: #f7f7f7;
   margin-bottom: 3px;
 }
 
-.chart-share-btns .chart-btn {
+.chart-btn-area .chart-btn {
   margin-top: -4px;
   padding: 10px 0px 10px 17px;
 }

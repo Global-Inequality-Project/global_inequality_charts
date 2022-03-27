@@ -110,7 +110,7 @@ function render_inequality_gdp_region(canvasID){
 	options['xaxis'] = { categories: years, tickAmount: 30, tooltip: {enabled: false} };
 	options.series = series;
 
-	var chart = createApexChart(canvasID, options);
+	return createApexChart(canvasID, options);
 
 }
 

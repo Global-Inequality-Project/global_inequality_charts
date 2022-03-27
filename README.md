@@ -1,6 +1,19 @@
 # Global Inequality Charts 
 
-A divi module to display interactive charts on a wordpress site and provide various tools in a sidebar.
+A divi module to display interactive charts on a wordpress site and provides the following tools:
+
+- Expand: Opens a modal to display the chart (or an extended version) full-screen
+- Share: Provides different options to share the chart
+    - Twitter
+    - Facebook
+    - Copy link
+- Download
+    - Image: Generates an image of the chart
+    - Data: Opens the chart's directory on GitHub
+- Sources: Opens a popover with information about the chart's sources
+- Custom chart-specific tools
+
+![screenshot](screenshot.png)
 
 ## Installation
 
@@ -52,11 +65,12 @@ You can add a new chart to the plugin as follows:
    - `[chartID]_sources.txt` -> Information on data sources
    - `[chartID].css` -> optional: contains custom css for the graph
    - `[chartID].png` -> optional: image that is used when the chart is shared (1200×630 px)
-   - `LICENSE` -> optional: custom license information regarding the chart and used data
+   - `README.md` -> optional: custom information regarding the chart and used data
+   - `LICENSE` -> optional: custom license regarding the chart and used data
 
 An example can be found in `charts/demo_chart/`.
 
-### `[chartID].json` (Version 4)
+### [chartID].json (Version 4)
 
 This file contains the following chart settings:
 
@@ -96,19 +110,23 @@ Here is an example:
 
 ```
 
-### `[chartID].js`
+### [chartID].js
 
 The script `[chartID].js` has to call the function `createChartInterface()`, which takes the following inputs:
 
 - `chartID` (string): The unique ID of the chart
 - `renderFunc` (function): Function to render the main chart (see below)
-- `renderFuncModal` (function, optional): Function to render a different chart in expanded mode
-- `chartData` (object, optional): Will be forwarded to `renderFunc` and `renderFuncModal`
 - `customTools` (string, optional): Will be forwarded to the chosen template to display custom tools
 
-The functions `renderFunc` and `renderFuncModal` take two inputs `canvasID` and `data` and are meant to display the chart on the DOM element with the id `canvasID`.
+The function `renderFunc` takes two inputs:
 
-### `[chartID].css`
+- `canvasID` (string): id of the chart's location
+- `modal` (bool): indicates whether the chart is to be rendered normally or in the expansion modal
+
+The function is meant to render the chart within `canvasID`, using 100% of the the canvas's width and height. The function can return a chart object, which will be stored in `window.charts[chartID]`. If data for the chart should be stored globally, you can use `window.chart_data[chartID]`. When the chart is rendered onto the expansion modal, the object is stored in `window.charts['modal']`. When the modal is closed the chart object's `destroy()` function is called if it exists.
+
+
+### [chartID].css
 
 The file `[chartID].css` can be used to modify chart styles. Please use the selectors `#chart-[chartID]` or `chart-modal-content-[chartID]` to affect only chart styles. Here are some examples:
 
@@ -126,7 +144,7 @@ The file `[chartID].css` can be used to modify chart styles. Please use the sele
   overflow-y: auto; 
   overflow-x: hidden;
   width: 100%;
-  height: auto;
+  height: 100%;
   padding-right: 20px;
 }
 ```
@@ -168,5 +186,5 @@ The feature to add custom tools can add additional tools to the template. Each t
 </button>
 ```
 
-The function `myCustomFunction()` would then have to be defined in `[chartID].js`.
+The function `myCustomFunction()` would then have to be defined in `[chartID].js`. A more advanced example can be found in `charts/demo_chart/demo_chart.js`.
 
