@@ -6,38 +6,46 @@ window.charts_path = window.wp_url + "/wp-content/plugins/global_inequality_char
 
 // Chart Interface
 // ---------------
-function createChartInterface({chartID, renderFunc, customTools}) {
+function createChartInterface({ chartID, renderFunc, customTools }) {
     // TODO - Create Chart Interace if loading of chartSources fails
     loadJson(`${window.charts_path}/${chartID}/${chartID}.json`, function (error, data) {
-    jQuery.get(`${window.charts_path}/${chartID}/${chartID}_sources.txt`, function(chartSources) {    
         if (error === null) {
             if (data.schema_version >= 4) {
-                createChart({
-                    chartID: chartID,
-                    chartTitle: data.title,
-                    chartDescription: data.description,
-                    chartSources: chartSources,
-                    renderFunc: renderFunc,
-                    template: data.template ? data.template : "main",
-                    customTools: customTools ? customTools : "",
-                })
+                loadTxt(`${window.charts_path}/${chartID}/${chartID}_sources.txt`, function (error, chartSources) {
+                    if (error !== null) {
+                        console.log(error, chartSources, jQuery(`#chart-btn-sources-${chartID}`))
+                        setTimeout(function () {
+                            jQuery(`#chart-${chartID}-sources-btns`).hide();
+                            jQuery(`#chart-btn-sources-${chartID}`).hide();
+                        }, 500)
+                        chartSources = "Sources not available."
+                    }
+                    createChart({
+                        chartID: chartID,
+                        chartTitle: data.title,
+                        chartDescription: data.description,
+                        chartSources: chartSources,
+                        renderFunc: renderFunc,
+                        template: data.template ? data.template : "main",
+                        customTools: customTools ? customTools : "",
+                    })
+                });
             } else {
                 console.log("Chart settings 'schema_version < 4' is depreciated. Please update schema.")
             }
         } else {
             console.log("Chart settings ([chartID].json) could not be loaded.")
         }
-    })
     });
+};
 
-}
 
 
-function createChart({chartID, chartTitle, chartDescription, renderFunc, template, customTools, chartSources}) {
+function createChart({ chartID, chartTitle, chartDescription, renderFunc, template, customTools, chartSources }) {
 
     let createTemplate = window["createTemplate_" + template]({
-        chartID: chartID, 
-        chartTitle: chartTitle, 
+        chartID: chartID,
+        chartTitle: chartTitle,
         chartDescription: chartDescription,
         customTools: customTools,
         chartSources: chartSources
@@ -121,7 +129,7 @@ function copyChartURL(chartID) {
     copyToClipboard(url)
 }
 
-function copyToClipboard(url) {  
+function copyToClipboard(url) {
     //console.log(url)
     if (navigator.clipboard) {
         navigator.clipboard.writeText(url);
@@ -151,10 +159,10 @@ function createImage(chartID, chartTitle, chartDescription) {
     document.getElementById(`downloadImage-${chartID}`).appendChild(logo_clone);
 
     document.getElementById(`downloadImage-${chartID}`).innerHTML +=
-              `<h2>${chartTitle}</h2>`;
+        `<h2>${chartTitle}</h2>`;
 
     document.getElementById(`downloadImage-${chartID}`).innerHTML +=
-              `<h4>${chartDescription}</h4>`;
+        `<h4>${chartDescription}</h4>`;
 
     document.getElementById(`downloadImage-${chartID}`).appendChild(chart_clone);
 
@@ -162,7 +170,7 @@ function createImage(chartID, chartTitle, chartDescription) {
     //          `Sources: ${chartSources} <br>`;
 
     document.getElementById(`downloadImage-${chartID}`).innerHTML +=
-              `URL: ${window.location.href}#chart-${chartID}`;
+        `URL: ${window.location.href}#chart-${chartID}`;
 
 }
 
@@ -203,6 +211,20 @@ function loadJson(url, callback) {
     xhr.send();
 };
 
+function loadTxt(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'txt';
+    xhr.onload = function () {
+        var status = xhr.status;
+        if (status === 200) {
+            callback(null, xhr.response);
+        } else {
+            callback(status, xhr.response);
+        }
+    };
+    xhr.send();
+};
 
 // Modal wrapper
 // -------------
@@ -230,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function () {
             modal.style.display = "none";
             document.getElementById("chart-modal-box").innerHTML = "";
             document.body.style.overflow = "auto"; // Enable scrolling
-            var chart = window.charts["modal"] 
+            var chart = window.charts["modal"]
             if (typeof chart.destroy == 'function') {
                 chart.destroy();
             }
