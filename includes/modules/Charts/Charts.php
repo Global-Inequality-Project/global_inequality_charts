@@ -18,7 +18,6 @@ class GLICH_Charts extends ET_Builder_Module
 	public function init()
 	{
 		$this->name = esc_html__('Global Inequality Charts', 'glich-global_inequalitiy_charts');
-
 	}
 
 	private function console_log($output, $with_script_tags = true)
@@ -49,12 +48,7 @@ class GLICH_Charts extends ET_Builder_Module
 					// deal with error...
 					$this->console_log("failed to parse json for chart " . $path . $chart_id . ".json");
 				} else {
-					if ($chart_json["schema_version"] >= 2) {
-						$options[$chart_id] =  esc_html__($chart_json["title"], 'dvmm-divi-mad-menu');
-					} else {
-						// pre v2 schema
-						$options[$chart_id] =  esc_html__($chart_json["name"], 'dvmm-divi-mad-menu');
-					}
+					$options[$chart_id] =  esc_html__($chart_json["title"], 'dvmm-divi-mad-menu');
 				}
 			}
 		}
@@ -74,22 +68,29 @@ class GLICH_Charts extends ET_Builder_Module
 	public function render($attrs, $content = null, $render_slug)
 	{
 		$ctype = $this->props['charttype'];
-		$this->load_libraries($ctype);
-		// load chart js
 		$charttype_js_path = '../../../charts/' . $ctype . '/' . $ctype . '.js';
-		$charttype_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $charttype_js_path));
+		if (file_exists(plugin_dir_path(__FILE__).$charttype_js_path)) {
+			$this->load_libraries($ctype);
+			// load chart js
 
-		wp_enqueue_script('chartinterface_js_' . $ctype, plugins_url($charttype_js_path, __FILE__), array(), $charttype_js_ver);
-		$this->console_log("render " . $ctype);
+			$charttype_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $charttype_js_path));
 
-		// render chart
-		return sprintf('<br/><div id="chart-%1$s"></div>', $ctype);
+			wp_enqueue_script('chartinterface_js_' . $ctype, plugins_url($charttype_js_path, __FILE__), array(), $charttype_js_ver);
+			$this->console_log("render " . $ctype);
+
+			// render chart
+			return sprintf('<br/><div id="chart-%1$s"></div>', $ctype);
+		} else {
+			return sprintf('<br/><div id="error-chart-%1$s" style="border:3px solid black; padding: 30px;">Global Inequality Chart: Chart type is not supported: %1$s</div>', $ctype );
+
+		}
 	}
 
 	// load the libraries for the chart depending on the libraries section of the config
 	private function load_libraries($id)
 	{
 		$path = plugin_dir_path(__FILE__) . "../../../charts/" . $id . "/" . $id . ".json";
+
 		$chart_config_file = file_get_contents($path);
 		$chart_json = json_decode($chart_config_file, true);
 		if ($chart_json === null) {
@@ -109,8 +110,7 @@ class GLICH_Charts extends ET_Builder_Module
 			}
 			// load the chart utils js, always required for schema version < 2 
 			if (
-				$chart_json["schema_version"] < 2
-				|| isset($chart_json["libraries"]["chartutils"])
+				isset($chart_json["libraries"]["chartutils"])
 				&& $chart_json["libraries"]["chartutils"]
 			) {
 				$chartutils_js_path = '../../../assets/js/chartutils.js';
@@ -118,7 +118,7 @@ class GLICH_Charts extends ET_Builder_Module
 				wp_enqueue_script('chartutils_js', plugins_url($chartutils_js_path, __FILE__), array(), $chartutils_js_ver);
 			}
 			$template = "main";
-			if ($chart_json["schema_version"] >= 3 && isset($chart_json["template"]) &&  $chart_json["template"] != "") {
+			if (isset($chart_json["template"]) &&  $chart_json["template"] != "") {
 				$template = $chart_json["template"];
 			}
 			$template_js_path = '../../../assets/js/templates/' . $template . '.js';
@@ -154,8 +154,8 @@ function load_charts_scripts($hook)
 	// enqueue scripts
 	wp_enqueue_script('chartinterface_js', plugins_url($chartinterface_js_path, __FILE__), array(), $chartinterface_js_ver);
 	wp_enqueue_script('chartutils_js', plugins_url($chartutils_js_path, __FILE__), array(), $chartutils_js_ver);
+	// load html2canvas for screenshot
 	wp_enqueue_script('html2canvas_js_path', plugins_url($html2canvas_js_path, __FILE__), array(), $html2canvas_js_ver);
-
 }
 add_action('wp_enqueue_scripts', 'load_charts_scripts');
 
@@ -216,9 +216,8 @@ function add_open_graph_tags($id)
 		if ($debug) echo '<script>console.log("add open graph ' . $id . '");</script>';
 
 		echo '<meta name="twitter:card" content="summary" />'; // twitter card
-
-		// title was added in schema version 2
-		if ($chart_json['schema_version'] >= 2 && isset($chart_json['title']) && $chart_json['title'] != "") {
+		// only set title if it is not empty
+		if (isset($chart_json['title']) && $chart_json['title'] != "") {
 			echo '<meta property="og:title" content="' . $chart_json['title'] . '" />';
 		} else {
 			echo '<meta property="og:title" content="' . $id . '"/>';
@@ -239,8 +238,7 @@ function add_open_graph_tags($id)
 		echo '<meta property="og:image" content="' . $image_url . '" />';
 		echo '<meta name="twitter:image" content="' . $image_url . '" />';
 
-		// description was added in schema version 2
-		if ($chart_json['schema_version'] >= 2 && isset($chart_json['description'])  && $chart_json['description'] != "") {
+		if (isset($chart_json['description'])  && $chart_json['description'] != "") {
 			echo '<meta property="og:description" content="' . $chart_json['description'] . '" />';
 		}
 		$already_run = true;
