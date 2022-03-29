@@ -69,7 +69,7 @@ class GLICH_Charts extends ET_Builder_Module
 	{
 		$ctype = $this->props['charttype'];
 		$charttype_js_path = '../../../charts/' . $ctype . '/' . $ctype . '.js';
-		if (file_exists(plugin_dir_path(__FILE__).$charttype_js_path)) {
+		if (file_exists(plugin_dir_path(__FILE__) . $charttype_js_path)) {
 			$this->load_libraries($ctype);
 			// load chart js
 
@@ -81,8 +81,7 @@ class GLICH_Charts extends ET_Builder_Module
 			// render chart
 			return sprintf('<br/><div id="chart-%1$s"></div>', $ctype);
 		} else {
-			return sprintf('<br/><div id="error-chart-%1$s" style="border:3px solid black; padding: 30px;">Global Inequality Chart: Chart type is not supported: %1$s</div>', $ctype );
-
+			return sprintf('<br/><div id="error-chart-%1$s" style="border:3px solid black; padding: 30px;">Global Inequality Chart: Chart type is not supported: %1$s</div>', $ctype);
 		}
 	}
 
@@ -181,12 +180,17 @@ if (!function_exists('filter_presenters')) {
 	function filter_presenters($filter)
 
 	{
+		if (!is_singular() || !array_key_exists("chart", $_GET)){
+			return $filter;
+
+		} //if it is not a post or a page and if it is not a chart
+
 		$id = $_GET["chart"];
 		$id = htmlspecialchars($id, ENT_QUOTES, 'UTF-8');
 		$id = str_replace("/", "", $id);
 		$id = str_replace(".", "", $id);
 		$id = str_replace("chart-", "", $id);
-		if ($id == "" && is_singular()|| !is_singular()) {
+		if ($id == "") {
 			// if no chart id is set, return the original filter
 			return $filter;
 		}
@@ -235,8 +239,7 @@ if (!function_exists('add_open_graph_tags')) {
 		if (!$already_run) {
 
 			// PLACE YOUR CODE BELOW THIS LINE
-
-			if (!is_singular()) //if it is not a post or a page
+			if (!is_singular() || !array_key_exists("chart", $_GET)) //if it is not a post or a page
 				return;
 			$id = $_GET["chart"];
 			$id = htmlspecialchars($id, ENT_QUOTES, 'UTF-8');
