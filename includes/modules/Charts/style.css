@@ -102,19 +102,19 @@
 }
 
 @media all and (max-width: 900px) {
-
+  
   .chart-title-bars {
   display: block;
   }
-
+  
   .chart-all-btns {
   display: none;
   }
-
+  
   .chart-expand-btn {
     display: none;
   }
-
+  
   .chart-btn {
     padding: 12px 17px;
   }
