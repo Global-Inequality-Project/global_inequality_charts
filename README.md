@@ -188,3 +188,7 @@ The feature to add custom tools can add additional tools to the template. Each t
 
 The function `myCustomFunction()` would then have to be defined in `[chartID].js`. A more advanced example can be found in `charts/demo_chart/demo_chart.js`.
 
+
+
+# License
+The project is licensed under the [MIT license](https://github.com/Global-Inequality-Project/global_inequality_charts/blob/main/LICENSE), excluding the subfoldersin `/charts`, where other licenses apply if another license is specified.    
