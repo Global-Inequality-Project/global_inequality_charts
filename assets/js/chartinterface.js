@@ -1,56 +1,60 @@
 // Global objects
+window.charts = {}
 window.chart_data = {}
 window.charts_path = window.wp_url + "/wp-content/plugins/global_inequality_charts/charts"
 
 
 // Chart Interface
 // ---------------
-function createChartInterface({ chartID, renderFunc, pathToData, topMargin }) {
+function createChartInterface({ chartID, renderFunc, customTools }) {
+    // TODO - Create Chart Interace if loading of chartSources fails
     loadJson(`${window.charts_path}/${chartID}/${chartID}.json`, function (error, data) {
         if (error === null) {
-            if (data.schema_version >= 2) {
-                createChart({
-                    chartID: chartID,
-                    chartTitle: data.title,
-                    chartDescription: data.description,
-                    chartSources: data.sources,
-                    template: data.template ? data.template : "main",
-                    renderFunc: renderFunc,
-                    pathToData: pathToData,
-                    topMargin: topMargin
-                })
+            if (data.schema_version >= 4) {
+                loadTxt(`${window.charts_path}/${chartID}/${chartID}_sources.txt`, function (error, chartSources) {
+                    if (error !== null) {
+
+                        chartSources = null;
+                    }
+                    createChart({
+                        chartID: chartID,
+                        chartTitle: data.title,
+                        chartDescription: data.description,
+                        chartSources: chartSources,
+                        renderFunc: renderFunc,
+                        template: data.template ? data.template : "main",
+                        customTools: customTools ? customTools : "",
+                    })
+                });
             } else {
-                createChart({
-                    chartID: chartID,
-                    chartTitle: data.name,
-                    chartDescription: "no description",
-                    chartSources: "no sources",
-                    template: "main",
-                    renderFunc: renderFunc,
-                    pathToData: pathToData,
-                    topMargin: topMargin
-                })
+                console.log("Chart settings 'schema_version < 4' is depreciated. Please update schema.")
             }
         } else {
-            // todo - error handling
+            console.log("Chart settings ([chartID].json) could not be loaded.")
         }
     });
+};
 
 
-}
-function createChart({ chartID, chartTitle, chartDescription, chartSources, template, renderFunc, pathToData, topMargin }) {
 
+function createChart({ chartID, chartTitle, chartDescription, renderFunc, template, customTools, chartSources }) {
 
-    if (pathToData == null) { pathToData = `${window.charts_path}/${chartID}/${chartID}.csv` }
-    if (topMargin == null) { topMargin = 0 }
     let createTemplate = window["createTemplate_" + template]({
-        chartID: chartID, chartTitle: chartTitle, chartDescription: chartDescription,
-        chartSources: chartSources, topMargin: topMargin, pathToData: pathToData
+        chartID: chartID,
+        chartTitle: chartTitle,
+        chartDescription: chartDescription,
+        customTools: customTools,
+        chartSources: chartSources
     });
     document.getElementById(`chart-${chartID}`).innerHTML = createTemplate;
 
     // Render chart in main area
-    renderFunc(`#chart-canvas-${chartID}`)
+    window.charts[chartID] = renderFunc(`#chart-canvas-${chartID}`, false);
+    
+    if (chartSources === null){
+        document.getElementById(`chart-btn-sources-${chartID}`).style.display = 'none';
+        document.getElementById(`chart-${chartID}-sources-btns`).style.display = 'none';
+    }
 
     // If chart is specified in url, scroll to it
     const queryString = window.location.search;
@@ -62,7 +66,6 @@ function createChart({ chartID, chartTitle, chartDescription, chartSources, temp
         setTimeout(function () {
             document.getElementById(`chart-${chartID}`).scrollIntoView();
         }, 600);
-
     }
 
     // Expand function
@@ -79,39 +82,35 @@ function createChart({ chartID, chartTitle, chartDescription, chartSources, temp
         var modal = document.getElementById("chart-modal-wrapper")
         modal.style.display = "block"
 
+        // Disable scrolling
+        document.body.style.overflow = "hidden";
+
         // Render chart in modal content
-        renderFunc(`#chart-modal-content-${chartID}`)
+        window.charts["modal"] = renderFunc(`#chart-modal-content-${chartID}`, true)
 
     };
 }
+
 // Button areas
 // ------------
 
-function toggleArea(button, areaID, chartID) {
+function toggleChartArea(button, areaID, chartID) {
     var shareArea = document.getElementById(`chart-${chartID}-${areaID}-btns`)
     if (button.value == "OFF") {
         button.value = "ON";
         shareArea.style.display = "block";
+        shareArea.style.visibility = "visible";
     } else {
         button.value = "OFF";
         shareArea.style.display = "none";
+        shareArea.style.visibility = "hidden";
     }
 }
 
-function togglePopover(chartTitle,chartSources) {
-    popover = document.getElementById(`Popover-${chartTitle}`);
-
-    if (chartSources != null) {
-        copyChartURL(chartSources, true)
-    }
-    if (popover.style.display == "none" || popover.style.display == "") {
-        popover.style.display = "block";
-        popover.style.visibility = "visible";
-    } else {
-        popover.style.display = "none";
-        popover.style.visibility = "hidden";
-    }
-
+function copySources(chartID, chartSources) {
+    var btn = document.getElementById(`chart-btn-sources-${chartID}`)
+    toggleChartArea(btn, 'sources', chartID)
+    copyToClipboard(chartSources)
 }
 
 
@@ -126,13 +125,13 @@ function shareChartTwitter(chartID) {
     window.open(`https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}&url=${url}?chart=${chartID}`, "_blank");
 }
 
-function copyChartURL(chartID, boolean) {
-    if (boolean == true){
-        var url = chartID
-    } else {
-        var url = window.location.href.split('?')[0] + `?chart=${chartID}`;
-    }
-    console.log(url)
+function copyChartURL(chartID) {
+    var url = window.location.href.split('?')[0] + `?chart=${chartID}`;
+    copyToClipboard(url)
+}
+
+function copyToClipboard(url) {
+    //console.log(url)
     if (navigator.clipboard) {
         navigator.clipboard.writeText(url);
     } else {
@@ -146,12 +145,12 @@ function copyChartURL(chartID, boolean) {
     }
 }
 
-// todo fb share button + other social media
+// todo fb share button
 
 // Download image functions
-// ---------------
+// ------------------------
 
-function createImage(chartID, chartTitle, chartDescription, chartSources) {
+function createImage(chartID, chartTitle, chartDescription) {
 
     var chart = document.getElementById(`chart-canvas-${chartID}`);
     const chart_clone = chart.cloneNode(true);
@@ -161,24 +160,24 @@ function createImage(chartID, chartTitle, chartDescription, chartSources) {
     document.getElementById(`downloadImage-${chartID}`).appendChild(logo_clone);
 
     document.getElementById(`downloadImage-${chartID}`).innerHTML +=
-              `<h2>${chartTitle}</h2>`;
+        `<h2>${chartTitle}</h2>`;
 
     document.getElementById(`downloadImage-${chartID}`).innerHTML +=
-              `<h4>${chartDescription}</h4>`;
+        `<h4>${chartDescription}</h4>`;
 
     document.getElementById(`downloadImage-${chartID}`).appendChild(chart_clone);
 
-    document.getElementById(`downloadImage-${chartID}`).innerHTML +=
-              `Sources: ${chartSources} <br>`;
+    //document.getElementById(`downloadImage-${chartID}`).innerHTML +=
+    //          `Sources: ${chartSources} <br>`;
 
     document.getElementById(`downloadImage-${chartID}`).innerHTML +=
-              `URL: ${window.location.href}#chart-${chartID}`;
+        `URL: ${window.location.href}#chart-${chartID}`;
 
 }
 
-function downloadImage(chartID, chartTitle, chartDescription, chartSources) {
+function downloadImage(chartID, chartTitle, chartDescription) {
 
-    createImage(chartID, chartTitle, chartDescription, chartSources)
+    createImage(chartID, chartTitle, chartDescription)
 
     var container = document.getElementById(`downloadImage-${chartID}`);
 
@@ -213,6 +212,20 @@ function loadJson(url, callback) {
     xhr.send();
 };
 
+function loadTxt(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'txt';
+    xhr.onload = function () {
+        var status = xhr.status;
+        if (status === 200) {
+            callback(null, xhr.response);
+        } else {
+            callback(status, xhr.response);
+        }
+    };
+    xhr.send();
+};
 
 // Modal wrapper
 // -------------
@@ -231,6 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
     modalClose.onclick = function () {
         modal.style.display = "none";
         document.getElementById("chart-modal-box").innerHTML = "";
+        document.body.style.overflow = "auto"; // Enable scrolling
     };
 
     // Close modal by clicking on grey area
@@ -238,6 +252,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (event.target == modal) {
             modal.style.display = "none";
             document.getElementById("chart-modal-box").innerHTML = "";
+            document.body.style.overflow = "auto"; // Enable scrolling
+            var chart = window.charts["modal"]
+            if (typeof chart.destroy == 'function') {
+                chart.destroy();
+            }
+            window.charts["modal"] = null
         }
     };
 }, false);

@@ -25,11 +25,7 @@ function importFilesAndShow_inequality_gdp_region(){
         // Render Chart Interface
         createChartInterface({
           chartID:'inequality_gdp_region',
-          chartTitle:"GDP per capita: World regions",
-          chartDescription:"Constant 2010 USD",
-          chartSources:"Chart Sources",
           renderFunc:render_inequality_gdp_region,
-          topMargin:"-15px",
         })
 
 
@@ -43,6 +39,8 @@ function render_inequality_gdp_region(canvasID){
     var options = {
         chart: {
             type: 'line',
+            height: '100%',
+            fontFamily: 'Open Sans',
             toolbar: {
                 show: false,
                 tools: {zoom: false}
@@ -59,14 +57,24 @@ function render_inequality_gdp_region(canvasID){
                 }
             },
             {
-                breakpoint: 401,
+                breakpoint: 601,
                 options: {
                     yaxis: {
                         tickAmount: 5,
                         labels: { formatter: (val, index) => '$'+formatYAxisLabel(val, index, 0, true) }
                     },
+                    tooltip: {
+                        y: { 
+                            title: {
+                                // Names are too long for mobile view
+                                // Alternatively, formatter could change seriesName to abbreviation
+                                formatter: (seriesName) => '',
+                            }
+                        },
+                    }
                 }
-            }
+
+            },
         ],
         stroke: {
             curve: 'straight',
@@ -79,6 +87,13 @@ function render_inequality_gdp_region(canvasID){
             padding: {
                 top: 0,
             }
+        },
+        tooltip: {
+            y: { 
+                formatter: (val, index) => '$'+formatTooltipVal(val, index), 
+            },
+            followCursor: true,
+            shared: false,
         },
 	}
 
@@ -112,7 +127,7 @@ function render_inequality_gdp_region(canvasID){
 	options['xaxis'] = { categories: years, tickAmount: 30, tooltip: {enabled: false} };
 	options.series = series;
 
-	var chart = createApexChart(canvasID, chartID, options);
+	return createApexChart(canvasID, options);
 
 }
 
