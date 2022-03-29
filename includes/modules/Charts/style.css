@@ -14,7 +14,7 @@
 /* Mobile view */
 
 @media all and (max-width: 900px) {
-  
+
   .chart-template-main {
     display: block;
   }
@@ -102,19 +102,19 @@
 }
 
 @media all and (max-width: 900px) {
-  
+
   .chart-title-bars {
   display: block;
   }
-  
+
   .chart-all-btns {
   display: none;
   }
-  
+
   .chart-expand-btn {
     display: none;
   }
-  
+
   .chart-btn {
     padding: 12px 17px;
   }
@@ -180,7 +180,7 @@
 
 .chart-box-outer {
   width: 100%;
-  padding-top: calc(max(66%, 300px)); 
+  padding-top: calc(max(66%, 300px));
   position: relative;
 }
 
@@ -205,7 +205,7 @@
   top: -1000;
 }
 
-.downloadImage .et_pb_menu__logo {
+.downloadImage .global_inequality_logo {
     overflow: hidden;
     width: 150;
     float: right;

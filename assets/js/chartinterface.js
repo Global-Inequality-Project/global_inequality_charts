@@ -50,7 +50,7 @@ function createChart({ chartID, chartTitle, chartDescription, renderFunc, templa
 
     // Render chart in main area
     window.charts[chartID] = renderFunc(`#chart-canvas-${chartID}`, false);
-    
+
     if (chartSources === null){
         document.getElementById(`chart-btn-sources-${chartID}`).style.display = 'none';
         document.getElementById(`chart-${chartID}-sources-btns`).style.display = 'none';
@@ -154,10 +154,12 @@ function createImage(chartID, chartTitle, chartDescription) {
 
     var chart = document.getElementById(`chart-canvas-${chartID}`);
     const chart_clone = chart.cloneNode(true);
-    var logo = document.getElementsByClassName('et_pb_menu__logo');
-    const logo_clone = logo[0].cloneNode(true);
 
-    document.getElementById(`downloadImage-${chartID}`).appendChild(logo_clone);
+    var img = new Image();
+    img.src = '/wp-content/plugins/global_inequality_charts/assets/img/global_inequality_logo.png';
+    img.className = "global_inequality_logo";
+
+    document.getElementById(`downloadImage-${chartID}`).appendChild(img);
 
     document.getElementById(`downloadImage-${chartID}`).innerHTML +=
         `<h2>${chartTitle}</h2>`;
@@ -166,9 +168,6 @@ function createImage(chartID, chartTitle, chartDescription) {
         `<h4>${chartDescription}</h4>`;
 
     document.getElementById(`downloadImage-${chartID}`).appendChild(chart_clone);
-
-    //document.getElementById(`downloadImage-${chartID}`).innerHTML +=
-    //          `Sources: ${chartSources} <br>`;
 
     document.getElementById(`downloadImage-${chartID}`).innerHTML +=
         `URL: ${window.location.href}#chart-${chartID}`;
