@@ -108,7 +108,7 @@ class GLICH_Charts extends ET_Builder_Module
 
 				wp_enqueue_script('d3_js',  plugins_url($d3_path, __FILE__));
 			}
-			// load the chart utils js, always required for schema version < 2 
+			// load the chart utils js, always required for schema version < 2
 			if (
 				isset($chart_json["libraries"]["chartutils"])
 				&& $chart_json["libraries"]["chartutils"]
@@ -174,74 +174,117 @@ if (!function_exists('add_chart_modal_wrapper')) {
 	}
 	add_action('wp_footer', 'add_chart_modal_wrapper', 10);
 }
+// remove yoast seo open tags for shared charts
+if (!function_exists('filter_presenters')) {
+	add_filter('wpseo_frontend_presenter_classes', 'filter_presenters');
 
+	function filter_presenters($filter)
 
-/**
- * Add open graph tags to the header but only once!
- */
-function add_open_graph_tags($id)
-{
-	global $debug;
-	static $already_run = false;
-	if (!$already_run) {
-
-		// PLACE YOUR CODE BELOW THIS LINE
-
-		if (!is_singular()) //if it is not a post or a page
-			return;
+	{
 		$id = $_GET["chart"];
 		$id = htmlspecialchars($id, ENT_QUOTES, 'UTF-8');
 		$id = str_replace("/", "", $id);
 		$id = str_replace(".", "", $id);
 		$id = str_replace("chart-", "", $id);
-		if ($id == "") {
-			if ($debug)	echo '<script>console.log("add open graph for ' . $id . ' not found");</script>';
-
-			return;
+		if ($id == "" && is_singular()|| !is_singular()) {
+			// if no chart id is set, return the original filter
+			return $filter;
 		}
-		if ($debug) echo '<script>console.log("add open graph for ' . $id . '");</script>';
-
-		// load chart config for open graph tags
-		$charttype_json_path = plugin_dir_path(__FILE__) . '../../../charts/' . $id . '/' . $id . '.json';
-		if (!file_exists($charttype_json_path)) {
-			echo '<script>console.log("add open graph for ' . $charttype_json_path . ' not found");</script>';
-			return;
+		if (($key = array_search('Yoast\WP\SEO\Presenters\Twitter\Image_Presenter', $filter)) !== false) {
+			unset($filter[$key]);
 		}
-		$chart_json = file_get_contents($charttype_json_path);
-
-		// parse json
-		$chart_json = json_decode($chart_json, true);
-
-		// add open graph tags
-		if ($debug) echo '<script>console.log("add open graph ' . $id . '");</script>';
-
-		echo '<meta name="twitter:card" content="summary" />'; // twitter card
-		// only set title if it is not empty
-		if (isset($chart_json['title']) && $chart_json['title'] != "") {
-			echo '<meta property="og:title" content="' . $chart_json['title'] . '" />';
-		} else {
-			echo '<meta property="og:title" content="' . $id . '"/>';
+		if (($key = array_search('Yoast\WP\SEO\Presenters\Open_Graph\Image_Presenter', $filter)) !== false) {
+			unset($filter[$key]);
 		}
-		echo '<meta property="og:type" content="article" />';
-		$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-		$url = $protocol . $_SERVER['HTTP_HOST'];
-		echo '<meta property="og:url" content="' . $url .  $_SERVER['REQUEST_URI'] . '" />';
-		$chart_img_path = plugin_dir_path(__FILE__) . '../../../charts/' . $id . '/' . $id . '.png';
-
-		$image_url = "";
-		// try to find the image in the chart folder
-		if (file_exists($chart_img_path)) {
-			$image_url = plugins_url("", __FILE__) . '/../../../charts/' . $id . '/' . $id . '.png';
-		} else {
-			$image_url = plugins_url("", __FILE__) . '/../../../assets/img/global_inequality_share.png';
+		if (($key = array_search('Yoast\WP\SEO\Presenters\Open_Graph\Url_Presenter', $filter)) !== false) {
+			unset($filter[$key]);
 		}
-		echo '<meta property="og:image" content="' . $image_url . '" />';
-		echo '<meta name="twitter:image" content="' . $image_url . '" />';
-
-		if (isset($chart_json['description'])  && $chart_json['description'] != "") {
-			echo '<meta property="og:description" content="' . $chart_json['description'] . '" />';
+		if (($key = array_search('Yoast\WP\SEO\Presenters\Open_Graph\Description_Presenter', $filter)) !== false) {
+			unset($filter[$key]);
 		}
-		$already_run = true;
+		if (($key = array_search('Yoast\WP\SEO\Presenters\Twitter\Description_Presenter', $filter)) !== false) {
+			unset($filter[$key]);
+		}
+
+		if (($key = array_search('Yoast\WP\SEO\Presenters\Open_Graph\Title_Presenter', $filter)) !== false) {
+			unset($filter[$key]);
+		}
+
+		return $filter;
 	}
 }
-add_action('wp_head', 'add_open_graph_tags', 5);
+/**
+ * Add open graph tags to the header but only once!
+ */
+if (!function_exists('add_open_graph_tags')) {
+	function add_open_graph_tags($id)
+	{
+		global $debug;
+		static $already_run = false;
+		if (!$already_run) {
+
+			// PLACE YOUR CODE BELOW THIS LINE
+
+			if (!is_singular()) //if it is not a post or a page
+				return;
+			$id = $_GET["chart"];
+			$id = htmlspecialchars($id, ENT_QUOTES, 'UTF-8');
+			$id = str_replace("/", "", $id);
+			$id = str_replace(".", "", $id);
+			$id = str_replace("chart-", "", $id);
+			if ($id == "") {
+				if ($debug)	echo '<script>console.log("add open graph for ' . $id . ' not found");</script>';
+
+				return;
+			}
+			if ($debug) echo '<script>console.log("add open graph for ' . $id . '");</script>';
+
+			// load chart config for open graph tags
+			$charttype_json_path = plugin_dir_path(__FILE__) . '../../../charts/' . $id . '/' . $id . '.json';
+			if (!file_exists($charttype_json_path)) {
+				echo '<script>console.log("add open graph for ' . $charttype_json_path . ' not found");</script>';
+				return;
+			}
+			$chart_json = file_get_contents($charttype_json_path);
+
+			// parse json
+			$chart_json = json_decode($chart_json, true);
+
+			// add open graph tags
+			if ($debug) echo '<script>console.log("add open graph ' . $id . '");</script>';
+
+			echo '<meta name="twitter:card" content="summary_large_image" />' . PHP_EOL; // twitter card
+
+			if (isset($chart_json['title']) && $chart_json['title'] != "") {
+				echo '<meta property="og:title" content="' . $chart_json['title'] . '" />' . PHP_EOL;
+			} else {
+				echo '<meta property="og:title" content="' . $id . '"/>';
+			}
+			echo '<meta property="og:type" content="article" />' . PHP_EOL;
+			$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+			$url = $protocol . $_SERVER['HTTP_HOST'];
+			echo '<meta property="og:url" content="' . $url .  $_SERVER['REQUEST_URI'] . '" />' . PHP_EOL;
+			$chart_img_path = plugin_dir_path(__FILE__) . '../../../charts/' . $id . '/' . $id . '.png';
+
+			$image_url = "";
+			// try to find the image in the chart folder
+			if (file_exists($chart_img_path)) {
+				$image_url = plugins_url("", __FILE__) . '/../../../charts/' . $id . '/' . $id . '.png';
+			} else {
+				$image_url = plugins_url("", __FILE__) . '/../../../assets/img/global_inequality_share.png';
+			}
+			echo '<meta property="og:image" content="' . $image_url . '" />' . PHP_EOL;
+			echo '<meta name="twitter:image" content="' . $image_url . '" />' . PHP_EOL;
+
+			// description was added in schema version 2
+			if (isset($chart_json['description'])  && $chart_json['description'] != "") {
+				echo '<meta property="og:description" content="' . $chart_json['description'] . '" />' . PHP_EOL;
+				echo '<meta property="twitter:description" content="' . $chart_json['description'] . '" />' . PHP_EOL;
+			}
+
+
+			$already_run = true;
+		}
+	}
+	add_action('wp_head', 'add_open_graph_tags', 5);
+}
