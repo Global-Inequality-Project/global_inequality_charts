@@ -180,8 +180,10 @@ if (!function_exists('filter_presenters')) {
 	function filter_presenters($filter)
 
 	{
-		if (!is_singular() && !isset($_GET["chart"])) //if it is not a post or a page and if it is not a chart
+		if (!is_singular() || !array_key_exists("chart", $_GET)){
 			return $filter;
+
+		} //if it is not a post or a page and if it is not a chart
 
 		$id = $_GET["chart"];
 		$id = htmlspecialchars($id, ENT_QUOTES, 'UTF-8');
@@ -237,7 +239,7 @@ if (!function_exists('add_open_graph_tags')) {
 		if (!$already_run) {
 
 			// PLACE YOUR CODE BELOW THIS LINE
-			if (!is_singular() && !isset($_GET["chart"])) //if it is not a post or a page
+			if (!is_singular() || !array_key_exists("chart", $_GET)) //if it is not a post or a page
 				return;
 			$id = $_GET["chart"];
 			$id = htmlspecialchars($id, ENT_QUOTES, 'UTF-8');
