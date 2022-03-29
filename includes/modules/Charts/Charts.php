@@ -210,6 +210,17 @@ if (!function_exists('filter_presenters')) {
 			unset($filter[$key]);
 		}
 
+		if (($key = array_search('Yoast\WP\SEO\Presenters\Twitter\Card_Presenter', $filter)) !== false) {
+			unset($filter[$key]);
+		}
+
+		if (($key = array_search('Yoast\WP\SEO\Presenters\Twitter\Label_Presenter', $filter)) !== false) {
+			unset($filter[$key]);
+		}
+
+		if (($key = array_search('Yoast\WP\SEO\Presenters\Slack\Enhanced_Data_Presenter', $filter)) !== false) {
+			unset($filter[$key]);
+		}
 		return $filter;
 	}
 }
