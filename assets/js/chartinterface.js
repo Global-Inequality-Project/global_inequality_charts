@@ -13,12 +13,8 @@ function createChartInterface({ chartID, renderFunc, customTools }) {
             if (data.schema_version >= 4) {
                 loadTxt(`${window.charts_path}/${chartID}/${chartID}_sources.txt`, function (error, chartSources) {
                     if (error !== null) {
-                        console.log(error, chartSources, jQuery(`#chart-btn-sources-${chartID}`))
-                        setTimeout(function () {
-                            jQuery(`#chart-${chartID}-sources-btns`).hide();
-                            jQuery(`#chart-btn-sources-${chartID}`).hide();
-                        }, 500)
-                        chartSources = "Sources not available."
+
+                        chartSources = null;
                     }
                     createChart({
                         chartID: chartID,
@@ -53,7 +49,12 @@ function createChart({ chartID, chartTitle, chartDescription, renderFunc, templa
     document.getElementById(`chart-${chartID}`).innerHTML = createTemplate;
 
     // Render chart in main area
-    window.charts[chartID] = renderFunc(`#chart-canvas-${chartID}`, false)
+    window.charts[chartID] = renderFunc(`#chart-canvas-${chartID}`, false);
+    
+    if (chartSources === null){
+        document.getElementById(`chart-btn-sources-${chartID}`).style.display = 'none';
+        document.getElementById(`chart-${chartID}-sources-btns`).style.display = 'none';
+    }
 
     // If chart is specified in url, scroll to it
     const queryString = window.location.search;
