@@ -13,12 +13,12 @@ var tmpl =`
       <div class="chart-title-bars">
         <button class="chart-title-btn" onclick="toggleChartArea(this, 'all', '${chartID}')" value="OFF">
           <i class="fa-solid fa-bars"></i>
-        </button> 
+        </button>
       </div>
     </div>
-    
+
     <div class="chart-all-btns" id="chart-${chartID}-all-btns">
-        
+
         ${customTools}
 
         <button class="chart-btn chart-expand-btn" id="chart-expand-btn-${chartID}">
@@ -33,15 +33,15 @@ var tmpl =`
 
           <button class="chart-btn" onclick="shareChartTwitter('${chartID}')">
             <i class="fa-brands fa-twitter"></i>Twitter
-          </button> 
+          </button>
 
-          <button class="chart-btn">
+          <button class="chart-btn" onclick="shareChartFacebook('${chartID}')">
             <i class="fa-brands fa-facebook"></i>Facebook
           </button>
 
           <button class="chart-btn" onclick="copyChartURL('${chartID}')">
             <i class="fas fa-link"></i>Copy link
-          </button> 
+          </button>
 
         </div>
 

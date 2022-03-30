@@ -117,6 +117,12 @@ function copySources(chartID, chartSources) {
 // Share functions
 // ---------------
 
+function shareChartFacebook(chartID) {
+    var url = window.location.href.split('?')[0];
+    var title = `Global Inequality Chart`;
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}?chart=${chartID}&t=${title}`, "_blank" );
+}
+
 
 function shareChartTwitter(chartID) {
     var url = window.location.href.split('?')[0];
