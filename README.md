@@ -30,9 +30,9 @@ A chart is integrated into a wordpress page as follows:
 - Add a `global inequalities charts` module to the page
 - Select one of the charts in the module settings
 
-## Licensing
+## License
 
-The plugin code is released under the MIT license. Each of the charts and the corresponding datasets can be subject to different authorships and license terms, which are indicated in the respective directory of each chart. 
+The project is licensed under the [MIT license](https://github.com/Global-Inequality-Project/global_inequality_charts/blob/main/LICENSE), excluding the subfolders in `/charts` where other terms can apply if another license is specified.    
 
 ## Overview
 
@@ -187,4 +187,3 @@ The feature to add custom tools can add additional tools to the template. Each t
 ```
 
 The function `myCustomFunction()` would then have to be defined in `[chartID].js`. A more advanced example can be found in `charts/demo_chart/demo_chart.js`.
-
