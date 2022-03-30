@@ -23,11 +23,11 @@ function prepare_demo_chart(){
 
         <div class="chart-btn-area" id="chart-demo_chart-choice-btns">
 
-          <button class="chart-btn" id="demo_chart-choice-1" onclick="setDemoChartChoice(1)">
+          <button class="chart-btn" id="demo_chart-choice-1" onclick="setChoice_demo_chart(1)">
             <i class="fa-solid fa-square-check"></i>Choice 1
           </button> 
 
-          <button class="chart-btn" id="demo_chart-choice-2" onclick="setDemoChartChoice(2)">
+          <button class="chart-btn" id="demo_chart-choice-2" onclick="setChoice_demo_chart(2)">
             <i class="fa-solid fa-square"></i></i>Choice 2
           </button>
 
@@ -77,7 +77,7 @@ function render_demo_chart(canvasID, modal) {
     yaxis: {
       decimalsInFloat: 2,
     },
-    series: generateDemoChartSeries(data),
+    series: generateSeries_demo_chart(data),
     xaxis: {
       categories: data['year']
     },
@@ -107,7 +107,7 @@ function render_demo_chart(canvasID, modal) {
 
 
 // Function to change custom choice
-function setDemoChartChoice(choice){
+function setChoice_demo_chart(choice){
 
   var chart = window.charts['demo_chart']
   var data = window.chart_data['demo_chart']
@@ -119,18 +119,18 @@ function setDemoChartChoice(choice){
   if (choice == 1) {
     btn1.innerHTML = `<i class="fa-solid fa-square-check"></i>Choice 1`
     btn2.innerHTML = `<i class="fa-solid fa-square"></i>Choice 2`
-    chart.updateSeries(generateDemoChartSeries(data))
+    chart.updateSeries(generateSeries_demo_chart(data))
   } else if (choice == 2) {
     btn1.innerHTML = `<i class="fa-solid fa-square"></i>Choice 1`
     btn2.innerHTML = `<i class="fa-solid fa-square-check"></i>Choice 2`
-    chart.updateSeries(generateDemoChartSeries(data))
+    chart.updateSeries(generateSeries_demo_chart(data))
   }
 
 };
 
 
 // Generate data series based on custom choice
-function generateDemoChartSeries(){
+function generateSeries_demo_chart(){
 
   var data = window.chart_data['demo_chart']
   if (data.my_custom_choice == 1) {
