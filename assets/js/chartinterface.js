@@ -162,7 +162,7 @@ function createImage(chartID, chartTitle, chartDescription) {
     const chart_clone = chart.cloneNode(true);
 
     var img = new Image();
-    img.src = '/wp-content/plugins/global_inequality_charts/assets/img/global_inequality_logo.png';
+    img.src = window.wp_url+'/wp-content/plugins/global_inequality_charts/assets/img/global_inequality_logo.png';
     img.className = "global_inequality_logo";
 
     document.getElementById(`downloadImage-${chartID}`).appendChild(img);
