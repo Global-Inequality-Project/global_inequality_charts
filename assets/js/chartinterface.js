@@ -117,6 +117,12 @@ function copySources(chartID, chartSources) {
 // Share functions
 // ---------------
 
+function shareChartFacebook(chartID) {
+    var url = window.location.href.split('?')[0];
+    var title = `Global Inequality Chart`;
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}%3Fchart=${chartID}&t=${title}`, "_blank" );
+}
+
 
 function shareChartTwitter(chartID) {
     var url = window.location.href.split('?')[0];
@@ -156,7 +162,7 @@ function createImage(chartID, chartTitle, chartDescription) {
     const chart_clone = chart.cloneNode(true);
 
     var img = new Image();
-    img.src = '/wp-content/plugins/global_inequality_charts/assets/img/global_inequality_logo.png';
+    img.src = window.wp_url+'/wp-content/plugins/global_inequality_charts/assets/img/global_inequality_logo.png';
     img.className = "global_inequality_logo";
 
     document.getElementById(`downloadImage-${chartID}`).appendChild(img);
