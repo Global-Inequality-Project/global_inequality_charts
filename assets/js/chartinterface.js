@@ -120,7 +120,7 @@ function copySources(chartID, chartSources) {
 function shareChartFacebook(chartID) {
     var url = window.location.href.split('?')[0];
     var title = `Global Inequality Chart`;
-    window.open(`https://www.facebook.com/sharer/sharer.php%3Fu=${url}%3Fchart=${chartID}&t=${title}`, "_blank" );
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}%3Fchart=${chartID}&t=${title}`, "_blank" );
 }
 
 
