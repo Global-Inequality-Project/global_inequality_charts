@@ -3,7 +3,7 @@
 Plugin Name: Global Inequality Charts
 Plugin URI:  https://globalinequality.org/ 
 Description: A wp plugin to add a divi/gutenberg block for showing global inequality charts
-Version:     1.1.0
+Version:     1.2.0
 Author:      Aaron Kimmig and Leon Beccard from convive.io
 Author URI:  https://www.convive.io/
 License:     MIT
