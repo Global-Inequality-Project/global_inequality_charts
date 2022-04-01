@@ -2230,10 +2230,10 @@ anymatch@^3.0.3, anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-apexcharts@^3.34.0:
-  version "3.34.0"
-  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-3.34.0.tgz#7c70f232a2dbd878b55e5d4a517aa0499adaba58"
-  integrity sha512-0HMwkTRm4lwuM4TZ+BjFynXuIRQnCG8E36k2r0JoxEfh61rY6OmRa6iFHlTQiyILpemPyTHxuPvK4wkR8RKc9A==
+apexcharts@^3.33.1:
+  version "3.35.0"
+  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-3.35.0.tgz#5571f4852747359b7ef76662998f3d6a8ffe923a"
+  integrity sha512-oipJRkaxt8DPGRmn1kur6aPzML1JSpf2M3ecu+gyw+8xiNmT2C0p1uuuqPZrk+Lr2hmDxzNBPR7TvxwRl3ozgw==
   dependencies:
     svg.draggable.js "^2.2.2"
     svg.easing.js "^2.0.0"
@@ -6368,7 +6368,7 @@ grunt-legacy-util@~2.0.1:
     underscore.string "~3.3.5"
     which "~2.0.2"
 
-"grunt-po2mo@github:elegantthemes/grunt-po2mo#master":
+grunt-po2mo@elegantthemes/grunt-po2mo#master:
   version "0.1.5"
   resolved "https://codeload.github.com/elegantthemes/grunt-po2mo/tar.gz/26eca7c892db50837b58fdcf3771c5eb331a2ead"
   dependencies:
