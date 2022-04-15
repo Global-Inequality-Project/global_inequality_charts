@@ -1,7 +1,7 @@
 {
     "id":"inequality_gdp_region",
     "title": "GDP per capita: World regions",
-    "description": "Constant 2010 USD",
+    "description": "Constant 2015 USD",
     "author":"Huzaifa Zoomkawala",
     "template":"main",
     "schema_version":4,

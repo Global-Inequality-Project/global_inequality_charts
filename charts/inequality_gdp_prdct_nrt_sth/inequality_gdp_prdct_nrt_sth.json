@@ -1,6 +1,6 @@
 {
-    "id":"inequality_gdp_nrt_sth",
-    "title": "GDP per capita: Global North vs. Global South",
+    "id":"inequality_gdp_prdct_nrt_sth",
+    "title": "GDP * GDP per capita: Global North vs. Global South",
     "description": "Constant 2015 USD",
     "author":"Huzaifa Zoomkawala",
     "template":"main",
