@@ -12,7 +12,7 @@ jQuery(function() {
             { key: "SSF", name: 'Sub-Saharan Africa'},
             { key: "SAS", name: 'South Asia'}
         ],
-        years: { start: 1960, end: 2018},
+        years: { start: 1960, end: 2020},
     };
     importFilesAndShow_inequality_gdp_region();
 });
@@ -83,6 +83,7 @@ function render_inequality_gdp_region(canvasID){
         yaxis: {
             labels: { formatter: (val, index) => '$'+formatYAxisLabel(val, index, 0, true) }
         },
+        colors: ['#775DD0', '#FF4560', '#FEB019', '#00E396', '#008FFB', '#A5978B'],
         grid: {
             padding: {
                 top: 0,
