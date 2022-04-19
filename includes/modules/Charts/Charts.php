@@ -39,6 +39,7 @@ class GLICH_Charts extends ET_Builder_Module
 		$directory = plugin_dir_path(__FILE__) . "../../../charts";
 		$paths = list_files($directory, 1);
 		$options = array();
+
 		foreach ($paths as $path) {
 			$chart_id = basename($path);
 			if (is_file($path . "/" . $chart_id . ".json")) {
@@ -48,20 +49,44 @@ class GLICH_Charts extends ET_Builder_Module
 					// deal with error...
 					$this->console_log("failed to parse json for chart " . $path . $chart_id . ".json");
 				} else {
-					$options[$chart_id] =  esc_html__($chart_json["title"], 'dvmm-divi-mad-menu');
+					$category = esc_html__($chart_json["category"], 'dvmm-divi-mad-menu');
+					$options[$category][$chart_id] =  esc_html__($chart_json["title"], 'dvmm-divi-mad-menu');
 				}
 			}
+			
 		}
-
-		return array(
+		// sort charts by category and Name
+		foreach ($options as $option =>$value){
+			asort($value);
+			$options[$option] = $value; 
+		}
+		ksort($options);
+		$fields = array(
 			'charttype' => array(
 				'label'           => esc_html__('Charttype', 'glich-global_inequalitiy_charts'),
 				'type'            => 'select',
 				'option_category' => 'basic_option',
 				'options'         => $options,
 				'description'     => esc_html__('the charttype entered here will appear inside the module.', 'glich-global_inequalitiy_charts'),
-				'toggle_slug'     => 'main_content',
+				'toggle_slug'     => 'main_content'
 			),
+		);
+
+		return $fields;
+	}
+	
+	public function get_advanced_fields_config() {
+		return array(
+			'background'     => false,
+			'borders'        => false,
+			'box_shadow'     => false,
+			'button'         => false,
+			'filters'        => false,
+			'fonts'          => false,
+			'margin_padding' => false,
+			'max_width'      => false,
+			'transform'		 => false,
+			'animation'		 => false,
 		);
 	}
 
