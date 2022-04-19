@@ -70,7 +70,7 @@ You can add a new chart to the plugin as follows:
 
 An example can be found in `charts/demo_chart/`.
 
-### [chartID].json (Version 4)
+### [chartID].json (Version 5)
 
 This file contains the following chart settings:
 
@@ -79,6 +79,7 @@ This file contains the following chart settings:
 - description: a short description of the chart
 - author: the author(s) of the chart
 - template: the template of the chart -> `assets/js/templates/[template].js`
+- category: a freely choosen string that automatically adds a new category if it doesn't exists yet
 - schema_version: the version of the schema, this increases, when new features are added.
 - libraries: libraries that should be loaded in order to show the graph
 
@@ -101,7 +102,8 @@ Here is an example:
     "description": "This is the chart description",
     "author": "Name(s) of the author(s) <Email address>",
     "template":"main",
-    "schema_version": 4,
+    "category":"Demo",
+    "schema_version": 5,
     "libraries": {
         "apexcharts": true,
         "chartutils": true
