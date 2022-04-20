@@ -76,12 +76,6 @@ function render_poverty_people(canvasID) {
             forceNiceScale: true,
             labels: { formatter: (val, index) => formatBillionsLabel(val, index, 1, true) }
         },
-        grid: {
-            row: {
-                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                opacity: 0.5
-            },
-        },
         tooltip: {
             y: { 
                 formatter: (val, index) => '$'+formatTooltipVal(val, index), 

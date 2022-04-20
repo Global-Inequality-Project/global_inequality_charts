@@ -71,12 +71,6 @@ function render_poverty_people_world_china(canvasID) {
             max: 100,
             labels: { formatter: (val, index) => formatYAxisLabel(val, index) + '%' }
         },
-        grid: {
-            row: {
-                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                opacity: 0.5
-            },
-        },
         tooltip: {
             y: {
                 formatter: (val, index) => '$' + formatTooltipVal(val, index),
