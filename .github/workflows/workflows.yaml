@@ -38,5 +38,6 @@ jobs:
             node_modules/d3/dist/d3.min.js
             node_modules/svgmap/dist/svgMap.min.js
             node_modules/svgmap/dist/svgMap.min.css
+            node_modules/svg-pan-zoom/dist/svg-pan-zoom.min.js
             node_modules/html2canvas/dist/html2canvas.min.js
             global_inequality_charts.php
