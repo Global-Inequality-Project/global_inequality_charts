@@ -1,0 +1,13 @@
+{
+    "id":"poverty_people_world_china",
+    "title": "Proportion of people in poverty (World, and World minus China)",
+    "description": "Poverty Line $/day (2011 PPP)",
+    "author":"Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"Global poverty",
+    "schema_version":5,
+    "libraries":{
+        "apexcharts":true,
+        "chartutils": true
+    }
+}
