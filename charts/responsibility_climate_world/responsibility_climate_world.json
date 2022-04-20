@@ -1,0 +1,11 @@
+{
+    "id": "responsibility_climate_world",
+    "title": "Responsibility for Climate Breakdown Treemap",
+    "description": "",
+    "author": "Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"3. Responsibility for Climate Breakdown",
+    "schema_version": 5,
+    "libraries": {
+    }
+}

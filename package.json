@@ -9,7 +9,9 @@
     "divi-scripts": "1.0.2-rc.0",
     "html2canvas": "^1.4.1",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "svg-pan-zoom": "^3.6.1",
+    "svgmap": "^2.7.2"
   },
   "scripts": {
     "start": "divi-scripts start",
