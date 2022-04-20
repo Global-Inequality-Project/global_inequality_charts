@@ -2,9 +2,8 @@
 
 /* Adjusting chart tools */
 
-#chart-responsibility_climate_world {
-  display: flex;
-  justify-content: center;
+#chart-responsibility_climate_world .chart-template-main {
+  width: 100%;
 }
 #chart-responsibility_climate_world #treemap_svg  {
   max-width: 600px;

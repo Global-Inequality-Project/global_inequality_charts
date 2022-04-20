@@ -217,6 +217,21 @@ function loadJson(url, callback) {
     xhr.send();
 };
 
+function loadCsv(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'csv';
+    xhr.onload = function () {
+        var status = xhr.status;
+        if (status === 200) {
+            callback(null, xhr.response);
+        } else {
+            callback(status, xhr.response);
+        }
+    };
+    xhr.send();
+};
+
 function loadTxt(url, callback) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);

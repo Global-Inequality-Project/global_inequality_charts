@@ -18,60 +18,10 @@ function prepare_responsibility_climate_world() {
 // Render chart onto canvas
 // Make sure to use the chart ID to creat unique function names
 function render_responsibility_climate_world(canvasID, modal) {
-
-  jQuery("#chart-responsibility_climate_world").load(`${window.charts_path}/responsibility_climate_world/treemap.svg > *`, function() {
-    console.log("done")
+  jQuery("#chart-canvas-responsibility_climate_world").load(`${window.charts_path}/responsibility_climate_world/treemap.svg > *`, function() {
+    // console.log("done")
   });
   var data = window.chart_data['responsibility_climate_world']
-
-  // // Create a bigger chart in the modal
-  // if (modal == true) {
-  //   var height = '200%'
-  // } else {
-  //   var height = '100%'
-  // }
-
-  // var options = {
-  //   chart: {
-  //     type: 'line',
-  //     height: height, // In most cases, this should be set to '100%'
-  //     fontFamily: 'Open Sans', // Same as the rest of the plugin
-  //     // Hide & disable all apexchart tools
-  //     // (since we have the tools from the plugin)
-  //     toolbar: {
-  //       show: false,
-  //       tools: { zoom: false }
-  //     },
-  //     selection: { enable: false },
-  //   },
-  //   yaxis: {
-  //     decimalsInFloat: 2,
-  //   },
-  //   series: generateSeries_responsibility_climate_world(data),
-  //   xaxis: {
-  //     categories: data['year']
-  //   },
-  //   // Recommended paddings
-  //   grid: {
-  //     padding: {
-  //       bottom: 0,
-  //       left: 10,
-  //       right: 0,
-  //       top: 0,
-  //     }
-  //   },
-  // }
-
-  // // This callback function can be used to 
-  // // manipulate the chart after rendering
-  // function callback(chart) {
-  //   //chart.hideSeries('var2');
-  //   //chart.hideSeries('var3');
-  // }
-
-  // // Render chart to canvas and return chart
-  // // The function createApexChart() can be found in assets/js/chartutils.js
-  // return createApexChart(canvasID, options, callback);
 
 }
 
