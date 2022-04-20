@@ -1,0 +1,25 @@
+/* Please use always the chart id as primary selector to not interfer with other parts */
+
+/* Adjusting chart tools */
+
+#chart-demo_chart h1{
+    /*color: darkblue;*/
+}
+
+/* Adjusting the chart container */
+
+#chart-demo_chart .chart-box-outer {
+  margin-top: -15px;  /* Custom margins */
+  /* padding-top: calc(max(66%, 300px)); */ /* Custom graph height */
+}
+
+/* Adjusting the modal container */
+
+#chart-modal-content-demo_chart {
+  /* Create scrollable modal */
+  overflow-y: auto; 
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  padding-right: 20px; 
+}
