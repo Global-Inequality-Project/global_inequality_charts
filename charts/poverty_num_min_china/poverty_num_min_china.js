@@ -15,7 +15,7 @@ function importFilesAndShow_inequality_gdp_nrt_sth(){
   var chartID = "poverty_num_min_china"
 
   jQuery.get(`${window.charts_path}/${chartID}/${chartID}.csv`, function(poverty_num_min_china){
-      window.chart_data[chartID].data = fromCSV(poverty_num_min_china, ['string', 'number', 'number']);
+      window.chart_data[chartID].data = fromCSV(poverty_num_min_china, ['string', 'number', 'number', 'number']);
 
       // Render Chart Interface
       createChartInterface({
@@ -97,11 +97,11 @@ let series = [
       if (data_row){
           series[0].data.push(data_row['7.5']);
           series[1].data.push(data_row['10']);
-          series[1].data.push(data_row['15']);
+          series[2].data.push(data_row['15']);
       }else{
           series[0].data.push(null);
           series[1].data.push(null);
-          series[1].data.push(null);
+          series[2].data.push(null);
       }
   });
 
@@ -124,9 +124,9 @@ function abbreviatedTooltip(dataPointIndex, w){
   let marker2 = '<div class="custom-tooltip-marker" style="background-color:'+color2+'"></div>';
   let val2 = '$'+formatYAxisLabel(config_series[1].data[dataPointIndex], null, 0, true)
 
-  let color3 = w.config.colors[1];
-  let marker3 = '<div class="custom-tooltip-marker" style="background-color:'+color2+'"></div>';
-  let val3 = '$'+formatYAxisLabel(config_series[1].data[dataPointIndex], null, 0, true)
+  let color3 = w.config.colors[2];
+  let marker3 = '<div class="custom-tooltip-marker" style="background-color:'+color3+'"></div>';
+  let val3 = '$'+formatYAxisLabel(config_series[2].data[dataPointIndex], null, 0, true)
 
   return '<div class="custom-tooltip-box">' +
       '<div class="custom-tooltip-title">' + year+ '</div>' +
