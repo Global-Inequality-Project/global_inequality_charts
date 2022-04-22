@@ -1,0 +1,11 @@
+#chart-responsibility_undershoot_carbon .chart-box-outer {
+  margin-top: -15px;
+  padding-top: calc(max(66%, 400px));  /* Custom graph height */
+}
+#chart-responsibility_undershoot_carbon .chart-box-inner{
+  overflow: scroll;
+
+}
+#chart-modal-box{
+  overflow: scroll;
+}
