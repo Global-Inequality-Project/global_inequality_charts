@@ -58,7 +58,7 @@ function render_responsibility_climate_world_map(canvasID, modal) {
   });
   setTimeout(function () {
     new svgMap({
-      targetElementID: 'chart-canvas-responsibility_climate_world_map',
+      targetElementID: canvasID.replace("#", ""),
       colorMin: "#f5d993",
       data: {
         thousandSeparator: ".",
@@ -89,7 +89,7 @@ function render_responsibility_climate_world_map(canvasID, modal) {
       },
 
     });
-    jQuery("#chart-canvas-responsibility_climate_world_map").append('<div id="levels"><table><tbody><tr><td><span class="level_rect" style="background-color: #950000;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">250B+</span></td></tr><tr><td><span class="level_rect" style="background-color: #d30000;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">50B - 250B</span></td></tr><tr><td><span class="level_rect" style="background-color: #ea503b;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">25B - 50B</span></td></tr><tr><td><span class="level_rect" style="background-color: #f68648;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">5B - 25B</span></td></tr><tr><td><span class="level_rect" style="background-color: #f6bc77;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">1B - 5B</span></td></tr><tr><td><span class="level_rect" style="background-color: #f5d993;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">0 - 1B</span></td></tr><tr><td><span class="level_rect" style="background-color: #abdda4;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">No Overshoot</span></td></tr><tr><td><span class="level_rect" style="background-color: #e6e6e6;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">No data</span></td></tr></tbody></table></div>')
+    jQuery(canvasID).append('<div id="levels"><table><tbody><tr><td><span class="level_rect" style="background-color: #950000;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">250B+</span></td></tr><tr><td><span class="level_rect" style="background-color: #d30000;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">50B - 250B</span></td></tr><tr><td><span class="level_rect" style="background-color: #ea503b;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">25B - 50B</span></td></tr><tr><td><span class="level_rect" style="background-color: #f68648;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">5B - 25B</span></td></tr><tr><td><span class="level_rect" style="background-color: #f6bc77;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">1B - 5B</span></td></tr><tr><td><span class="level_rect" style="background-color: #f5d993;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">0 - 1B</span></td></tr><tr><td><span class="level_rect" style="background-color: #abdda4;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">No Overshoot</span></td></tr><tr><td><span class="level_rect" style="background-color: #e6e6e6;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">No data</span></td></tr></tbody></table></div>')
 
   }, 400)
 
