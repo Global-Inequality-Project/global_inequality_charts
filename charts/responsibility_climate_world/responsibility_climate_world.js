@@ -18,6 +18,7 @@ function prepare_responsibility_climate_world() {
 // Render chart onto canvas
 // Make sure to use the chart ID to creat unique function names
 function render_responsibility_climate_world(canvasID, modal) {
+  console.log(canvasID);
   jQuery("#chart-canvas-responsibility_climate_world").load(`${window.charts_path}/responsibility_climate_world/treemap.svg > *`, function() {
     // console.log("done")
   });
