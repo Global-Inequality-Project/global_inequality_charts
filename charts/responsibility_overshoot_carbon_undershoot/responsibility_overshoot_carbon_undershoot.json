@@ -1,0 +1,13 @@
+{
+    "id":"responsibility_overshoot_carbon_undershoot",
+    "title": "Overshoot of 350 ppm Carbon Budget with undershoot",
+    "description": "tonnes of CO2",
+    "author":"Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"3. Responsibility for Climate Breakdown",
+    "schema_version":5,
+    "libraries":{
+        "apexcharts":true,
+        "chartutils": true
+    }
+}
