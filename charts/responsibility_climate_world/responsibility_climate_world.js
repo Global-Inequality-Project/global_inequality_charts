@@ -19,101 +19,82 @@ function prepare_responsibility_climate_world() {
 // Make sure to use the chart ID to creat unique function names
 function render_responsibility_climate_world(canvasID, modal) {
   console.log(canvasID);
-  jQuery("#chart-canvas-responsibility_climate_world").load(`${window.charts_path}/responsibility_climate_world/treemap.svg > *`, function() {
-    // console.log("done")
-  });
-  var data = window.chart_data['responsibility_climate_world']
-
-}
-
-
-// Function to change custom choice
-function setChoice_responsibility_climate_world(choice) {
-
-  var chart = window.charts['responsibility_climate_world']
-  var data = window.chart_data['responsibility_climate_world']
-  data.my_custom_choice = choice
-
-  var btn1 = document.getElementById(`responsibility_climate_world-choice-1`)
-  var btn2 = document.getElementById(`responsibility_climate_world-choice-2`)
-
-  if (choice == 1) {
-    btn1.innerHTML = `<i class="fa-solid fa-square-check"></i>Choice 1`
-    btn2.innerHTML = `<i class="fa-solid fa-square"></i>Choice 2`
-    chart.updateSeries(generateSeries_responsibility_climate_world(data))
-  } else if (choice == 2) {
-    btn1.innerHTML = `<i class="fa-solid fa-square"></i>Choice 1`
-    btn2.innerHTML = `<i class="fa-solid fa-square-check"></i>Choice 2`
-    chart.updateSeries(generateSeries_responsibility_climate_world(data))
-  }
-
-};
-
-
-// Generate data series based on custom choice
-function generateSeries_responsibility_climate_world() {
-
-  var data = window.chart_data['responsibility_climate_world']
-  if (data.my_custom_choice == 1) {
-
-    return [{
-      name: 'var1',
-      data: data['var1']
-    }, {
-      name: 'var2',
-      data: data['var2']
-    }, {
-      name: 'var3',
-      data: data['var3']
-    }];
-
-  } else if (data.my_custom_choice == 2) {
-
-    return [{
-      name: 'var1',
-      data: data['var1_choice_2']
-    }, {
-      name: 'var2',
-      data: data['var2_choice_2']
-    }, {
-      name: 'var3',
-      data: data['var3_choice_2']
-    }];
-
-  }
-
-}
-
-//-------------------------------------- setTreeChartTooltip(selector)
-function setTreeChartTooltip(selector) {
-  selector.qtip({
-    content: {
-      text: function (event, api) {
-
-        var id = $(this).attr('id');
-
-        /*
-        var id_parts = long_id.split('_');
-        let ignore = Number(id_parts[0]);
-        let ndx = Number(id_parts[1]);
-
-        let row = window.global.gdp_chg[ndx];
-        let percentile = row.percentile;
-        let value = row.change;
-        */
-        let name = window.global.regions[id].name;
-        let pct = window.global.regions[id].pct;
-        return '<div class="tooltip-header">' + name +
-          '</div><div class="tooltip-detail">' + pct + '%</div>';
+  var options = {
+    chart: {
+      type: 'treemap',
+      fontFamily: 'Open Sans',
+      toolbar: {
+        show: false,
+        tools: { zoom: false }
+      },
+    },
+    dataLabels: {
+      enabled: true,
+      style: {
+        fontSize: '12px',
+      },
+      formatter: function(text, op) {
+        return [text, op.value+"%"]
+      },
+      offsetY: -4
+    },
+    tooltip: {
+      y: {
+          formatter: (val, index) => formatTooltipVal(val, index)+"%",
+      },
+      followCursor: true,
+      shared: false,
+  },
+    plotOptions: {
+      treemap: {
+        enableShades: true,
+        shadeIntensity: 0.5,
+        reverseNegativeShade: true,
+        colorScale: {
+          ranges: [
+            {
+              from: -6,
+              to: 9,
+              color: '#52B12C'
+            },
+            {
+              from: 10,
+              to: 50,
+              color: '#CD363A'
+            }
+          ]
+        }
       }
-    },
-    position: {
-      my: 'center',
-      at: 'center'
-    },
-    style: {
-      def: false,
-      classes: 'qtip-light qtip-shadow qtip-rounded'
     }
-  });
+  }
+  var series = [
+    {
+      data: [
+        {
+          x: 'USA',
+          y: 40
+        },
+        {
+          x: 'EU-28',
+          y: 29
+        },
+        {
+          x: 'Rest of Europe',
+          y: 13
+        },
+        {
+          x: 'Rest of Global North',
+          y: 10
+        },
+        {
+          x: 'Global South',
+          y: 8
+        },
+      ]
+    }
+  ]
+  options.series = series;
+  options['chart'].id = "responsibility_climate_world"
+  return createApexChart(canvasID, options);
+
 }
