@@ -156,8 +156,6 @@ function render_responsibility_overshoot_carbon_undershoot(canvasID) {
 
         countries.push(window.chart_data["responsibility_overshoot_carbon_undershoot"].countries[row['iso']]);
     });
-    console.log(series, sorted)
-
     options.xaxis.categories = countries;
     options['chart'].id = ('Overshoot of 350ppm Carbon Budget').replace(/ /g, "");
     options.series = series;
