@@ -1,0 +1,13 @@
+{
+    "id": "drain_sankey",
+    "title": "Drain sankey",
+    "description": "",
+    "author": "Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"4. Drain from the Global South (Unequal Exchange)",
+    "schema_version": 5,
+    "libraries": {
+        "chartjs":true,
+        "chartjs-sankey": true
+    }
+}
