@@ -128,9 +128,17 @@ class GLICH_Charts extends ET_Builder_Module
 				wp_enqueue_script('apexcharts_js', plugins_url($apexcharts_js_path, __FILE__), array(), $apexcharts_js_ver);
 			}
 			if (isset($chart_json["libraries"]["d3js"]) && $chart_json["libraries"]["d3js"]) {
-				$d3_path = '../../../node_modules/d3/dist/d3.min.js';
-
+				$d3_path = '../../../node_modules/d3/dist/d3.js';
 				wp_enqueue_script('d3_js',  plugins_url($d3_path, __FILE__));
+			}
+			if (isset($chart_json["libraries"]["chartjs"]) && $chart_json["libraries"]["chartjs"]) {
+				$chartjs_path = '../../../node_modules/chart.js/dist/chart.min.js';
+				wp_enqueue_script('chartjs',  plugins_url($chartjs_path, __FILE__));
+				// wp_enqueue_script('chartjs',  "https://cdn.jsdelivr.net/npm/chart.js");
+			}
+			if (isset($chart_json["libraries"]["chartjs-sankey"]) && $chart_json["libraries"]["chartjs-sankey"]) {
+				$chartjs_sankey_path = '../../../node_modules/chartjs-chart-sankey/dist/chartjs-chart-sankey.min.js';
+				wp_enqueue_script('chartjs-sankey',  plugins_url($chartjs_sankey_path, __FILE__));
 			}
 			if (isset($chart_json["libraries"]["svgmap"]) && $chart_json["libraries"]["svgmap"]) {
 				$svgmap_path = '../../../node_modules/svgmap/dist/svgMap.min.js';

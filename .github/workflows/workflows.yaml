@@ -36,6 +36,8 @@ jobs:
             node_modules/@fortawesome/fontawesome-free/css/all.min.css
             node_modules/@fortawesome/fontawesome-free/webfonts
             node_modules/d3/dist/d3.min.js
+            node_modules/chart.js/dist/chart.min.js
+            node_modules/chartjs-chart-sankey/dist/chartjs-chart-sankey.min.js
             node_modules/svgmap/dist/svgMap.min.js
             node_modules/svgmap/dist/svgMap.min.css
             node_modules/svg-pan-zoom/dist/svg-pan-zoom.min.js
