@@ -57,7 +57,7 @@ function render_responsibility_undershoot_carbon(canvasID) {
             {
                 breakpoint: 960,
                 options: {
-                    xaxis: { tickAmount: 10 }
+                    xaxis: { tickAmount: 1 }
                 }
             },
             {
@@ -114,7 +114,7 @@ function render_responsibility_undershoot_carbon(canvasID) {
         },
         tooltip: {
             y: {
-                formatter: (val, index) => '$' + formatTooltipVal(val, index),
+                formatter: (val, index) => formatTooltipVal(val, index),
             },
             followCursor: true,
             shared: false,

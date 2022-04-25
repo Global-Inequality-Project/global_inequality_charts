@@ -57,7 +57,7 @@ function render_responsibility_overshoot_carbon(canvasID) {
             {
                 breakpoint: 960,
                 options: {
-                    xaxis: { tickAmount: 10 }
+                    xaxis: { tickAmount: 1 }
                 }
             },
             {
@@ -114,7 +114,7 @@ function render_responsibility_overshoot_carbon(canvasID) {
         },
         tooltip: {
             y: {
-                formatter: (val, index) => '$' + formatTooltipVal(val, index),
+                formatter: (val, index) => formatTooltipVal(val, index),
             },
             followCursor: true,
             shared: false,
@@ -149,11 +149,12 @@ function render_responsibility_overshoot_carbon(canvasID) {
         let overshoot = +row['overshoot_350'];
         if (overshoot > 0) {
             series[0].data.push(overshoot);
-        } else {
-            series[0].data.push(0);
-        }
+            countries.push(window.chart_data["responsibility_overshoot_carbon"].countries[row['iso']]);
+        } 
+        // else {
+        //     series[0].data.push(0);
+        // }
 
-        countries.push(window.chart_data["responsibility_overshoot_carbon"].countries[row['iso']]);
     });
     console.log(series, sorted)
 
