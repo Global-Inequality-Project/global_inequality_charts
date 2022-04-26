@@ -85,18 +85,8 @@ function render_responsibility_undershoot_carbon(canvasID) {
                 }
             }
         },
-        // dataLabels: {
-        //     enabled: false,
-        //     //textAnchor: 'start',
-        //     formatter: (val, index) => formatTooltipVal(val, index),
-        //     offsetX: 10,
-        //     style: {
-        //         fontWeight: 'normal',
-        //         colors: ['black']
-        //     }
-        // },
         yaxis: {
-            max: 1.0e11,
+            max: 0.9e11,
             labels: { align: 'left' }
         },
         xaxis: {
