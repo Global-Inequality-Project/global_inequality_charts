@@ -1,7 +1,7 @@
 {
     "id": "poverty_num_min_china",
     "title": "Number of people in Poverty in the World (minus China)",
-    "description": "Poverty Line $/day",
+    "description": "Poverty Line $/day (2011 PPP)",
     "author": "Huzaifa Zoomkawala",
     "template":"main",
     "category":"Global poverty",
