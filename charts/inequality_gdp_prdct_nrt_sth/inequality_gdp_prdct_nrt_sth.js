@@ -89,11 +89,11 @@ function render_inequality_gdp_prdct_nrt_sth(canvasID) {
     }
 
     let div_id = '#gdp_nrt_sth';
-    let data = window.chart_data["inequality_gdp_nrt_sth"].data;
+    let data = window.chart_data["inequality_gdp_prdct_nrt_sth"].data;
     let data_hash = makeHash(data, 'year');
 
     let years = [];
-    for (let year = window.chart_data["inequality_gdp_nrt_sth"].years.start, end = window.chart_data["inequality_gdp_nrt_sth"].years.end; year <= end; ++year)
+    for (let year = window.chart_data["inequality_gdp_prdct_nrt_sth"].years.start, end = window.chart_data["inequality_gdp_prdct_nrt_sth"].years.end; year <= end; ++year)
         years.push(year);
 
     let series = [
