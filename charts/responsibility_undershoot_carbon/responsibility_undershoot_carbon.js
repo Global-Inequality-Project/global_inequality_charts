@@ -96,7 +96,7 @@ function render_responsibility_undershoot_carbon(canvasID) {
         //     }
         // },
         yaxis: {
-            max: 3.8e11,
+            max: 1.0e11,
             labels: { align: 'left' }
         },
         xaxis: {

@@ -25,7 +25,6 @@ function render_drain_sankey(canvasID, modal) {
   // canvas.height = 400;
 
   let parent = document.getElementById(canvasID.replace("#", ""))
-  console.log(parent, canvasID);
   parent.appendChild(canvas);
   var ctx = canvas.getContext("2d");
 
