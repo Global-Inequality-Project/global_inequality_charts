@@ -79,15 +79,14 @@ function render_responsibility_undershoot_carbon(canvasID) {
         plotOptions: {
             bar: {
                 horizontal: true,
-
-                dataLabels: {
-                    position: 'middle',
-                }
             }
+        },
+        dataLabels: {
+            enabled: false
         },
         yaxis: {
             max: 0.9e11,
-            labels: { align: 'left' }
+            // labels: { align: 'left' }
         },
         xaxis: {
             tickAmount: 1,
@@ -109,22 +108,7 @@ function render_responsibility_undershoot_carbon(canvasID) {
             followCursor: true,
             shared: false,
         },
-        annotations: {
-            xaxis: [
-
-                {
-                    label: {
-                        text: '0',
-                        orientation: 'horizontal',
-                        offsetY: -17,
-                        textAnchor: 'middle'
-                    },
-                    x: 0,
-                    borderColor: '#4d4d4d',
-                }
-            ],
-        },
-        legend: { show: false},
+        legend: { show: false },
     }
 
     let sorted = window.chart_data["responsibility_undershoot_carbon"].data.sort((a, b) => a['overshoot_350'] - b['overshoot_350']);

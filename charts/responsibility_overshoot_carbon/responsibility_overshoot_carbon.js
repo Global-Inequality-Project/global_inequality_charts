@@ -79,22 +79,11 @@ function render_responsibility_overshoot_carbon(canvasID) {
         plotOptions: {
             bar: {
                 horizontal: true,
-
-                dataLabels: {
-                    position: 'middle',
-                }
             }
         },
-        // dataLabels: {
-        //     enabled: false,
-        //     //textAnchor: 'start',
-        //     formatter: (val, index) => formatTooltipVal(val, index),
-        //     offsetX: 10,
-        //     style: {
-        //         fontWeight: 'normal',
-        //         colors: ['black']
-        //     }
-        // },
+        dataLabels: {
+            enabled: false
+        },
         yaxis: {
             max: 3.8e11,
             labels: { align: 'left'}
@@ -119,21 +108,6 @@ function render_responsibility_overshoot_carbon(canvasID) {
             followCursor: true,
             shared: false,
         },
-        annotations: {
-            xaxis: [
-
-                {
-                    label: {
-                        text: '0',
-                        orientation: 'horizontal',
-                        offsetY: -17,
-                        textAnchor: 'middle'
-                    },
-                    x: 0,
-                    borderColor: '#4d4d4d',
-                }
-            ],
-        }
     }
 
     window.chart_data["responsibility_overshoot_carbon"].data.forEach(function (row) {
@@ -151,10 +125,6 @@ function render_responsibility_overshoot_carbon(canvasID) {
             series[0].data.push(overshoot);
             countries.push(window.chart_data["responsibility_overshoot_carbon"].countries[row['iso']]);
         } 
-        // else {
-        //     series[0].data.push(0);
-        // }
-
     });
     console.log(series, sorted)
 
