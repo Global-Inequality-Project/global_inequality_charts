@@ -1,0 +1,13 @@
+{
+    "id":"eco_breakdown_global_use",
+    "title": "Global resource use (1900-2017)",
+    "description": "Gigatonnes (Gt)",
+    "author":"Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"Responsibility for Ecological Breakdown",
+    "schema_version":5,
+    "libraries":{
+        "apexcharts":true,
+        "chartutils": true
+    }
+}
