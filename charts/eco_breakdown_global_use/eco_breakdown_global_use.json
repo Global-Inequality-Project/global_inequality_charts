@@ -4,7 +4,7 @@
     "description": "Gigatonnes (Gt)",
     "author":"Huzaifa Zoomkawala",
     "template":"main",
-    "category":"Responsibility for Ecological Breakdown",
+    "category":"8. Responsibility for Ecological Breakdown",
     "schema_version":5,
     "libraries":{
         "apexcharts":true,

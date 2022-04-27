@@ -4,7 +4,7 @@
     "description": "Poverty Line $/day (2011 PPP)",
     "author":"Huzaifa Zoomkawala",
     "template":"main",
-    "category":"Global poverty",
+    "category":"1. Global Poverty",
     "schema_version":5,
     "libraries":{
         "apexcharts":true,
