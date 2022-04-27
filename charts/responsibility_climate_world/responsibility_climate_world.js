@@ -40,7 +40,7 @@ function render_responsibility_climate_world(canvasID, modal) {
     },
     tooltip: {
       y: {
-          formatter: (val, index) => formatTooltipVal(val, index)+"%",
+          formatter: (val, index) => formatTooltipVal(val, index, 0)+"%",
       },
       followCursor: true,
       shared: false,
