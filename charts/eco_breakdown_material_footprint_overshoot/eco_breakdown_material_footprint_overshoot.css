@@ -1,0 +1,11 @@
+#chart-eco_breakdown_material_footprint_overshoot .chart-box-outer {
+  margin-top: -15px;
+  padding-top: calc(max(66%, 400px));  /* Custom graph height */
+}
+#chart-eco_breakdown_material_footprint_overshoot .chart-box-inner{
+  overflow: scroll;
+
+}
+#chart-modal-box{
+  overflow: scroll;
+}

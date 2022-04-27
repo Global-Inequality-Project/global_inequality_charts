@@ -1,0 +1,13 @@
+{
+    "id":"eco_breakdown_material_footprint_overshoot",
+    "title": "Cumulative Material Footprint overshoot (1970-2017)",
+    "description": "Gigatonnes (Gt)",
+    "author":"Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"8. Responsibility for Ecological Breakdown",
+    "schema_version":5,
+    "libraries":{
+        "apexcharts":true,
+        "chartutils": true
+    }
+}
