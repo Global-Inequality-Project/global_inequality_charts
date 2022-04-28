@@ -4,7 +4,7 @@
     "description": "This is the chart description",
     "author": "Joël Foramitti",
     "template":"main",
-    "category":"1. Demo",
+    "category":"0. Demo",
     "schema_version": 5,
     "libraries": {
         "apexcharts": true,
