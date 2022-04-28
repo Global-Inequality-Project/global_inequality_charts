@@ -124,7 +124,6 @@ function render_eco_breakdown_material_footprint_overshoot(canvasID) {
             countries.push(window.chart_data["eco_breakdown_material_footprint_overshoot"].countries[row['category']]);
         }
     });
-    console.log(series, sorted)
 
     options.xaxis.categories = countries;
     options['chart'].id = ('Cumulative Material Footprint overshoot (1970-2017)').replace(/ /g, "");

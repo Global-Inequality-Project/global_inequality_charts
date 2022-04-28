@@ -18,7 +18,6 @@ function prepare_responsibility_climate_world() {
 // Render chart onto canvas
 // Make sure to use the chart ID to creat unique function names
 function render_responsibility_climate_world(canvasID, modal) {
-  console.log(canvasID);
   var options = {
     chart: {
       type: 'treemap',

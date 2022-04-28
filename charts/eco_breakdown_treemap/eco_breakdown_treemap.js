@@ -18,7 +18,6 @@ function prepare_eco_breakdown_treemap() {
 // Render chart onto canvas
 // Make sure to use the chart ID to creat unique function names
 function render_eco_breakdown_treemap(canvasID, modal) {
-  console.log(canvasID);
   var options = {
     chart: {
       type: 'treemap',
