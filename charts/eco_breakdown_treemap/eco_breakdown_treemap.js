@@ -1,15 +1,15 @@
 // Wait for window to be ready
 jQuery(function () {
-  prepare_responsibility_climate_world();
+  prepare_eco_breakdown_treemap();
 });
 
 
 // Import data and render chart interface
 // Make sure to use the chart ID to creat unique function names
-function prepare_responsibility_climate_world() {
+function prepare_eco_breakdown_treemap() {
   createChartInterface({
-    chartID: "responsibility_climate_world",
-    renderFunc: render_responsibility_climate_world,
+    chartID: "eco_breakdown_treemap",
+    renderFunc: render_eco_breakdown_treemap,
   })
 
 }
@@ -17,7 +17,7 @@ function prepare_responsibility_climate_world() {
 
 // Render chart onto canvas
 // Make sure to use the chart ID to creat unique function names
-function render_responsibility_climate_world(canvasID, modal) {
+function render_eco_breakdown_treemap(canvasID, modal) {
   var options = {
     chart: {
       type: 'treemap',
@@ -39,7 +39,7 @@ function render_responsibility_climate_world(canvasID, modal) {
     },
     tooltip: {
       y: {
-          formatter: (val, index) => formatTooltipVal(val, index, 0)+"%",
+          formatter: (val, index) => formatTooltipVal(val, index,0)+"%",
       },
       followCursor: true,
       shared: false,
@@ -71,29 +71,29 @@ function render_responsibility_climate_world(canvasID, modal) {
       data: [
         {
           x: 'USA',
-          y: 40
+          y: 27
         },
         {
-          x: 'EU-28',
-          y: 29
+          x: 'UK+EU',
+          y: 25
         },
         {
-          x: 'Rest of Europe',
-          y: 13
+          x: 'Rest of Europe and HICs',
+          y: 24
         },
         {
-          x: 'Rest of Global North',
-          y: 10
+          x: 'China',
+          y: 15
         },
         {
-          x: 'Global South',
+          x: 'Rest of Global South',
           y: 8
         },
       ]
     }
   ]
   options.series = series;
-  options['chart'].id = "responsibility_climate_world"
+  options['chart'].id = "eco_breakdown_treemap"
   return createApexChart(canvasID, options);
 
 }
