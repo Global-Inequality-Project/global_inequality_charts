@@ -44,7 +44,6 @@ function render_responsibility_undershoot_carbon(canvasID) {
     let countries = [];
     let series = [
         { name: 'tonnes of CO2', data: [] },
-        { name: 'tonnes of CO2', data: [] }
     ];
     sorted.forEach(row => {
         let overshoot = +row['overshoot_350'];
@@ -127,7 +126,8 @@ function render_responsibility_undershoot_carbon(canvasID) {
                 formatter: (val, index) => formatTooltipVal(val, index),
             },
             followCursor: true,
-            shared: false,
+            intersect: false,
+            shared:true
         },
         legend: { show: false },
         series: series
