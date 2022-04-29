@@ -250,7 +250,12 @@
   margin-bottom: 15px;
 }
 
-
 #chart-modal-box{
   overflow: scroll;
+}
+
+/* border for map charts */
+.svgMap-map-image{
+  border: 1px solid #ddd;
+  border-radius: 3px;
 }
