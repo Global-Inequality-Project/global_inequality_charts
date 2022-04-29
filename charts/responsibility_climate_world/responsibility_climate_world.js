@@ -29,9 +29,6 @@ function render_responsibility_climate_world(canvasID, modal) {
     },
     dataLabels: {
       enabled: true,
-      style: {
-        fontSize: '12px',
-      },
       formatter: function(text, op) {
         return [text, op.value+"%"]
       },

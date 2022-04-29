@@ -117,7 +117,8 @@ function render_responsibility_overshoot_carbon_undershoot(canvasID) {
                 formatter: (val, index) => formatTooltipVal(val, index),
             },
             followCursor: true,
-            shared: false,
+            intersect: false,
+            shared:true
         },
         annotations: {
             xaxis: [

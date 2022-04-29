@@ -39,11 +39,25 @@ function importFilesAndShow_responsibility_undershoot_carbon() {
 function render_responsibility_undershoot_carbon(canvasID) {
 
     var chartID = "responsibility_undershoot_carbon"
+    let sorted = window.chart_data["responsibility_undershoot_carbon"].data.sort((a, b) => a['overshoot_350'] - b['overshoot_350']);
+    sorted = sorted.filter(x => x.iso != 'GUY'); // EXCLUDING Guyana
+    let countries = [];
+    let series = [
+        { name: 'tonnes of CO2', data: [] },
+    ];
+    sorted.forEach(row => {
+        let overshoot = +row['overshoot_350'];
+        if (overshoot <= 0) {
+            series[0].data.push(-overshoot);
+            countries.push(window.chart_data["responsibility_undershoot_carbon"].countries[row['iso']]);
+        }
+    });
+
     var options = {
         chart: {
             type: 'bar',
             stacked: true,
-            height: '3500',
+            height: series[0].data.length * 25,
             fontFamily: 'Open Sans',
             toolbar: {
                 show: false,
@@ -82,18 +96,24 @@ function render_responsibility_undershoot_carbon(canvasID) {
             }
         },
         dataLabels: {
-            enabled: false
+            enabled: false,
         },
         yaxis: {
             max: 0.9e11,
-            // labels: { align: 'left' }
+            labels: {
+                align: 'left',
+                style: {
+                    fontSize: '12px',
+                },
+            }
         },
         xaxis: {
             tickAmount: 1,
             position: 'top',
             axisBorder: { show: false },
             labels: { formatter: (val, index) => formatYAxisLabel(val, index, 0) },
-            axisTicks: { height: 0 }
+            axisTicks: { height: 0 },
+            categories: countries
         },
         colors: ['#73c71c'],
         grid: {
@@ -106,29 +126,14 @@ function render_responsibility_undershoot_carbon(canvasID) {
                 formatter: (val, index) => formatTooltipVal(val, index),
             },
             followCursor: true,
-            shared: false,
+            intersect: false,
+            shared:true
         },
         legend: { show: false },
+        series: series
     }
-
-    let sorted = window.chart_data["responsibility_undershoot_carbon"].data.sort((a, b) => a['overshoot_350'] - b['overshoot_350']);
-    sorted = sorted.filter(x => x.iso != 'GUY'); // EXCLUDING Guyana
-    let countries = [];
-    let series = [
-        { name: 'tonnes of CO2', data: [] },
-        { name: 'tonnes of CO2', data: [] }
-    ];
-    sorted.forEach(row => {
-        let overshoot = +row['overshoot_350'];
-        if (overshoot <= 0) {
-            series[0].data.push(-overshoot);
-            countries.push(window.chart_data["responsibility_undershoot_carbon"].countries[row['iso']]);
-        }
-    });
-
-    options.xaxis.categories = countries;
     options['chart'].id = ('Undershoot of 350 ppm Carbon Budget').replace(/ /g, "");
-    options.series = series;
+
     return createApexChart(canvasID, options);
 
 }
