@@ -37,13 +37,26 @@ function importFilesAndShow_eco_breakdown_material_footprint_overshoot() {
 
 //--------------------------------------- showChart
 function render_eco_breakdown_material_footprint_overshoot(canvasID) {
+    let sorted = window.chart_data["eco_breakdown_material_footprint_overshoot"].data.sort((a, b) => b['Cumulative-MF-overshoot'] - a['Cumulative-MF-overshoot']);
+    //sorted = sorted.filter(x => x.iso != 'GUY'); // EXCLUDING Guyana
+    let countries = [];
+    let series = [
+        { name: 'Gigatonnes (Gt)', data: [] },
+    ];
+    sorted.forEach(row => {
+        let overshoot = +row['Cumulative-MF-overshoot'];
+        if (overshoot > 0) {
+            series[0].data.push(overshoot);
+            countries.push(window.chart_data["eco_breakdown_material_footprint_overshoot"].countries[row['category']]);
+        }
+    });
 
     var chartID = "eco_breakdown_material_footprint_overshoot"
     var options = {
         chart: {
             type: 'bar',
             stacked: true,
-            height: '3500',
+            height: series[0].data.length * 25,
             fontFamily: 'Open Sans',
             toolbar: {
                 show: false,
@@ -93,7 +106,8 @@ function render_eco_breakdown_material_footprint_overshoot(canvasID) {
             position: 'top',
             axisBorder: { show: false },
             labels: { formatter: (val, index) => formatYAxisLabel(val, index, 0) + ' Gt' },
-            axisTicks: { height: 0 }
+            axisTicks: { height: 0 },
+            categories: countries
         },
         colors: ['#775DD0', '#73c71c'],
         grid: {
@@ -108,26 +122,13 @@ function render_eco_breakdown_material_footprint_overshoot(canvasID) {
             followCursor: true,
             shared: false,
         },
+        series: series
     }
 
 
-    let sorted = window.chart_data["eco_breakdown_material_footprint_overshoot"].data.sort((a, b) => b['Cumulative-MF-overshoot'] - a['Cumulative-MF-overshoot']);
-    //sorted = sorted.filter(x => x.iso != 'GUY'); // EXCLUDING Guyana
-    let countries = [];
-    let series = [
-        { name: 'Gigatonnes (Gt)', data: [] },
-    ];
-    sorted.forEach(row => {
-        let overshoot = +row['Cumulative-MF-overshoot'];
-        if (overshoot > 0) {
-            series[0].data.push(overshoot);
-            countries.push(window.chart_data["eco_breakdown_material_footprint_overshoot"].countries[row['category']]);
-        }
-    });
 
-    options.xaxis.categories = countries;
+
     options['chart'].id = ('Cumulative Material Footprint overshoot (1970-2017)').replace(/ /g, "");
-    options.series = series;
     return createApexChart(canvasID, options);
 
 }
