@@ -1,15 +1,15 @@
 // Wait for window to be ready
 jQuery(function () {
-  prepare_responsibility_climate_world();
+  prepare_climate_world_treemap();
 });
 
 
 // Import data and render chart interface
 // Make sure to use the chart ID to creat unique function names
-function prepare_responsibility_climate_world() {
+function prepare_climate_world_treemap() {
   createChartInterface({
-    chartID: "responsibility_climate_world",
-    renderFunc: render_responsibility_climate_world,
+    chartID: "climate_world_treemap",
+    renderFunc: render_climate_world_treemap,
   })
 
 }
@@ -17,7 +17,7 @@ function prepare_responsibility_climate_world() {
 
 // Render chart onto canvas
 // Make sure to use the chart ID to creat unique function names
-function render_responsibility_climate_world(canvasID, modal) {
+function render_climate_world_treemap(canvasID, modal) {
   var options = {
     chart: {
       type: 'treemap',
@@ -29,6 +29,9 @@ function render_responsibility_climate_world(canvasID, modal) {
     },
     dataLabels: {
       enabled: true,
+      style: {
+        fontSize: '14px',
+      },
       formatter: function(text, op) {
         return [text, op.value+"%"]
       },
@@ -90,7 +93,7 @@ function render_responsibility_climate_world(canvasID, modal) {
     }
   ]
   options.series = series;
-  options['chart'].id = "responsibility_climate_world"
+  options['chart'].id = "climate_world_treemap"
   return createApexChart(canvasID, options);
 
 }

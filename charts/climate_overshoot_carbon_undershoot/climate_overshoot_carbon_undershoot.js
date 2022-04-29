@@ -1,26 +1,26 @@
 //--------------------------------------- window.ready
 jQuery(function () {
     checkObjectKeysFunc();
-    window.chart_data["responsibility_overshoot_carbon_undershoot"] = {
+    window.chart_data["climate_overshoot_carbon_undershoot"] = {
         data: {},
         countries: {}
     };
-    importFilesAndShow_responsibility_overshoot_carbon_undershoot();
+    importFilesAndShow_climate_overshoot_carbon_undershoot();
 });
 
 //-------------------------------------- importFilesAndShow
-function importFilesAndShow_responsibility_overshoot_carbon_undershoot() {
-    loadCsv(`${window.charts_path}/${"responsibility_overshoot_carbon_undershoot"}/${"responsibility_overshoot_carbon_undershoot"}.csv`, function (err, overshot_data) {
+function importFilesAndShow_climate_overshoot_carbon_undershoot() {
+    loadCsv(`${window.charts_path}/${"climate_overshoot_carbon_undershoot"}/${"climate_overshoot_carbon_undershoot"}.csv`, function (err, overshot_data) {
         if (err === null) {
-            loadCsv(`${window.charts_path}/${"responsibility_overshoot_carbon_undershoot"}/country.csv`, function (err, countries) {
+            loadCsv(`${window.charts_path}/${"climate_overshoot_carbon_undershoot"}/country.csv`, function (err, countries) {
                 if (err === null) {
-                    window.chart_data["responsibility_overshoot_carbon_undershoot"].data = fromCSV(overshot_data, ['string'].concat(Array(8).fill('number')));
-                    window.chart_data["responsibility_overshoot_carbon_undershoot"].countries = CSVLookup(countries, '%');
+                    window.chart_data["climate_overshoot_carbon_undershoot"].data = fromCSV(overshot_data, ['string'].concat(Array(8).fill('number')));
+                    window.chart_data["climate_overshoot_carbon_undershoot"].countries = CSVLookup(countries, '%');
 
                     // Render Chart Interface
                     createChartInterface({
-                        chartID: 'responsibility_overshoot_carbon_undershoot',
-                        renderFunc: render_responsibility_overshoot_carbon_undershoot,
+                        chartID: 'climate_overshoot_carbon_undershoot',
+                        renderFunc: render_climate_overshoot_carbon_undershoot,
                     })
                 } else {
                     console.error("failed to load data ", err)
@@ -36,9 +36,9 @@ function importFilesAndShow_responsibility_overshoot_carbon_undershoot() {
 }
 
 //--------------------------------------- showChart
-function render_responsibility_overshoot_carbon_undershoot(canvasID) {
+function render_climate_overshoot_carbon_undershoot(canvasID) {
 
-    var chartID = "responsibility_overshoot_carbon_undershoot"
+    var chartID = "climate_overshoot_carbon_undershoot"
     var options = {
         chart: {
             type: 'bar',
@@ -138,7 +138,7 @@ function render_responsibility_overshoot_carbon_undershoot(canvasID) {
         legend: { show: false},
     }
 
-    let sorted = window.chart_data["responsibility_overshoot_carbon_undershoot"].data.sort((a, b) => b['overshoot_350'] - a['overshoot_350']);
+    let sorted = window.chart_data["climate_overshoot_carbon_undershoot"].data.sort((a, b) => b['overshoot_350'] - a['overshoot_350']);
     sorted = sorted.filter(x => x.iso != 'GUY'); // EXCLUDING Guyana
     let countries = [];
     let series = [
@@ -155,7 +155,7 @@ function render_responsibility_overshoot_carbon_undershoot(canvasID) {
             series[1].data.push(overshoot);
         }
 
-        countries.push(window.chart_data["responsibility_overshoot_carbon_undershoot"].countries[row['iso']]);
+        countries.push(window.chart_data["climate_overshoot_carbon_undershoot"].countries[row['iso']]);
     });
     options.xaxis.categories = countries;
     options['chart'].id = ('Overshoot of 350ppm Carbon Budget').replace(/ /g, "");

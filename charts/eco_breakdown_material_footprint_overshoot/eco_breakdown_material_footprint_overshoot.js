@@ -3,7 +3,7 @@ jQuery(function () {
     checkObjectKeysFunc();
     window.chart_data["eco_breakdown_material_footprint_overshoot"] = {
         data: {},
-        countries:{}
+        countries: {}
     };
     importFilesAndShow_eco_breakdown_material_footprint_overshoot();
 });
@@ -15,7 +15,7 @@ function importFilesAndShow_eco_breakdown_material_footprint_overshoot() {
             loadCsv(`${window.charts_path}/${"eco_breakdown_material_footprint_overshoot"}/country.csv`, function (err, countries) {
                 if (err === null) {
                     window.chart_data["eco_breakdown_material_footprint_overshoot"].data = fromCSV(overshot_data, ['string'].concat(Array(8).fill('number')));
-                    window.chart_data["eco_breakdown_material_footprint_overshoot"].countries = CSVLookup(countries,'%');
+                    window.chart_data["eco_breakdown_material_footprint_overshoot"].countries = CSVLookup(countries, '%');
 
                     // Render Chart Interface
                     createChartInterface({
@@ -82,17 +82,17 @@ function render_eco_breakdown_material_footprint_overshoot(canvasID) {
             }
         },
         dataLabels: {
-            enabled: false
+            enabled: false,
         },
         yaxis: {
             //max: 3.8e11,
-            labels: { align: 'left'}
+            labels: { align: 'left' }
         },
         xaxis: {
             tickAmount: 1,
             position: 'top',
             axisBorder: { show: false },
-            labels: { formatter: (val, index) => formatYAxisLabel(val, index, 0)+' Gt'},
+            labels: { formatter: (val, index) => formatYAxisLabel(val, index, 0) + ' Gt' },
             axisTicks: { height: 0 }
         },
         colors: ['#775DD0', '#73c71c'],
@@ -115,7 +115,7 @@ function render_eco_breakdown_material_footprint_overshoot(canvasID) {
     //sorted = sorted.filter(x => x.iso != 'GUY'); // EXCLUDING Guyana
     let countries = [];
     let series = [
-        { name: 'Gigatonnes (Gt)', data:[]},
+        { name: 'Gigatonnes (Gt)', data: [] },
     ];
     sorted.forEach(row => {
         let overshoot = +row['Cumulative-MF-overshoot'];

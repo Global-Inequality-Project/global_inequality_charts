@@ -1,24 +1,24 @@
 
 // Wait for window to be ready
 jQuery(function () {
-  prepare_responsibility_climate_vulnerability_world_map();
+  prepare_climate_world_map();
 });
 
 
 // Import data and render chart interface
 // Make sure to use the chart ID to creat unique function names
-function prepare_responsibility_climate_vulnerability_world_map() {
-  loadCsv(`${window.charts_path}/responsibility_climate_vulnerability_world_map/responsibility_climate_vulnerability_world_map.csv`,
+function prepare_climate_world_map() {
+  loadCsv(`${window.charts_path}/climate_world_map/co2_treemap.csv`,
     function (error, treemap_data) {
       if (error === null) {
-        window.chart_data['responsibility_climate_vulnerability_world_map'] = [{
-          name: "vulnerability",
+        window.chart_data['climate_world_map'] = [{
+          name: "co2",
           data: {}
         }]
-        window.chart_data['responsibility_climate_vulnerability_world_map'][0].data = fromCSV(treemap_data, ['string', 'number', 'number']);
+        window.chart_data['climate_world_map'][0].data = fromCSV(treemap_data, ['string', 'number', 'number']);
         createChartInterface({
-          chartID: "responsibility_climate_vulnerability_world_map",
-          renderFunc: render_responsibility_climate_vulnerability_world_map,
+          chartID: "climate_world_map",
+          renderFunc: render_climate_world_map,
         })
       } else {
         console.error(error)
@@ -30,32 +30,30 @@ function prepare_responsibility_climate_vulnerability_world_map() {
 
 // Render chart onto canvas
 // Make sure to use the chart ID to creat unique function names
-function render_responsibility_climate_vulnerability_world_map(canvasID, modal) {
+function render_climate_world_map(canvasID, modal) {
   let values = {};
-  window.chart_data['responsibility_climate_vulnerability_world_map'][0].data.forEach(element => {
+  window.chart_data['climate_world_map'][0].data.forEach(element => {
     const countryCode = convertCountryAlphas3To2(element.iso)
     values[countryCode] = {
-      vulnerability: element.vulnerability,
+      co2: (element.co2 / 1000000000).toFixed(2),
+      overshoot: (element.overshoot / 1000000000).toFixed(2),
+      global_overshoot: element.global_overshoot,
       quantile: element.quantile
     }
-    if (element.quantile >= 8) {
-      values[countryCode]["color"] = "#81001f";
-    } else if (element.quantile == 7) {
-      values[countryCode]["color"] = "#c8001a";
-    } else if (element.quantile == 6) {
-      values[countryCode]["color"] = "#f60100";
+    if (element.overshoot == 0) {
+      values[countryCode]["color"] = "#abdda4";
     } else if (element.quantile == 5) {
-      values[countryCode]["color"] = "#ff3102";
+      values[countryCode]["color"] = "#950000";
     } else if (element.quantile == 4) {
-      values[countryCode]["color"] = "#ff7916";
+      values[countryCode]["color"] = "#d30000";
     } else if (element.quantile == 3) {
-      values[countryCode]["color"] = "#ffa427";
+      values[countryCode]["color"] = "#ea503b";
     } else if (element.quantile == 2) {
-      values[countryCode]["color"] = "#ffd358";
+      values[countryCode]["color"] = "#f68648";
     } else if (element.quantile == 1) {
-      values[countryCode]["color"] = "#ffe98b";
+      values[countryCode]["color"] = "#f6bc77";
     } else if (element.quantile == 0) {
-      values[countryCode]["color"] = "#ffffbf";
+      values[countryCode]["color"] = "#f5d993";
     }
   });
   setTimeout(function () {
@@ -66,9 +64,20 @@ function render_responsibility_climate_vulnerability_world_map(canvasID, modal) 
         thousandSeparator: ".",
         data: {
 
-          vulnerability: {
-            name: 'Vulnerability Index',
-            format: '{0}',
+          co2: {
+            name: 'CO2',
+            format: '{0} B tonnes',
+            thousandSeparator: ',',
+            // thresholdMax: 50000,
+            // thresholdMin: 1000
+          },
+          overshoot: {
+            name: 'Overshoot',
+            format: '{0} B tonnes'
+          },
+          global_overshoot: {
+            name: 'Share of global overshoot',
+            format: '{0} %'
           },
           quantile: {
             name: 'quantile',
@@ -80,7 +89,8 @@ function render_responsibility_climate_vulnerability_world_map(canvasID, modal) 
       },
 
     });
-    jQuery(canvasID).append('<div id="levels"><table><tbody><tr><td><span class="level_rect" style="background-color: #81001f;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">More</span></td></tr><tr><td><span class="level_rect" style="background-color: #c8001a;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td></td></tr><tr><td><span class="level_rect" style="background-color: #f60100;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td></td></tr><tr><td><span class="level_rect" style="background-color: #ff3102;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td></td></tr><tr><td><span class="level_rect" style="background-color: #ff7916;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td></td></tr><tr><td><span class="level_rect" style="background-color: #ffa427;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td></td></tr><tr><td><span class="level_rect" style="background-color: #ffd358;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td></td></tr><tr><td><span class="level_rect" style="background-color: #ffe98b;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td></td></tr><tr><td><span class="level_rect" style="background-color: #ffffbf;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">Less</span></td></tr><tr><td><span class="level_rect" style="background-color: #e6e6e6;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">No data</span></td></tr></tbody></table></div>');
+    jQuery(canvasID).append('<div id="levels"><table><tbody><tr><td><span class="level_rect" style="background-color: #950000;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">250B+</span></td></tr><tr><td><span class="level_rect" style="background-color: #d30000;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">50B - 250B</span></td></tr><tr><td><span class="level_rect" style="background-color: #ea503b;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">25B - 50B</span></td></tr><tr><td><span class="level_rect" style="background-color: #f68648;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">5B - 25B</span></td></tr><tr><td><span class="level_rect" style="background-color: #f6bc77;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">1B - 5B</span></td></tr><tr><td><span class="level_rect" style="background-color: #f5d993;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">0 - 1B</span></td></tr><tr><td><span class="level_rect" style="background-color: #abdda4;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">No Overshoot</span></td></tr><tr><td><span class="level_rect" style="background-color: #e6e6e6;">&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td><span class="level_name">No data</span></td></tr></tbody></table></div>')
+
   }, 400)
 
 }
