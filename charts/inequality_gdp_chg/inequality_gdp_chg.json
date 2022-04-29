@@ -4,7 +4,7 @@
     "description": "Constant 2018 USD",
     "author":"Huzaifa Zoomkawala",
     "template":"main",
-    "category":"Global Inequality",
+    "category":"2. Global Inequality",
     "schema_version":5,
     "libraries":{
         "apexcharts":true,

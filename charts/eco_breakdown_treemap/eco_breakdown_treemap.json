@@ -1,0 +1,11 @@
+{
+    "id": "eco_breakdown_treemap",
+    "title": "Responsibility for Ecological Breakdown Treemap",
+    "description": "",
+    "author": "Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"8. Responsibility for Ecological Breakdown",
+    "schema_version": 5,
+    "libraries": {
+    }
+}
