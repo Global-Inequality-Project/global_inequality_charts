@@ -39,11 +39,27 @@ function importFilesAndShow_responsibility_overshoot_carbon() {
 function render_responsibility_overshoot_carbon(canvasID) {
 
     var chartID = "responsibility_overshoot_carbon"
+    window.chart_data[chartID].data.forEach(function (row) {
+        row['overshoot_350'] *= row['overshoot_350'] < 0 ? 0 : 1;
+    });
+    let sorted = window.chart_data[chartID].data.sort((a, b) => b['overshoot_350'] - a['overshoot_350']);
+    sorted = sorted.filter(x => x.iso != 'GUY'); // EXCLUDING Guyana
+    let countries = [];
+    let series = [
+        { name: 'tonnes of CO2', data: [] },
+    ];
+    sorted.forEach(row => {
+        let overshoot = +row['overshoot_350'];
+        if (overshoot > 0) {
+            series[0].data.push(overshoot);
+            countries.push(window.chart_data[chartID].countries[row['iso']]);
+        }
+    });
     var options = {
         chart: {
             type: 'bar',
             stacked: true,
-            height: '3500',
+            height: series[0].data.length * 25,
             fontFamily: 'Open Sans',
             toolbar: {
                 show: false,
@@ -98,7 +114,8 @@ function render_responsibility_overshoot_carbon(canvasID) {
             position: 'top',
             axisBorder: { show: false },
             labels: { formatter: (val, index) => formatYAxisLabel(val, index, 0) },
-            axisTicks: { height: 0 }
+            axisTicks: { height: 0 },
+            categories: countries
         },
         colors: ['#775DD0', '#73c71c'],
         grid: {
@@ -113,29 +130,12 @@ function render_responsibility_overshoot_carbon(canvasID) {
             followCursor: true,
             shared: false,
         },
+        series: series
     }
 
-    window.chart_data["responsibility_overshoot_carbon"].data.forEach(function (row) {
-        row['overshoot_350'] *= row['overshoot_350'] < 0 ? 0 : 1;
-    });
-    let sorted = window.chart_data["responsibility_overshoot_carbon"].data.sort((a, b) => b['overshoot_350'] - a['overshoot_350']);
-    sorted = sorted.filter(x => x.iso != 'GUY'); // EXCLUDING Guyana
-    let countries = [];
-    let series = [
-        { name: 'tonnes of CO2', data: [] },
-    ];
-    sorted.forEach(row => {
-        let overshoot = +row['overshoot_350'];
-        if (overshoot > 0) {
-            series[0].data.push(overshoot);
-            countries.push(window.chart_data["responsibility_overshoot_carbon"].countries[row['iso']]);
-        }
-    });
-    console.log(series, sorted)
 
-    options.xaxis.categories = countries;
+
     options['chart'].id = ('Overshoot of 350ppm Carbon Budget').replace(/ /g, "");
-    options.series = series;
     return createApexChart(canvasID, options);
 
 }
