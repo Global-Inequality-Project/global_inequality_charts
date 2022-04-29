@@ -2,16 +2,16 @@
 
 /* Adjusting chart tools */
 
-#chart-responsibility_climate_world .chart-template-main {
+#chart-climate_world_treemap .chart-template-main {
   width: 100%;
 }
-#chart-responsibility_climate_world #treemap_svg  {
+#chart-climate_world_treemap #treemap_svg  {
   max-width: 600px;
   max-height: 450px;
 }
 
 @media all and (max-width: 460px)  {
-  #chart-responsibility_climate_world #treemap_svg text{
+  #chart-climate_world_treemap #treemap_svg text{
     font-size: 9px!important;
   }
 }

@@ -134,7 +134,6 @@ class GLICH_Charts extends ET_Builder_Module
 			if (isset($chart_json["libraries"]["chartjs"]) && $chart_json["libraries"]["chartjs"]) {
 				$chartjs_path = '../../../node_modules/chart.js/dist/chart.min.js';
 				wp_enqueue_script('chartjs',  plugins_url($chartjs_path, __FILE__));
-				// wp_enqueue_script('chartjs',  "https://cdn.jsdelivr.net/npm/chart.js");
 			}
 			if (isset($chart_json["libraries"]["chartjs-sankey"]) && $chart_json["libraries"]["chartjs-sankey"]) {
 				$chartjs_sankey_path = '../../../node_modules/chartjs-chart-sankey/dist/chartjs-chart-sankey.min.js';

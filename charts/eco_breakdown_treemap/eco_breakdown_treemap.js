@@ -30,7 +30,7 @@ function render_eco_breakdown_treemap(canvasID, modal) {
     dataLabels: {
       enabled: true,
       style: {
-        fontSize: '12px',
+        fontSize: '14px',
       },
       formatter: function(text, op) {
         return [text, op.value+"%"]

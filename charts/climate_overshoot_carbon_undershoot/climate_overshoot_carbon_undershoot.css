@@ -1,8 +1,8 @@
-#chart-responsibility_overshoot_carbon_undershoot .chart-box-outer {
+#chart-climate_overshoot_carbon_undershoot .chart-box-outer {
   margin-top: -15px;
   padding-top: calc(max(66%, 400px));  /* Custom graph height */
 }
-#chart-responsibility_overshoot_carbon_undershoot .chart-box-inner{
+#chart-climate_overshoot_carbon_undershoot .chart-box-inner{
   overflow: scroll;
 
 }
