@@ -3,7 +3,7 @@ jQuery(function () {
     checkObjectKeysFunc();
     window.chart_data["responsibility_overshoot_carbon"] = {
         data: {},
-        countries:{}
+        countries: {}
     };
     importFilesAndShow_responsibility_overshoot_carbon();
 });
@@ -15,7 +15,7 @@ function importFilesAndShow_responsibility_overshoot_carbon() {
             loadCsv(`${window.charts_path}/${"responsibility_overshoot_carbon"}/country.csv`, function (err, countries) {
                 if (err === null) {
                     window.chart_data["responsibility_overshoot_carbon"].data = fromCSV(overshot_data, ['string'].concat(Array(8).fill('number')));
-                    window.chart_data["responsibility_overshoot_carbon"].countries = CSVLookup(countries,'%');
+                    window.chart_data["responsibility_overshoot_carbon"].countries = CSVLookup(countries, '%');
 
                     // Render Chart Interface
                     createChartInterface({
@@ -82,17 +82,22 @@ function render_responsibility_overshoot_carbon(canvasID) {
             }
         },
         dataLabels: {
-            enabled: false
+            enabled: false,
         },
         yaxis: {
             max: 3.8e11,
-            labels: { align: 'left'}
+            labels: {
+                align: 'left',
+                style: {
+                    fontSize: '12px',
+                },
+            }
         },
         xaxis: {
             tickAmount: 1,
             position: 'top',
             axisBorder: { show: false },
-            labels: { formatter: (val, index) => formatYAxisLabel(val, index, 0)},
+            labels: { formatter: (val, index) => formatYAxisLabel(val, index, 0) },
             axisTicks: { height: 0 }
         },
         colors: ['#775DD0', '#73c71c'],
@@ -117,14 +122,14 @@ function render_responsibility_overshoot_carbon(canvasID) {
     sorted = sorted.filter(x => x.iso != 'GUY'); // EXCLUDING Guyana
     let countries = [];
     let series = [
-        { name: 'tonnes of CO2', data:[]},
+        { name: 'tonnes of CO2', data: [] },
     ];
     sorted.forEach(row => {
         let overshoot = +row['overshoot_350'];
         if (overshoot > 0) {
             series[0].data.push(overshoot);
             countries.push(window.chart_data["responsibility_overshoot_carbon"].countries[row['iso']]);
-        } 
+        }
     });
     console.log(series, sorted)
 

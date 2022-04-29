@@ -82,11 +82,16 @@ function render_responsibility_undershoot_carbon(canvasID) {
             }
         },
         dataLabels: {
-            enabled: false
+            enabled: false,
         },
         yaxis: {
             max: 0.9e11,
-            // labels: { align: 'left' }
+            labels: {
+                align: 'left',
+                style: {
+                    fontSize: '12px',
+                },
+            }
         },
         xaxis: {
             tickAmount: 1,
