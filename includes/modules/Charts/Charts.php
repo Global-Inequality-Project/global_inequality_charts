@@ -53,12 +53,11 @@ class GLICH_Charts extends ET_Builder_Module
 					$options[$category][$chart_id] =  esc_html__($chart_json["title"], 'dvmm-divi-mad-menu');
 				}
 			}
-			
 		}
 		// sort charts by category and Name
-		foreach ($options as $option =>$value){
+		foreach ($options as $option => $value) {
 			asort($value);
-			$options[$option] = $value; 
+			$options[$option] = $value;
 		}
 		ksort($options);
 		$fields = array(
@@ -74,8 +73,9 @@ class GLICH_Charts extends ET_Builder_Module
 
 		return $fields;
 	}
-	
-	public function get_advanced_fields_config() {
+
+	public function get_advanced_fields_config()
+	{
 		return array(
 			'background'     => false,
 			'borders'        => false,
@@ -170,6 +170,12 @@ class GLICH_Charts extends ET_Builder_Module
 			$chart_css_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $chart_css_path));
 			wp_enqueue_style('chart_css_' . $id, plugins_url($chart_css_path, __FILE__), array(), $chart_css_ver);
 		}
+		// load the global chart styles
+		$glich_css_path = 'style.css';
+		if (is_file(plugin_dir_path(__FILE__) . $glich_css_path )) {
+			$glich_css_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $glich_css_path));
+			wp_enqueue_style('chart_css_' . $id, plugins_url($glich_css_path, __FILE__), array(), $chart_css_ver);
+		}
 	}
 }
 
@@ -220,9 +226,8 @@ if (!function_exists('filter_presenters')) {
 	function filter_presenters($filter)
 
 	{
-		if (!is_singular() || !array_key_exists("chart", $_GET)){
+		if (!is_singular() || !array_key_exists("chart", $_GET)) {
 			return $filter;
-
 		} //if it is not a post or a page and if it is not a chart
 
 		$id = $_GET["chart"];
