@@ -1,0 +1,13 @@
+{
+    "id": "aid_in_reverse_map",
+    "title": "Drain from the global South map",
+    "description": "",
+    "author": "Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"9. Drain from the global South (Illicit financial flows)",
+    "schema_version": 5,
+    "libraries": {
+        "svgmap":true,
+        "mapcharts":true
+    }
+}
