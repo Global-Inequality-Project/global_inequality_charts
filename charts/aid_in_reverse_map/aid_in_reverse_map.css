@@ -1,0 +1,50 @@
+/* Please use always the chart id as primary selector to not interfer with other parts */
+
+/* Adjusting chart tools */
+
+.svgMap-map-wrapper {
+  background: transparent;
+}
+#chart-modal-content-aid_in_reverse_map{
+  max-height: 100%;
+}
+#chart-modal-content-aid_in_reverse_map
+{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+#chart-modal-content-aid_in_reverse_map .svgMap-container, 
+#chart-modal-content-aid_in_reverse_map .svgMap-wrapper, 
+#chart-modal-content-aid_in_reverse_map .svgMap-map-container, 
+#chart-modal-content-aid_in_reverse_map .svgMap-map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-top: 0%;
+}
+
+.svgMap-map-container
+{
+  position: initial;
+}
+
+.svgMap-tooltip .svgMap-tooltip-content table tbody tr:last-child{
+  display:none; 
+}
+#chart-modal-content-aid_in_reverse_map table tbody,
+#chart-aid_in_reverse_map table tbody{
+  display: flex;
+  margin-top: 20px;
+}
+#chart-modal-content-aid_in_reverse_map table tbody tr,
+#chart-aid_in_reverse_map table tbody tr{
+  margin-right: 3px;
+}
+
+.svgMap-tooltip{
+  z-index: 999999999;
+}

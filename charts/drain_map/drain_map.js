@@ -49,7 +49,7 @@ function prepare_drain_map() {
 function render_drain_map(canvasID, modal) {
   let values = {};
   window.chart_data['drain_map'].data[0].data.forEach(element => {
-    const countryCode = drain_map_convertCountryAlphas3To2(element.iso)
+    const countryCode = map_convertCountryAlphas3To2(element.iso)
     if (countryCode) {
       if (!values[countryCode]) values[countryCode] = {}
       values[countryCode].loss = element.loss
@@ -62,7 +62,7 @@ function render_drain_map(canvasID, modal) {
 
   });
   window.chart_data['drain_map'].data[1].data.forEach(element => {
-    const countryCode = drain_map_convertCountryAlphas3To2(element.iso)
+    const countryCode = map_convertCountryAlphas3To2(element.iso)
     if (countryCode) {
       if (!values[countryCode]) values[countryCode] = {}
       values[countryCode].gain = element.gain
@@ -147,11 +147,4 @@ function render_drain_map(canvasID, modal) {
 
   }, 400)
 
-}
-
-
-function drain_map_convertCountryAlphas3To2($code = '') {
-
-  $out = window.chart_data["drain_map"].countries[$code];
-  return $out;
 }

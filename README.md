@@ -91,6 +91,7 @@ The following entries for libraries are currently supported. They are optional a
 - `chartjs-chart-sankey` (v0.9.0)
 - `d3js` (v4.13)
 - `svgmap` (v2.7.2)
+- `mapchart` * (used in combination with svgmap)
 
 The following templates are currently supported:
 
