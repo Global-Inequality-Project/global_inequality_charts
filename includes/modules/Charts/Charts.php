@@ -147,7 +147,7 @@ class GLICH_Charts extends ET_Builder_Module
 				wp_enqueue_script('svgmap_js',  plugins_url($svgmap_path, __FILE__));
 				wp_enqueue_style('svgmap_css',  plugins_url($svgmap_css_path, __FILE__));
 			}
-			// load the chart utils js, always required for schema version < 2
+			// load the chart utils js
 			if (
 				isset($chart_json["libraries"]["chartutils"])
 				&& $chart_json["libraries"]["chartutils"]
@@ -155,6 +155,15 @@ class GLICH_Charts extends ET_Builder_Module
 				$chartutils_js_path = '../../../assets/js/chartutils.js';
 				$chartutils_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $chartutils_js_path));
 				wp_enqueue_script('chartutils_js', plugins_url($chartutils_js_path, __FILE__), array(), $chartutils_js_ver);
+			}
+			// load the chart utils js, always required for schema version < 2
+			if (
+				isset($chart_json["libraries"]["mapcharts"])
+				&& $chart_json["libraries"]["mapcharts"]
+			) {
+				$mapcharts_js_path = '../../../assets/js/mapcharts.js';
+				$mapcharts_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $mapcharts_js_path));
+				wp_enqueue_script('mapcharts_js', plugins_url($mapcharts_js_path, __FILE__), array(), $mapcharts_js_ver);
 			}
 			$template = "main";
 			if (isset($chart_json["template"]) &&  $chart_json["template"] != "") {
@@ -172,7 +181,7 @@ class GLICH_Charts extends ET_Builder_Module
 		}
 		// load the global chart styles
 		$glich_css_path = 'style.css';
-		if (is_file(plugin_dir_path(__FILE__) . $glich_css_path )) {
+		if (is_file(plugin_dir_path(__FILE__) . $glich_css_path)) {
 			$glich_css_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $glich_css_path));
 			wp_enqueue_style('chart_css_' . $id, plugins_url($glich_css_path, __FILE__), array(), $chart_css_ver);
 		}

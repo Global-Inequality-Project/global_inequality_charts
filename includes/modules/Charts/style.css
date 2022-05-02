@@ -14,7 +14,6 @@
 /* Mobile view */
 
 @media all and (max-width: 900px) {
-
   .chart-template-main {
     display: block;
   }
@@ -89,7 +88,7 @@
   background-color: #e2e2e2;
 }
 
-.chart-btn[value*="ON"] {
+.chart-btn[value*='ON'] {
   font-weight: bold;
   background-color: #e2e2e2;
   border-bottom: 3px white solid;
@@ -102,19 +101,18 @@
 }
 
 @media all and (max-width: 900px) {
-  
   .chart-title-bars {
-  display: block;
+    display: block;
   }
-  
+
   .chart-all-btns {
-  display: none;
+    display: none;
   }
-  
+
   .chart-expand-btn {
     display: none;
   }
-  
+
   .chart-btn {
     padding: 12px 17px;
   }
@@ -124,7 +122,6 @@
     border: none !important;
     margin-top: 0px !important;
   }
-
 }
 
 /* Chart Sub Buttons */
@@ -206,9 +203,9 @@
 }
 
 .downloadImage .global_inequality_logo {
-    overflow: hidden;
-    width: 150;
-    float: right;
+  overflow: hidden;
+  width: 150;
+  float: right;
 }
 
 .chart-sources-popover {
@@ -237,25 +234,44 @@
   z-index: 3;
 }
 
-.chart-sources-popover-title{
+.chart-sources-popover-title {
   font-size: 14px;
   font-family: 'Open Sans';
   margin: 3px 0px;
   color: #646464;
 }
 
-.glich-backend{
+.glich-backend {
   background-color: #f7f7f7;
   padding: 15px;
   margin-bottom: 15px;
 }
 
-#chart-modal-box{
+#chart-modal-box {
   overflow: scroll;
 }
 
 /* border for map charts */
-.svgMap-map-image{
+.svgMap-map-image {
   border: 1px solid #ddd;
   border-radius: 3px;
+}
+.map-legend {
+ display: flex;
+ justify-content: center;
+ width: 100%;
+}
+.map-legend table tbody tr {
+  display: flex;
+  flex-direction: column;
+}
+.map-legend .level_name {
+  font-size: small;
+  padding: 10px;
+}
+.map-legend .level_rect {
+  background-color: #950000;
+  width: 100%;
+  display: block;
+  height: 11px;
 }
