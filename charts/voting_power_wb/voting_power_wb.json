@@ -1,0 +1,13 @@
+{
+    "id": "voting_power_wb",
+    "title": "Voting Power WorldBank",
+    "description": "",
+    "author": "Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"10. Voting power in global economic governance",
+    "schema_version": 5,
+    "libraries": {
+        "apexcharts":true,
+        "chartutils": true
+    }
+}
