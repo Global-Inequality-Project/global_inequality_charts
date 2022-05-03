@@ -1,7 +1,6 @@
 function createTemplate_main({ chartID, chartTitle, chartDescription, chartSources, customTools }) {
-
 var tmpl =`
-<div class="chart-interface chart-template-main">
+<div class="chart-interface chart-template-main" id="chart-wrapper-${chartID}">
 
   <div class="chart-col-left">
 

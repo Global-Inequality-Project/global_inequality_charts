@@ -7,6 +7,7 @@
     "category":"4. Drain from the Global South (Unequal Exchange)",
     "schema_version": 5,
     "libraries": {
-        "svgmap":true
+        "svgmap":true,
+        "mapcharts":true
     }
 }

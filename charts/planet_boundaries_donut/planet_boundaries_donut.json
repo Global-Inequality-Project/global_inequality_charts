@@ -1,0 +1,12 @@
+{
+    "id": "planet_boundaries_donut",
+    "title": "Planetary Boundaries donut",
+    "description": "This is the chart description",
+    "author": "Huzaifa",
+    "template":"main",
+    "category":"13. Planetary Boundaries",
+    "schema_version": 5,
+    "libraries": {
+        "d3js": true
+    }
+}

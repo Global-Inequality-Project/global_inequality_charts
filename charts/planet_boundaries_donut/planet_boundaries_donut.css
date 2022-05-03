@@ -1,0 +1,66 @@
+/* Please use always the chart id as primary selector to not interfer with other parts */
+
+/* Adjusting chart tools */
+
+#chart-planet_boundaries_donut h1 {
+  /*color: darkblue;*/
+}
+
+/* Adjusting the chart container */
+
+#chart-planet_boundaries_donut .chart-box-outer {
+  margin-top: -15px; /* Custom margins */
+  /* padding-top: calc(max(66%, 300px)); */ /* Custom graph height */
+}
+
+/* Adjusting the modal container */
+
+#chart-modal-content-planet_boundaries_donut {
+  /* Create scrollable modal */
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  padding-right: 20px;
+}
+#chart-canvas-planet_boundaries_donut {
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+}
+#chart-modal-content-planet_boundaries_donut-charts-modal,
+#chart-canvas-planet_boundaries_donut-charts {
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  justify-content: center;
+}
+#chart-modal-content-planet_boundaries_donut .vertical-doughnut,
+#chart-canvas-planet_boundaries_donut .vertical-doughnut {
+  padding-top: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.vertical-control {
+  padding-top: 1vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+}
+.vertical-control input {
+  -webkit-appearance: auto;
+}
+.donut {
+  max-height: 450px;
+  max-width: 450px;
+  height: 100%;
+  width: 100%;
+}
