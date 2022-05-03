@@ -1,11 +1,11 @@
 #chart-climate_overshoot_carbon_undershoot .chart-box-outer {
-  margin-top: -15px;
-  padding-top: calc(max(66%, 400px));  /* Custom graph height */
+  padding-top: calc(max(66%, 400px)); /* Custom graph height */
+  border: 1px solid #bfbfbf;
+  border-radius: 3px;
 }
-#chart-climate_overshoot_carbon_undershoot .chart-box-inner{
+#chart-climate_overshoot_carbon_undershoot .chart-box-inner {
   overflow: scroll;
-
 }
-#chart-modal-box{
+#chart-modal-box {
   overflow: scroll;
 }

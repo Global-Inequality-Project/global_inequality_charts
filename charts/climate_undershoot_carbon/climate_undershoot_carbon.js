@@ -102,6 +102,7 @@ function render_climate_undershoot_carbon(canvasID) {
             max: 0.9e11,
             labels: {
                 align: 'left',
+                offsetY: 2,
                 style: {
                     fontSize: '12px',
                 },

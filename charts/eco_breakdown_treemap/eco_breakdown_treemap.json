@@ -7,5 +7,7 @@
     "category":"8. Responsibility for Ecological Breakdown",
     "schema_version": 5,
     "libraries": {
+        "apexcharts":true,
+        "chartutils": true
     }
 }

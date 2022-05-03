@@ -99,7 +99,10 @@ function render_eco_breakdown_material_footprint_overshoot(canvasID) {
         },
         yaxis: {
             //max: 3.8e11,
-            labels: { align: 'left' }
+            labels: {
+                align: 'left',
+                offsetY: 2
+            }
         },
         xaxis: {
             tickAmount: 1,
