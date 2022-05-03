@@ -16,6 +16,5 @@
   }
 }
 #chart-climate_world_treemap .chart-box-outer {
-  margin-top: -15px; /* Custom margins */
-  /* padding-top: calc(max(66%, 300px)); */ /* Custom graph height */
+  margin-top: -20px; /* Custom margins */
 }
