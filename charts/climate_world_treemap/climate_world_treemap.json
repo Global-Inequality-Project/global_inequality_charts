@@ -7,5 +7,7 @@
     "category":"3. Responsibility for Climate Breakdown",
     "schema_version": 5,
     "libraries": {
+        "apexcharts":true,
+        "chartutils": true
     }
 }
