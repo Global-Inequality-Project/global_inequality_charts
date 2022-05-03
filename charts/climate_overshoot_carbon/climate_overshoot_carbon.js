@@ -103,6 +103,7 @@ function render_climate_overshoot_carbon(canvasID) {
         yaxis: {
             max: 3.8e11,
             labels: {
+                offsetY: 2,
                 align: 'left',
                 style: {
                     fontSize: '12px',
