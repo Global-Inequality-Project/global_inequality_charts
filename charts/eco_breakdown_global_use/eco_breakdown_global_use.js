@@ -83,6 +83,22 @@ function render_eco_breakdown_global_use(canvasID) {
         legend: {
             show: false
         },
+        annotations: {
+            yaxis: [
+                {
+                y: 50,
+                borderColor: '#00E396',
+                label: {
+                    borderColor: '#00E396',
+                    style: {
+                        color: '#fff',
+                        background: '#00E396'
+                    },
+                        text: 'Sustainability threshold'
+                }
+                }
+            ]
+        }
 	}
 
 	let data = window.chart_data["eco_breakdown_global_use"].data;
