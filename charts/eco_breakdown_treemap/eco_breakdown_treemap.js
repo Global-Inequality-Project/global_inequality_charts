@@ -21,6 +21,7 @@ function render_eco_breakdown_treemap(canvasID, modal) {
   var options = {
     chart: {
       type: 'treemap',
+      height:"100%",
       fontFamily: 'Open Sans',
       toolbar: {
         show: false,

@@ -22,6 +22,7 @@ function render_climate_world_treemap(canvasID, modal) {
     chart: {
       type: 'treemap',
       fontFamily: 'Open Sans',
+      height:"100%",
       toolbar: {
         show: false,
         tools: { zoom: false }

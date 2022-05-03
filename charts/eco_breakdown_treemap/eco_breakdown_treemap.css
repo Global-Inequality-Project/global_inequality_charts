@@ -5,17 +5,21 @@
 #chart-eco_breakdown_treemap .chart-template-main {
   width: 100%;
 }
-#chart-eco_breakdown_treemap #treemap_svg  {
+#chart-eco_breakdown_treemap #treemap_svg {
   max-width: 600px;
   max-height: 450px;
 }
 
-@media all and (max-width: 460px)  {
-  #chart-eco_breakdown_treemap #treemap_svg text{
-    font-size: 9px!important;
+@media all and (max-width: 460px) {
+  #chart-eco_breakdown_treemap #treemap_svg text {
+    font-size: 9px !important;
   }
 }
 
 #chart-eco_breakdown_treemap .chart-box-outer {
   margin-top: -20px; /* Custom margins */
+}
+#chart-modal-content-eco_breakdown_treemap {
+  max-height: 100%;
+  overflow: hidden;
 }
