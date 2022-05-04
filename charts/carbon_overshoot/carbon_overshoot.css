@@ -1,0 +1,11 @@
+#chart-carbon_overshoot .chart-box-outer {
+  padding-top: calc(max(52%, 400px));  /* Custom graph height */
+  border: 1px solid #bfbfbf;
+  border-radius: 3px;
+}
+#chart-carbon_overshoot .chart-box-inner{
+  overflow: scroll;
+}
+#chart-modal-box{
+  overflow: scroll;
+}

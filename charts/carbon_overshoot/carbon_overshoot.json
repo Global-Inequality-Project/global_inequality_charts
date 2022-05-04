@@ -1,0 +1,13 @@
+{
+    "id":"carbon_overshoot",
+    "title": "Overshoot of Budget",
+    "description": "Absolute Overshoot of Budget (Tonnes)",
+    "author":"Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"5. Carbon Budget Fair Shares",
+    "schema_version":5,
+    "libraries":{
+        "apexcharts":true,
+        "chartutils": true
+    }
+}

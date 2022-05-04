@@ -1,0 +1,13 @@
+{
+    "id":"carbon_budget",
+    "title": " % of Carbon Budget Used",
+    "description": "% Budget Used",
+    "author":"Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"5. Carbon Budget Fair Shares",
+    "schema_version":5,
+    "libraries":{
+        "apexcharts":true,
+        "chartutils": true
+    }
+}
