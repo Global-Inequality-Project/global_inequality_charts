@@ -1,0 +1,13 @@
+{
+    "id":"carbon_inequality",
+    "title": "CO2 Emissions per capita (2019)",
+    "description": "Tonnes (CO2 equivalent) per Capita (TpC)",
+    "author":"Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"12. Carbon Inequality",
+    "schema_version":5,
+    "libraries":{
+        "apexcharts":true,
+        "chartutils": true
+    }
+}
