@@ -87,14 +87,16 @@ function render_eco_breakdown_material_footprint_income_group(canvasID) {
             yaxis: [
                 {
                 y: 7.7,
-                borderColor: '#00E396',
+                borderColor: '#9A0000',
                 label: {
-                    borderColor: '#00E396',
+                    text: 'Sustainability threshold (7.7 TpC)',
+                    position: 'left',
+                    textAnchor: 'start',
+                    borderColor: '#9A0000',
                     style: {
                         color: '#fff',
-                        background: '#00E396'
+                        background: '#9A0000'
                     },
-                        text: 'Sustainability threshold'
                 }
                 }
             ]
