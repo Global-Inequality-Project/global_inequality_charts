@@ -119,7 +119,7 @@ function render_climate_world_map(canvasID, modal) {
         color: "#e6e6e6",
         name: "No data"
       }
-    ], canvasID);
+    ].reverse(), canvasID);
 
   }, 400)
 
