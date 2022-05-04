@@ -634,7 +634,7 @@ function prepare_planet_boundaries_donut() {
           south_wrapper.setAttribute("class", "vertical-doughnut");
           let south_title = document.createElement("div");
           south_title.setAttribute("class", "region_label");
-          south_title.innerHTML = "Global south";
+          south_title.innerHTML = "Global South";
           let south = document.createElement("div");
           south.setAttribute("id", south_id);
           south.setAttribute("class", "donut");
