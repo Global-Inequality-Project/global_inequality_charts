@@ -1,0 +1,21 @@
+/* Please use always the chart id as primary selector to not interfer with other parts */
+
+/* Adjusting chart tools */
+
+#chart-voting_power_wto_gdp .chart-template-main {
+  width: 100%;
+}
+#chart-voting_power_wto_gdp #treemap_svg {
+  max-width: 600px;
+  max-height: 450px;
+}
+
+@media all and (max-width: 460px) {
+  #chart-voting_power_wto_gdp #treemap_svg text {
+    font-size: 9px !important;
+  }
+}
+#chart-voting_power_wto_gdp .chart-box-outer {
+  margin-top: -15px; /* Custom margins */
+  /* padding-top: calc(max(66%, 300px)); */ /* Custom graph height */
+}

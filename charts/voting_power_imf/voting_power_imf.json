@@ -1,0 +1,13 @@
+{
+    "id": "voting_power_imf",
+    "title": "Voting Power International Monetary Fund (IMF)",
+    "description": "",
+    "author": "Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"10. Voting power in global economic governance",
+    "schema_version": 5,
+    "libraries": {
+        "apexcharts":true,
+        "chartutils": true
+    }
+}

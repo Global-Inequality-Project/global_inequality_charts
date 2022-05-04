@@ -1,0 +1,13 @@
+{
+    "id": "voting_power_wto_gdp",
+    "title": "Bargaining Power in the World Trade Organization (WTO): Share of GDP (2020)",
+    "description": "",
+    "author": "Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"10. Voting power in global economic governance",
+    "schema_version": 5,
+    "libraries": {
+        "apexcharts":true,
+        "chartutils": true
+    }
+}
