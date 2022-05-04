@@ -88,16 +88,40 @@ function render_eco_breakdown_material_footprint_income_group(canvasID) {
                 {
                 y: 7.7,
                 borderColor: '#9A0000',
+                borderWidth: 5,
+                strokeDashArray: 5,
+                offsetY: 2.5,
                 label: {
-                    text: 'Sustainability threshold (7.7 TpC)',
+                    text: 'Sustainability threshold',
                     position: 'left',
                     textAnchor: 'start',
                     borderColor: '#9A0000',
+                    offsetY: 1,
+                    offsetX: 5,
                     style: {
                         color: '#fff',
+                        fontSize: '14px',
                         background: '#9A0000'
                     },
                 }
+                },
+                {
+                y: 7.7,
+                borderColor: '#9A0000',
+                borderWidth: 5,
+                strokeDashArray: 5,
+                offsetY: 2.5,
+                label: {
+                    text: '7.7 TpC',
+                    position: 'left',
+                    textAnchor: 'start',
+                    borderColor: '#fff',
+                    offsetY: 5,
+                    offsetX: -48,
+                    style: {
+                        color: '#9A0000',
+                    },
+                    },
                 }
             ]
         }

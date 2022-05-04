@@ -88,16 +88,40 @@ function render_eco_breakdown_global_use(canvasID) {
                 {
                 y: 50,
                 borderColor: '#9A0000',
+                borderWidth: 5,
+                strokeDashArray: 5,
+                offsetY: 2.5,
                 label: {
-                    text: 'Sustainability threshold (50 Gt)',
+                    text: 'Sustainability threshold',
                     position: 'left',
                     textAnchor: 'start',
                     borderColor: '#9A0000',
+                    offsetY: 1,
+                    offsetX: 5,
                     style: {
                         color: '#fff',
+                        fontSize: '14px',
                         background: '#9A0000'
                     }
                 }
+                },
+                {
+                y: 50,
+                borderColor: '#9A0000',
+                borderWidth: 5,
+                strokeDashArray: 5,
+                offsetY: 2.5,
+                label: {
+                    text: '50 Gt',
+                    position: 'left',
+                    textAnchor: 'start',
+                    borderColor: '#fff',
+                    offsetY: 5,
+                    offsetX: -38,
+                    style: {
+                        color: '#9A0000',
+                    },
+                    },
                 }
             ]
         }

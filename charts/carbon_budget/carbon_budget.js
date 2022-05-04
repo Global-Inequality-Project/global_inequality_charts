@@ -30,7 +30,7 @@ function importFilesAndShow_carbon_budget() {
 
           <button class="chart-btn" id="carbon_budget-choice-1" onclick="setChoice_carbon_budget(1)">
             <i class="fa-solid fa-square-check"></i>1.5°
-          </button> 
+          </button>
 
           <button class="chart-btn" id="carbon_budget-choice-2" onclick="setChoice_carbon_budget(2)">
             <i class="fa-solid fa-square"></i></i>2°
@@ -142,6 +142,8 @@ function render_carbon_budget(canvasID) {
                 {
                     x: '100',
                     borderColor: '#9A0000',
+                    borderWidth: 5,
+                    strokeDashArray: 5,
                     label: {
                         orientation: 'horizontal',
                         text: '100%',
