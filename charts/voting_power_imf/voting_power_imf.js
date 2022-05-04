@@ -1,15 +1,15 @@
 // Wait for window to be ready
 jQuery(function () {
-  prepare_voting_power_wb();
+  prepare_voting_power_imf();
 });
 
 
 // Import data and render chart interface
 // Make sure to use the chart ID to creat unique function names
-function prepare_voting_power_wb() {
+function prepare_voting_power_imf() {
   createChartInterface({
-    chartID: "voting_power_wb",
-    renderFunc: render_voting_power_wb,
+    chartID: "voting_power_imf",
+    renderFunc: render_voting_power_imf,
   })
 
 }
@@ -17,7 +17,7 @@ function prepare_voting_power_wb() {
 
 // Render chart onto canvas
 // Make sure to use the chart ID to creat unique function names
-function render_voting_power_wb(canvasID, modal) {
+function render_voting_power_imf(canvasID, modal) {
   var options = {
     chart: {
       type: 'donut',
@@ -57,10 +57,10 @@ function render_voting_power_wb(canvasID, modal) {
         bottom: -80
       }
     },
-    series: [53.6, 9.4, 8.9, 6.9, 7.0, 6.9, 7.3],
+    series: [54.5, 10.3, 8.4, 6.5, 10.0, 5.5, 4.8],
     labels: ["G7 and European Union", "Rest of Global North", "Latin America", "Middle East and North Africa", "East Asia and Pacific", "South and Central Asia", "Sub-Saharan Africa"],
   }
-  options['chart'].id = "voting_power_wb"
+  options['chart'].id = "voting_power_imf"
   return createApexChart(canvasID, options);
 
 }
