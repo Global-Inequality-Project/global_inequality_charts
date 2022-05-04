@@ -87,14 +87,16 @@ function render_eco_breakdown_global_use(canvasID) {
             yaxis: [
                 {
                 y: 50,
-                borderColor: '#00E396',
+                borderColor: '#9A0000',
                 label: {
-                    borderColor: '#00E396',
+                    text: 'Sustainability threshold (50 Gt)',
+                    position: 'left',
+                    textAnchor: 'start',
+                    borderColor: '#9A0000',
                     style: {
                         color: '#fff',
-                        background: '#00E396'
-                    },
-                        text: 'Sustainability threshold'
+                        background: '#9A0000'
+                    }
                 }
                 }
             ]
