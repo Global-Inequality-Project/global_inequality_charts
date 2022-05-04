@@ -1,7 +1,7 @@
 {
     "id":"eco_breakdown_material_footprint_income_group",
     "title": "Material Footprint by income group (1970-2017)",
-    "description": "Tonnes per Capita (TpC)",
+    "description": "Tonnes (CO2 equivalent) per Capita (TpC)",
     "author":"Huzaifa Zoomkawala",
     "template":"main",
     "category":"8. Responsibility for Ecological Breakdown",
