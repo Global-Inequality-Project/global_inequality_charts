@@ -588,117 +588,117 @@ function prepare_planet_boundaries_donut() {
     },
     showChart(year_seq) {
       let chart = window.chart_data.planet_boundaries_donut;
-        let north_id = "doughnut_north";
-        let south_id = "doughnut_south";
-        let south_wo_chn_id = "doughnut_south_wo_chn";
-        let chn_id = "doughnut_chn";
-        let slider_id = "doughnut_slider";
-        let year_id = "doughnut_year";
+      let north_id = "doughnut_north";
+      let south_id = "doughnut_south";
+      let south_wo_chn_id = "doughnut_south_wo_chn";
+      let chn_id = "doughnut_chn";
+      let slider_id = "doughnut_slider";
+      let year_id = "doughnut_year";
 
-        let charts_wrapper_id = this.canvasID.replace("#", '') + "-charts"
-        if (window.chart_data['planet_boundaries_donut'].modal) {
-          north_id += "-modal"
-          south_id += "-modal"
-          south_wo_chn_id += "-modal"
-          chn_id += "-modal"
-          charts_wrapper_id += "-modal"
-          year_id +="-modal"
-          slider_id +="-modal"
+      let charts_wrapper_id = this.canvasID.replace("#", '') + "-charts"
+      if (window.chart_data['planet_boundaries_donut'].modal) {
+        north_id += "-modal"
+        south_id += "-modal"
+        south_wo_chn_id += "-modal"
+        chn_id += "-modal"
+        charts_wrapper_id += "-modal"
+        year_id += "-modal"
+        slider_id += "-modal"
+      }
+
+
+      let charts = document.getElementById(charts_wrapper_id);
+      if (charts == null) {
+        window.chart_data['planet_boundaries_donut'].modal = false;
+        window.chart_data['planet_boundaries_donut'].canvasID = window.chart_data['planet_boundaries_donut'].canvasID.replace("-modal", "").replace("-content", "-canvas")
+        window.chart_data['planet_boundaries_donut'].showChart(year_seq);
+      } else {
+        charts.innerHTML = "";
+
+        if (window.chart_data['planet_boundaries_donut'].enabledCharts.north) {
+          let north_wrapper = document.createElement("div");
+          north_wrapper.setAttribute("class", "vertical-doughnut");
+          let north_title = document.createElement("div");
+          north_title.setAttribute("class", "region_label");
+          north_title.innerHTML = "Global North";
+          let north = document.createElement("div");
+          north.setAttribute("id", north_id);
+          north.setAttribute("class", "donut");
+          north_wrapper.appendChild(north_title);
+          north_wrapper.appendChild(north);
+          charts.appendChild(north_wrapper);
+          window.chart_data['planet_boundaries_donut'].svg_north = d3.select("#" + north_id).append("svg");
+        }
+        if (window.chart_data['planet_boundaries_donut'].enabledCharts.south) {
+          let south_wrapper = document.createElement("div");
+          south_wrapper.setAttribute("class", "vertical-doughnut");
+          let south_title = document.createElement("div");
+          south_title.setAttribute("class", "region_label");
+          south_title.innerHTML = "Global south";
+          let south = document.createElement("div");
+          south.setAttribute("id", south_id);
+          south.setAttribute("class", "donut");
+          south_wrapper.appendChild(south_title);
+          south_wrapper.appendChild(south);
+          charts.appendChild(south_wrapper);
+          window.chart_data['planet_boundaries_donut'].svg_south = d3.select("#" + south_id).append("svg");
+        }
+        if (window.chart_data['planet_boundaries_donut'].enabledCharts.south_wo_chn) {
+          let south_wo_chn_wrapper = document.createElement("div");
+          south_wo_chn_wrapper.setAttribute("class", "vertical-doughnut");
+          let south_wo_chn_title = document.createElement("div");
+          south_wo_chn_title.setAttribute("class", "region_label");
+          south_wo_chn_title.innerHTML = "Global South w/o China";
+          let south_wo_chn = document.createElement("div");
+          south_wo_chn.setAttribute("id", south_wo_chn_id);
+          south_wo_chn.setAttribute("class", "donut");
+          south_wo_chn_wrapper.appendChild(south_wo_chn_title);
+          south_wo_chn_wrapper.appendChild(south_wo_chn);
+          charts.appendChild(south_wo_chn_wrapper);
+          window.chart_data['planet_boundaries_donut'].svg_south_wo_chn = d3.select("#" + south_wo_chn_id).append("svg");
+
+        }
+        if (window.chart_data['planet_boundaries_donut'].enabledCharts.china) {
+          let chn_wrapper = document.createElement("div");
+          chn_wrapper.setAttribute("class", "vertical-doughnut");
+          let chn_title = document.createElement("div");
+          chn_title.setAttribute("class", "region_label");
+          chn_title.innerHTML = "China";
+          let chn = document.createElement("div");
+          chn.setAttribute("id", chn_id);
+          chn.setAttribute("class", "donut");
+          chn_wrapper.appendChild(chn_title);
+          chn_wrapper.appendChild(chn);
+          charts.appendChild(chn_wrapper);
+          window.chart_data['planet_boundaries_donut'].svg_chn = d3.select("#" + chn_id).append("svg");
         }
 
-
-        let charts = document.getElementById(charts_wrapper_id);
-        if (charts == null){
-          window.chart_data['planet_boundaries_donut'].modal = false;
-          window.chart_data['planet_boundaries_donut'].canvasID=window.chart_data['planet_boundaries_donut'].canvasID.replace("-modal","").replace("-content","-canvas")
-          window.chart_data['planet_boundaries_donut'].showChart(year_seq);
-        } else{
-          charts.innerHTML = "";
-
-          if (window.chart_data['planet_boundaries_donut'].enabledCharts.north) {
-            let north_wrapper = document.createElement("div");
-            north_wrapper.setAttribute("class", "vertical-doughnut");
-            let north_title = document.createElement("div");
-            north_title.setAttribute("class", "region_label");
-            north_title.innerHTML = "Global North";
-            let north = document.createElement("div");
-            north.setAttribute("id", north_id);            
-            north.setAttribute("class", "donut");
-            north_wrapper.appendChild(north_title);
-            north_wrapper.appendChild(north);
-            charts.appendChild(north_wrapper);
-            window.chart_data['planet_boundaries_donut'].svg_north = d3.select("#" + north_id).append("svg");
-          }
-          if (window.chart_data['planet_boundaries_donut'].enabledCharts.south) {
-            let south_wrapper = document.createElement("div");
-            south_wrapper.setAttribute("class", "vertical-doughnut");
-            let south_title = document.createElement("div");
-            south_title.setAttribute("class", "region_label");
-            south_title.innerHTML = "Global south";
-            let south = document.createElement("div");
-            south.setAttribute("id", south_id);            
-            south.setAttribute("class", "donut");
-            south_wrapper.appendChild(south_title);
-            south_wrapper.appendChild(south);
-            charts.appendChild(south_wrapper);
-            window.chart_data['planet_boundaries_donut'].svg_south = d3.select("#" + south_id).append("svg");
-          }
-          if (window.chart_data['planet_boundaries_donut'].enabledCharts.south_wo_chn) {
-            let south_wo_chn_wrapper = document.createElement("div");
-            south_wo_chn_wrapper.setAttribute("class", "vertical-doughnut");
-            let south_wo_chn_title = document.createElement("div");
-            south_wo_chn_title.setAttribute("class", "region_label");
-            south_wo_chn_title.innerHTML = "Global South w/o China";
-            let south_wo_chn = document.createElement("div");
-            south_wo_chn.setAttribute("id", south_wo_chn_id);            
-            south_wo_chn.setAttribute("class", "donut");
-            south_wo_chn_wrapper.appendChild(south_wo_chn_title);
-            south_wo_chn_wrapper.appendChild(south_wo_chn);
-            charts.appendChild(south_wo_chn_wrapper);
-            window.chart_data['planet_boundaries_donut'].svg_south_wo_chn = d3.select("#" + south_wo_chn_id).append("svg");
-  
-          }
-          if (window.chart_data['planet_boundaries_donut'].enabledCharts.china) {
-            let chn_wrapper = document.createElement("div");
-            chn_wrapper.setAttribute("class", "vertical-doughnut");
-            let chn_title = document.createElement("div");
-            chn_title.setAttribute("class", "region_label");
-            chn_title.innerHTML = "China";
-            let chn = document.createElement("div");
-            chn.setAttribute("id", chn_id);            
-            chn.setAttribute("class", "donut");
-            chn_wrapper.appendChild(chn_title);
-            chn_wrapper.appendChild(chn);
-            charts.appendChild(chn_wrapper);
-            window.chart_data['planet_boundaries_donut'].svg_chn = d3.select("#" + chn_id).append("svg");
-          }
-      
-          chart.sequence = year_seq;
-          if (window.chart_data['planet_boundaries_donut'].enabledCharts.north) {
-            chart.setSvg(window.chart_data.planet_boundaries_donut.svg_north);
-            chart.setData(window.chart_data.planet_boundaries_donut.rawData.NRT);
-          }
-          if (window.chart_data['planet_boundaries_donut'].enabledCharts.south) {
-            chart.setSvg(window.chart_data.planet_boundaries_donut.svg_south);
-            chart.setData(window.chart_data.planet_boundaries_donut.rawData.STH);
-          }
-          if (window.chart_data['planet_boundaries_donut'].enabledCharts.south_wo_chn) {
-            chart.setSvg(window.chart_data.planet_boundaries_donut.svg_south_wo_chn);
-            chart.setData(window.chart_data.planet_boundaries_donut.rawData.STH_wo_CHN);
-          }
-          if (window.chart_data['planet_boundaries_donut'].enabledCharts.china) {
-            chart.setSvg(window.chart_data.planet_boundaries_donut.svg_chn);
-            chart.setData(window.chart_data.planet_boundaries_donut.rawData.CHN);
-          }
-          jQuery("#"+slider_id).on("input", function () {
-            let year_seq = +this.value;
-            let year = year_seq + 1992;
-            jQuery("#"+year_id).text(year);
-            if (window.chart_data.planet_boundaries_donut.sequence !== year_seq)
+        chart.sequence = year_seq;
+        if (window.chart_data['planet_boundaries_donut'].enabledCharts.north) {
+          chart.setSvg(window.chart_data.planet_boundaries_donut.svg_north);
+          chart.setData(window.chart_data.planet_boundaries_donut.rawData.NRT);
+        }
+        if (window.chart_data['planet_boundaries_donut'].enabledCharts.south) {
+          chart.setSvg(window.chart_data.planet_boundaries_donut.svg_south);
+          chart.setData(window.chart_data.planet_boundaries_donut.rawData.STH);
+        }
+        if (window.chart_data['planet_boundaries_donut'].enabledCharts.south_wo_chn) {
+          chart.setSvg(window.chart_data.planet_boundaries_donut.svg_south_wo_chn);
+          chart.setData(window.chart_data.planet_boundaries_donut.rawData.STH_wo_CHN);
+        }
+        if (window.chart_data['planet_boundaries_donut'].enabledCharts.china) {
+          chart.setSvg(window.chart_data.planet_boundaries_donut.svg_chn);
+          chart.setData(window.chart_data.planet_boundaries_donut.rawData.CHN);
+        }
+        jQuery("#" + slider_id).on("input", function () {
+          let year_seq = +this.value;
+          let year = year_seq + 1992;
+          jQuery("#" + year_id).text(year);
+          if (window.chart_data.planet_boundaries_donut.sequence !== year_seq)
             window.chart_data['planet_boundaries_donut'].showChart(year_seq);
-          });
-        }
-       
+        });
+      }
+
     },
 
 
@@ -781,15 +781,15 @@ function render_planet_boundaries_donut(canvasID, modal) {
   let year_id = "doughnut_year";
   if (modal) {
     charts_wrapper_id += "-modal"
-    year_id +="-modal"
-    slider_id +="-modal"
+    year_id += "-modal"
+    slider_id += "-modal"
   }
   canvas.innerHTML = `
-      <div class="vertical-control">
+    <div id="${charts_wrapper_id}"></div>
+    <div class="vertical-control">
         <div><input id="${slider_id}" type="range" min="0" max="23" value="23"></div>
         <div id="${year_id}">2015</div>
     </div>
-    <div id="${charts_wrapper_id}"></div>
     `;
   window.chart_data.planet_boundaries_donut.showChart(23);
 
