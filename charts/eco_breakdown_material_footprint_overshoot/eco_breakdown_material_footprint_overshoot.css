@@ -1,5 +1,5 @@
 #chart-eco_breakdown_material_footprint_overshoot .chart-box-outer {
-  padding-top: calc(max(66%, 400px)); /* Custom graph height */
+  padding-top: calc(max(52%, 400px)); /* Custom graph height */
   border: 1px solid #bfbfbf;
   border-radius: 3px;
 }
