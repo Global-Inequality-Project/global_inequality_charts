@@ -1,0 +1,13 @@
+{
+    "id": "eco_breakdown_worldmap",
+    "title": "Responsibility for ecological breakdown world map",
+    "description": "",
+    "author": "Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"8. Responsibility for Ecological Breakdown",
+    "schema_version": 5,
+    "libraries": {
+        "svgmap":true,
+        "mapcharts":true
+    }
+}
