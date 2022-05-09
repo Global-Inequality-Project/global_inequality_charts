@@ -84,7 +84,8 @@ function render_climate_world_map(canvasID, modal) {
         applyData: 'quantile',
         values: values
       },
-
+      showZoomReset:true,
+      showContinentSelector:true,
     });
     map_createLegend([
       {

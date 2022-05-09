@@ -11752,7 +11752,7 @@ svg.select.js@^3.0.1:
 
 "svgmap@https://github.com/convive-lab/svgMap.git":
   version "2.7.2"
-  resolved "https://github.com/convive-lab/svgMap.git#32955cbbb4cbb1d03c2d5dbdefa1d49af3242e34"
+  resolved "https://github.com/convive-lab/svgMap.git#f5afc8bca6ece8284fd61183b6f9cf54ffb9f4d4"
   dependencies:
     svg-pan-zoom "^3.6.1"
 
