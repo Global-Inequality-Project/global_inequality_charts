@@ -18,6 +18,11 @@
 #chart-climate_world_treemap .chart-box-outer {
   margin-top: -20px; /* Custom margins */
 }
+
+#chart-climate_world_treemap .chart-box-inner {
+  width: 105%; /* Custom margins */
+}
+
 #chart-modal-content-climate_world_treemap{
   max-height: 100%;
   overflow: hidden;

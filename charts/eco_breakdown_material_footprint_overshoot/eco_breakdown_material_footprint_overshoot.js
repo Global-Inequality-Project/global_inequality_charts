@@ -37,7 +37,8 @@ function importFilesAndShow_eco_breakdown_material_footprint_overshoot() {
 
 //--------------------------------------- showChart
 function render_eco_breakdown_material_footprint_overshoot(canvasID) {
-    let sorted = window.chart_data["eco_breakdown_material_footprint_overshoot"].data.sort((a, b) => b['Cumulative-MF-overshoot'] - a['Cumulative-MF-overshoot']);
+    var chartID = "eco_breakdown_material_footprint_overshoot"
+    let sorted = window.chart_data[chartID].data.sort((a, b) => b['Cumulative-MF-overshoot'] - a['Cumulative-MF-overshoot']);
     //sorted = sorted.filter(x => x.iso != 'GUY'); // EXCLUDING Guyana
     let countries = [];
     let series = [
@@ -51,7 +52,6 @@ function render_eco_breakdown_material_footprint_overshoot(canvasID) {
         }
     });
 
-    var chartID = "eco_breakdown_material_footprint_overshoot"
     var options = {
         chart: {
             type: 'bar',
@@ -98,10 +98,13 @@ function render_eco_breakdown_material_footprint_overshoot(canvasID) {
             enabled: false,
         },
         yaxis: {
-            //max: 3.8e11,
+            max: 300,
             labels: {
                 align: 'left',
-                offsetY: 2
+                offsetY: 2,
+                style: {
+                    fontSize: '12px',
+                },
             }
         },
         xaxis: {
