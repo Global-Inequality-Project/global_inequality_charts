@@ -3,7 +3,7 @@
     "title": "Number of people in Poverty in the World (minus China)",
     "description": "Poverty Line $/day (2011 PPP)",
     "author": "Huzaifa Zoomkawala",
-    "template":"twocharts",
+    "template":"main",
     "category":"1. Global Poverty",
     "schema_version": 5,
     "libraries": {

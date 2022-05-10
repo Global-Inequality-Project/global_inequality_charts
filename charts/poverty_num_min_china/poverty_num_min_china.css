@@ -1,17 +1,3 @@
 #chart-poverty_num_min_china .chart-box-outer {
   margin-top: -15px;
 }
-
-#chart-poverty_num_min_china .chart-col-left {
-  display: inline-block;
-}
-
-#chart-poverty_num_min_china .chart-col-middle {
-  display: inline-block;
-  width: 35%;
-}
-
-#chart-poverty_num_min_china .chart-col-right {
-  display: inline-block;
-  width: 35%;
-}
