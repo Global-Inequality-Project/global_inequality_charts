@@ -18,7 +18,7 @@ jobs:
       - run: yarn build
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: global_inequality_charts
           retention-days: 7
