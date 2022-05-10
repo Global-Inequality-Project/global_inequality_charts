@@ -109,6 +109,8 @@ options['xaxis'] = { categories: years, tickAmount: 30, tooltip: {enabled: false
   options['chart'].id = ('Number of people in poverty in the world, minus China').replace(/ /g,"");
 options.series = series;
 
+createApexChart(canvasID+'-2', options);
+
 return createApexChart(canvasID, options);
 }
 
