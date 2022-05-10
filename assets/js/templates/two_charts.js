@@ -1,11 +1,11 @@
-function createTemplate_twocharts({ chartID, chartTitle, chartDescription, chartSources, customTools }) {
+function createTemplate_two_charts({ chartID, chartTitle, chartDescription, chartSources, customTools }) {
     var tmpl =`
-    <div class="chart-interface chart-template-twocharts" id="chart-wrapper-${chartID}">
+    <div class="chart-interface chart-template-two_charts" id="chart-wrapper-${chartID}">
 
       <div class="chart-col-left">
 
         <div class="chart-title">
-          <div class="chart-title-twocharts">
+          <div class="chart-title-two_charts">
             <h1>${chartTitle}</h1>
             ${chartDescription}
           </div>

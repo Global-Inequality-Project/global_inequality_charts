@@ -1,0 +1,13 @@
+{
+    "id": "demo2_chart",
+    "title": "Demo2 chart",
+    "description": "This is the chart description",
+    "author": "Joël Foramitti",
+    "template":"two_charts",
+    "category":"0. Demo",
+    "schema_version": 5,
+    "libraries": {
+        "apexcharts": true,
+        "chartutils": true
+    }
+}
