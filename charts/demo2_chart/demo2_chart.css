@@ -2,10 +2,9 @@
 
 /* Adjusting chart tools */
 
-#chart-demo2_chart h1{
+/* #chart-demo2_chart h1{
     /*color: darkblue;*/
-}
-
+/*}
 /* Adjusting the chart container */
 
 #chart-demo2_chart .chart-box-outer {
@@ -24,16 +23,18 @@
   padding-right: 20px;
 }
 
-#chart-demo2_chart .chart-col-left {
-  display: inline-block;
+#chart-demo2_chart .chart-col-above {
+  position: relative;
 }
 
-#chart-demo2_chart .chart-col-middle {
-  display: inline-block;
-  width: 35%;
+#chart-demo2_chart .chart-col-below {
+  display: flex;
 }
 
-#chart-demo2_chart .chart-col-right {
-  display: inline-block;
-  width: 35%;
+#chart-demo2_chart .chart-col-two_charts {
+  flex: 1;
+  padding: 1em;
+  border: 1px solid #bfbfbf;
+  border-radius: 3px;
 }
+

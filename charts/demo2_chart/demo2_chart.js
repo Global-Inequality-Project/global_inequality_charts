@@ -99,10 +99,9 @@ function render_demo2_chart(canvasID, modal) {
     //chart.hideSeries('var3');
   }
 
-  createApexChart(canvasID+'-2', options);
   // Render chart to canvas and return chart
   // The function createApexChart() can be found in assets/js/chartutils.js
-  return createApexChart(canvasID, options, callback);
+  return [createApexChart(canvasID, options, callback),createApexChart(canvasID+'-2', options)];
 
 }
 
@@ -110,7 +109,7 @@ function render_demo2_chart(canvasID, modal) {
 // Function to change custom choice
 function setChoice_demo2_chart(choice){
 
-  var chart = window.charts['demo2_chart']
+  var charts = window.charts['demo2_chart']
   var data = window.chart_data['demo2_chart']
   data.my_custom_choice = choice
 
@@ -120,11 +119,13 @@ function setChoice_demo2_chart(choice){
   if (choice == 1) {
     btn1.innerHTML = `<i class="fa-solid fa-square-check"></i>Choice 1`
     btn2.innerHTML = `<i class="fa-solid fa-square"></i>Choice 2`
-    chart.updateSeries(generateSeries_demo2_chart(data))
+    charts[0].updateSeries(generateSeries_demo2_chart(data))
+    charts[1].updateSeries(generateSeries_demo2_chart(data))
   } else if (choice == 2) {
     btn1.innerHTML = `<i class="fa-solid fa-square"></i>Choice 1`
     btn2.innerHTML = `<i class="fa-solid fa-square-check"></i>Choice 2`
-    chart.updateSeries(generateSeries_demo2_chart(data))
+    charts[0].updateSeries(generateSeries_demo2_chart(data))
+    charts[1].updateSeries(generateSeries_demo2_chart(data))
   }
 
 };

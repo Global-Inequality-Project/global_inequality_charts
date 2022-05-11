@@ -94,16 +94,25 @@ function createChart({ chartID, chartTitle, chartDescription, renderFunc, templa
 // Button areas
 // ------------
 
-function toggleChartArea(button, areaID, chartID) {
+function toggleChartArea(button, areaID, chartID, hide_description = false) {
     var shareArea = document.getElementById(`chart-${chartID}-${areaID}-btns`)
+    var chartDescription = document.getElementById(`two-charts-description-${chartID}`);
     if (button.value == "OFF") {
         button.value = "ON";
         shareArea.style.display = "block";
         shareArea.style.visibility = "visible";
+        if (hide_description) {
+            chartDescription.style.display = "block";
+            chartDescription.style.visibility = "visible";
+        }
     } else {
         button.value = "OFF";
         shareArea.style.display = "none";
         shareArea.style.visibility = "hidden";
+        if (hide_description) {
+            chartDescription.style.display = "none";
+            chartDescription.style.visibility = "hidden";
+        }
     }
 }
 

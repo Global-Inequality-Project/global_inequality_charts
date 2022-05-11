@@ -2,15 +2,15 @@ function createTemplate_two_charts({ chartID, chartTitle, chartDescription, char
     var tmpl =`
     <div class="chart-interface chart-template-two_charts" id="chart-wrapper-${chartID}">
 
-      <div class="chart-col-left">
+      <div class="chart-col-above">
 
         <div class="chart-title">
           <div class="chart-title-two_charts">
             <h1>${chartTitle}</h1>
-            ${chartDescription}
+            <p class="chart-description-two_charts" id="two-charts-description-${chartID}">${chartDescription}</p>
           </div>
           <div class="chart-title-bars">
-            <button class="chart-title-btn" onclick="toggleChartArea(this, 'all', '${chartID}')" value="OFF">
+            <button class="chart-title-btn" onclick="toggleChartArea(this, 'all', '${chartID}', true)" value="OFF">
               <i class="fa-solid fa-bars"></i>
             </button>
           </div>
@@ -79,24 +79,25 @@ function createTemplate_two_charts({ chartID, chartTitle, chartDescription, char
 
         </div>
       </div>
+    <div class="chart-col-below">
+        <div class="chart-col-two_charts">
+          <div class="chart-box-outer">
+            <div class="chart-box-inner">
+              <div id="chart-canvas-${chartID}">
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <div class="chart-col-middle">
-      <div class="chart-box-outer">
-        <div class="chart-box-inner">
-          <div id="chart-canvas-${chartID}">
+      <div class="chart-col-two_charts">
+        <div class="chart-box-outer">
+          <div class="chart-box-inner">
+            <div id="chart-canvas-${chartID}-2">
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="chart-col-right">
-    <div class="chart-box-outer">
-      <div class="chart-box-inner">
-        <div id="chart-canvas-${chartID}-2">
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 
