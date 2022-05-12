@@ -50,7 +50,7 @@ function createTemplate_two_charts({ chartID, chartTitle, chartDescription, char
 
             <div class="chart-btn-area" id="chart-${chartID}-save-btns">
 
-                <button onclick="downloadImage('${chartID}', '${chartTitle}', '${chartDescription}')" class="chart-btn">
+                <button onclick="downloadImage('${chartID}', '${chartTitle}', '${chartDescription}', true)" class="chart-btn">
                     <i class="fas fa-image"></i>Image
                 </button>
 
