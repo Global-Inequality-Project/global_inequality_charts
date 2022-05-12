@@ -14,7 +14,7 @@
 }
 
 .chart-template-two_charts .chart-title-bars {
-  display: block;
+  display: block !important;
   margin-left: auto;
   margin-right: 0;
 }
@@ -55,14 +55,14 @@
 
   /* Style changes for template two_charts -----------------*/
   .chart-template-two_charts .chart-col-below {
-    height: 100vh !important;
+    height: 90vh !important;
     flex-direction: column !important;
   }
   .chart-col-two_charts .chart-box-outer{
     padding-top: 0;
   }
   .chart-col-two_charts .chart-box-inner{
-    height: 50vh !important;
+    height: 45vh !important;
   }
   /*--------------------------------------------------------*/
 
