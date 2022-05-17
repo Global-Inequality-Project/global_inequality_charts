@@ -204,6 +204,9 @@ function load_charts_scripts($hook)
 	$chartutils_js_ver  = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $chartinterface_js_path));
 	$html2canvas_js_path = '../../../node_modules/html2canvas/dist/html2canvas.min.js';
 	$html2canvas_js_ver = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $html2canvas_js_path));
+	$multiselect_js_path = '../../../node_modules/multiselect/js/jquery.multi-select.js';
+	$multiselect_js_ver = date("ymd-Gis", filemtime(plugin_dir_path(__FILE__) . $multiselect_js_path));
+
 
 	// enqueue scripts
 	wp_enqueue_script('chartinterface_js', plugins_url($chartinterface_js_path, __FILE__), array(), $chartinterface_js_ver);

@@ -34,8 +34,6 @@ function importFilesAndShow_eco_breakdown_national_use() {
 
 //--------------------------------------- showChart
 function render_eco_breakdown_national_use(canvasID) {
-  let data = window.chart_data["eco_breakdown_national_use"].data;
-
   var options = {
     chart: {
       type: "line",
@@ -61,6 +59,9 @@ function render_eco_breakdown_national_use(canvasID) {
         options: {
           yaxis: {
             tickAmount: 5,
+            labels: {
+              formatter: (val, index) => formatYAxisLabel(val, index, 0, true),
+            },
           },
         },
       },
@@ -69,16 +70,6 @@ function render_eco_breakdown_national_use(canvasID) {
       curve: "straight",
       width: 2.5,
     },
-    series: [
-      {
-        name: "Series A",
-        data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6],
-      },
-      {
-        name: "Series B",
-        data: [20, 29, 37, 36, 44, 45, 50, 58],
-      },
-    ],
     yaxis: [
       {
         axisTicks: {
@@ -94,7 +85,7 @@ function render_eco_breakdown_national_use(canvasID) {
           },
         },
         title: {
-          text: "Series A",
+          text: "Fair Share",
           style: {
             color: "#FF1654",
           },
@@ -115,16 +106,13 @@ function render_eco_breakdown_national_use(canvasID) {
           },
         },
         title: {
-          text: "Series B",
+          text: "Resources",
           style: {
             color: "#247BA0",
           },
         },
       },
     ],
-    xaxis: {
-      categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
-    },
     colors: ["#775DD0", "#FF4560", "#FEB019", "#00E396", "#008FFB", "#A5978B"],
     grid: {
       padding: {
@@ -134,29 +122,58 @@ function render_eco_breakdown_national_use(canvasID) {
     legend: {
       fontSize: "12px",
       markers: { width: 10, height: 10, radius: 10, offsetY: "-2px" },
-      horizontalAlign: "left",
-      offsetX: 40,
     },
     tooltip: {
-      shared: false,
-      intersect: true,
-      x: {
-        show: false,
-      },
-    },
-    legend: {
-      horizontalAlign: "left",
-      offsetX: 40,
+      y: { formatter: (val, index) => formatTooltipVal(val, index, 0) },
     },
   };
 
-  options["chart"].id = "GDP per capita Global North vs Global South".replace(
-    / /g,
-    ""
-  );
+  let years = [];
+  for (
+    let year = window.chart_data["eco_breakdown_national_use"].years.start,
+      end = window.chart_data["eco_breakdown_national_use"].years.end;
+    year <= end;
+    ++year
+  )
+    years.push(year);
+
+  let series = [
+    { name: "Fair Share", data: [] },
+    { name: "Resources", data: [] },
+  ];
+
+  let data = window.chart_data["eco_breakdown_national_use"].data;
+
+  for (let i = 0; i < data.length; i++) {
+    series[0]["data"].push(formatYAxisLabel(data[i]["fairShare"], 0, 0));
+    series[1]["data"].push(formatYAxisLabel(data[i]["value"], 0, 0));
+  }
+
+  options["xaxis"] = {
+    categories: years,
+    tickAmount: 15,
+    tooltip: { enabled: false },
+  };
+  options.series = series;
 
   return [
     createApexChart(canvasID, options),
     createApexChart(canvasID + "-2", options),
   ];
 }
+
+jQuery('#languageSelect').multiselect({
+  columns: 1,
+  placeholder: 'Select Languages',
+  search: true,
+  onOptionClick: function(r, element){
+    const values = jQuery('#languageSelect').val();
+    let innerHtml = ""
+    values.forEach(val=>{
+        innerHtml += "<span class='sel'>"+val+"</span>"
+    })
+    console.log(innerHtml)
+    jQuery("#selected").html(innerHtml);
+
+  }
+});

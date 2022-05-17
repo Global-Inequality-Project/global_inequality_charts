@@ -84,6 +84,22 @@ function createTemplate_two_charts({ chartID, chartTitle, chartDescription, char
           <div class="chart-box-outer">
             <div class="chart-box-inner">
               <div id="chart-canvas-${chartID}">
+              <div class="wrapper">
+                <select name="languageSelect[]" multiple id="languageSelect">
+                    <option value="C++">C++</option>
+                    <option value="C#">C#</option>
+                    <option value="Java">Java</option>
+                    <option value="Objective-C">Objective-C</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Perl">Perl</option>
+                    <option value="PHP">PHP</option>
+                    <option value="Ruby on Rails">Ruby on Rails</option>
+                    <option value="Android">Android</option>
+                    <option value="iOS">iOS</option>
+                    <option value="HTML">HTML</option>
+                    <option value="XML">XML</option>
+                </select>
+                </div>
               </div>
             </div>
           </div>
@@ -93,6 +109,22 @@ function createTemplate_two_charts({ chartID, chartTitle, chartDescription, char
         <div class="chart-box-outer">
           <div class="chart-box-inner">
             <div id="chart-canvas-${chartID}-2">
+            <div class="wrapper">
+                <select name="languageSelect[]" multiple id="languageSelect">
+                    <option value="C++">C++</option>
+                    <option value="C#">C#</option>
+                    <option value="Java">Java</option>
+                    <option value="Objective-C">Objective-C</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Perl">Perl</option>
+                    <option value="PHP">PHP</option>
+                    <option value="Ruby on Rails">Ruby on Rails</option>
+                    <option value="Android">Android</option>
+                    <option value="iOS">iOS</option>
+                    <option value="HTML">HTML</option>
+                    <option value="XML">XML</option>
+                </select>
+                </div>
             </div>
           </div>
         </div>
