@@ -12,17 +12,10 @@ jQuery(function() {
 function importFilesAndShow_eco_breakdown_national_use() {
   var chartID = "eco_breakdown_national_use";
 
-  jQuery.get(`${window.charts_path}/${chartID}/single_country.csv`, function(
+  loadJson(`${window.charts_path}/${chartID}/data.json`, function(err,
     eco_breakdown_national_use
   ) {
-    window.chart_data[chartID].data = fromCSV(eco_breakdown_national_use, [
-      "string",
-      "string",
-      "number",
-      "number",
-      "number",
-      "string",
-    ]);
+    window.chart_data[chartID].data = eco_breakdown_national_use;
 
     // Render Chart Interface
     createChartInterface({
@@ -33,8 +26,9 @@ function importFilesAndShow_eco_breakdown_national_use() {
 }
 
 //--------------------------------------- showChart
-function render_eco_breakdown_national_use(canvasID) {
-  var options = {
+function render_eco_breakdown_national_use(canvasID, selected = false) {
+  let options, options2;
+  options = options2 = {
     chart: {
       type: "line",
       height: "100%",
@@ -58,10 +52,7 @@ function render_eco_breakdown_national_use(canvasID) {
         breakpoint: 401,
         options: {
           yaxis: {
-            tickAmount: 5,
-            labels: {
-              formatter: (val, index) => formatYAxisLabel(val, index, 0, true),
-            },
+            tickAmount: 15,
           },
         },
       },
@@ -70,49 +61,6 @@ function render_eco_breakdown_national_use(canvasID) {
       curve: "straight",
       width: 2.5,
     },
-    yaxis: [
-      {
-        axisTicks: {
-          show: true,
-        },
-        axisBorder: {
-          show: true,
-          color: "#FF1654",
-        },
-        labels: {
-          style: {
-            colors: "#FF1654",
-          },
-        },
-        title: {
-          text: "Fair Share",
-          style: {
-            color: "#FF1654",
-          },
-        },
-      },
-      {
-        opposite: true,
-        axisTicks: {
-          show: true,
-        },
-        axisBorder: {
-          show: true,
-          color: "#247BA0",
-        },
-        labels: {
-          style: {
-            colors: "#247BA0",
-          },
-        },
-        title: {
-          text: "Resources",
-          style: {
-            color: "#247BA0",
-          },
-        },
-      },
-    ],
     colors: ["#775DD0", "#FF4560", "#FEB019", "#00E396", "#008FFB", "#A5978B"],
     grid: {
       padding: {
@@ -122,9 +70,6 @@ function render_eco_breakdown_national_use(canvasID) {
     legend: {
       fontSize: "12px",
       markers: { width: 10, height: 10, radius: 10, offsetY: "-2px" },
-    },
-    tooltip: {
-      y: { formatter: (val, index) => formatTooltipVal(val, index, 0) },
     },
   };
 
@@ -136,44 +81,80 @@ function render_eco_breakdown_national_use(canvasID) {
     ++year
   )
     years.push(year);
+  let series, series2;
 
-  let series = [
-    { name: "Fair Share", data: [] },
-    { name: "Resources", data: [] },
+  series = series2 = [
+    { name: "Ratio", data: [] },
   ];
 
   let data = window.chart_data["eco_breakdown_national_use"].data;
 
-  for (let i = 0; i < data.length; i++) {
-    series[0]["data"].push(formatYAxisLabel(data[i]["fairShare"], 0, 0));
-    series[1]["data"].push(formatYAxisLabel(data[i]["value"], 0, 0));
+  for (let i = 0; i < 48; i++) {
+    series[0]["data"].push(data[0]["biophysical"]["ratio"]["MF"][i]);
+    series2[0]["data"].push(data[0]["biophysical"]["ratio"]["MF"][i]);
   }
+  console.log(series)
+  console.log(series2)
+
 
   options["xaxis"] = {
     categories: years,
-    tickAmount: 15,
     tooltip: { enabled: false },
   };
   options.series = series;
+  options2.series = series;
 
-  return [
-    createApexChart(canvasID, options),
-    createApexChart(canvasID + "-2", options),
-  ];
+  let chart = createApexChart(canvasID, options);
+  let chart2 = createApexChart(canvasID + "-2", options2);
+
+  createDropdown(chart, chart2, canvasID, canvasID+'-2', data, series, options)
+
+  return [chart, chart2];
 }
 
-jQuery('#languageSelect').multiselect({
-  columns: 1,
-  placeholder: 'Select Languages',
-  search: true,
-  onOptionClick: function(r, element){
-    const values = jQuery('#languageSelect').val();
-    let innerHtml = ""
-    values.forEach(val=>{
-        innerHtml += "<span class='sel'>"+val+"</span>"
+function createDropdown(chart, chart2, canvasID, canvasID2, data, series, options){
+  let dropdown = `
+<div class="wrapper">
+  <select name="countrySelect[]" id="countrySelect">
+     `;
+  data.forEach(element => {
+    let opt = document.createElement('option');
+    opt.value = element['country'];
+    opt.innerHTML = element['country'];
+    dropdown += opt.outerHTML;
     })
-    console.log(innerHtml)
-    jQuery("#selected").html(innerHtml);
+  dropdown += `
+  </select>
+</div>
+`;
+  //Append dropdown menu
+  jQuery(canvasID).append(dropdown);
+  jQuery(canvasID2).append(dropdown);
 
-  }
-});
+  jQuery("#countrySelect").on("change", function(e) {
+    let country = e.target.value
+    let country_data = data.find(element=>element.country == country)
+    series[0]["data"] = []
+    for (let i = 0; i < 48; i++) {
+      series[0]["data"].push(country_data["biophysical"]["ratio"]["MF"][i]);
+    }
+    options.series = series;
+    console.log(chart)
+    let canvas = document.getElementById("chart-canvas-eco_breakdown_national_use");
+    console.log(canvas)
+    let childNode = canvas.removeChild(canvas.lastChild)
+    //var divtest = document.createElement("div");
+    //divtest.innerHTML = createApexChart(canvasID, options)
+    canvas.appendChild(createApexChart(canvasID, options));
+
+    //jQuery(canvasID).remove();
+    //createDropdown(chart, chart2, canvasID, canvasID2, data, series, options)
+    // chart2.updateSeries (
+    //   series
+    // )
+    //chart2.updateSeries = createApexChart(canvasID + "-2", options);
+
+
+    return true;
+  });
+}
