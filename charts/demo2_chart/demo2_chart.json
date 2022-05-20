@@ -1,6 +1,6 @@
 {
     "id": "demo2_chart",
-    "title": "Demo2 chart",
+    "title": "Demo2 chart for two collums",
     "description": "This is the chart description",
     "author": "Joël Foramitti",
     "template":"two_charts",

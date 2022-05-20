@@ -14,7 +14,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "svg-pan-zoom": "^3.6.1",
-    "svgmap": "^2.7.2"
+    "svgmap": "https://github.com/convive-lab/svgMap.git#v2.7.2-convive.4"
   },
   "scripts": {
     "start": "divi-scripts start",

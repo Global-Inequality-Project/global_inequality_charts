@@ -96,6 +96,7 @@ The following entries for libraries are currently supported. They are optional a
 The following templates are currently supported:
 
 - `main` (default)
+- `two_charts` (a two collum template for 2 charts.)
 
 Here is an example:
 
