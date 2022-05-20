@@ -13,8 +13,11 @@
 }
 
 /* Adjusting the modal container */
-
-#chart-modal-content-eco_breakdown_national_use {
+#chart-canvas-eco_breakdown_national_use-2,
+#chart-canvas-eco_breakdown_national_use{
+  height: 100%;
+}
+#chart-modal-content-eco_breakdown_national_use-chart {
   /* Create scrollable modal */
   overflow-y: auto;
   overflow-x: hidden;

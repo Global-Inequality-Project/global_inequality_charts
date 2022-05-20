@@ -1,5 +1,5 @@
 //--------------------------------------- window.ready
-jQuery(function() {
+jQuery(function () {
   checkObjectKeysFunc();
   window.chart_data["eco_breakdown_national_use"] = {
     years: { start: 1970, end: 2017 },
@@ -12,7 +12,7 @@ jQuery(function() {
 function importFilesAndShow_eco_breakdown_national_use() {
   var chartID = "eco_breakdown_national_use";
 
-  loadJson(`${window.charts_path}/${chartID}/data.json`, function(
+  loadJson(`${window.charts_path}/${chartID}/data.json`, function (
     err,
     eco_breakdown_national_use
   ) {
@@ -31,7 +31,7 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
   let years = [];
   for (
     let year = window.chart_data["eco_breakdown_national_use"].years.start,
-      end = window.chart_data["eco_breakdown_national_use"].years.end;
+    end = window.chart_data["eco_breakdown_national_use"].years.end;
     year <= end;
     ++year
   )
@@ -162,68 +162,67 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
 
   const canvasID2 = canvasID + "-2";
 
-  let chart = createApexChart(canvasID, options);
-  let chart2 = createApexChart(canvasID + "-2", options);
 
-  let dropdown = `
-<div class="wrapper">
-  <select name="countrySelect[]" id="countrySelect">
-     `;
-  data.forEach((element) => {
-    let opt = document.createElement("option");
-    opt.value = element["country"];
-    opt.innerHTML = element["country"];
-    dropdown += opt.outerHTML;
-  });
-  dropdown += `
-  </select>
-</div>
-`;
+  function createDropdownForChart(id) {
+    let dropdown = `
+    <div class="wrapper">
+      <select name="countrySelect[]" id="countrySelect">
+         `;
+    data.forEach((element) => {
+      let opt = document.createElement("option");
+      opt.value = element["country"];
+      opt.innerHTML = element["country"];
+      dropdown += opt.outerHTML;
+    });
+    dropdown += `
+      </select>
+    </div>
+    <div id="${id.replace("#", "")}-chart"></div>
+    `;
+    jQuery(id).append(dropdown);
+  }
+  function createSelectedChart(
+    series,
+    country_data,
+    options,
+    chart
+  ) {
+    series[0]["data"] = [];
+    for (let i = 0; i < 48; i++) {
+      series[0]["data"].push(country_data["biophysical"]["ratio"]["MF"][i]);
+    }
+    options.series = series;
+    options.yaxis = {
+      min: 0,
+      max:
+        Math.max.apply(Math, series[0]["data"]) > 1
+          ? Math.max.apply(Math, series[0]["data"])
+          : 1,
+      forceNiceScale: true,
+    };
+    chart.updateOptions(options)
+  }
+  
+  createDropdownForChart(canvasID)
+  createDropdownForChart(canvasID2)
+  let chart = createApexChart(canvasID + "-chart", options);
+  let chart2 = createApexChart(canvasID2 + "-chart", options);
+
   //Append dropdown menu
-  jQuery(canvasID).append(dropdown);
-  jQuery(canvasID2).append(dropdown);
 
-  jQuery(".wrapper:first-child").on("change", function(e) {
+  jQuery(".wrapper:first-child").on("change", function (e) {
     let country = e.target.value;
     let country_data = data.find((element) => element.country == country);
 
     parentid = e.target.parentNode.parentNode.getAttributeNode("id").value;
-
     if (parentid == "chart-canvas-eco_breakdown_national_use") {
-      createSelectedChart(series, country_data, options, parentid, canvasID);
+      createSelectedChart(series, country_data, options, chart);
     } else if (parentid == "chart-canvas-eco_breakdown_national_use-2") {
-      createSelectedChart(series, country_data, options, parentid, canvasID2);
+      createSelectedChart(series, country_data, options, chart2);
     } else {
       throw new Error("Wrong identifier");
     }
   });
 
   return [chart, chart2];
-}
-
-function createSelectedChart(
-  series,
-  country_data,
-  options,
-  parentid,
-  canvasID
-) {
-  series[0]["data"] = [];
-  for (let i = 0; i < 48; i++) {
-    series[0]["data"].push(country_data["biophysical"]["ratio"]["MF"][i]);
-  }
-  options.series = series;
-  options.yaxis = {
-    min: 0,
-    max:
-      Math.max.apply(Math, series[0]["data"]) > 1
-        ? Math.max.apply(Math, series[0]["data"])
-        : 1,
-    forceNiceScale: true,
-  };
-  let canvas = document.getElementById(parentid);
-  canvas.removeChild(canvas.lastChild);
-  var divtest = document.createElement("div");
-  divtest.outerHTML = createApexChart(canvasID, options);
-  canvas.appendChild(divtest);
 }
