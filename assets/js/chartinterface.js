@@ -94,16 +94,25 @@ function createChart({ chartID, chartTitle, chartDescription, renderFunc, templa
 // Button areas
 // ------------
 
-function toggleChartArea(button, areaID, chartID) {
+function toggleChartArea(button, areaID, chartID, hide_description = false) {
     var shareArea = document.getElementById(`chart-${chartID}-${areaID}-btns`)
+    var chartDescription = document.getElementById(`two-charts-description-${chartID}`);
     if (button.value == "OFF") {
         button.value = "ON";
         shareArea.style.display = "block";
         shareArea.style.visibility = "visible";
+        if (hide_description) {
+            chartDescription.style.display = "block";
+            chartDescription.style.visibility = "visible";
+        }
     } else {
         button.value = "OFF";
         shareArea.style.display = "none";
         shareArea.style.visibility = "hidden";
+        if (hide_description) {
+            chartDescription.style.display = "none";
+            chartDescription.style.visibility = "hidden";
+        }
     }
 }
 
@@ -156,10 +165,15 @@ function copyToClipboard(url) {
 // Download image functions
 // ------------------------
 
-function createImage(chartID, chartTitle, chartDescription) {
+function createImage(chartID, chartTitle, chartDescription, second_chart) {
 
     var chart = document.getElementById(`chart-canvas-${chartID}`);
     const chart_clone = chart.cloneNode(true);
+
+    if (second_chart) {
+        var chart2 = document.getElementById(`chart-canvas-${chartID}-2`);
+        var chart2_clone = chart2.cloneNode(true);
+    }
 
     var img = new Image();
     img.src = window.wp_url+'/wp-content/plugins/global_inequality_charts/assets/img/global_inequality_logo.png';
@@ -175,14 +189,18 @@ function createImage(chartID, chartTitle, chartDescription) {
 
     document.getElementById(`downloadImage-${chartID}`).appendChild(chart_clone);
 
+    if (second_chart) {
+        document.getElementById(`downloadImage-${chartID}`).appendChild(chart2_clone);
+    }
+
     document.getElementById(`downloadImage-${chartID}`).innerHTML +=
         `URL: ${window.location.href}#chart-${chartID}`;
 
 }
 
-function downloadImage(chartID, chartTitle, chartDescription) {
+function downloadImage(chartID, chartTitle, chartDescription, second_chart = false) {
 
-    createImage(chartID, chartTitle, chartDescription)
+    createImage(chartID, chartTitle, chartDescription, second_chart)
 
     var container = document.getElementById(`downloadImage-${chartID}`);
 

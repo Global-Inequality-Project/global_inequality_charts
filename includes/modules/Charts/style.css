@@ -1,3 +1,38 @@
+/* Style changes for template two_charts -----------------*/
+.chart-template-two_charts .chart-all-btns {
+  display: none;
+}
+
+.chart-template-two_charts .chart-col-above {
+  width: 100%;
+}
+
+.chart-template-two_charts .chart-col-below {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 50px;
+}
+
+.chart-template-two_charts .chart-title-bars {
+  display: block !important;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.chart-template-two_charts .chart-expand-btn {
+  display: none;
+}
+
+.chart-title-two_charts .chart-description-two_charts {
+  display: none;
+}
+
+.chart-template-two_charts .chart-sources-popover {
+  width: 100%;
+  border-right: 0;
+}
+/*--------------------------------------------------------*/
+
 .chart-template-main {
   display: flex;
 }
@@ -17,6 +52,19 @@
   .chart-template-main {
     display: block;
   }
+
+  /* Style changes for template two_charts -----------------*/
+  .chart-template-two_charts .chart-col-below {
+    height: 90vh !important;
+    flex-direction: column !important;
+  }
+  .chart-col-two_charts .chart-box-outer{
+    padding-top: 0;
+  }
+  .chart-col-two_charts .chart-box-inner{
+    height: 45vh !important;
+  }
+  /*--------------------------------------------------------*/
 
   .chart-col-left {
     width: 100%;
