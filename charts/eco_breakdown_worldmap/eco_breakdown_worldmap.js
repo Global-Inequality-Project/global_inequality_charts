@@ -92,27 +92,27 @@ function render_eco_breakdown_worldmap(canvasID, modal) {
     map_createLegend([
       {
         color: "#950000",
-        name: "20B+"
+        name: "100B+"
       },
       {
         color: "#d30000",
-        name: "10B - 20B"
+        name: "30B - 100B"
       },
       {
         color: "#ea503b",
-        name: "5B - 10B"
+        name: "20B - 30B"
       },
       {
         color: "#f68648",
-        name: "2B - 5B"
+        name: "10B - 20B"
       },
       {
         color: "#f6bc77",
-        name: "1B - 2B"
+        name: "5B - 10B"
       },
       {
         color: "#f5d993",
-        name: "0B - 1B"
+        name: "0B - 5B"
       },
       {
         color: "#abdda4",
