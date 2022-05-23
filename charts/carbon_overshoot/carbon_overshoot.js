@@ -22,11 +22,7 @@ function importFilesAndShow_carbon_overshoot() {
                     // Create custom tools for the sidebar (optional)
                     data.my_custom_choice = 1;
                     var customTools = `
-        <button onclick="toggleChartArea(this, 'choice', 'carbon_overshoot')" value="OFF" class="chart-btn">
-          <i class="fa-solid fa-sliders"></i>Degrees
-        </button>
 
-        <div class="chart-btn-area" id="chart-carbon_overshoot-choice-btns">
 
           <button class="chart-btn" id="carbon_overshoot-choice-1" onclick="setChoice_carbon_overshoot(1)">
             <i class="fa-solid fa-square-check"></i>1.5°
@@ -36,7 +32,6 @@ function importFilesAndShow_carbon_overshoot() {
             <i class="fa-solid fa-square"></i></i>2°
           </button>
 
-        </div>
         `
                     // Render Chart Interface
                     createChartInterface({
@@ -137,7 +132,18 @@ function render_carbon_overshoot(canvasID) {
             shared: true,
             intersect: false
         },
-        series:series,
+        series: series,
+        title: {
+            text: "% of 1.5C budget used",
+            style: {
+                fontSize: '14px',
+                fontWeight: '600',
+                fontFamily: "OpenSans",
+                color: '#000'
+            },
+            align: 'center',
+            margin: 0
+        }
     }
 
 
@@ -158,16 +164,21 @@ function setChoice_carbon_overshoot(choice) {
 
     var btn1 = document.getElementById(`carbon_overshoot-choice-1`)
     var btn2 = document.getElementById(`carbon_overshoot-choice-2`)
-    console.log(chart)
+    let title = "% of 1.5C budget used"
     if (choice == 1) {
         btn1.innerHTML = `<i class="fa-solid fa-square-check"></i>1.5°`
         btn2.innerHTML = `<i class="fa-solid fa-square"></i>2°`
     } else if (choice == 2) {
         btn1.innerHTML = `<i class="fa-solid fa-square"></i>1.5°`
         btn2.innerHTML = `<i class="fa-solid fa-square-check"></i>2°`
+        title = "% of 2C budget used"
+
     }
     const updateData = generateSeries_carbon_overshoot(data);
-    chart.updateOptions({xaxis:{categories:window.chart_data["carbon_overshoot"].countries_sorted}})
+    chart.updateOptions({
+        xaxis: { categories: window.chart_data["carbon_overshoot"].countries_sorted },
+        title: { text: title }
+    })
     chart.updateSeries(updateData)
 
 };
