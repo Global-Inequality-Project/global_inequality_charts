@@ -1,0 +1,43 @@
+/* Please use always the chart id as primary selector to not interfer with other parts */
+
+/* Adjusting chart tools */
+
+/* #chart-eco_breakdown_national_use h1{
+    /*color: darkblue;*/
+/*}
+/* Adjusting the chart container */
+
+#chart-eco_breakdown_national_use .chart-box-outer {
+  margin-top: -15px;  /* Custom margins */
+  /* padding-top: calc(max(66%, 300px)); */ /* Custom graph height */
+}
+
+/* Adjusting the modal container */
+#chart-canvas-eco_breakdown_national_use-2,
+#chart-canvas-eco_breakdown_national_use{
+  height: 100%;
+}
+#chart-modal-content-eco_breakdown_national_use-chart {
+  /* Create scrollable modal */
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  padding-right: 20px;
+}
+
+#chart-eco_breakdown_national_use .chart-col-above {
+  position: relative;
+}
+
+#chart-eco_breakdown_national_use .chart-col-below {
+  display: flex;
+}
+
+#chart-eco_breakdown_national_use .chart-col-two_charts {
+  flex: 1;
+  padding: 1em;
+  border: 1px solid #bfbfbf;
+  border-radius: 3px;
+}
+

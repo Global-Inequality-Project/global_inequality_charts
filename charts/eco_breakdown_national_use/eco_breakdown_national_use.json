@@ -1,0 +1,13 @@
+{
+    "id": "eco_breakdown_national_use",
+    "title": "National Resource Use with Respect to Fair Shares (Fair share = 1)",
+    "description": "This is the chart description",
+    "author": "Jason Hickel",
+    "template":"two_charts",
+    "category":"8. Responsibility for Ecological Breakdown",
+    "schema_version": 5,
+    "libraries": {
+        "apexcharts": true,
+        "chartutils": true
+    }
+}
