@@ -22,21 +22,13 @@ function importFilesAndShow_carbon_budget() {
                     // Create custom tools for the sidebar (optional)
                     data.my_custom_choice = 1;
                     var customTools = `
-        <button onclick="toggleChartArea(this, 'choice', 'carbon_budget')" value="OFF" class="chart-btn">
-          <i class="fa-solid fa-sliders"></i>Degrees
-        </button>
-
-        <div class="chart-btn-area" id="chart-carbon_budget-choice-btns">
-
-          <button class="chart-btn" id="carbon_budget-choice-1" onclick="setChoice_carbon_budget(1)">
-            <i class="fa-solid fa-square-check"></i>1.5°
-          </button>
-
-          <button class="chart-btn" id="carbon_budget-choice-2" onclick="setChoice_carbon_budget(2)">
-            <i class="fa-solid fa-square"></i></i>2°
-          </button>
-
-        </div>
+                    <button class="chart-btn" id="carbon_budget-choice-1" onclick="setChoice_carbon_budget(1)">
+                    <i class="fa-solid fa-square-check"></i>1.5°
+                  </button>
+        
+                  <button class="chart-btn" id="carbon_budget-choice-2" onclick="setChoice_carbon_budget(2)">
+                    <i class="fa-solid fa-square"></i></i>2°
+                  </button>
         `
                     // Render Chart Interface
                     createChartInterface({
@@ -158,6 +150,17 @@ function render_carbon_budget(canvasID) {
             ]
         },
         series: series,
+        title: {
+            text: "% of 1.5C budget used",
+            style: {
+                fontSize: '14px',
+                fontWeight: '600',
+                fontFamily: "OpenSans",
+                color: '#000'
+            },
+            align: 'center',
+            margin: 0
+        }
     }
 
 
@@ -178,16 +181,21 @@ function setChoice_carbon_budget(choice) {
 
     var btn1 = document.getElementById(`carbon_budget-choice-1`)
     var btn2 = document.getElementById(`carbon_budget-choice-2`)
-    console.log(chart)
+    let title = "% of 1.5C budget used"
+
     if (choice == 1) {
         btn1.innerHTML = `<i class="fa-solid fa-square-check"></i>1.5°`
         btn2.innerHTML = `<i class="fa-solid fa-square"></i>2°`
     } else if (choice == 2) {
         btn1.innerHTML = `<i class="fa-solid fa-square"></i>1.5°`
         btn2.innerHTML = `<i class="fa-solid fa-square-check"></i>2°`
+        title = "% of 2C budget used"
     }
     const updateData = generateSeries_carbon_budget(data);
-    chart.updateOptions({ xaxis: { categories: window.chart_data["carbon_budget"].countries_sorted } })
+    chart.updateOptions({
+        xaxis: { categories: window.chart_data["carbon_budget"].countries_sorted },
+        title: { text: title }
+    })
     chart.updateSeries(updateData)
 
 };

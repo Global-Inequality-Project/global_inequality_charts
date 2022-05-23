@@ -323,3 +323,7 @@
   display: block;
   height: 11px;
 }
+
+.svgMap-map-wrapper .svgMap-country {
+  stroke: #747474!important;
+}

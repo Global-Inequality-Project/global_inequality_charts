@@ -4,8 +4,10 @@
   border-radius: 3px;
 }
 #chart-eco_breakdown_material_footprint_overshoot .chart-box-inner {
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 #chart-modal-box {
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }

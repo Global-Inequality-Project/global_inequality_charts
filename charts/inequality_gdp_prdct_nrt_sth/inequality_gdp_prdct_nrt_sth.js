@@ -66,10 +66,6 @@ function render_inequality_gdp_prdct_nrt_sth(canvasID) {
 
             },
         ],
-        stroke: {
-            curve: 'straight',
-            width: 3
-        },
         yaxis: {
             labels: { formatter: (val, index) => '$' + formatYAxisLabel(val, index, 0, true) }
         },
