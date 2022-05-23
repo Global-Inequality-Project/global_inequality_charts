@@ -1,5 +1,5 @@
 //--------------------------------------- window.ready
-jQuery(function () {
+jQuery(function() {
   checkObjectKeysFunc();
   window.chart_data["eco_breakdown_national_use"] = {
     years: { start: 1970, end: 2017 },
@@ -12,7 +12,7 @@ jQuery(function () {
 function importFilesAndShow_eco_breakdown_national_use() {
   var chartID = "eco_breakdown_national_use";
 
-  loadJson(`${window.charts_path}/${chartID}/data.json`, function (
+  loadJson(`${window.charts_path}/${chartID}/data.json`, function(
     err,
     eco_breakdown_national_use
   ) {
@@ -31,7 +31,7 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
   let years = [];
   for (
     let year = window.chart_data["eco_breakdown_national_use"].years.start,
-    end = window.chart_data["eco_breakdown_national_use"].years.end;
+      end = window.chart_data["eco_breakdown_national_use"].years.end;
     year <= end;
     ++year
   )
@@ -162,7 +162,6 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
 
   const canvasID2 = canvasID + "-2";
 
-
   function createDropdownForChart(id) {
     let dropdown = `
     <div class="wrapper">
@@ -181,46 +180,89 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
     `;
     jQuery(id).append(dropdown);
   }
-  function createSelectedChart(
-    series,
-    country_data,
-    options,
-    chart
-  ) {
-    series[0]["data"] = [];
-    for (let i = 0; i < 48; i++) {
-      series[0]["data"].push(country_data["biophysical"]["ratio"]["MF"][i]);
-    }
+
+  function updateChart(chart, options, series, higher_series) {
     options.series = series;
     options.yaxis = {
       min: 0,
       max:
-        Math.max.apply(Math, series[0]["data"]) > 1
-          ? Math.max.apply(Math, series[0]["data"])
+        Math.max.apply(Math, higher_series[0]["data"]) > 1
+          ? Math.max.apply(Math, higher_series[0]["data"])
           : 1,
       forceNiceScale: true,
     };
-    chart.updateOptions(options)
+    chart.updateOptions(options);
   }
-  
-  createDropdownForChart(canvasID)
-  createDropdownForChart(canvasID2)
+
+  function createSelectedChart(
+    chart,
+    country_data,
+    options,
+    chart2,
+    options2,
+    first_chart
+  ) {
+    let series = [{ name: "Ratio", data: [] }];
+    let series2 = [{ name: "Ratio", data: [] }];
+
+    let country2 = (first_chart ? jQuery("#chart-canvas-eco_breakdown_national_use-2") : jQuery("#chart-canvas-eco_breakdown_national_use"))
+      .find(":selected")
+      .text();
+      console.log("Country 2:",country2)
+    let country_data2 = data.find((element) => element.country == country2);
+
+    for (let i = 0; i < 48; i++) {
+      series[0]["data"].push(country_data["biophysical"]["ratio"]["MF"][i]);
+    }
+
+    for (let i = 0; i < 48; i++) {
+      series2[0]["data"].push(country_data2["biophysical"]["ratio"]["MF"][i]);
+    }
+    console.log("Series 2", series2);
+
+    if (
+      Math.max.apply(Math, series[0]["data"]) >=
+      Math.max.apply(Math, series2[0]["data"])
+    ) {
+      updateChart(chart, options, series, series);
+      updateChart(chart2, options2, series2, series);
+    } else {
+      updateChart(chart, options, series, series2);
+      updateChart(chart2, options2, series2, series2);
+    }
+  }
+
+  createDropdownForChart(canvasID);
+  createDropdownForChart(canvasID2);
   let chart = createApexChart(canvasID + "-chart", options);
   let chart2 = createApexChart(canvasID2 + "-chart", options);
 
   //Append dropdown menu
 
-  jQuery(".wrapper:first-child").on("change", function (e) {
+  jQuery(".wrapper:first-child").on("change", function(e) {
     let country = e.target.value;
     let country_data = data.find((element) => element.country == country);
+    console.log(jQuery("#chart-canvas-eco_breakdown_national_use").children());
 
     parentid = e.target.parentNode.parentNode.getAttributeNode("id").value;
     if (parentid == "chart-canvas-eco_breakdown_national_use") {
-      createSelectedChart(series, country_data, options, chart);
-    } else if (parentid == "chart-canvas-eco_breakdown_national_use-2") {
-      createSelectedChart(series, country_data, options, chart2);
+      createSelectedChart(
+        chart,
+        country_data,
+        options,
+        chart2,
+        (options2 = options),
+        true
+      );
     } else {
-      throw new Error("Wrong identifier");
+      createSelectedChart(
+        chart2,
+        country_data,
+        options,
+        chart,
+        (options2 = options),
+        false
+      );
     }
   });
 
