@@ -61,10 +61,7 @@ function render_poverty_num_min_china(canvasID) {
                 }
             }
         ],
-        stroke: {
-            curve: 'straight',
-            width: 2.5
-        },
+
         yaxis: {
             min: 0,
             labels: { formatter: (val, index) => formatYAxisLabel(val, index, 1, true) }

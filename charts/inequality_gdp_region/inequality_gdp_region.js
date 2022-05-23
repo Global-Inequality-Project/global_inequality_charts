@@ -76,10 +76,6 @@ function render_inequality_gdp_region(canvasID){
 
             },
         ],
-        stroke: {
-            curve: 'straight',
-            width: 3
-        },
         yaxis: {
             max: 65e3,
             labels: { formatter: (val, index) => '$'+formatYAxisLabel(val, index, 0, true) }

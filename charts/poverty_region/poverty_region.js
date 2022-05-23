@@ -45,10 +45,6 @@ function render_poverty_region(canvasID) {
             },
             selection: { enable: false },
         },
-        stroke: {
-            curve: 'straight',
-            width: 1
-        },
         theme: {
             palette: 'palette1',
         },
