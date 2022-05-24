@@ -134,11 +134,11 @@ function render_carbon_overshoot(canvasID) {
         },
         series: series,
         title: {
-            text: "% of 1.5C budget used",
+            text: "overshoot of 1.5C budget",
             style: {
                 fontSize: '14px',
                 fontWeight: '600',
-                fontFamily: "OpenSans",
+                fontFamily: "Open Sans",
                 color: '#000'
             },
             align: 'center',
@@ -164,20 +164,21 @@ function setChoice_carbon_overshoot(choice) {
 
     var btn1 = document.getElementById(`carbon_overshoot-choice-1`)
     var btn2 = document.getElementById(`carbon_overshoot-choice-2`)
-    let title = "% of 1.5C budget used"
+    let title = "overshoot of 1.5C budget"
     if (choice == 1) {
         btn1.innerHTML = `<i class="fa-solid fa-square-check"></i>1.5°`
         btn2.innerHTML = `<i class="fa-solid fa-square"></i>2°`
     } else if (choice == 2) {
         btn1.innerHTML = `<i class="fa-solid fa-square"></i>1.5°`
         btn2.innerHTML = `<i class="fa-solid fa-square-check"></i>2°`
-        title = "% of 2C budget used"
+        title = "overshoot of 2C budget"
 
     }
     const updateData = generateSeries_carbon_overshoot(data);
     chart.updateOptions({
         xaxis: { categories: window.chart_data["carbon_overshoot"].countries_sorted },
-        title: { text: title }
+        title: { text: title },
+        chart:{height: updateData[0].data.length * 25}
     })
     chart.updateSeries(updateData)
 

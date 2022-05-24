@@ -125,7 +125,6 @@ function render_carbon_budget(canvasID) {
             y: {
                 formatter: (val, index) => formatTooltipVal(val, index),
             },
-            // followCursor: true,
             shared: true,
             intersect: false
         },
@@ -155,7 +154,7 @@ function render_carbon_budget(canvasID) {
             style: {
                 fontSize: '14px',
                 fontWeight: '600',
-                fontFamily: "OpenSans",
+                fontFamily: "Open Sans",
                 color: '#000'
             },
             align: 'center',
@@ -166,7 +165,7 @@ function render_carbon_budget(canvasID) {
 
 
     options.xaxis.categories = window.chart_data["carbon_budget"].countries_sorted;
-    options['chart'].id = ('Overshoot of 350ppm Carbon Budget').replace(/ /g, "");
+    options['chart'].id = (canvasID+"-id").replace(/ /g, "").replace("#","");
     return createApexChart(canvasID, options);
 
 }

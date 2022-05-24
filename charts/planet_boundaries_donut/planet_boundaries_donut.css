@@ -24,11 +24,6 @@
   padding-right: 20px;
 }
 #chart-canvas-planet_boundaries_donut {
-  display: flex;
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
   border: 1px solid #bfbfbf;
   border-radius: 3px;
 }
@@ -36,14 +31,15 @@
 #chart-canvas-planet_boundaries_donut-charts {
   display: flex;
   flex-direction: row;
-  overflow-y: scroll;
-  overflow-x: hidden;
   max-width: 100%;
-  max-height: 100%;
-  height: 100%;
   justify-content: center;
   flex-wrap: wrap;
-
+}
+#chart-modal-content-planet_boundaries_donut-charts-modal {
+  height: 100%;
+  max-height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 #chart-modal-content-planet_boundaries_donut .vertical-doughnut,
 #chart-canvas-planet_boundaries_donut .vertical-doughnut {
@@ -51,7 +47,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  text-align: center;
   min-width: 300px;
 }
 .vertical-control {
@@ -72,25 +68,36 @@
   justify-content: center;
   width: 80%;
   padding-top: 10%;
-  align-items: flex-end;
 }
 #doughnut_north {
-  width: 100%;
-  align-items: flex-start;
+  width: 450%;
   padding-top: 0%;
-
 }
 
-@media all and (max-width: 460px)  {
+@media all and (max-width: 460px) {
   #chart-canvas-planet_boundaries_donut,
   #chart-modal-content-planet_boundaries_donut-charts-modal,
   #chart-canvas-planet_boundaries_donut-charts {
     max-height: none;
   }
-  #chart-wrapper-planet_boundaries_donut .chart-box-outer{
+  #chart-wrapper-planet_boundaries_donut .chart-box-outer {
     padding-top: 0px;
   }
   #chart-wrapper-planet_boundaries_donut .chart-box-inner {
     position: relative;
   }
+}
+
+#chart-wrapper-planet_boundaries_donut .chart-box-inner {
+  padding: 0;
+  margin-top: 10px;
+}
+#doughnut_south {
+  padding-top: 119px;
+  padding-bottom: 10px;
+  align-items: unset;
+  width: 260px;
+}
+#chart-wrapper-planet_boundaries_donut .chart-col-below >:nth-child(2){
+  display: none;
 }

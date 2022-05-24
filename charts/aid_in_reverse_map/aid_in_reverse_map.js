@@ -124,9 +124,10 @@ function render_aid_in_reverse_map(canvasID, modal) {
             format: '${0}'
           },
         },
-        initialZoom:1.20,
-        showZoomReset:true,
-        showContinentSelector:true,
+        initialZoom: 1.20,
+        showZoomReset: true,
+        showContinentSelector: true,
+        initialPan: { x: 550, y: 160 },
         applyData: 'quantile',
         values: values
       },

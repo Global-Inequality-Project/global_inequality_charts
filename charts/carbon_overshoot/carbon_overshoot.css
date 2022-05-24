@@ -4,7 +4,7 @@
   border-radius: 3px;
 }
 #chart-carbon_overshoot .chart-box-inner{
-  overflow: scroll;
+  overflow-y: scroll;
 }
 #chart-modal-box{
   overflow: scroll;

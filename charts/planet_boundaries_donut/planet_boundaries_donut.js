@@ -618,6 +618,7 @@ function prepare_planet_boundaries_donut() {
         if (window.chart_data['planet_boundaries_donut'].enabledCharts.north) {
           let north_wrapper = document.createElement("div");
           north_wrapper.setAttribute("class", "vertical-doughnut");
+          north_wrapper.setAttribute("id", "vertical-doughnut-north");
           let north_title = document.createElement("div");
           north_title.setAttribute("class", "region_label");
           north_title.innerHTML = "Global North";
@@ -632,6 +633,7 @@ function prepare_planet_boundaries_donut() {
         if (window.chart_data['planet_boundaries_donut'].enabledCharts.south) {
           let south_wrapper = document.createElement("div");
           south_wrapper.setAttribute("class", "vertical-doughnut");
+          south_wrapper.setAttribute("id", "vertical-doughnut-south");
           let south_title = document.createElement("div");
           south_title.setAttribute("class", "region_label");
           south_title.innerHTML = "Global South";
@@ -645,7 +647,7 @@ function prepare_planet_boundaries_donut() {
         }
         if (window.chart_data['planet_boundaries_donut'].enabledCharts.south_wo_chn) {
           let south_wo_chn_wrapper = document.createElement("div");
-          south_wo_chn_wrapper.setAttribute("class", "vertical-doughnut");
+          south_wo_chn_wrapper.setAttribute("id", "vertical-doughnut-south-wo-chn");
           let south_wo_chn_title = document.createElement("div");
           south_wo_chn_title.setAttribute("class", "region_label");
           south_wo_chn_title.innerHTML = "Global South w/o China";
@@ -661,6 +663,7 @@ function prepare_planet_boundaries_donut() {
         if (window.chart_data['planet_boundaries_donut'].enabledCharts.china) {
           let chn_wrapper = document.createElement("div");
           chn_wrapper.setAttribute("class", "vertical-doughnut");
+          chn_wrapper.setAttribute("id", "vertical-doughnut-china");
           let chn_title = document.createElement("div");
           chn_title.setAttribute("class", "region_label");
           chn_title.innerHTML = "China";
@@ -719,12 +722,6 @@ function prepare_planet_boundaries_donut() {
 
                   // Create custom tools for the sidebar (optional)
                   let customTools = `
-                    <button onclick="toggleChartArea(this, 'choice', 'planet_boundaries_donut')" value="OFF" class="chart-btn">
-                      <i class="fa-solid fa-sliders"></i>Show graphs
-                    </button>
-
-                    <div class="chart-btn-area" id="chart-planet_boundaries_donut-choice-btns">
-
                       <button class="chart-btn" id="planet_boundaries_donut-choice-1" onclick="setChoice_planet_boundaries_donut(1)">
                         <i id="planet_boundaries_donut-choice-1-icon" class="fa-solid fa-square-check"></i>Global North
                       </button> 
@@ -740,8 +737,6 @@ function prepare_planet_boundaries_donut() {
                       <button class="chart-btn" id="planet_boundaries_donut-choice-4" onclick="setChoice_planet_boundaries_donut(4)">
                         <i id="planet_boundaries_donut-choice-4-icon" class="fa-solid fa-square"></i></i>China
                       </button>
-
-                    </div>
                     `
                   // Render Chart Interface
                   createChartInterface({

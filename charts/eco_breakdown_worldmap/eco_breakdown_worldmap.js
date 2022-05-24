@@ -87,6 +87,7 @@ function render_eco_breakdown_worldmap(canvasID, modal) {
       initialZoom:1.20,
       showZoomReset: true,
       showContinentSelector: true,
+      initialPan: { x: 550, y: 160 },
 
     });
     map_createLegend([
