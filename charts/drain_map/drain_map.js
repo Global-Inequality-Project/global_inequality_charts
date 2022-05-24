@@ -99,7 +99,10 @@ function render_drain_map(canvasID, modal) {
           },
         },
         applyData: 'loss',
-        values: values
+        values: values,
+        initialZoom:1.20,
+        showZoomReset: true,
+        showContinentSelector: true,
       },
       onGetTooltip: function (tooltipDiv, countryID, countryValues) {
         // Create tooltip content element
