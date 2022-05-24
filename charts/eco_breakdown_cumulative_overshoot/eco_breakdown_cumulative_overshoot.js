@@ -65,12 +65,6 @@ function render_eco_breakdown_cumulative_overshoot(canvasID) {
           xaxis: { tickAmount: 10 },
         },
       },
-      {
-        breakpoint: 401,
-        options: {
-          //chart: {height: 300},
-        },
-      },
     ],
     dataLabels: {
       enabled: false,
@@ -124,13 +118,6 @@ function render_eco_breakdown_cumulative_overshoot(canvasID) {
         }
     })
   });
-
-//     years.forEach((year) => {
-//       let data_row = data_hash["7_5"][year + "_" + region];
-//       if (data_row) series[i].data.push(data_row["poor_pop"] * 1e6);
-//       else series[i].data.push(null);
-//     });
-//   });
 
   options["chart"].id = "Share of responsibility for excess resource use by region".replace(/ /g, "");
   options["xaxis"] = {
