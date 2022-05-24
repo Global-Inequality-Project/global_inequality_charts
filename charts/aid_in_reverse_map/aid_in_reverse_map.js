@@ -124,13 +124,13 @@ function render_aid_in_reverse_map(canvasID, modal) {
             format: '${0}'
           },
         },
-        initialZoom: 1.15,
-        showZoomReset: true,
-        showContinentSelector: true,
-        initialPan: { x: 550, y: 160 },
         applyData: 'quantile',
         values: values
       },
+      initialZoom: 1.15,
+      showZoomReset: true,
+      showContinentSelector: true,
+      initialPan: { x: 550, y: 160 },
       onGetTooltip: function (tooltipDiv, countryID, countryValues) {
         // Create tooltip content element
         var tooltipContentElement = document.createElement('div');
