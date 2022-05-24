@@ -116,7 +116,7 @@ function render_carbon_inequality(canvasID) {
             series[0].data.push(null);
     });
 
-    options['chart'].id = ('CO2 Emissions per capita (2019)').replace(/ /g,"");
+    options['chart'].id = ('CO2 Emissions per capita').replace(/ /g,"");
 	options.series = series;
 
     return createApexChart(canvasID, options);

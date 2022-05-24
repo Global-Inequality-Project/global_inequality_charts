@@ -125,16 +125,12 @@ function render_eco_breakdown_material_footprint_overshoot(canvasID) {
             y: {
                 formatter: (val, index) => formatTooltipVal(val, index),
             },
-            followCursor: true,
-            shared: false,
+            shared: true,
+            intersect: false
         },
         series: series
     }
-
-
-
-
-    options['chart'].id = ('Cumulative Material Footprint overshoot (1970-2017)').replace(/ /g, "");
+    options['chart'].id = ('Cumulative Material Footprint overshoot').replace(/ /g, "");
     return createApexChart(canvasID, options);
 
 }

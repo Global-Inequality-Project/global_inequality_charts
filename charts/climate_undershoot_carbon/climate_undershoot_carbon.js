@@ -126,9 +126,8 @@ function render_climate_undershoot_carbon(canvasID) {
             y: {
                 formatter: (val, index) => formatTooltipVal(val, index),
             },
-            followCursor: true,
-            intersect: false,
-            shared:true
+            shared: true,
+            intersect: false
         },
         legend: { show: false },
         series: series

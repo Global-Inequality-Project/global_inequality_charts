@@ -128,7 +128,6 @@ function render_climate_overshoot_carbon(canvasID) {
             y: {
                 formatter: (val, index) => formatTooltipVal(val, index),
             },
-            followCursor: true,
             intersect: false,
             shared:true
         },

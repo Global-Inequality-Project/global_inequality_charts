@@ -128,7 +128,6 @@ function render_carbon_overshoot(canvasID) {
             y: {
                 formatter: (val, index) => formatTooltipVal(val, index),
             },
-            // followCursor: true,
             shared: true,
             intersect: false
         },
