@@ -84,7 +84,7 @@ function render_eco_breakdown_worldmap(canvasID, modal) {
         applyData: 'quantile',
         values: values
       },
-      initialZoom:1.20,
+      initialZoom:1.15,
       showZoomReset: true,
       showContinentSelector: true,
       initialPan: { x: 550, y: 160 },

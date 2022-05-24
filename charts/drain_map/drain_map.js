@@ -100,7 +100,7 @@ function render_drain_map(canvasID, modal) {
         },
         applyData: 'loss',
         values: values,
-        initialZoom:1.20,
+        initialZoom:1.15,
         showZoomReset: true,
         showContinentSelector: true,
       },
