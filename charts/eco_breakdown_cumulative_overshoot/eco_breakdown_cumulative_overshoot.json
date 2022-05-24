@@ -1,0 +1,13 @@
+{
+    "id":"eco_breakdown_cumulative_overshoot",
+    "title": "Share of responsibility for excess resource use by region, 1970–2017",
+    "description": "Share of cumulative overshoot (%)",
+    "author":"Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"8. Responsibility for Ecological Breakdown",
+    "schema_version":5,
+    "libraries":{
+        "apexcharts":true,
+        "chartutils": true
+    }
+}
