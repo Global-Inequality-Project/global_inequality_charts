@@ -155,7 +155,7 @@ function render_carbon_budget(canvasID) {
             style: {
                 fontSize: '14px',
                 fontWeight: '600',
-                fontFamily: "OpenSans",
+                fontFamily: "Open Sans",
                 color: '#000'
             },
             align: 'center',
