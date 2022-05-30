@@ -20,7 +20,7 @@ function createTemplate_two_charts({ chartID, chartTitle, chartDescription, char
 
             ${customTools}
 
-            <button class="chart-btn chart-expand-btn" id="chart-expand-btn-${chartID}">
+            <button class="chart-btn chart-expand-btn" id="chart-expand-btn-${chartID}-2">
               <i class="fas fa-expand-alt"></i>Expand
             </button>
 

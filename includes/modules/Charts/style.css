@@ -20,7 +20,7 @@
 }
 
 .chart-template-two_charts .chart-expand-btn {
-  display: none;
+  display: block;
 }
 
 .chart-title-two_charts .chart-description-two_charts {
@@ -30,6 +30,11 @@
 .chart-template-two_charts .chart-sources-popover {
   width: 100%;
   border-right: 0;
+}
+
+.chart-modal-content-container {
+  display: flex;
+  height: 100%;
 }
 /*--------------------------------------------------------*/
 
@@ -58,11 +63,15 @@
     height: 90vh !important;
     flex-direction: column !important;
   }
-  .chart-col-two_charts .chart-box-outer{
+  .chart-col-two_charts .chart-box-outer {
     padding-top: 0;
   }
-  .chart-col-two_charts .chart-box-inner{
+  .chart-col-two_charts .chart-box-inner {
     height: 45vh !important;
+  }
+  /* Hide expand button since both charts are maxed out on mobile screen */
+  .chart-template-two_charts .chart-expand-btn {
+    display: none;
   }
   /*--------------------------------------------------------*/
 
@@ -126,7 +135,7 @@
   padding: 15px 17px;
   margin: 3px 0px;
   font-size: 14px;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   cursor: pointer;
   width: 100%;
   text-align: left;
@@ -136,7 +145,7 @@
   background-color: #e2e2e2;
 }
 
-.chart-btn[value*='ON'] {
+.chart-btn[value*="ON"] {
   font-weight: bold;
   background-color: #e2e2e2;
   border-bottom: 3px white solid;
@@ -284,7 +293,7 @@
 
 .chart-sources-popover-title {
   font-size: 14px;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   margin: 3px 0px;
   color: #646464;
 }
@@ -305,9 +314,9 @@
   border-radius: 3px;
 }
 .map-legend {
- display: flex;
- justify-content: center;
- width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 .map-legend table tbody tr {
   display: flex;
@@ -325,5 +334,5 @@
 }
 
 .svgMap-map-wrapper .svgMap-country {
-  stroke: #747474!important;
+  stroke: #747474 !important;
 }
