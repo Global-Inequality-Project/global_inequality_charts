@@ -84,8 +84,8 @@ function render_climate_world_map(canvasID, modal) {
         applyData: 'quantile',
         values: values
       },
-      initialZoom: 1.15,
-      initialPan: { x: 550, y: 160 },
+      initialZoom: 1.13,
+      initialPan: { x: 520, y: 200 },
       showZoomReset: true,
       showContinentSelector: true,
     });

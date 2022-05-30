@@ -84,10 +84,10 @@ function render_eco_breakdown_worldmap(canvasID, modal) {
         applyData: 'quantile',
         values: values
       },
-      initialZoom:1.15,
+      initialZoom: 1.13,
       showZoomReset: true,
       showContinentSelector: true,
-      initialPan: { x: 550, y: 160 },
+      initialPan: { x: 520, y: 200 },
 
     });
     map_createLegend([
