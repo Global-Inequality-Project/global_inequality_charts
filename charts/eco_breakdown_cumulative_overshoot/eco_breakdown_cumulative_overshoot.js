@@ -92,7 +92,6 @@ function render_eco_breakdown_cumulative_overshoot(canvasID) {
   };
 
   let data = window.chart_data["eco_breakdown_cumulative_overshoot"].data;
-  console.log(data)
 
   let years = [];
   for (
@@ -110,7 +109,6 @@ function render_eco_breakdown_cumulative_overshoot(canvasID) {
 
     years.forEach((year) => {
         let data_cell = data[i][year];
-        console.log(data_cell)
         if (isNaN(data_cell)==false) {
             series[i].data.push(data_cell)
         } else {

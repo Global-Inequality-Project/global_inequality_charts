@@ -208,7 +208,6 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
     let country2 = (first_chart ? jQuery("#chart-canvas-eco_breakdown_national_use-2") : jQuery("#chart-canvas-eco_breakdown_national_use"))
       .find(":selected")
       .text();
-      console.log("Country 2:",country2)
     let country_data2 = data.find((element) => element.country == country2);
 
     for (let i = 0; i < 48; i++) {
@@ -218,7 +217,6 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
     for (let i = 0; i < 48; i++) {
       series2[0]["data"].push(country_data2["biophysical"]["ratio"]["MF"][i]);
     }
-    console.log("Series 2", series2);
 
     if (
       Math.max.apply(Math, series[0]["data"]) >=
@@ -242,7 +240,6 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
   jQuery(".wrapper:first-child").on("change", function(e) {
     let country = e.target.value;
     let country_data = data.find((element) => element.country == country);
-    console.log(jQuery("#chart-canvas-eco_breakdown_national_use").children());
 
     parentid = e.target.parentNode.parentNode.getAttributeNode("id").value;
     if (parentid == "chart-canvas-eco_breakdown_national_use") {
