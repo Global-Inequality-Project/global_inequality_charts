@@ -85,12 +85,12 @@ This file contains the following chart settings:
 
 The following entries for libraries are currently supported. They are optional and can be omitted when not used. Entries marked with a * can be adapted in `assets/js/`.
 
-- `apexcharts` (v3.33)
+- `apexcharts` (v3.35.0)
 - `chartutils` *
 - `chart.js` (v3.7.1)
 - `chartjs-chart-sankey` (v0.9.0)
-- `d3js` (v4.13)
-- `svgmap` (v2.7.2)
+- `d3js` (v7.4.4)
+- `svgmap` (v2.8.0)
 - `mapchart` * (used in combination with svgmap)
 
 The following templates are currently supported:
