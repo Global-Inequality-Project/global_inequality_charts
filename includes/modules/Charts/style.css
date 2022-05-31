@@ -1,43 +1,45 @@
 /* Font family -------------------------------------------*/
-h1 {
-  font-family: 'Open Sans';
-  font-size: 24px;
+h1,
+h2,
+h3,
+p,
+blockquote,
+pre {
+  font-family: "Open Sans";
   font-style: normal;
   font-variant: normal;
+}
+
+h1,
+h3 {
   font-weight: 700;
-  line-height: 26.4px;
+}
+
+p,
+blockquote,
+pre {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 1.5rem;
+  line-height: 1.65rem;
 }
 h3 {
-  font-family: 'Open Sans';
-  font-size: 14px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 700;
-  line-height: 15.4px;
+  font-size: 0.875rem;
+  line-height: 0.9625rem;
 }
 p {
-  font-family: 'Open Sans';
-  font-size: 14px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: 20px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 blockquote {
-  font-family: 'Open Sans';
-  font-size: 21px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: 30px;
+  font-size: 1.3125rem;
+  line-height: 1.875rem;
 }
 pre {
-  font-family: 'Open Sans';
-  font-size: 13px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: 18.5667px;
+  font-size: 0.8125rem;
+  line-height: 1.16041875rem;
 }
 /* ------------------------------------------------------ */
 /* Style changes for template two_charts -----------------*/
