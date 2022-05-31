@@ -12,12 +12,21 @@
 /* Adjusting the modal container */
 
 #chart-modal-content-demo2_chart {
-  /* Create scrollable modal */
-  overflow-y: auto;
+   /* Create scrollable modal */
+  overflow-y: hidden;
   overflow-x: hidden;
   width: 100%;
   height: 100%;
   padding-right: 20px;
+}
+
+#chart-modal-content-demo2_chart-2 {
+  /* Create scrollable modal */
+ overflow-y: hidden;
+ overflow-x: hidden;
+ width: 100%;
+ height: 100%;
+ padding-right: 20px;
 }
 
 #chart-demo2_chart .chart-col-above {
