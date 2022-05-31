@@ -17,13 +17,23 @@
 #chart-canvas-eco_breakdown_national_use{
   height: 100%;
 }
-#chart-modal-content-eco_breakdown_national_use-chart {
+
+#chart-modal-content-eco_breakdown_national_use {
   /* Create scrollable modal */
-  overflow-y: auto;
-  overflow-x: hidden;
-  width: 100%;
-  height: 100%;
-  padding-right: 20px;
+ overflow-y: hidden;
+ overflow-x: hidden;
+ width: 100%;
+ height: 100%;
+ padding-right: 20px;
+}
+
+#chart-modal-content-eco_breakdown_national_use-2 {
+ /* Create scrollable modal */
+overflow-y: hidden;
+overflow-x: hidden;
+width: 100%;
+height: 100%;
+padding-right: 20px;
 }
 
 #chart-eco_breakdown_national_use .chart-col-above {

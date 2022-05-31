@@ -160,7 +160,7 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
   };
   options.series = series;
 
-  const canvasID2 = canvasID + "-2";
+  let canvasID2 = canvasID + "-2";
 
   function createDropdownForChart(id) {
     let dropdown = `
@@ -200,12 +200,16 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
     options,
     chart2,
     options2,
-    first_chart
+    first_chart,
+    modal
   ) {
     let series = [{ name: "Ratio", data: [] }];
     let series2 = [{ name: "Ratio", data: [] }];
 
-    let country2 = (first_chart ? jQuery("#chart-canvas-eco_breakdown_national_use-2") : jQuery("#chart-canvas-eco_breakdown_national_use"))
+    let country2 = (first_chart
+      ? (modal ? jQuery("#chart-modal-content-eco_breakdown_national_use-2") : jQuery("#chart-canvas-eco_breakdown_national_use-2"))
+      : (modal ? jQuery("#chart-modal-content-eco_breakdown_national_use") : jQuery("#chart-canvas-eco_breakdown_national_use"))
+    )
       .find(":selected")
       .text();
     let country_data2 = data.find((element) => element.country == country2);
@@ -249,19 +253,43 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
         options,
         chart2,
         (options2 = options),
-        true
+        true,
+        false
       );
-    } else {
+    } else if (parentid == "chart-canvas-eco_breakdown_national_use-2") {
       createSelectedChart(
         chart2,
         country_data,
         options,
         chart,
         (options2 = options),
+        false,
         false
       );
+    } else if (parentid == "chart-modal-content-eco_breakdown_national_use") {
+      createSelectedChart(
+        chart,
+        country_data,
+        options,
+        chart2,
+        (options2 = options),
+        true,
+        true
+      );
+    } else if (parentid == "chart-modal-content-eco_breakdown_national_use-2") {
+      createSelectedChart(
+        chart2,
+        country_data,
+        options,
+        chart,
+        (options2 = options),
+        false,
+        true
+      );
+    } else {
+      // Error
     }
   });
-
+  jQuery("#chart-modal-content-eco_breakdown_national_use-2");
   return [chart, chart2];
 }

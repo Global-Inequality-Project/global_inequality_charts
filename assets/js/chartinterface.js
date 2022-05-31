@@ -84,16 +84,16 @@ function createChart({
 
   // Expand function
   if (document.getElementById(`chart-expand-btn-${chartID}`)) {
-    var expandButton = document.getElementById(`chart-expand-btn-${chartID}`);
+    let expandButton = document.getElementById(`chart-expand-btn-${chartID}`);
     expandButton.onclick = function() {
       // Prepare modal content
-      var modalBox = document.getElementById("chart-modal-box");
-      var modelContent = document.createElement("div");
+      let modalBox = document.getElementById("chart-modal-box");
+      let modelContent = document.createElement("div");
       modelContent.id = `chart-modal-content-${chartID}`;
       modalBox.appendChild(modelContent);
 
       // Make modal wrapper visible
-      var modal = document.getElementById("chart-modal-wrapper");
+      let modal = document.getElementById("chart-modal-wrapper");
       modal.style.display = "block";
 
       // Disable scrolling
@@ -105,24 +105,23 @@ function createChart({
         true
       );
     };
-  } else if (document.getElementById(`chart-expand-btn-${chartID}-2`)){
+  } else if (document.getElementById(`chart-expand-btn-${chartID}-2`)) {
     let expandButton = document.getElementById(`chart-expand-btn-${chartID}-2`);
-    console.log("Entered second expand button")
     expandButton.onclick = function() {
       // Prepare modal content
-      var modalBox = document.getElementById("chart-modal-box");
+      let modalBox = document.getElementById("chart-modal-box");
       let container = document.createElement("div");
-      container.className = `chart-modal-content-container`
+      container.className = `chart-modal-content-container`;
       modalBox.appendChild(container);
-      var modelContent = document.createElement("div");
+      let modelContent = document.createElement("div");
       modelContent.id = `chart-modal-content-${chartID}`;
-      var modelContent2 = document.createElement("div");
+      let modelContent2 = document.createElement("div");
       modelContent2.id = `chart-modal-content-${chartID}-2`;
       container.appendChild(modelContent);
       container.appendChild(modelContent2);
 
       // Make modal wrapper visible
-      var modal = document.getElementById("chart-modal-wrapper");
+      let modal = document.getElementById("chart-modal-wrapper");
       modal.style.display = "block";
 
       // Disable scrolling
@@ -133,9 +132,7 @@ function createChart({
         `#chart-modal-content-${chartID}`,
         true
       );
-
     };
-
   }
 }
 
@@ -143,8 +140,8 @@ function createChart({
 // ------------
 
 function toggleChartArea(button, areaID, chartID, hide_description = false) {
-  var shareArea = document.getElementById(`chart-${chartID}-${areaID}-btns`);
-  var chartDescription = document.getElementById(
+  let shareArea = document.getElementById(`chart-${chartID}-${areaID}-btns`);
+  let chartDescription = document.getElementById(
     `two-charts-description-${chartID}`
   );
   if (button.value == "OFF") {
@@ -167,7 +164,7 @@ function toggleChartArea(button, areaID, chartID, hide_description = false) {
 }
 
 function copySources(chartID, chartSources) {
-  var btn = document.getElementById(`chart-btn-sources-${chartID}`);
+  let btn = document.getElementById(`chart-btn-sources-${chartID}`);
   toggleChartArea(btn, "sources", chartID);
   copyToClipboard(chartSources);
 }
@@ -176,8 +173,8 @@ function copySources(chartID, chartSources) {
 // ---------------
 
 function shareChartFacebook(chartID) {
-  var url = window.location.href.split("?")[0];
-  var title = `Global Inequality Chart`;
+  let url = window.location.href.split("?")[0];
+  let title = `Global Inequality Chart`;
   window.open(
     `https://www.facebook.com/sharer/sharer.php?u=${url}%3Fchart=${chartID}&t=${title}`,
     "_blank"
@@ -185,9 +182,9 @@ function shareChartFacebook(chartID) {
 }
 
 function shareChartTwitter(chartID) {
-  var url = window.location.href.split("?")[0];
-  var text = `Check out this chart on Global Inequality:`;
-  var hashtags = "globalinequality,inequality,global,globalinequalitycharts";
+  let url = window.location.href.split("?")[0];
+  let text = `Check out this chart on Global Inequality:`;
+  let hashtags = "globalinequality,inequality,global,globalinequalitycharts";
   window.open(
     `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}&url=${url}?chart=${chartID}`,
     "_blank"
@@ -195,7 +192,7 @@ function shareChartTwitter(chartID) {
 }
 
 function copyChartURL(chartID) {
-  var url = window.location.href.split("?")[0] + `?chart=${chartID}`;
+  let url = window.location.href.split("?")[0] + `?chart=${chartID}`;
   copyToClipboard(url);
 }
 
@@ -205,7 +202,7 @@ function copyToClipboard(url) {
     navigator.clipboard.writeText(url);
   } else {
     // fallback: manually copy the text for older browsers
-    var dummy = document.createElement("textarea");
+    let dummy = document.createElement("textarea");
     document.body.appendChild(dummy);
     dummy.value = url;
     dummy.select();
@@ -220,15 +217,15 @@ function copyToClipboard(url) {
 // ------------------------
 
 function createImage(chartID, chartTitle, chartDescription, second_chart) {
-  var chart = document.getElementById(`chart-canvas-${chartID}`);
+  let chart = document.getElementById(`chart-canvas-${chartID}`);
   const chart_clone = chart.cloneNode(true);
 
   if (second_chart) {
-    var chart2 = document.getElementById(`chart-canvas-${chartID}-2`);
-    var chart2_clone = chart2.cloneNode(true);
+    let chart2 = document.getElementById(`chart-canvas-${chartID}-2`);
+    let chart2_clone = chart2.cloneNode(true);
   }
 
-  var img = new Image();
+  let img = new Image();
   img.src =
     window.wp_url +
     "/wp-content/plugins/global_inequality_charts/assets/img/global_inequality_logo.png";
@@ -265,10 +262,10 @@ function downloadImage(
 ) {
   createImage(chartID, chartTitle, chartDescription, second_chart);
 
-  var container = document.getElementById(`downloadImage-${chartID}`);
+  let container = document.getElementById(`downloadImage-${chartID}`);
 
   html2canvas(container, { allowTaint: true }).then(function(canvas) {
-    var link = document.createElement("a");
+    let link = document.createElement("a");
     document.body.appendChild(link);
     link.download = `${chartTitle}.png`;
     link.href = canvas.toDataURL();
@@ -282,11 +279,11 @@ function downloadImage(
 
 // load Json data
 function loadJson(url, callback) {
-  var xhr = new XMLHttpRequest();
+  let xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.responseType = "json";
   xhr.onload = function() {
-    var status = xhr.status;
+    let status = xhr.status;
     if (status === 200) {
       callback(null, xhr.response);
     } else {
@@ -297,11 +294,11 @@ function loadJson(url, callback) {
 }
 
 function loadCsv(url, callback) {
-  var xhr = new XMLHttpRequest();
+  let xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.responseType = "csv";
   xhr.onload = function() {
-    var status = xhr.status;
+    let status = xhr.status;
     if (status === 200) {
       callback(null, xhr.response);
     } else {
@@ -312,11 +309,11 @@ function loadCsv(url, callback) {
 }
 
 function loadTxt(url, callback) {
-  var xhr = new XMLHttpRequest();
+  let xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.responseType = "txt";
   xhr.onload = function() {
-    var status = xhr.status;
+    let status = xhr.status;
     if (status === 200) {
       callback(null, xhr.response);
     } else {
@@ -333,7 +330,7 @@ function loadTxt(url, callback) {
 document.addEventListener(
   "DOMContentLoaded",
   function() {
-    var modal = document.getElementById("chart-modal-wrapper");
+    let modal = document.getElementById("chart-modal-wrapper");
     modal.className = "modal-wrapper";
     modal.innerHTML += `
     <span class="modal-close" id="chart-modal-close">&times;</span>
@@ -341,7 +338,7 @@ document.addEventListener(
     `;
 
     // Close modal by clicking on the close button
-    var modalClose = document.getElementById("chart-modal-close");
+    let modalClose = document.getElementById("chart-modal-close");
     modalClose.onclick = function() {
       modal.style.display = "none";
       document.getElementById("chart-modal-box").innerHTML = "";
@@ -354,7 +351,7 @@ document.addEventListener(
         modal.style.display = "none";
         document.getElementById("chart-modal-box").innerHTML = "";
         document.body.style.overflow = "auto"; // Enable scrolling
-        var chart = window.charts["modal"];
+        let chart = window.charts["modal"];
         if (typeof chart.destroy == "function") {
           chart.destroy();
         }
