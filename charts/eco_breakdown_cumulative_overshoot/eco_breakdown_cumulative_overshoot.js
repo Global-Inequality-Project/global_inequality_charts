@@ -3,10 +3,10 @@ jQuery(function() {
   checkObjectKeysFunc();
   window.chart_data["eco_breakdown_cumulative_overshoot"] = {
     regions: {
-      CHN: "China",
-      EUK: "Europe and United Kingdom",
-      HIC: "Rest of Europe and High Income Countries",
       SOU: "Rest of Global South",
+      CHN: "China",
+      HIC: "Rest of Europe and High Income Countries",
+      EUK: "Europe and United Kingdom",
       USA: "United States of America",
     },
     years: { start: 1970, end: 2017 },
