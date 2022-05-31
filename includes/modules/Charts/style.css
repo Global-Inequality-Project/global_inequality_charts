@@ -1,3 +1,45 @@
+/* Font family -------------------------------------------*/
+h1 {
+  font-family: 'Open Sans';
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 26.4px;
+}
+h3 {
+  font-family: 'Open Sans';
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 15.4px;
+}
+p {
+  font-family: 'Open Sans';
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+blockquote {
+  font-family: 'Open Sans';
+  font-size: 21px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 30px;
+}
+pre {
+  font-family: 'Open Sans';
+  font-size: 13px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 18.5667px;
+}
+/* ------------------------------------------------------ */
 /* Style changes for template two_charts -----------------*/
 .chart-template-two_charts .chart-all-btns {
   display: none;
@@ -36,7 +78,7 @@
   display: flex;
   height: 100%;
 }
-/*--------------------------------------------------------*/
+/* ------------------------------------------------------ */
 
 .chart-template-main {
   display: flex;
