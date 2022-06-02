@@ -1,0 +1,13 @@
+{
+    "id": "poverty_average_income",
+    "title": "Average income of poorest 50%",
+    "description": "2011 PPP USD per day",
+    "author": "Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"1. Global Poverty",
+    "schema_version": 5,
+    "libraries": {
+        "apexcharts": true,
+        "chartutils": true
+    }
+}
