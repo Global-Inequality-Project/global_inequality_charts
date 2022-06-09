@@ -34,7 +34,7 @@ function importFilesAndShow_poverty_people_world_china() {
         // Create custom tools for the sidebar (optional)
         let customTools = `
     <button onclick="toggleChartArea(this, 'choice', 'poverty_people_world_china')" value="OFF" class="chart-btn">
-      <i class="fa-solid fa-sliders"></i>Poverty Line in $/day
+      <i class="fa-solid fa-sliders"></i>Scale to
     </button>
 
     <div class="chart-btn-area" id="chart-poverty_people_world_china-choice-btns">

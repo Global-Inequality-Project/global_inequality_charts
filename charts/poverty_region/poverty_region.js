@@ -33,7 +33,7 @@ function importFilesAndShow_poverty_region() {
     // Create custom tools for the sidebar (optional)
     let customTools = `
         <button onclick="toggleChartArea(this, 'choice', 'poverty_region')" value="OFF" class="chart-btn">
-          <i class="fa-solid fa-sliders"></i>Poverty Line in $/day
+          <i class="fa-solid fa-sliders"></i>Scale to
         </button>
 
         <div class="chart-btn-area" id="chart-poverty_region-choice-btns">
