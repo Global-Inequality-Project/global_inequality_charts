@@ -31,7 +31,6 @@ function importFilesAndShow_poverty_average_income() {
     ]);
 
     // Create custom tools for the sidebar (optional)
-    //data.my_custom_choice = 1;
     var customTools = `
          <button onclick="toggleChartArea(this, 'choice', 'poverty_average_income')" value="OFF" class="chart-btn">
            <i class="fa-solid fa-sliders"></i>Scale to
@@ -87,7 +86,8 @@ function render_poverty_average_income(canvasID) {
           yaxis: {
             tickAmount: 5,
             labels: {
-              formatter: (val, index) => "$"+formatYAxisLabel(val, index, 0, true),
+              formatter: (val, index) =>
+                val == null ? val : "$" + formatYAxisLabel(val, index, 0, true),
             },
           },
         },
@@ -104,7 +104,10 @@ function render_poverty_average_income(canvasID) {
       markers: { width: 10, height: 10, radius: 10, offsetY: "-2px" },
     },
     tooltip: {
-      y: { formatter: (val, index) => "$"+formatTooltipVal(val, index) },
+      y: {
+        formatter: (val, index) =>
+          val == null ? val : "$" + formatTooltipVal(val, index),
+      },
     },
   };
 
@@ -120,8 +123,8 @@ function render_poverty_average_income(canvasID) {
     ++year
   )
     years.push(year);
+
   let series = [];
-  let shortcut = [];
   Object.entries(chart_data.regions).forEach(([key, value]) => {
     series.push({ name: value, data: [] });
   });
@@ -130,7 +133,11 @@ function render_poverty_average_income(canvasID) {
     let data_row = data_hash[year];
     if (data_row) {
       for (let index = 0; index < series.length; index++) {
-        series[index].data.push(data_row[series[index].name]);
+        if (isNaN(data_row[series[index].name])) {
+          series[index].data.push(null);
+        } else {
+          series[index].data.push(data_row[series[index].name]);
+        }
       }
     } else {
       console.log("Error");
@@ -149,7 +156,7 @@ function render_poverty_average_income(canvasID) {
     ""
   );
   options.series = series;
-  options = generateOptions_poverty_average_income(1,options)
+  options = generateOptions_poverty_average_income(1, options);
 
   return createApexChart(canvasID, options);
 }
@@ -229,11 +236,17 @@ function setChoice_poverty_average_income(choice) {
   if (choice == 1) {
     btn1.innerHTML = `<i class="fa-solid fa-square-check"></i>Global average income`;
     btn2.innerHTML = `<i class="fa-solid fa-square"></i>US poverty line`;
-    chart.updateOptions(generateOptions_poverty_average_income(choice, options),true);
+    chart.updateOptions(
+      generateOptions_poverty_average_income(choice, options),
+      true
+    );
   } else if (choice == 2) {
     btn1.innerHTML = `<i class="fa-solid fa-square"></i>Global average income`;
     btn2.innerHTML = `<i class="fa-solid fa-square-check"></i>US poverty line`;
-    chart.updateOptions(generateOptions_poverty_average_income(choice, options),true);
+    chart.updateOptions(
+      generateOptions_poverty_average_income(choice, options),
+      true
+    );
   }
 }
 
@@ -245,93 +258,94 @@ function generateOptions_poverty_average_income(choice, options) {
       min: 0,
       forceNiceScale: true,
       labels: {
-        formatter: (val, index) => "$" +formatYAxisLabel(val, index, 0, true) ,
+        formatter: (val, index) =>
+          val == null ? val : "$" + formatYAxisLabel(val, index, 0, true),
       },
     };
     options["annotations"] = {
-        yaxis: [
-            {
-                y: 45,
-                borderColor: "#9A0000",
-                borderWidth: 5,
-                strokeDashArray: 5,
-                offsetY: 2.5,
-                label: {
-                  text: "$45",
-                  position: "left",
-                  textAnchor: "start",
-                  borderColor: "#9A0000",
-                  offsetY: 1,
-                  offsetX: 5,
-                  style: {
-                    color: "#fff",
-                    fontSize: "14px",
-                    background: "#9A0000",
-                  },
-                },
-              },
-            {
-                y: 35,
-                borderColor: "#9A0000",
-                borderWidth: 5,
-                strokeDashArray: 5,
-                offsetY: 2.5,
-                label: {
-                  text: "$35",
-                  position: "left",
-                  textAnchor: "start",
-                  borderColor: "#9A0000",
-                  offsetY: 1,
-                  offsetX: 5,
-                  style: {
-                    color: "#fff",
-                    fontSize: "14px",
-                    background: "#9A0000",
-                  },
-                },
-              },
-          {
-            y: 15,
+      yaxis: [
+        {
+          y: 45,
+          borderColor: "#9A0000",
+          borderWidth: 5,
+          strokeDashArray: 5,
+          offsetY: 2.5,
+          label: {
+            text: "$45",
+            position: "left",
+            textAnchor: "start",
             borderColor: "#9A0000",
-            borderWidth: 5,
-            strokeDashArray: 5,
-            offsetY: 2.5,
-            label: {
-              text: "$15",
-              position: "left",
-              textAnchor: "start",
-              borderColor: "#9A0000",
-              offsetY: 1,
-              offsetX: 5,
-              style: {
-                color: "#fff",
-                fontSize: "14px",
-                background: "#9A0000",
-              },
+            offsetY: 1,
+            offsetX: 5,
+            style: {
+              color: "#fff",
+              fontSize: "14px",
+              background: "#9A0000",
             },
           },
-          {
-              y: 7.5,
-              borderColor: "#9A0000",
-              borderWidth: 5,
-              strokeDashArray: 5,
-              offsetY: 2.5,
-              label: {
-                text: "$7.5",
-                position: "left",
-                textAnchor: "start",
-                borderColor: "#9A0000",
-                offsetY: 1,
-                offsetX: 5,
-                style: {
-                  color: "#fff",
-                  fontSize: "14px",
-                  background: "#9A0000",
-                },
-              },
+        },
+        {
+          y: 35,
+          borderColor: "#9A0000",
+          borderWidth: 5,
+          strokeDashArray: 5,
+          offsetY: 2.5,
+          label: {
+            text: "$35",
+            position: "left",
+            textAnchor: "start",
+            borderColor: "#9A0000",
+            offsetY: 1,
+            offsetX: 5,
+            style: {
+              color: "#fff",
+              fontSize: "14px",
+              background: "#9A0000",
             },
-        ],
-      };
+          },
+        },
+        {
+          y: 15,
+          borderColor: "#9A0000",
+          borderWidth: 5,
+          strokeDashArray: 5,
+          offsetY: 2.5,
+          label: {
+            text: "$15",
+            position: "left",
+            textAnchor: "start",
+            borderColor: "#9A0000",
+            offsetY: 1,
+            offsetX: 5,
+            style: {
+              color: "#fff",
+              fontSize: "14px",
+              background: "#9A0000",
+            },
+          },
+        },
+        {
+          y: 7.5,
+          borderColor: "#9A0000",
+          borderWidth: 5,
+          strokeDashArray: 5,
+          offsetY: 2.5,
+          label: {
+            text: "$7.5",
+            position: "left",
+            textAnchor: "start",
+            borderColor: "#9A0000",
+            offsetY: 1,
+            offsetX: 5,
+            style: {
+              color: "#fff",
+              fontSize: "14px",
+              background: "#9A0000",
+            },
+          },
+        },
+      ],
+    };
 
     return options;
   } else if (choice == 2) {
@@ -340,7 +354,8 @@ function generateOptions_poverty_average_income(choice, options) {
       min: 0,
       forceNiceScale: true,
       labels: {
-        formatter: (val, index) => "$" +formatYAxisLabel(val, index, 0, true) ,
+        formatter: (val, index) =>
+          val == null ? val : "$" + formatYAxisLabel(val, index, 0, true),
       },
     };
     options["annotations"] = {
@@ -366,25 +381,25 @@ function generateOptions_poverty_average_income(choice, options) {
           },
         },
         {
-            y: 7.5,
+          y: 7.5,
+          borderColor: "#9A0000",
+          borderWidth: 5,
+          strokeDashArray: 5,
+          offsetY: 2.5,
+          label: {
+            text: "$7.5",
+            position: "left",
+            textAnchor: "start",
             borderColor: "#9A0000",
-            borderWidth: 5,
-            strokeDashArray: 5,
-            offsetY: 2.5,
-            label: {
-              text: "$7.5",
-              position: "left",
-              textAnchor: "start",
-              borderColor: "#9A0000",
-              offsetY: 1,
-              offsetX: 5,
-              style: {
-                color: "#fff",
-                fontSize: "14px",
-                background: "#9A0000",
-              },
+            offsetY: 1,
+            offsetX: 5,
+            style: {
+              color: "#fff",
+              fontSize: "14px",
+              background: "#9A0000",
             },
           },
+        },
       ],
     };
 
