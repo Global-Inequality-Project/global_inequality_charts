@@ -11,6 +11,7 @@ jQuery(function() {
       WOR: "World",
     },
     years: { start: 1981, end: 2017 },
+    customChoice: 1,
   };
 
   importFilesAndShow_poverty_average_income();
@@ -156,7 +157,7 @@ function render_poverty_average_income(canvasID) {
     ""
   );
   options.series = series;
-  options = generateOptions_poverty_average_income(1, options);
+  options = generateOptions_poverty_average_income(chart_data.customChoice, options);
 
   return createApexChart(canvasID, options);
 }
@@ -229,6 +230,7 @@ function abbreviatedTooltip(dataPointIndex, w) {
 function setChoice_poverty_average_income(choice) {
   var chart = window.charts["poverty_average_income"];
   var options = window.charts["poverty_average_income"].opts;
+  window.chart_data["poverty_average_income"].customChoice = choice
 
   var btn1 = document.getElementById(`poverty_average_income-choice-1`);
   var btn2 = document.getElementById(`poverty_average_income-choice-2`);

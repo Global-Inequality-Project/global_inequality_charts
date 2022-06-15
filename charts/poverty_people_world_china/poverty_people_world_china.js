@@ -5,6 +5,7 @@ jQuery(function() {
     years: { start: 1981, end: 2015 },
     data: { "7_5": null, "10": null, "15": null },
     poverty_lines: ["7_5", "10", "15"],
+    customChoice: 0,
   };
 
   importFilesAndShow_poverty_people_world_china();
@@ -114,7 +115,8 @@ function render_poverty_people_world_china(canvasID) {
   };
 
   axes = [];
-  axes = createAxes_pov(chartID, 0);
+  let customChoice = window.chart_data["poverty_people_world_china"].customChoice;
+  axes = createAxes_pov(chartID, customChoice);
 
   options["chart"].id = chartID;
   options["xaxis"] = { categories: axes[1], tooltip: { enabled: false } };
@@ -166,7 +168,7 @@ function setChoice_poverty_people_world_china(choice) {
   const chartID = "poverty_people_world_china";
   let chart = window.charts[chartID];
   let data = window.chart_data[chartID];
-  data.poverty_line = choice;
+  window.chart_data[chartID].customChoice = choice;
 
   let btn1 = document.getElementById(`poverty_people_world_china-choice-1`);
   let btn2 = document.getElementById(`poverty_people_world_china-choice-2`);
