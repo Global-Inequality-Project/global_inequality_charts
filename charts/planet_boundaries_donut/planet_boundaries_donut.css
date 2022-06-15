@@ -88,7 +88,9 @@
     .chart-col-below {
     height: 100% !important;
   }
-  #chart-wrapper-planet_boundaries_donut .chart-col-two_charts .chart-box-inner {
+  #chart-wrapper-planet_boundaries_donut
+    .chart-col-two_charts
+    .chart-box-inner {
     height: 100% !important;
   }
 }
@@ -103,6 +105,12 @@
   }
   #chart-wrapper-planet_boundaries_donut .chart-box-inner {
     position: relative;
+  }
+  .donut {
+    max-width: 100%;
+  }
+  #doughnut_south {
+    padding-top: 0px;
   }
 }
 
