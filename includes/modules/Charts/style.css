@@ -135,7 +135,7 @@
   padding: 15px 17px;
   margin: 3px 0px;
   font-size: 14px;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   cursor: pointer;
   width: 100%;
   text-align: left;
@@ -145,7 +145,7 @@
   background-color: #e2e2e2;
 }
 
-.chart-btn[value*="ON"] {
+.chart-btn[value*='ON'] {
   font-weight: bold;
   background-color: #e2e2e2;
   border-bottom: 3px white solid;
@@ -255,8 +255,8 @@
 
 .downloadImage {
   position: fixed;
-  padding: 30;
-  top: -1000;
+  padding: 30px;
+  top: -1000px;
 }
 
 .downloadImage .global_inequality_logo {
@@ -293,7 +293,7 @@
 
 .chart-sources-popover-title {
   font-size: 14px;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   margin: 3px 0px;
   color: #646464;
 }
@@ -326,6 +326,9 @@
   font-size: small;
   padding: 10px;
 }
+.map-legend .level_name.empty {
+  padding: 10px 1px;
+}
 .map-legend .level_rect {
   background-color: #950000;
   width: 100%;
@@ -335,4 +338,27 @@
 
 .svgMap-map-wrapper .svgMap-country {
   stroke: #747474 !important;
+}
+
+@media all and (max-width: 900px) {
+  /* remove margins on mobile  */
+  .glich_charts {
+    margin: 0 -20px 0 -20px;
+  }
+  .chart-box-inner {
+    padding: 0px;
+  }
+  .chart-col-left {
+    margin-bottom: 0px;
+  }
+  .chart-box-outer {
+    border: none !important;
+  }
+  .map-legend tbody tr {
+    display: block !important;
+    float: left;
+  }
+  .map-legend table tbody {
+    display: initial !important;
+  }
 }

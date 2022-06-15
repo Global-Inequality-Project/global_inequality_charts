@@ -100,10 +100,11 @@ function render_drain_map(canvasID, modal) {
         },
         applyData: 'loss',
         values: values,
-        initialZoom: 1.13,
-        showZoomReset: true,
-        showContinentSelector: true,
+
       },
+      initialZoom: 1.13,
+      showZoomReset: true,
+      showContinentSelector: true,
       onGetTooltip: function (tooltipDiv, countryID, countryValues) {
         // Create tooltip content element
         var tooltipContentElement = document.createElement('div');

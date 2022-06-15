@@ -1,7 +1,7 @@
 {
     "id": "planet_boundaries_donut",
     "title": "Planetary Boundaries donut",
-    "description": "This is the chart description",
+    "description": "",
     "author": "Huzaifa",
     "template":"two_charts",
     "category":"13. Planetary Boundaries",

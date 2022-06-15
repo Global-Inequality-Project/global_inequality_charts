@@ -57,6 +57,10 @@ function render_carbon_overshoot(canvasID) {
 
     var data = window.chart_data['carbon_overshoot']
     const series = generateSeries_carbon_overshoot(data);
+    let title = "overshoot of 1.5C budget";
+    if (data.my_custom_choice == 2) {
+        title = "overshoot of 2C budget"
+    }
     var options = {
         chart: {
             type: 'bar',
