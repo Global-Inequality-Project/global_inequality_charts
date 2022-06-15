@@ -255,8 +255,8 @@
 
 .downloadImage {
   position: fixed;
-  padding: 30;
-  top: -1000;
+  padding: 30px;
+  top: -1000px;
 }
 
 .downloadImage .global_inequality_logo {
