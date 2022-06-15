@@ -721,23 +721,24 @@ function prepare_planet_boundaries_donut() {
                   window.chart_data.planet_boundaries_donut.rawData.CHN = CHN;
 
                   // Create custom tools for the sidebar (optional)
-                  let customTools = `
-                      <button class="chart-btn" id="planet_boundaries_donut-choice-1" onclick="setChoice_planet_boundaries_donut(1)">
-                        <i id="planet_boundaries_donut-choice-1-icon" class="fa-solid fa-square-check"></i>Global North
-                      </button> 
+                  let customTools = "";
+                      // `
+                    //   <button class="chart-btn" id="planet_boundaries_donut-choice-1" onclick="setChoice_planet_boundaries_donut(1)">
+                    //     <i id="planet_boundaries_donut-choice-1-icon" class="fa-solid fa-square-check"></i>Global North
+                    //   </button> 
 
-                      <button class="chart-btn" id="planet_boundaries_donut-choice-2" onclick="setChoice_planet_boundaries_donut(2)">
-                        <i id="planet_boundaries_donut-choice-2-icon" class="fa-solid fa-square-check"></i></i>Global South
-                      </button>
+                    //   <button class="chart-btn" id="planet_boundaries_donut-choice-2" onclick="setChoice_planet_boundaries_donut(2)">
+                    //     <i id="planet_boundaries_donut-choice-2-icon" class="fa-solid fa-square-check"></i></i>Global South
+                    //   </button>
 
-                      <button class="chart-btn" id="planet_boundaries_donut-choice-3" onclick="setChoice_planet_boundaries_donut(3)">
-                        <i id="planet_boundaries_donut-choice-3-icon" class="fa-solid fa-square"></i></i>Global South w/o China
-                      </button>
+                    //   <button class="chart-btn" id="planet_boundaries_donut-choice-3" onclick="setChoice_planet_boundaries_donut(3)">
+                    //     <i id="planet_boundaries_donut-choice-3-icon" class="fa-solid fa-square"></i></i>Global South w/o China
+                    //   </button>
 
-                      <button class="chart-btn" id="planet_boundaries_donut-choice-4" onclick="setChoice_planet_boundaries_donut(4)">
-                        <i id="planet_boundaries_donut-choice-4-icon" class="fa-solid fa-square"></i></i>China
-                      </button>
-                    `
+                    //   <button class="chart-btn" id="planet_boundaries_donut-choice-4" onclick="setChoice_planet_boundaries_donut(4)">
+                    //     <i id="planet_boundaries_donut-choice-4-icon" class="fa-solid fa-square"></i></i>China
+                    //   </button>
+                    // `
                   // Render Chart Interface
                   createChartInterface({
                     chartID: "planet_boundaries_donut",
