@@ -326,6 +326,9 @@
   font-size: small;
   padding: 10px;
 }
+.map-legend .level_name.empty {
+  padding: 10px 1px;
+}
 .map-legend .level_rect {
   background-color: #950000;
   width: 100%;
@@ -340,6 +343,22 @@
 @media all and (max-width: 900px) {
   /* remove margins on mobile  */
   .glich_charts {
-    margin: 0 -15px 0 -20px;
+    margin: 0 -20px 0 -20px;
+  }
+  .chart-box-inner {
+    padding: 0px;
+  }
+  .chart-col-left {
+    margin-bottom: 0px;
+  }
+  .chart-box-outer {
+    border: none !important;
+  }
+  .map-legend tbody tr {
+    display: block !important;
+    float: left;
+  }
+  .map-legend table tbody {
+    display: initial !important;
   }
 }
