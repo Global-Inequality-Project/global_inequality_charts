@@ -11,7 +11,7 @@
     "divi-scripts": "1.0.2-rc.0",
     "html2canvas": "^1.4.1",
     "multiselect": "^0.9.12",
-    "react": "^18.1.0",
+    "react": "^18.2.0",
     "react-dom": "^18.1.0",
     "svg-pan-zoom": "^3.6.1",
     "svgmap": "^v2.8.0"
