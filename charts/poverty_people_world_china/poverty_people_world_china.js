@@ -85,13 +85,18 @@ function render_poverty_people_world_china(canvasID) {
     },
     responsive: [
       {
-        breakpoint: 960,
+        breakpoint: 961,
         options: {
-          xaxis: { tickAmount: 10 },
+          xaxis: {
+            tickAmount: 8,
+          },
+          yaxis: {
+            min: 0,
+            max: 100,
+            tickAmount: 5,
+            labels: { formatter: (val, index) => formatYAxisLabel(val, index) + "%" },
+          },
         },
-      },
-      {
-        breakpoint: 401,
       },
     ],
     dataLabels: {
@@ -100,11 +105,12 @@ function render_poverty_people_world_china(canvasID) {
     yaxis: {
       min: 0,
       max: 100,
+      tickAmount: 10,
       labels: { formatter: (val, index) => formatYAxisLabel(val, index) + "%" },
     },
     tooltip: {
       y: {
-        formatter: (val, index) => "$" + formatTooltipVal(val, index),
+        formatter: (val, index) => "$" + formatTooltipVal(val, index, 0),
       },
       followCursor: true,
       shared: false,
@@ -115,11 +121,16 @@ function render_poverty_people_world_china(canvasID) {
   };
 
   axes = [];
-  let customChoice = window.chart_data["poverty_people_world_china"].customChoice;
+  let customChoice =
+    window.chart_data["poverty_people_world_china"].customChoice;
   axes = createAxes_pov(chartID, customChoice);
 
   options["chart"].id = chartID;
-  options["xaxis"] = { categories: axes[1], tooltip: { enabled: false } };
+  options["xaxis"] = {
+    categories: axes[1],
+    tickAmount: 30,
+    tooltip: { enabled: false },
+  };
   options.series = axes[0];
 
   return createApexChart(canvasID, options);

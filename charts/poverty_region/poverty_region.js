@@ -86,13 +86,31 @@ function render_poverty_region(canvasID) {
       {
         breakpoint: 960,
         options: {
-          xaxis: { tickAmount: 10 },
+          xaxis: { tickAmount: 8 },
         },
       },
       {
-        breakpoint: 401,
+        breakpoint: 600,
         options: {
-          //chart: {height: 300},
+          legend: {
+            fontSize: "10px",
+            markers: {
+              width: 7,
+              height: 7,
+              radius: 7,
+              offsetY: -1,
+            },
+          },
+          yaxis: {
+            min: 0,
+            max: 6e9,
+            tickAmount: 6,
+            forceNiceScale: true,
+            labels: {
+              formatter: (val, index) =>
+                formatBillionsLabel(val, index, 0, true),
+            },
+          },
         },
       },
     ],
@@ -121,11 +139,14 @@ function render_poverty_region(canvasID) {
   };
   let axes = [];
   let customChoice = window.chart_data["poverty_region"].customChoice;
-  axes = createAxes(chartID, window.chart_data["poverty_region"].poverty_lines[customChoice]);
+  axes = createAxes(
+    chartID,
+    window.chart_data["poverty_region"].poverty_lines[customChoice]
+  );
   options["chart"].id = "Number of people in poverty world".replace(/ /g, "");
   options["xaxis"] = {
     categories: axes[1],
-    tickAmount: 30,
+    tickAmount: 20,
     tooltip: { enabled: false },
   };
   options.series = axes[0];

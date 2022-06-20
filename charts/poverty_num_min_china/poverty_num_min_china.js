@@ -46,25 +46,29 @@ function render_poverty_num_min_china(canvasID) {
             {
                 breakpoint: 961,
                 options: {
-                    xaxis: { tickAmount: 10 }
+                    xaxis: { tickAmount: 10 },
+                    yaxis: {
+                        tickAmount: 5,
+                        min: 0,
+                        forceNiceScale: true,
+                        labels: {
+                            formatter: (val, index) => formatBillionsLabel(val, index, 0, true)
+                        }
+                    },
                 }
             },
             {
                 breakpoint: 401,
                 options: {
-                    yaxis: {
-                        tickAmount: 5,
-                        labels: {
-                            formatter: (val, index) => formatYAxisLabel(val, index, 0, true)
-                        }
-                    },
+
                 }
             }
         ],
 
         yaxis: {
             min: 0,
-            labels: { formatter: (val, index) => formatYAxisLabel(val, index, 1, true) }
+            forceNiceScale: true,
+            labels: { formatter: (val, index) => formatBillionsLabel(val, index, 0, true) }
         },
         colors: ['#775DD0', '#FF4560', '#FEB019', '#00E396', '#008FFB', '#A5978B'],
         grid: {

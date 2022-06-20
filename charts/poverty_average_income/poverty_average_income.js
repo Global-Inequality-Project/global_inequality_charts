@@ -76,23 +76,25 @@ function render_poverty_average_income(canvasID) {
     },
     responsive: [
       {
-        breakpoint: 961,
-        options: {
-          xaxis: { tickAmount: 10 },
-        },
-      },
-      {
-        breakpoint: 401,
-        options: {
-          yaxis: {
-            tickAmount: 5,
-            labels: {
-              formatter: (val, index) =>
-                val == null ? val : "$" + formatYAxisLabel(val, index, 0, true),
-            },
+          breakpoint: 960,
+          options: {
+            xaxis: { tickAmount: 8 },
           },
         },
-      },
+        {
+          breakpoint: 600,
+          options: {
+            legend: {
+              fontSize: "10px",
+            },
+            markers: {
+              width: 7,
+              height: 7,
+              radius: 7,
+              offsetY: -1,
+            },
+            },
+          },
     ],
     colors: ["#775DD0", "#FF4560", "#FEB019", "#00E396", "#008FFB", "#A5978B"],
     grid: {
@@ -147,7 +149,7 @@ function render_poverty_average_income(canvasID) {
 
   options["xaxis"] = {
     categories: years,
-    tickAmount: 30,
+    tickAmount: 20,
     tooltip: { enabled: false },
   };
   options[
