@@ -23,7 +23,11 @@ function map_createLegend(items, canvasID) {
   let innerHtml = '<div class="map-legend" id="map-legend-' + canvasID + '"><table><tbody>'
   items.forEach(element => {
     innerHtml += '<tr>'
-    innerHtml += '<td><span class="level_name">' + element.name + '</span></td>'
+    if (element.name)
+      innerHtml += '<td><span class="level_name">' + element.name + '</span></td>'
+    else 
+    innerHtml += '<td><span class="level_name empty"></span></td>'
+
     innerHtml += '<td><span class="level_rect" style="background-color: ' + element.color + ';">&nbsp;&nbsp;&nbsp;&nbsp;</span></td>'
     innerHtml += '</tr>'
 
