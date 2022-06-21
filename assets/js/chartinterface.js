@@ -242,7 +242,6 @@ function createImage(chartID, chartTitle, chartDescription, second_chart) {
   ).innerHTML += `<h4>${chartDescription}</h4>`;
 
   document.getElementById(`downloadImage-${chartID}`).appendChild(chart_clone);
-  console.log(chart2_clone)
   if (second_chart && chart2_clone !== undefined) {
     document
       .getElementById(`downloadImage-${chartID}`)
@@ -251,7 +250,7 @@ function createImage(chartID, chartTitle, chartDescription, second_chart) {
 
   document.getElementById(
     `downloadImage-${chartID}`
-  ).innerHTML += `URL: ${window.location.href}#chart-${chartID}`;
+  ).innerHTML += `Source: ${window.location.href}#chart-${chartID}`;
 }
 
 function downloadImage(

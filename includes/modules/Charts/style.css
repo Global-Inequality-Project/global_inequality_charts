@@ -135,7 +135,7 @@
   padding: 15px 17px;
   margin: 3px 0px;
   font-size: 14px;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   cursor: pointer;
   width: 100%;
   text-align: left;
@@ -145,7 +145,7 @@
   background-color: #e2e2e2;
 }
 
-.chart-btn[value*='ON'] {
+.chart-btn[value*="ON"] {
   font-weight: bold;
   background-color: #e2e2e2;
   border-bottom: 3px white solid;
@@ -255,14 +255,17 @@
 
 .downloadImage {
   position: fixed;
+  text-align: center;
   padding: 30px;
-  top: -1000px;
+  top: 0px;
 }
 
 .downloadImage .global_inequality_logo {
   overflow: hidden;
-  width: 150;
-  float: right;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1%;
 }
 
 .chart-sources-popover {
@@ -293,7 +296,7 @@
 
 .chart-sources-popover-title {
   font-size: 14px;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   margin: 3px 0px;
   color: #646464;
 }
