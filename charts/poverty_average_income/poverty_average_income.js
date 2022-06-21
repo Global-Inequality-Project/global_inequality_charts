@@ -81,20 +81,6 @@ function render_poverty_average_income(canvasID) {
             xaxis: { tickAmount: 8 },
           },
         },
-        {
-          breakpoint: 600,
-          options: {
-            legend: {
-              fontSize: "10px",
-            },
-            markers: {
-              width: 7,
-              height: 7,
-              radius: 7,
-              offsetY: -1,
-            },
-            },
-          },
     ],
     colors: ["#775DD0", "#FF4560", "#FEB019", "#00E396", "#008FFB", "#A5978B"],
     grid: {

@@ -92,15 +92,6 @@ function render_poverty_region(canvasID) {
       {
         breakpoint: 600,
         options: {
-          legend: {
-            fontSize: "10px",
-            markers: {
-              width: 7,
-              height: 7,
-              radius: 7,
-              offsetY: -1,
-            },
-          },
           yaxis: {
             min: 0,
             max: 6e9,
