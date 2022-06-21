@@ -51,23 +51,15 @@ function render_inequality_gdp_prdct_nrt_sth(canvasID) {
                 options: {
                     yaxis: {
                         tickAmount: 5,
-                        labels: { formatter: (val, index) => '$' + formatYAxisLabel(val, index, 0, true) }
+                        labels: { formatter: (val, index) => '$' + formatMillionsLabel(val, index, 1, true) }
                     },
-                    tooltip: {
-                        y: {
-                            title: {
-                                // Names are too long for mobile view
-                                // Alternatively, formatter could change seriesName to abbreviation
-                                formatter: (seriesName) => '',
-                            }
-                        },
-                    }
                 }
 
             },
         ],
         yaxis: {
-            labels: { formatter: (val, index) => '$' + formatYAxisLabel(val, index, 0, true) }
+            forceNiceScale: true,
+            labels: { formatter: (val, index) => '$' + formatMillionsLabel(val, index, 1, true) }
         },
         colors: ['#775DD0', '#FF4560', '#FEB019', '#00E396', '#008FFB', '#A5978B'],
         grid: {
@@ -109,8 +101,6 @@ function render_inequality_gdp_prdct_nrt_sth(canvasID) {
     });
 
     options['xaxis'] = { categories: years, tickAmount: 30, tooltip: { enabled: false } };
-    options.title = { text: 'GDP * GDP per capita: Global North vs. Global South' };
-    options.subtitle = { text: 'Constant 2015 USD (Trillions)' }
     options['chart'].id = ('GDP * GDP per capita Global North vs Global South').replace(/ /g, "");
     options.series = series;
 

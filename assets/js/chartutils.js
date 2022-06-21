@@ -40,6 +40,21 @@ function formatYAxisLabel(val, index, precision, short){
         return val;
 }
 
+//--------------------------------------- formatMillionsLabel
+function formatMillionsLabel(val, index, precision, short){
+    if (precision == undefined)
+        precision = 1;
+    short = short || false;
+    let millions_str = formatYAxisLabel(val, index, precision, short);
+    let isNumber = (typeof millions_str == 'number');
+    if (!isNumber && millions_str && millions_str.endsWith('K')){
+        let millions =  parseFloat(millions_str.substring(0,millions_str.length-2));
+        let billions = millions/1000;
+        millions_str = billions.toFixed(precision) + " " + (short ? "M" : "million");
+    }
+    return millions_str;
+}
+
 //--------------------------------------- formatBillionsLabel
 function formatBillionsLabel(val, index, precision, short){
     if (precision == undefined)
