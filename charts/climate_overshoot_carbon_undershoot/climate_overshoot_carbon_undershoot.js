@@ -79,22 +79,21 @@ function render_climate_overshoot_carbon_undershoot(canvasID) {
         plotOptions: {
             bar: {
                 horizontal: true,
-
                 dataLabels: {
                     position: 'middle',
                 }
             }
         },
-        // dataLabels: {
-        //     enabled: false,
-        //     //textAnchor: 'start',
-        //     formatter: (val, index) => formatTooltipVal(val, index),
-        //     offsetX: 10,
-        //     style: {
-        //         fontWeight: 'normal',
-        //         colors: ['black']
-        //     }
-        // },
+        dataLabels: {
+            enabled: true,
+            textAnchor: 'end',
+            formatter: (val, index) => formatTooltipVal(val, index),
+            offsetY: -2,
+            style: {
+                fontWeight: 'normal',
+                colors: ['white']
+            }
+        },
         yaxis: {
             max: 3.8e11,
             labels: { align: 'left' }
