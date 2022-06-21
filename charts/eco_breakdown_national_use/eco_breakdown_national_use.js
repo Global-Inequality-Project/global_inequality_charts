@@ -63,30 +63,30 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
         breakpoint: 961,
         options: {
           // decrease font size at responsive view
-          annotations: {
-            yaxis: [
-              {
-                y: 1,
-                borderColor: "#9A0000",
-                borderWidth: 5,
-                strokeDashArray: 5,
-                offsetY: 2.5,
-                label: {
-                  text: "Fair Share",
-                  position: "left",
-                  textAnchor: "start",
-                  borderColor: "#9A0000",
-                  offsetY: 1,
-                  offsetX: 5,
-                  style: {
-                    color: "#fff",
-                    fontSize: "8px",
-                    background: "#9A0000",
-                  },
-                },
-              },
-            ],
-          },
+          // annotations: {
+          //   yaxis: [
+          //     {
+          //       y: 1,
+          //       borderColor: "#9A0000",
+          //       borderWidth: 5,
+          //       strokeDashArray: 5,
+          //       offsetY: 2.5,
+          //       label: {
+          //         text: "Fair Share",
+          //         position: "left",
+          //         textAnchor: "start",
+          //         borderColor: "#9A0000",
+          //         offsetY: 1,
+          //         offsetX: 5,
+          //         style: {
+          //           color: "#fff",
+          //           fontSize: "10px",
+          //           background: "#9A0000",
+          //         },
+          //       },
+          //     },
+          //   ],
+          // },
           xaxis: { tickAmount: 10 },
         },
       },

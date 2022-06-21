@@ -44,7 +44,18 @@ function render_eco_breakdown_material_footprint_income_group(canvasID) {
             {
                 breakpoint: 960,
                 options: {
-                    xaxis: {tickAmount: 10}
+                    xaxis: {tickAmount: 10},
+                    tooltip: {
+                        y: {
+                            formatter: (val, index) => formatTooltipVal(val, index, 2)+' TpC',
+                            title: {
+                                formatter: (seriesName) => '',
+                            },
+                        },
+                        x: {
+                            formatter: (val) => val,
+                        }
+                    },
                 }
             },
             {
