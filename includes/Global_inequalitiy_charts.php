@@ -39,6 +39,7 @@ class GLICH_Global_inequality_charts extends DiviExtension
 	public function __construct($name = 'global_inequalitiy_charts', $args = array())
 	{
 		$this->plugin_dir     = plugin_dir_path(__FILE__);
+		$this->plugin_dir_url_parent = plugin_dir_url('global_inequalitiy_charts').'global_inequalitiy_charts/';
 		$this->plugin_dir_url = plugin_dir_url($this->plugin_dir);
 
 		parent::__construct($name, $args);

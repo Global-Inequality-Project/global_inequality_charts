@@ -11,6 +11,7 @@ jQuery(function() {
       WOR: "World",
     },
     years: { start: 1981, end: 2017 },
+    customChoice: 1,
   };
 
   importFilesAndShow_poverty_average_income();
@@ -75,23 +76,11 @@ function render_poverty_average_income(canvasID) {
     },
     responsive: [
       {
-        breakpoint: 961,
-        options: {
-          xaxis: { tickAmount: 10 },
-        },
-      },
-      {
-        breakpoint: 401,
-        options: {
-          yaxis: {
-            tickAmount: 5,
-            labels: {
-              formatter: (val, index) =>
-                val == null ? val : "$" + formatYAxisLabel(val, index, 0, true),
-            },
+          breakpoint: 960,
+          options: {
+            xaxis: { tickAmount: 8 },
           },
         },
-      },
     ],
     colors: ["#775DD0", "#FF4560", "#FEB019", "#00E396", "#008FFB", "#A5978B"],
     grid: {
@@ -146,7 +135,7 @@ function render_poverty_average_income(canvasID) {
 
   options["xaxis"] = {
     categories: years,
-    tickAmount: 30,
+    tickAmount: 20,
     tooltip: { enabled: false },
   };
   options[
@@ -156,7 +145,7 @@ function render_poverty_average_income(canvasID) {
     ""
   );
   options.series = series;
-  options = generateOptions_poverty_average_income(1, options);
+  options = generateOptions_poverty_average_income(chart_data.customChoice, options);
 
   return createApexChart(canvasID, options);
 }
@@ -229,6 +218,7 @@ function abbreviatedTooltip(dataPointIndex, w) {
 function setChoice_poverty_average_income(choice) {
   var chart = window.charts["poverty_average_income"];
   var options = window.charts["poverty_average_income"].opts;
+  window.chart_data["poverty_average_income"].customChoice = choice
 
   var btn1 = document.getElementById(`poverty_average_income-choice-1`);
   var btn2 = document.getElementById(`poverty_average_income-choice-2`);

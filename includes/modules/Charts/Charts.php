@@ -337,9 +337,9 @@ if (!function_exists('add_open_graph_tags')) {
 			$image_url = "";
 			// try to find the image in the chart folder
 			if (file_exists($chart_img_path)) {
-				$image_url = plugins_url("", __FILE__) . '/../../../charts/' . $id . '/' . $id . '.png';
+				$image_url = plugins_url() . '/global_inequality_charts/charts/' . $id . '/' . $id . '.png';
 			} else {
-				$image_url = plugins_url("", __FILE__) . '/../../../assets/img/global_inequality_share.png';
+				$image_url = plugins_url() . '/global_inequality_charts/assets/img/global_inequality_share.png';
 			}
 			echo '<meta property="og:image" content="' . $image_url . '" />' . PHP_EOL;
 			echo '<meta name="twitter:image" content="' . $image_url . '" />' . PHP_EOL;
