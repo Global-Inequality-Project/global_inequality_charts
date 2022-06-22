@@ -254,10 +254,15 @@
 }
 
 .downloadImage {
-  position: fixed;
+  position: absolute;
   text-align: center;
   padding: 30px;
-  top: 0px;
+  margin: 0 auto;
+  display: block;
+  /* bottom: 0px;
+  top: 0px;*/
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .downloadImage .global_inequality_logo {
