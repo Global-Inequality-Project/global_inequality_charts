@@ -8,7 +8,7 @@ window.charts_path =
 // ---------------
 function createChartInterface({ chartID, renderFunc, customTools }) {
   // TODO - Create Chart Interace if loading of chartSources fails
-  loadJson(`${window.charts_path}/${chartID}/${chartID}.json`, function (
+  loadJson(`${window.charts_path}/${chartID}/${chartID}.json`, function(
     error,
     data
   ) {
@@ -16,7 +16,7 @@ function createChartInterface({ chartID, renderFunc, customTools }) {
       if (data.schema_version >= 4) {
         loadTxt(
           `${window.charts_path}/${chartID}/${chartID}_sources.txt`,
-          function (error, chartSources) {
+          function(error, chartSources) {
             if (error !== null) {
               chartSources = null;
             }
@@ -77,7 +77,7 @@ function createChart({
 
   if (chart === chartID) {
     // Scroll to chart after chart is ready
-    setTimeout(function () {
+    setTimeout(function() {
       document.getElementById(`chart-${chartID}`).scrollIntoView();
     }, 600);
   }
@@ -85,7 +85,7 @@ function createChart({
   // Expand function
   if (document.getElementById(`chart-expand-btn-${chartID}`)) {
     let expandButton = document.getElementById(`chart-expand-btn-${chartID}`);
-    expandButton.onclick = function () {
+    expandButton.onclick = function() {
       // Prepare modal content
       let modalBox = document.getElementById("chart-modal-box");
       let modelContent = document.createElement("div");
@@ -107,7 +107,7 @@ function createChart({
     };
   } else if (document.getElementById(`chart-expand-btn-${chartID}-2`)) {
     let expandButton = document.getElementById(`chart-expand-btn-${chartID}-2`);
-    expandButton.onclick = function () {
+    expandButton.onclick = function() {
       // Prepare modal content
       let modalBox = document.getElementById("chart-modal-box");
       let container = document.createElement("div");
@@ -222,7 +222,21 @@ function createImage(chartID, chartTitle, chartDescription, second_chart) {
   let chart2_clone;
   if (second_chart) {
     let chart2 = document.getElementById(`chart-canvas-${chartID}-2`);
-    chart2_clone= chart2.cloneNode(true);
+    chart2_clone = chart2.cloneNode(true);
+    // specific chart case
+    if (chartID == 'eco_breakdown_national_use') {
+      // give charts selected country name and change select menu to header
+      chart_clone.children[0].innerHTML =
+        "<h4>" +
+        document.getElementById(`chart-canvas-${chartID}`)
+          .children[0].children[0].value;
+      +"</h4>";
+      chart2_clone.children[0].innerHTML =
+        "<h4>" +
+        document.getElementById(`chart-canvas-${chartID}-2`)
+          .children[0].children[0].value;
+      +"</h4>";
+    }
   }
 
   let img = new Image();
@@ -263,7 +277,7 @@ function downloadImage(
 
   let container = document.getElementById(`downloadImage-${chartID}`);
 
-  html2canvas(container, { allowTaint: true }).then(function (canvas) {
+  html2canvas(container, { allowTaint: true }).then(function(canvas) {
     let link = document.createElement("a");
     document.body.appendChild(link);
     link.download = `${chartTitle}.png`;
@@ -281,7 +295,7 @@ function loadJson(url, callback) {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.responseType = "json";
-  xhr.onload = function () {
+  xhr.onload = function() {
     let status = xhr.status;
     if (status === 200) {
       callback(null, xhr.response);
@@ -296,7 +310,7 @@ function loadCsv(url, callback) {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.responseType = "csv";
-  xhr.onload = function () {
+  xhr.onload = function() {
     let status = xhr.status;
     if (status === 200) {
       callback(null, xhr.response);
@@ -311,7 +325,7 @@ function loadTxt(url, callback) {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.responseType = "txt";
-  xhr.onload = function () {
+  xhr.onload = function() {
     let status = xhr.status;
     if (status === 200) {
       callback(null, xhr.response);
@@ -328,7 +342,7 @@ function loadTxt(url, callback) {
 // Create modal elements
 document.addEventListener(
   "DOMContentLoaded",
-  function () {
+  function() {
     let modal = document.getElementById("chart-modal-wrapper");
     modal.className = "modal-wrapper";
     modal.innerHTML += `
@@ -338,14 +352,14 @@ document.addEventListener(
 
     // Close modal by clicking on the close button
     let modalClose = document.getElementById("chart-modal-close");
-    modalClose.onclick = function () {
+    modalClose.onclick = function() {
       modal.style.display = "none";
       document.getElementById("chart-modal-box").innerHTML = "";
       document.body.style.overflow = "auto"; // Enable scrolling
     };
 
     // Close modal by clicking on grey area
-    window.onclick = function (event) {
+    window.onclick = function(event) {
       if (event.target == modal) {
         modal.style.display = "none";
         document.getElementById("chart-modal-box").innerHTML = "";
