@@ -58,6 +58,14 @@
     display: block;
   }
 
+  .downloadImage .global_inequality_logo {
+    overflow: hidden;
+    width: 75% !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1%;
+  }
+
   /* Style changes for template two_charts -----------------*/
   .chart-template-two_charts .chart-col-below {
     height: 90vh !important;
@@ -257,16 +265,15 @@
 .downloadImage {
   position: absolute;
   text-align: center;
-  padding: 30px;
-  margin: 0 auto;
-  display: block;
   left: 50%;
-  transform: translate(-50%, 0);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
 }
 
 .downloadImage .global_inequality_logo {
   overflow: hidden;
-  width: 300px;
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 1%;
