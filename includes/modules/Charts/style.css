@@ -126,6 +126,7 @@
   background: none;
   border: none;
   cursor: pointer;
+  color: #646464 !important;
 }
 
 .chart-btn {
