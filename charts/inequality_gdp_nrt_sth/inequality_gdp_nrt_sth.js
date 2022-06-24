@@ -65,6 +65,9 @@ function render_inequality_gdp_nrt_sth(canvasID){
         yaxis: {
             labels: { formatter: (val, index) => '$'+formatYAxisLabel(val, index, 0, true) }
         },
+        stroke:{
+            width:4
+        },
         colors: ['#775DD0', '#FF4560', '#FEB019', '#00E396', '#008FFB', '#A5978B'],
         grid: {
             padding: {

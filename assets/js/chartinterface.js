@@ -276,7 +276,6 @@ function downloadImage(
   createImage(chartID, chartTitle, chartDescription, second_chart);
   let container = document.getElementById(`downloadImage-${chartID}`);
   const map = container.getElementsByClassName("svgMap-map-wrapper")
-  console.log(map)
   if (map.length > 0) {
     let link = document.createElement("a");
     document.body.appendChild(link);

@@ -1,30 +1,30 @@
 //--------------------------------------- window.ready
-jQuery(function() {
+jQuery(function () {
     checkObjectKeysFunc();
     window.chart_data["inequality_gdp_chg"] = {
-        percentiles: { start: 1, end: 100},
+        percentiles: { start: 1, end: 100 },
     };
 
     importFilesAndShow_inequality_gdp_chg();
 });
 
 //-------------------------------------- importFilesAndShow
-function importFilesAndShow_inequality_gdp_chg(){
-	jQuery.get(`${window.charts_path}/${"inequality_gdp_chg"}/${"inequality_gdp_chg"}.csv`, function(gdp_nrt_sth){
+function importFilesAndShow_inequality_gdp_chg() {
+    jQuery.get(`${window.charts_path}/${"inequality_gdp_chg"}/${"inequality_gdp_chg"}.csv`, function (gdp_nrt_sth) {
         window.chart_data["inequality_gdp_chg"].data = fromCSV(gdp_nrt_sth, ['string', 'number', 'number']);
-        
+
         // Render Chart Interface
         createChartInterface({
-          chartID:'inequality_gdp_chg',
-          renderFunc:render_inequality_gdp_chg,
+            chartID: 'inequality_gdp_chg',
+            renderFunc: render_inequality_gdp_chg,
         })
 
-	});
+    });
 }
 
 //--------------------------------------- showChart
 function render_inequality_gdp_chg(canvasID) {
-    
+
     var chartID = "inequality_gdp_chg"
     var options = {
         chart: {
@@ -33,9 +33,9 @@ function render_inequality_gdp_chg(canvasID) {
             fontFamily: 'Open Sans',
             toolbar: {
                 show: false,
-                tools: {zoom: false}
+                tools: { zoom: false }
             },
-            selection: {enable: false},
+            selection: { enable: false },
         },
         theme: {
             palette: 'palette6',
@@ -44,7 +44,7 @@ function render_inequality_gdp_chg(canvasID) {
             {
                 breakpoint: 960,
                 options: {
-                    xaxis: {tickAmount: 10}
+                    xaxis: { tickAmount: 10 }
                 }
             },
             {
@@ -73,8 +73,8 @@ function render_inequality_gdp_chg(canvasID) {
         yaxis: {
             max: 150e3,
             tickAmount: 5,
-            labels: { 
-                formatter: (val, index) => '$'+formatYAxisLabel(val, index, 0, true),
+            labels: {
+                formatter: (val, index) => '$' + formatYAxisLabel(val, index, 0, true),
                 maxWidth: 40,
             }
         },
@@ -84,29 +84,31 @@ function render_inequality_gdp_chg(canvasID) {
             }
         },
         tooltip: {
-            y: { 
-                formatter: (val, index) => '$'+formatTooltipVal(val, index, 0), 
+            y: {
+                formatter: (val, index) => '$' + formatTooltipVal(val, index, 0),
                 title: {
                     formatter: (seriesName) => '',
                 },
             },
             x: {
-                formatter: (val) => 'Percentile: '+val,
-            }
+                formatter: (val) => 'Percentile: ' + val,
+            },
+            followCursor: true,
+            shared: false,
         },
         legend: {
             show: false
         },
-	}
+    }
 
-	let data = window.chart_data["inequality_gdp_chg"].data;
-    let data_hash  = makeHash(data, 'percentile');
+    let data = window.chart_data["inequality_gdp_chg"].data;
+    let data_hash = makeHash(data, 'percentile');
 
-	let percentiles = [];
-	for (let percentile=window.chart_data["inequality_gdp_chg"].percentiles.start, end = window.chart_data["inequality_gdp_chg"].percentiles.end; percentile <= end; ++percentile)
-		percentiles.push(percentile);
+    let percentiles = [];
+    for (let percentile = window.chart_data["inequality_gdp_chg"].percentiles.start, end = window.chart_data["inequality_gdp_chg"].percentiles.end; percentile <= end; ++percentile)
+        percentiles.push(percentile);
 
-	let series = [ { name: 'Change in annual income (1980-2016)', data:[]}];
+    let series = [{ name: 'Change in annual income (1980-2016)', data: [] }];
 
     percentiles.forEach(percentile => {
         let data_row = data_hash[percentile];
@@ -116,8 +118,8 @@ function render_inequality_gdp_chg(canvasID) {
             series[0].data.push(null);
     });
 
-    options['chart'].id = ('Distribution of New Income 1980to2016').replace(/ /g,"");
-	options.series = series;
+    options['chart'].id = ('Distribution of New Income 1980to2016').replace(/ /g, "");
+    options.series = series;
 
     return createApexChart(canvasID, options);
 }

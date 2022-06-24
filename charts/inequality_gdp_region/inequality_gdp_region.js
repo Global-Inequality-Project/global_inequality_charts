@@ -79,10 +79,13 @@ function render_inequality_gdp_region(canvasID) {
         },
       },
     ],
+    stroke:{
+      width:4
+    },
     yaxis: {
       max: 65e3,
       min: 0,
-      forceNiceScale: true,
+      // forceNiceScale: true,
       labels: {
         formatter: (val, index) => "$" + formatYAxisLabel(val, index, 0, true),
       },
@@ -99,6 +102,9 @@ function render_inequality_gdp_region(canvasID) {
       },
       followCursor: true,
       shared: false,
+    },
+    stroke:{
+      width:3
     },
     legend: {
       fontSize: "12px",
