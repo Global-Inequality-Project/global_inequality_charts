@@ -354,6 +354,14 @@
   stroke: #747474 !important;
 }
 
+/* fixes for maps for the download image */
+.downloadImage .svgMap-map-image{
+  border: none !important;
+}
+.downloadImage .svgMap-map-continent-controls-wrapper,
+.downloadImage .svgMap-map-controls-wrapper{
+  display: none !important;
+}
 @media all and (max-width: 900px) {
   /* remove margins on mobile  */
   .glich_charts {

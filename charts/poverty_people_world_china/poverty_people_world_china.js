@@ -115,6 +115,9 @@ function render_poverty_people_world_china(canvasID) {
       followCursor: true,
       shared: false,
     },
+    stroke: {
+      width: 2.5,
+    },
     legend: {
       show: true,
     },

@@ -67,6 +67,9 @@ function render_inequality_gdp_prdct_nrt_sth(canvasID) {
                 top: 0,
             }
         },
+        stroke:{
+            width:4
+        },
         tooltip: {
             y: {
                 formatter: (val, index) => '$' + formatTooltipVal(val, index),

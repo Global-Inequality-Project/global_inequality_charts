@@ -124,6 +124,9 @@ function render_poverty_region(canvasID) {
       followCursor: true,
       shared: false,
     },
+    stroke: {
+      width: 2.5,
+    },
     legend: {
       show: true,
     },
