@@ -1,0 +1,13 @@
+{
+    "id":"inequality_gdp_chg",
+    "title": "Distribution of new income (1980-2016)",
+    "description": "Constant 2018 USD",
+    "author":"Huzaifa Zoomkawala",
+    "template":"main",
+    "category":"2. Global Inequality",
+    "schema_version":5,
+    "libraries":{
+        "apexcharts":true,
+        "chartutils": true
+    }
+}
