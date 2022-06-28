@@ -1,125 +1,145 @@
 //--------------------------------------- window.ready
-jQuery(function () {
-    checkObjectKeysFunc();
-    window.chart_data["inequality_gdp_chg"] = {
-        percentiles: { start: 1, end: 100 },
-    };
+jQuery(function() {
+  checkObjectKeysFunc();
+  window.chart_data["inequality_gini_coefficient"] = {
+    years: { start: 1960, end: 2020 },
+  };
 
-    importFilesAndShow_inequality_gdp_chg();
+  importFilesAndShow_inequality_gini_coefficient();
 });
 
 //-------------------------------------- importFilesAndShow
-function importFilesAndShow_inequality_gdp_chg() {
-    jQuery.get(`${window.charts_path}/${"inequality_gdp_chg"}/${"inequality_gdp_chg"}.csv`, function (gdp_nrt_sth) {
-        window.chart_data["inequality_gdp_chg"].data = fromCSV(gdp_nrt_sth, ['string', 'number', 'number']);
+function importFilesAndShow_inequality_gini_coefficient() {
+  jQuery.get(
+    `${
+      window.charts_path
+    }/${"inequality_gini_coefficient"}/${"inequality_gini_coefficient"}.csv`,
+    function(inequality_gini_coefficient) {
+      window.chart_data[
+        "inequality_gini_coefficient"
+      ].data = fromCSV(inequality_gini_coefficient, [
+        "string",
+        "number",
+        "number",
+      ]);
 
-        // Render Chart Interface
-        createChartInterface({
-            chartID: 'inequality_gdp_chg',
-            renderFunc: render_inequality_gdp_chg,
-        })
-
-    });
+      // Render Chart Interface
+      createChartInterface({
+        chartID: "inequality_gini_coefficient",
+        renderFunc: render_inequality_gini_coefficient,
+      });
+    }
+  );
 }
 
 //--------------------------------------- showChart
-function render_inequality_gdp_chg(canvasID) {
+function render_inequality_gini_coefficient(canvasID) {
+  var options = {
+    chart: {
+      type: "line",
+      height: "100%",
+      fontFamily: "Open Sans",
+      toolbar: {
+        show: false,
+        tools: { zoom: false },
+      },
+      selection: { enable: false },
+    },
+    theme: {
+      palette: "palette6",
+    },
+    responsive: [
+      {
+        breakpoint: 960,
+        options: {
+          xaxis: { tickAmount: 10 },
+        },
+      },
+      {
+        breakpoint: 401,
+        options: {
+          //chart: {height: 300},
+        },
+      },
+    ],
+    dataLabels: {
+      enabled: false,
+    },
+    xaxis: {
+      tickAmount: 20,
+      tickPlacement: "between",
+      labels: {
+        rotateAlways: true,
+        formatter: (val, index) => formatYAxisLabel(val, index, 0, true),
+      },
+      axisTicks: {
+        show: false,
+      },
+    },
+    yaxis: {
+      tickAmount: 5,
+      forceNiceScale: true,
+      labels: {
+        formatter: (val, index) => formatYAxisLabel(val, index, 2),
+      },
+    },
+    grid: {
+      padding: {
+        top: 0,
+      },
+    },
+    tooltip: {
+      y: {
+        formatter: (val, index) => formatYAxisLabel(val, index, 2),
+        title: {
+          formatter: (seriesName) => "",
+        },
+      },
+      x: {
+        formatter: (val, index) => "Year: " + val,
+      },
+      followCursor: true,
+      shared: false,
+    },
+    legend: {
+      show: false,
+    },
+  };
 
-    var chartID = "inequality_gdp_chg"
-    var options = {
-        chart: {
-            type: 'bar',
-            height: '100%',
-            fontFamily: 'Open Sans',
-            toolbar: {
-                show: false,
-                tools: { zoom: false }
-            },
-            selection: { enable: false },
-        },
-        theme: {
-            palette: 'palette6',
-        },
-        responsive: [
-            {
-                breakpoint: 960,
-                options: {
-                    xaxis: { tickAmount: 10 }
-                }
-            },
-            {
-                breakpoint: 401,
-                options: {
-                    //chart: {height: 300},
-                }
-            }
-        ],
-        dataLabels: {
-            enabled: false,
-        },
-        xaxis: {
-            type: 'numeric',
-            tickAmount: 20,
-            tickPlacement: 'between',
-            labels: {
-                rotateAlways: true,
-                formatter: percentile => formatPercentileLabel(percentile),
-                maxHeight: 60,
-            },
-            axisTicks: {
-                show: false
-            }
-        },
-        yaxis: {
-            max: 150e3,
-            tickAmount: 5,
-            labels: {
-                formatter: (val, index) => '$' + formatYAxisLabel(val, index, 0, true),
-                maxWidth: 40,
-            }
-        },
-        grid: {
-            padding: {
-                top: 0,
-            }
-        },
-        tooltip: {
-            y: {
-                formatter: (val, index) => '$' + formatTooltipVal(val, index, 0),
-                title: {
-                    formatter: (seriesName) => '',
-                },
-            },
-            x: {
-                formatter: (val) => 'Percentile: ' + val,
-            },
-            followCursor: true,
-            shared: false,
-        },
-        legend: {
-            show: false
-        },
+  let data = window.chart_data["inequality_gini_coefficient"].data;
+  let data_hash = makeHash(data, "year");
+
+  let years = [];
+  for (
+    let year = window.chart_data["inequality_gini_coefficient"].years.start,
+      end = window.chart_data["inequality_gini_coefficient"].years.end;
+    year <= end;
+    ++year
+  )
+    years.push(year);
+
+  let series = [
+    { name: "Absolute gini", data: [] },
+    { name: "Relative gini", data: [] },
+  ];
+
+  years.forEach((year) => {
+    let data_row = data_hash[year];
+    if (data_row) {
+      series[0].data.push(data_row["all_countries"]);
+      series[1].data.push(data_row["all_countries_w/o_china"]);
+    } else {
+      series[0].data.push(null);
+      series[1].data.push(null);
     }
+  });
+  console.log(series)
+  options.series = series;
+  options["xaxis"] = {
+    categories: years,
+    tickAmount: 30,
+    tooltip: { enabled: false },
+  };
 
-    let data = window.chart_data["inequality_gdp_chg"].data;
-    let data_hash = makeHash(data, 'percentile');
-
-    let percentiles = [];
-    for (let percentile = window.chart_data["inequality_gdp_chg"].percentiles.start, end = window.chart_data["inequality_gdp_chg"].percentiles.end; percentile <= end; ++percentile)
-        percentiles.push(percentile);
-
-    let series = [{ name: 'Change in annual income (1980-2016)', data: [] }];
-
-    percentiles.forEach(percentile => {
-        let data_row = data_hash[percentile];
-        if (data_row)
-            series[0].data.push(data_row['change']);
-        else
-            series[0].data.push(null);
-    });
-
-    options['chart'].id = ('Distribution of New Income 1980to2016').replace(/ /g, "");
-    options.series = series;
-
-    return createApexChart(canvasID, options);
+  return createApexChart(canvasID, options);
 }

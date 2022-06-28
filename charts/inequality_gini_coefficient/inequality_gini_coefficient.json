@@ -1,8 +1,8 @@
 {
-    "id":"inequality_gdp_chg",
-    "title": "Distribution of new income (1980-2016)",
-    "description": "Constant 2018 USD",
-    "author":"Huzaifa Zoomkawala",
+    "id":"inequality_gini_coefficient",
+    "title": "Absolute and relative gini",
+    "description": "",
+    "author":"Jason Hickel",
     "template":"main",
     "category":"2. Global Inequality",
     "schema_version":5,
