@@ -1,0 +1,13 @@
+{
+    "id":"inequality_gini_coefficient",
+    "title": "Absolute and relative gini",
+    "description": "",
+    "author":"Jason Hickel",
+    "template":"main",
+    "category":"2. Global Inequality",
+    "schema_version":5,
+    "libraries":{
+        "apexcharts":true,
+        "chartutils": true
+    }
+}
