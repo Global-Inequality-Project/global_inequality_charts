@@ -1673,10 +1673,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@fortawesome/fontawesome-free@^6.0.0":
-  version "6.1.1"
-  resolved "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-6.1.1.tgz"
-  integrity sha512-J/3yg2AIXc9wznaVqpHVX3Wa5jwKovVF0AMYSnbmcXTiL3PpRPfF58pzWucCwEiCJBp+hCNRLWClTomD8SseKg==
+"@fortawesome/fontawesome-free@^6.2.1":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-6.2.1.tgz#344baf6ff9eaad7a73cff067d8c56bfc11ae5304"
+  integrity sha512-viouXhegu/TjkvYQoiRZK3aax69dGXxgEjpvZW81wIJdxm5Fnvp3VVIP4VHKqX4SvFw6qpmkILkD4RJWAdrt7A==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
