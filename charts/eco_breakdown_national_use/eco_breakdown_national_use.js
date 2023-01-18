@@ -2,7 +2,7 @@
 jQuery(function() {
   checkObjectKeysFunc();
   window.chart_data["eco_breakdown_national_use"] = {
-    years: { start: 1970, end: 2017 },
+    years: { start: 1990, end: 2017 },
   };
 
   importFilesAndShow_eco_breakdown_national_use();
@@ -27,7 +27,7 @@ function importFilesAndShow_eco_breakdown_national_use() {
 }
 
 //--------------------------------------- showChart
-function render_eco_breakdown_national_use(canvasID, selected = false) {
+function render_eco_breakdown_national_use(canvasID) {
   let years = [];
   for (
     let year = window.chart_data["eco_breakdown_national_use"].years.start,
@@ -38,11 +38,13 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
     years.push(year);
 
   let series = [{ name: "Ratio", data: [] }];
+  let seriesNew = [{ name: "Ratio", data: [] }];
 
   let data = window.chart_data["eco_breakdown_national_use"].data;
 
-  for (let i = 0; i < 48; i++) {
+  for (let i = 20; i < 48; i++) {
     series[0]["data"].push(data[0]["biophysical"]["ratio"]["MF"][i]);
+    seriesNew[0]["data"].push(data[3]["biophysical"]["ratio"]["MF"][i])
   }
 
   let options = {
@@ -160,6 +162,9 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
   };
   options.series = series;
 
+  optionsNew = JSON.parse(JSON.stringify(options));
+  optionsNew.series = seriesNew;
+
   let canvasID2 = canvasID + "-2";
 
   function createDropdownForChart(id) {
@@ -171,6 +176,10 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
       let opt = document.createElement("option");
       opt.value = element["country"];
       opt.innerHTML = element["country"];
+      if(id=='#chart-canvas-eco_breakdown_national_use-2' && opt.value=='Low-income'){
+        opt.selected=true
+        opt.defaultSelected=true
+      }
       dropdown += opt.outerHTML;
     });
     dropdown += `
@@ -214,11 +223,11 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
       .text();
     let country_data2 = data.find((element) => element.country == country2);
 
-    for (let i = 0; i < 48; i++) {
+    for (let i = 20; i < 48; i++) {
       series[0]["data"].push(country_data["biophysical"]["ratio"]["MF"][i]);
     }
 
-    for (let i = 0; i < 48; i++) {
+    for (let i = 20; i < 48; i++) {
       series2[0]["data"].push(country_data2["biophysical"]["ratio"]["MF"][i]);
     }
 
@@ -237,7 +246,7 @@ function render_eco_breakdown_national_use(canvasID, selected = false) {
   createDropdownForChart(canvasID);
   createDropdownForChart(canvasID2);
   let chart = createApexChart(canvasID + "-chart", options);
-  let chart2 = createApexChart(canvasID2 + "-chart", options);
+  let chart2 = createApexChart(canvasID2 + "-chart", optionsNew);
 
   //Append dropdown menu
 
